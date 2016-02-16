@@ -9,7 +9,9 @@
 import { Directive, Component, ElementRef, Renderer } from 'angular2/core'
 import { RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
 import { Http, Headers } from 'angular2/http';
-import { HomeComponent } from './components/home.component';
+import { HomeComponent } from './components/home/home.component';
+import { ErrorComponent } from './components/error/error.component';
+import { AppDetailsComponent } from './components/appdetails/appdetails.component';
 
 @Component({
     selector: 'appstore-app',
@@ -18,8 +20,9 @@ import { HomeComponent } from './components/home.component';
     template: require('./app.component.html')
 })
 @RouteConfig([
-    { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true }
-//    { path: '/error', name: 'Error', component: ErrorComponent },
+    { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
+    { path: '/appdetails/:id', name: 'AppDetails', component: AppDetailsComponent }, 
+    { path: '/error', name: 'Error', component: ErrorComponent },
 //    { path: '/signup', name: 'Signup', component: SignupComponent, useAsDefault: true },
 //    { path: '/signin', name: 'Signin', component: SigninComponent },
 ])

@@ -1,10 +1,9 @@
-// import { SuchAndSuchInjectables1 } from './SuchAndSuchService1';
-// import { SuchAndSuchInjectables2 } from './SuchAndSuchService2';
+ import { appsServiceInjectables } from './apps.service';
 
-// export * from './SuchAndSuchService1';
-// export * from './SuchAndSuchService2';
+export * from './apps.service';
 
-// export var servicesInjectables: Array<any> = [
-//     SuchAndSuchInjectables1,
-//     SuchAndSuchInjectables2
-// ];
+export var servicesInjectables: Array<any> = [
+    appsServiceInjectables
+];
+
+export var appSettings = { apiRoot: 'api/'};

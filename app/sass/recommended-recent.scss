@@ -1,0 +1,18 @@
+.recommended-recent-container {
+	background: #eee;
+	text-align: center;
+
+    .recommended-recent-list-item {
+        display: inline-block;
+        margin: 0 15px;
+        line-height: 3;
+        
+        a {
+            cursor: pointer;
+        }
+    }
+
+    .recommended-recent-highlight {
+	   font-weight: 700
+    }
+}

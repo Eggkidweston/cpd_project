@@ -1,0 +1,6 @@
+<nav class="recommended-recent-container">
+    <ul>
+        <li class="recommended-recent-list-item"><a (click)="recommendedClicked()" [class.recommended-recent-highlight]="recommendedRecent==0">Recommended</a></li>
+        <li class="recommended-recent-list-item"><a (click)="recentClicked()" [class.recommended-recent-highlight]="recommendedRecent==1">Recent</a></li>
+    </ul>
+</nav>
