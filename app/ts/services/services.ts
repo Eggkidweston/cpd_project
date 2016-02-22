@@ -1,9 +1,11 @@
- import { appsServiceInjectables } from './apps.service';
+import { appsServiceInjectables } from './apps.service';
+import { authenticationServiceInjectables } from './authentication.service';
 
 export * from './apps.service';
+export * from './authentication.service';
 
 export var servicesInjectables: Array<any> = [
-    appsServiceInjectables
+    appsServiceInjectables, authenticationServiceInjectables
 ];
 
-export var appSettings = { apiRoot: 'api/'};
+export var appSettings = { apiRoot: 'http://api.jiscstore.ithium.net:8080/'};

@@ -9,13 +9,13 @@ export class AppsService {
     constructor(private http: Http) {}
     
     public getRecentApps() {
-        return this.http.get(`${appSettings.apiRoot}recentapps`)
+        return this.http.get(`${appSettings.apiRoot}resources/recent`)
             .map(res => <Array<StoreApp>> res.json().data)
             .catch(this.handleError);
     }
 
     public getRecommendedApps() {
-        return this.http.get(`${appSettings.apiRoot}recommendedapps`)
+        return this.http.get(`${appSettings.apiRoot}resources/recommended`)
             .map(res => <Array<StoreApp>> res.json().data)
             .catch(this.handleError);
     }

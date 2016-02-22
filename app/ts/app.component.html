@@ -9,14 +9,14 @@
             <a class="" href="http://jisc-app-store-dev.elasticbeanstalk.com/"><img src='../images/jisc-logo.png'></a>
         </div>
         <div class="pull-right">
-            <button class="btn btn-warning navbar-btn" role="button">Sign In</button>
+            <a class="btn btn-warning navbar-btn" [routerLink]="['SignIn']">Sign In</a>
         </div>
     </div>
 </nav>
 <main>  
     <router-outlet></router-outlet>
 </main>
-<footer class="_2LLuu_gpg9FBPewU-lOCGN" role="contentinfo">
+<footer class="_2LLuu_gpg9FBPewU-lOCGN footer" role="contentinfo">
     <div class="M7qygVPOtRJVQQy_QGmCd"><img alt="Logo" src="../images/jisc-logo.png"></div>
     <ul>
         <li><a href="http://jisc-app-store-dev.elasticbeanstalk.com/about">About</a></li>
@@ -28,3 +28,8 @@
         </ul>
     </div>
 </footer>
+    <!--<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>-->

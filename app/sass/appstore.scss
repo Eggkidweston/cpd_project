@@ -1,39 +1,55 @@
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
-.app-widget-container {
-    font-size: 16px;
-    background-color: #fff;
-    box-shadow: 0 1px 6px rgba(0,0,0,.12), 0 1px 4px rgba(0,0,0,.24);	
-    -webkit-transition: all .45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-	transition: all .45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+// #e85e12. highlight #ea6e2a
+
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
 }
 
-.app-widget-images {
-    width:100%; 
-    height:150px; 
-    background-repeat:no-repeat; 
-    background-size:cover; 
-    background-position:center;
-} 
 
-.app-widget-small-image-container {
-    position: relative;
-    top: 25px;
-	width: 75pt;
-	margin: 25px auto;
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
 }
 
-.widget-image-inner {
-	border: 2px solid #fff;
-	background: #eee;
-	border-radius: 3px;
-	overflow: hidden;
-    
-    img {
-    	display: block;
-        border-radius: 3px
-    }
+html {
+ 	font-family: Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+ 	font-family: sans-serif;
+ 	-ms-text-size-adjust: 100%;
+ 	-webkit-text-size-adjust: 100%;
+ 	-webkit-font-feature-settings: "kern", "liga", "pnum";
+ 	-moz-font-feature-settings: "kern", "liga", "pnum";
+	-ms-font-feature-settings: "kern", "liga", "pnum";
+	font-feature-settings: kern, liga, pnum;
+	-webkit-font-smoothing: antialiased;
+	color: #0c2931;
+	line-height: 1.5;
 }
 
 ._331U-ev2oSgMplO4ONhPr5 {
@@ -67,8 +83,8 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 .G0TOp25O3uhac9c6LG09o {
 	position: relative;
 	overflow: hidden;
-	height: 150px;
-	max-height: 150px;
+	height: 86px;
+	max-height: 86px;
 	background-color: #eee;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px
@@ -92,9 +108,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 	right: 0;
 	background: hsla(0,0%,60%,.6)
 }
-._1dp1av8dgxwO3rAcXG84U- {
 
-}
 ._1dp1av8dgxwO3rAcXG84U- img {
 	-webkit-transition: all .2s ease-in-out;
 	transition: all .2s ease-in-out
@@ -271,34 +285,15 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 	box-sizing: inherit
 } /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
-html {
- 	font-family: Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-	box-sizing: border-box;
-	font-family: sans-serif;
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
-	-webkit-font-feature-settings: "kern", "liga", "pnum";
-	-moz-font-feature-settings: "kern", "liga", "pnum";
-	-ms-font-feature-settings: "kern", "liga", "pnum";
-	font-feature-settings: kern, liga, pnum;
-	-webkit-font-smoothing: antialiased;
-	color: #0c2931;
-	line-height: 1.5
-}
-
-body, html {
-	height: 100%
+signin, main, app-storeapp {
+    height: 100%;
 }
 
 body {
-	margin: 0
-}
-
-.wrapper {
+	margin: 0;
     min-height: 100%;
-    height: auto !important;
     height: 100%;
-    margin: 0 auto -150px;
+    font-family: "Stag Sans Web Light",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,sans-serif
 }
 
 .navbar {
@@ -329,9 +324,9 @@ a:active, a:focus {
 	left: 0;
 	background: #c3d1d6;
 	padding: 1.5em;
-    margin-top: 150px;
+    margin-top: 86px;
 	width: 100%;
-	height: 150px;
+	height: 86px;
 	border-bottom: 20px solid #0c2931
 }
 
@@ -361,17 +356,6 @@ a:active, a:focus {
         display: inline;
         text-align: left
     }
-}
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: #c3d1d6;
-    padding: 1.5em;
-    width: 100%;
-    height: 150px;
-    border-bottom: 20px solid #0c2931
 }
 
 ._2LLuu_gpg9FBPewU-lOCGN ul li a {

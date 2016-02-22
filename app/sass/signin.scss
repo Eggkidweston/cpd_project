@@ -2,8 +2,8 @@
 
 .signin-alt {
     min-height:100%;
+    height: 100%;
     width:100vw;
-    background-color: #373746;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,8 +81,6 @@
 
 
 .authenty.signin-alt {
-	background-color: #373746;
-	color: #eaeaea;
 	.section-content {
 		padding: 0;
 	}
@@ -102,14 +100,14 @@
 		&.top-buffer {
 			margin-top: 130px;
 			a {
-				color: #fff;
+				color: #00557f;
 				-webkit-transition: color 300ms linear;
 				-moz-transition: color 300ms linear;
 				-o-transition: color 300ms linear;
 				-ms-transition: color 300ms linear;
 				transition: color 300ms linear;
 				&:hover {
-					color: #ff7000;
+					color: #e85e13;
 				}
 			}
 		}
@@ -176,7 +174,7 @@
 			left: -30px;
 			padding: 20px;
 			font-size: 18px;
-			background: #3e4764;
+			background: #e85e12;
 			border-radius: 50%;
 			color: #fff;
 		}
