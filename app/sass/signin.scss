@@ -2,8 +2,8 @@
 
 .signin-alt {
     min-height:100%;
-    height: 100%;
     width:100vw;
+    background-color: #373746;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,6 +81,8 @@
 
 
 .authenty.signin-alt {
+	background-color: #373746;
+	color: #eaeaea;
 	.section-content {
 		padding: 0;
 	}
@@ -100,14 +102,14 @@
 		&.top-buffer {
 			margin-top: 130px;
 			a {
-				color: #00557f;
+				color: #fff;
 				-webkit-transition: color 300ms linear;
 				-moz-transition: color 300ms linear;
 				-o-transition: color 300ms linear;
 				-ms-transition: color 300ms linear;
 				transition: color 300ms linear;
 				&:hover {
-					color: #e85e13;
+					color: #ff7000;
 				}
 			}
 		}
@@ -160,6 +162,7 @@
 				background-color: #1E2B46;
 			}
 		}
+        box-sizing: border-box; 
 	}
 	.horizontal-divider {
 		margin: 0 auto;
@@ -174,7 +177,7 @@
 			left: -30px;
 			padding: 20px;
 			font-size: 18px;
-			background: #e85e12;
+			background: #3e4764;
 			border-radius: 50%;
 			color: #fff;
 		}
@@ -224,7 +227,6 @@
 	}
 }
 
-
 @media screen and (max-width: $screen-sm-max) { 
 	.authenty.signin-alt {
 		.horizontal-divider:before {
@@ -234,7 +236,7 @@
 			font-size: 16px;
 		}
 		.bottom-wrap.top-buffer {
-				margin-top: 50px;
+            margin-top: 50px;
 		}
 		.container {
 			padding-right: 30px;
@@ -348,22 +350,20 @@
 	animation-name: fadeInLeft;
 }
 
+.signin-height-adjust {
+    padding-bottom: 38px;
+}
 
+@media screen and (min-height:707px) and (min-width: $screen-md-min)
+{
+    .signin-height-adjust {
+        height: calc(100vh - 242px);
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media screen and (min-height:900px) and (max-width: $screen-md-max)
+{
+    .signin-height-adjust {
+        height: calc(100vh - 242px);
+    }
+}

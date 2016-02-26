@@ -4,7 +4,7 @@
   "description": "Jisc App Store",
   "main": "index.js",
   "scripts": {
-    "go": "./node_modules/.bin/webpack-dev-server --display-reasons --display-chunks --watch --loglevel verbose",
+    "go": "env UV_THREADPOOL_SIZE=128 ./node_modules/.bin/webpack-dev-server --display-reasons --display-chunks --watch --loglevel verbose",
     "test": "karma start"
   },
   "author": "",
@@ -54,7 +54,7 @@
     "phantomjs": "1.9.18",
     "phantomjs-polyfill": "0.0.1",
     "raw-loader": "0.5.1",
-    "sass-loader": "1.0.2",
+    "sass-loader": "^3.1.2",
     "script-loader": "0.6.1",
     "style-loader": "0.12.3",
     "traceur-loader": "0.6.3",

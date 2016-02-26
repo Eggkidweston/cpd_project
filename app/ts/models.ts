@@ -1,6 +1,12 @@
 export class User {
-    emailAddress: string;
-    name: string;
+    id: number;
+	name: string;
+    username: string;
+	email: string;
+	password: string;
+    updatedat: string;
+    createdat: string;
+	active: any;
 }
 
 export class StoreApp {

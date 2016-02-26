@@ -1,30 +1,40 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="pull-left">
-            <p class="navbar-text no-text-decoration">
-                <a href="http://jisc-app-store-dev.elasticbeanstalk.com/search/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a>
-            </p>
+<div class="flex-container">
+    <nav class="flex-nav navbar navbar-default">
+        <div class="container-fluid">
+            <div class="pull-left">
+                <p class="navbar-text no-text-decoration">
+                    <a href="http://jisc-app-store-dev.elasticbeanstalk.com/search/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a>
+                </p>
+            </div>
+            <div class="nav-image">
+                <a class="" href="http://jisc-app-store-dev.elasticbeanstalk.com/"><img src='../images/jisc-logo.png'></a>
+            </div>
+            <div *ngIf="authenticationService.userLoggedIn" class="pull-right">
+                <span>Hello {{ authenticationService.user.name }}</span>
+                <a class="btn btn-warning navbar-btn" (click)="signOut()" href="#">Sign Out</a>
+            </div>
+            <div *ngIf="!authenticationService.userLoggedIn && !atSignIn" class="pull-right">
+                <a class="btn btn-warning navbar-btn" [routerLink]="['SignIn']">Sign In</a>
+            </div>
         </div>
-        <div class="nav-image">
-            <a class="" href="http://jisc-app-store-dev.elasticbeanstalk.com/"><img src='../images/jisc-logo.png'></a>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-warning navbar-btn" [routerLink]="['SignIn']">Sign In</a>
-        </div>
+    </nav>
+
+    <div class="flex-fill">
+        <main>
+            <router-outlet></router-outlet>
+        </main>
     </div>
-</nav>
-<main>  
-    <router-outlet></router-outlet>
-</main>
-<footer class="footer2 footer" role="contentinfo">
-    <div class="inner-footer"><img alt="Logo" src="../images/jisc-logo.png"></div>
-    <ul>
-        <li><a href="http://jisc-app-store-dev.elasticbeanstalk.com/about">About</a></li>
-    </ul>
-    <div class="terms-privacy">
+
+    <footer class="footer footer2 flex-footer" role="contentinfo">
+        <div class="inner-footer"><img alt="Logo" src="../images/jisc-logo.png"></div>
         <ul>
-            <li><a class="" href="http://jisc-app-store-dev.elasticbeanstalk.com/terms" data-reactid=".0.2.2.0.0.0">Terms &amp; Conditions</a></li>
-            <li><a class="" href="http://jisc-app-store-dev.elasticbeanstalk.com/privacy" data-reactid=".0.2.2.0.1.0">Privacy Policy</a></li>
+            <li><a href="http://jisc-app-store-dev.elasticbeanstalk.com/about">About</a></li>
         </ul>
-    </div>
-</footer>
+        <div class="terms-privacy">
+            <ul>
+                <li><a class="" href="http://jisc-app-store-dev.elasticbeanstalk.com/terms" data-reactid=".0.2.2.0.0.0">Terms &amp; Conditions</a></li>
+                <li><a class="" href="http://jisc-app-store-dev.elasticbeanstalk.com/privacy" data-reactid=".0.2.2.0.1.0">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </footer>
+</div>

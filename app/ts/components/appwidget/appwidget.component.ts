@@ -5,6 +5,7 @@ import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from
 @Component({
   selector: 'app-widget',
   template: require('./appwidget.component.html'),
+  styles: [require('../../../sass/appwidget.scss').toString()],
   directives: [RouterOutlet, RouterLink, RatingComponent]
 })
 export class AppWidgetComponent {

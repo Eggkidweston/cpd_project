@@ -1,7 +1,7 @@
 import { Component, ViewChild } from 'angular2/core';
 import { ControlGroup, FormBuilder, AbstractControl, Validators } from 'angular2/common';
 import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationService } from '../../services/services';
 import { AppComponent } from '../../app.component';
 import * as Rx from "RxJS";
 import 'rxjs/add/operator/debounceTime.js';
@@ -120,12 +120,13 @@ export class RegisterComponent {
 
             this.authenticationService
                 .register(formValues.email, formValues.username, formValues.password,
-                    (res: any) => {
-                        console.log(res);
+                    () => {
+                        this.busy = false;
                         this.router.navigate(['Home']);
                     },
                     (res: any) => {
-                        if( res.status === 409 ) {
+                        if( res.status === 409 || res.status === 400 ) {
+                            this.busy = false;
                             this.shakeForm();
                         } else {
                             AppComponent.generalError(res.status);

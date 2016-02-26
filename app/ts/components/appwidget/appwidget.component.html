@@ -1,5 +1,5 @@
-<div class="col-md-3 col-sm-6 col-xs-12">
-    <a [routerLink]="['AppDetails', { id: 1 }]">
+<div class="app-widget col-xs-12 col-sm-6 col-md-4 col-lg-3" style="padding:0;">
+    <a [routerLink]="['AppDetails', { id: 1 }]" style="text-decoration:none">
         <div class="app-widget-container">
             <div class="app-widget-images" style="background-image: linear-gradient( hsla(0,0%,60%,.6), hsla(0,0%,60%,.6) ), url(https://jisc-store-media.s3.amazonaws.com/0984408c-3db0-4255-88ee-867fb973457e.jpg);">
                 <div class="app-widget-small-image-container">
@@ -9,9 +9,11 @@
                 </div>
             </div>
             <div>
-                <div class="test1">Unitu</div>
-                <div class="test2">Closes the feedback loop.</div>
-                <rating></rating>
+                <div class="title-text">Unitu</div>
+                <div class="details-text">Closes the feedback loop.</div>
+                <div class="rating">
+                    <rating></rating>
+                </div>
             </div>
         </div>
     </a>

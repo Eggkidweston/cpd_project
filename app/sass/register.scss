@@ -296,3 +296,17 @@
 	-o-animation-name: fadeInLeft;
 	animation-name: fadeInLeft;
 }
+
+@media screen and (min-height:775px) and (min-width: $screen-md-min)
+{
+    .register-height-adjust {
+        height: calc(100vh - 206px);
+    }
+}
+
+@media screen and (min-height:800px) and (max-width: $screen-md-max)
+{
+    .register-height-adjust {
+        height: calc(100vh - 206px);
+    }
+}

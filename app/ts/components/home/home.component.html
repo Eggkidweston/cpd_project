@@ -1,12 +1,9 @@
-<main>
-    <div class="jumbotron landing-page-jumbotron">
-        <h1>Explore the resources your peers are using</h1>
-        <div class="input-container">
-            <input value="" type="text" placeholder="Search resources">
-        </div>
+<div class="jumbotron landing-page-jumbotron" style="margin-bottom:0;">
+    <h1>Explore the resources your peers are using</h1>
+    <div class="input-container">
+        <input value="" type="text" placeholder="Search resources">
     </div>
-    <recommended-recent (recommendedSelected)="recommendedSelected()" (recentSelected)="recentSelected()">
-    </recommended-recent>
-
-    <app-widgets></app-widgets>
-</main>
+</div>
+<recommended-recent (recommendedSelected)="recommendedSelected()" (recentSelected)="recentSelected()">
+</recommended-recent>
+<app-widgets></app-widgets>

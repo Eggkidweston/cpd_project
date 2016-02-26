@@ -1,4 +1,4 @@
-<section id="signin_alt" class="authenty signin-alt">
+<section id="signin_alt" class="signin-height-adjust authenty signin-alt">
     <div class="section-content">
         <div class="container">
             <div class="row animated fadeInUp">
@@ -7,26 +7,26 @@
                         <div class="title">
                             <h3>Sign In</h3>
                         </div>
-                        <form [ngFormModel]="signinForm" novalidate>
+                        <form [class.shake]="shaking" [class.animated]="shaking" [ngFormModel]="signInForm" (submit)="onSubmit(signInForm.value)" novalidate>
                             <div class="form-main">
                                 <div class="form-group">
                                     <div class="un-wrap">
                                         <i class="fa fa-user"></i>
-                                        <input type="text" class="form-control" placeholder="Email address or username" [ngFormControl]="emailOrUsername" required="required">
+                                        <input style="padding-top:0; padding-bottom:0;" [disabled]="busy"type="text" class="form-control" placeholder="Email address or username" [ngFormControl]="emailOrUsername" required="required">
                                     </div>
                                     <div class="pw-wrap">
                                         <i class="fa fa-lock"></i>
-                                        <input type="password" class="form-control" placeholder="Password" required="required" [ngFormControl]="password">
+                                        <input style="padding-top:0; padding-bottom:0;" [disabled]="busy" type="password" class="form-control" placeholder="Password" required="required" [ngFormControl]="password">
                                     </div>
-                                    <div class="row">
+                                    <!--<div class="row">
                                         <div class="col-md-6">
-                                            <input type="checkbox" class="form-control" checked id="rememberMe" [ngFormControl]="rememberMe" #rememberMeElement>
+                                            <input [disabled]="busy" type="checkbox" class="form-control" checked id="rememberMe" [ngFormControl]="rememberMe" #rememberMeElement>
                                             <label>Remember me</label>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="row top-buffer">
                                         <div class="col-md-4 col-md-offset-8">
-                                            <button (click)="performSignin(username, password)" class="btn btn-block signin">Sign In</button>
+                                            <button [disabled]="busy" class="btn btn-block signin" type="submit">Sign In</button>
                                         </div>
                                     </div>
                                 </div>
@@ -47,10 +47,10 @@
             </div>
             <div class="row top-buffer bottom-wrap">
                 <div class="col-xs-6 col-md-2 col-md-offset-1">
-                    <a href="#">Fogotten your password?</a>
+                    <a href="#" id="forgot_from_2">Fogotten your password?</a>
                 </div>
                 <div class="col-xs-6 col-md-2">
-                    <a [routerLink]="['Register']">Register for an account</a>
+                    <a [routerLink]="['Register']" id="signup_from_2">Create an account</a>
                 </div>
             </div>
         </div>
