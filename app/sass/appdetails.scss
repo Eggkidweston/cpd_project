@@ -1,23 +1,16 @@
-._1_uXyAeK6-cl5A6uLlrpeC {
-	background: #eee
-}
-
-.vmZgQoCWJG8MqU8oNM5Cg {
-	font-family: Material Icons;
-	font-weight: 400;
-	font-style: normal;
-	font-size: 24px;
-	display: inline-block;
-	width: 1em;
-	height: 1em;
-	line-height: 1;
-	text-transform: none;
-	letter-spacing: normal;
-	word-wrap: normal;
-	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizeLegibility;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-feature-settings: 'liga';
-	-moz-font-feature-settings: 'liga';
-	font-feature-settings: liga
+.app-details {
+    h3 {
+        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    
+    h4 {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    section {
+        padding-bottom: 16px;
+    }
 }
