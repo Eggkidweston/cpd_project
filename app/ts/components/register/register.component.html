@@ -38,7 +38,7 @@
                                     <a href="#password_recovery" id="forgot_from_3">need help?</a>
                                 </div>
                                 <div class="col-md-5 col-md-offset-7">
-                                    <button [disabled]="busy" type="submit" class="btn btn-block register">Sign Up</button>
+                                    <button [disabled]="busy || emailInUse || usernameInUse" type="submit" class="btn btn-block register">Sign Up</button>
                                 </div>
                             </div>
                         </form>

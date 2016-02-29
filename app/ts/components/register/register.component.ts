@@ -65,52 +65,41 @@ export class RegisterComponent {
         this.password = this.registerForm.controls['password'];
         this.repeatPassword = this.registerForm.controls['repeatPassword'];
 
-//         this.email.valueChanges
-//             .do((_) => {
-//                 this.emailInUse = false;
-//                 this.checkingForDuplicateEmail = true;
-//             })
-//             .debounceTime(500)
-//             .distinctUntilChanged()
-//             .switchMap(email =>
-//                 this.email.value ? this.authenticationService.isEmailInUse(this.email.value)
-//                     : Rx.Observable.of(null)
-//             )
-//             .subscribe(
-//                 (res: any) => {
-//                     this.emailInUse = res && res.text() == "Email already in use";
-//                 },
-//                 (res: any) => {
-//                     AppComponent.generalError(res.status);
-//                 },
-//                 () => {
-//                     this.checkingForDuplicateEmail = false;
-//                 }
-//             );
-// 
-//         this.username.valueChanges
-//             .do((_) => {
-//                 this.usernameInUse = false;
-//                 this.checkingForDuplicateUsername = true;
-//             })
-//             .debounceTime(500)
-//             .distinctUntilChanged()
-//             .switchMap(username =>
-//                 this.username.value ? this.authenticationService.isUsernameInUse(this.username.value)
-//                     : Rx.Observable.of(null)
-//             )
-//             .subscribe(
-//                 (res: any) => {
-//                     this.usernameInUse = res && res.text() == "Username already in use";
-//                 },
-//                 (res: any) => {
-//                     AppComponent.generalError(res.status);
-//                 },
-//                 () => {
-//                     this.checkingForDuplicateUsername = false;
-//                 }
-//             );
-    }
+        this.email.valueChanges
+            .do((_) => {
+                this.emailInUse = false;
+                this.checkingForDuplicateEmail = true;
+            })
+            .debounceTime(500)
+            .distinctUntilChanged()
+            .subscribe(
+                (res: any) => {
+                    if( res.indexOf('@') >= 0)
+                        authenticationService.isEmailOrUsernameInUse(res,
+                            (inUse: boolean): void => { this.emailInUse = inUse },
+                            (res: any) => AppComponent.generalError(res.status),
+                            () => this.checkingForDuplicateEmail = false
+                    )
+                }
+            );
+
+         this.username.valueChanges
+            .do((_) => {
+                this.usernameInUse = false;
+                this.checkingForDuplicateUsername = true;
+            })
+            .debounceTime(500)
+            .distinctUntilChanged()
+            .subscribe(
+                (res: any) => {
+                    authenticationService.isEmailOrUsernameInUse(res,
+                        (inUse: boolean): void => { this.usernameInUse = inUse },
+                        (res: any) => AppComponent.generalError(res.status),
+                        () => this.checkingForDuplicateUsername = false
+                    )
+                }
+            );      
+        }
 
     onSubmit(formValues: any) {
         // these properties really ought to be part of an async validator,
