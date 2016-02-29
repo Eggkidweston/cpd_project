@@ -19,8 +19,12 @@ export class AuthenticationService {
         return AuthenticationService._user;
     }
 
-    get userLoggedIn(): boolean {
+    get userSignedIn(): boolean {
         return AuthenticationService._user != null;
+    }
+    
+    get apiKey(): string {
+        return AuthenticationService.API_KEY;
     }
 
     register(email: string, username:string, password: string,
@@ -85,7 +89,7 @@ export class AuthenticationService {
         exists: (exists: boolean) => void, 
         err: (res: Response) => void,
         complete: () => void) 
-        {
+    {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 

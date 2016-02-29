@@ -9,11 +9,11 @@
             <div class="nav-image">
                 <a class="" href="http://jisc-app-store-dev.elasticbeanstalk.com/"><img src='../images/jisc-logo.png'></a>
             </div>
-            <div *ngIf="authenticationService.userLoggedIn" class="pull-right">
+            <div *ngIf="authenticationService.userSignedIn" class="pull-right">
                 <span style="color: white; font-size:16px; font-weight:600;">Hello {{ authenticationService.user.name }}</span>&nbsp;
                 <a class="btn btn-warning navbar-btn" (click)="signOut()" href="#">Sign Out</a>
             </div>
-            <div *ngIf="!authenticationService.userLoggedIn && !atSignIn" class="pull-right">
+            <div *ngIf="!authenticationService.userSignedIn && !atSignIn" class="pull-right">
                 <a class="btn btn-warning navbar-btn" [routerLink]="['SignIn']">Sign In</a>
             </div>
         </div>

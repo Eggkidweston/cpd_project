@@ -74,7 +74,7 @@ export class RegisterComponent {
             .distinctUntilChanged()
             .subscribe(
                 (res: any) => {
-                    if( res.indexOf('@') >= 0)
+                    if( res.indexOf('@') >= 0 )
                         authenticationService.isEmailOrUsernameInUse(res,
                             (inUse: boolean): void => { this.emailInUse = inUse },
                             (res: any) => AppComponent.generalError(res.status),
