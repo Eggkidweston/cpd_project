@@ -3,7 +3,6 @@ import { ControlGroup, FormBuilder, AbstractControl, Validators } from 'angular2
 import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
 import { AuthenticationService } from '../../services/services';
 import { AppComponent } from '../../app.component';
-import * as Rx from "RxJS";
 import 'rxjs/add/operator/debounceTime.js';
 import 'rxjs/add/operator/distinctUntilChanged.js';
 import 'rxjs/add/operator/switchMap.js';
