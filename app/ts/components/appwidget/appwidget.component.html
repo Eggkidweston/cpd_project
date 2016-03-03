@@ -1,16 +1,16 @@
 <div class="app-widget col-xs-12 col-sm-6 col-md-4 col-lg-3" style="padding:0;">
-    <a [routerLink]="['AppDetails', { id: 1 }]" style="text-decoration:none">
+    <a [routerLink]="['AppDetails', { id: app.id }]" style="text-decoration:none">
         <div class="app-widget-container">
-            <div class="app-widget-images" style="background-image: linear-gradient( hsla(0,0%,60%,.6), hsla(0,0%,60%,.6) ), url(https://jisc-store-media.s3.amazonaws.com/0984408c-3db0-4255-88ee-867fb973457e.jpg);">
+            <div class="app-widget-images" style="background-image: linear-gradient( hsla(0,0%,60%,.6), hsla(0,0%,60%,.6) ), url({{ app?.image }});">
                 <div class="app-widget-small-image-container">
                     <div class="widget-image-inner">
-                        <img src="https://jisc-store-media.s3.amazonaws.com/0984408c-3db0-4255-88ee-867fb973457e.jpg" width="100" height="100">
+                        <img src="{{ app?.image }}" width="100" height="100">
                     </div>
                 </div>
             </div>
             <div>
-                <div class="title-text">Unitu</div>
-                <div class="details-text">Closes the feedback loop.</div>
+                <div class="title-text">{{ app?.title }}</div>
+                <div class="details-text">{{ app?.description }}</div>
                 <div class="rating">
                     <rating></rating>
                 </div>

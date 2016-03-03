@@ -2,10 +2,10 @@
     <div class="container-fluid" style="padding-top:48px;">
         <div class="row">
             <div class="col-md-4 col-md-offset-1 col-xs-12 col-xs-offset-0">
-                <img style="width:120px; height:120px;" class="pull-left" src="https://jisc-store-media.s3.amazonaws.com/0984408c-3db0-4255-88ee-867fb973457e.jpg"
+                <img style="width:120px; height:120px;" class="pull-left" src="{{ app?.image }}"
                 width="120" height="120">
                 <div style="margin-left:136px;">
-                    <h2 style="margin-top:0;">Unitu</h2>
+                    <h2 style="margin-top:0;">{{ app?.overview }}</h2>
                     <button class="btn btn-success btn-lg" href="#">Get it</button>
                 </div>
             </div>
@@ -44,23 +44,17 @@
                 <section style="background-color: white; padding: 1px 12px 12px 12px; margin: 0px;" class="clearfix">
                     <div>
                         <h3>Overview</h3>
-                        <p>How the curriculum can help develop the skills and competencies needed in the world of work. Jisc
-                            Guide are developed by experts, providing the best advice possible.</p>
+                        <p>{{ app?.description }}</p>
                     </div>
                 </section>
                 <section>
                     <h3>Reviews</h3>
-                    <h4 *ngIf="!authenticationService.userSignedIn"><a [routerLink]="['SignIn']">Sign In</a> to submit a review</h4>
-                    <submit-review *ngIf="authenticationService.userSignedIn"></submit-review>
-                    <div style="padding-top:12px;" class="clearfix">
+                    <h4 *ngIf="!authenticationService?.userSignedIn"><a [routerLink]="['SignIn']">Sign In</a> to submit a review</h4>
+                    <submit-review *ngIf="authenticationService?.userSignedIn" [reviewAdded]="reviewAdded(review)"></submit-review>
+                    <div *ngFor="#review of reviews" style="padding-top:12px;" class="clearfix">
                         <img src="https://jisc-store-media.s3.amazonaws.com/508f0938-1636-40d1-a169-52599cf7410c.png" width="36" height="36" class="pull-left"
                         />
-                        <div style="background-color: white; margin-left:52px;">A really fab guide. Really helped me improve assessment process in our uni.</div>
-                    </div>
-                    <div style="padding-top:12px;" class="clearfix">
-                        <img src="https://jisc-store-media.s3.amazonaws.com/508f0938-1636-40d1-a169-52599cf7410c.png" width="36" height="36" class="pull-left"
-                        />
-                        <div style="background-color: white; margin-left:52px;">A really fab guide. Really helped me improve assessment process in our uni.</div>
+                        <div style="background-color: white; margin-left:52px;">{{ review?.description }}</div>
                     </div>
                 </section>
             </div>

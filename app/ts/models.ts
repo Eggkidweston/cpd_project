@@ -33,10 +33,15 @@ export class StoreApp {
 }
 
 enum LicenseType {
+    LicenseType1, LicenseType2, LicenseType3
 }
 
 export class Review {
-    body: string;
+    constructor( 
+        public resourceId: number, 
+        public title: string, 
+        public description: string, 
+        public rating: number ) {};
 }
 
 export class Medium {

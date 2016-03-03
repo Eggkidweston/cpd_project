@@ -8,8 +8,8 @@
         <div [hidden]="!reviewing" class="form-group col-xs-11">
             <label for="reviewTitle">Title</label>
             <input [ngFormControl]="reviewTitle" id="reviewTitle" class="form-control" style="padding: 4px;">
-            <label for="reviewText">Your review</label>
-            <textarea [ngFormControl]="reviewText" id="reviewText" class="form-control" style="padding: 8px;"></textarea>
+            <label for="reviewDescription">Your review</label>
+            <textarea [ngFormControl]="reviewDescription" id="reviewText" class="form-control" style="padding: 8px;"></textarea>
             <div style="padding-top: 12px;">
                 <button [disabled]="busy" class="btn btn-primary" type="submit">Submit review</button>
                 <button [disabled]="busy" class="btn btn-primary" (click)="cancelClicked()">Cancel</button>

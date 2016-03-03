@@ -1,49 +1,82 @@
-import { Injectable, bind } from 'angular2/core';
+import { Injectable, Input, bind } from 'angular2/core';
 import { Http, Response, Headers } from 'angular2/http';
 import { Observable } from 'rxjs/Observable';
 import { StoreApp } from '../models';
 import { appSettings } from './services';
 import { AuthenticationService } from './authentication.service';
+import { Review } from '../models';
 
 @Injectable()
 export class AppsService {
-    constructor(private http: Http, 
-    private authenticationService: AuthenticationService) {}
-    
+    constructor(private http: Http,
+        private authenticationService: AuthenticationService) {
+        this.getAllApps();
+    }
+
+    public getAllApps() {
+        return this.http.get(`${appSettings.apiRoot}resources`)
+            .map(res => <StoreApp[]>res.json().data)
+            .catch(this.handleError);
+    }
+
     public getRecentApps() {
         return this.http.get(`${appSettings.apiRoot}resources/recent`)
-            .map(res => <Array<StoreApp>> res.json().data)
+            .map(res => <StoreApp[]>res.json().data)
             .catch(this.handleError);
     }
 
     public getRecommendedApps() {
         return this.http.get(`${appSettings.apiRoot}resources/recommended`)
-            .map(res => <Array<StoreApp>> res.json().data)
+            .map(res => <StoreApp[]>res.json().data)
+            .catch(this.handleError);
+    }
+
+    public getApp(appId: number) {
+        return this.http.get(`${appSettings.apiRoot}resources/${appId}`)
+            .map(res => <StoreApp>res.json().resource)
             .catch(this.handleError);
     }
     
-    public submitReview(title: string, reviewText: string,
-        done:(review) => void,
-        error:(err) => void) 
-    {
+    public getReviews(resourceId: number,
+        done: (review) => void,
+        error: (err) => void) 
+        {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', this.authenticationService.apiKey);
         
+        return this.http.get(`${appSettings.apiRoot}resources/${resourceId}/reviews`, { headers} )
+            .map( res => <Review>res.json().review)
+            .subscribe(
+                reviews => done(reviews),
+                err => error(err)
+            );    
+    }
+
+    public submitReview(review: Review,
+        done: (review) => void,
+        error: (err) => void) 
+        {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('x-access-token', this.authenticationService.apiKey);
+
         this.http.post(`${appSettings.apiRoot}reviews/create`,
             JSON.stringify({
-                resource_id: 0,
-                title: title,
-                description: reviewText,
-                rating: 0
+                resource_id: review.resourceId,
+                title: review.title,
+                description: review.description,
+                rating: review.rating
             }), { headers })
             .map(res => res.json())
-            .subscribe( 
+            .subscribe(
                 review => done(review),
                 err => error(err)
             );
     }
-        
+    
+    public 
+
     private handleError(error: Response) {
         return Observable.throw(error);
     }

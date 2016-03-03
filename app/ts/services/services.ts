@@ -8,4 +8,4 @@ export var servicesInjectables: Array<any> = [
     appsServiceInjectables, authenticationServiceInjectables
 ];
 
-export var appSettings = { apiRoot: 'http://store.data.alpha.jisc.ac.uk:8080/'};
+export var appSettings = { apiRoot: 'http://store.data.alpha.jisc.ac.uk:8080/' };
