@@ -37,20 +37,15 @@ export class AppsService {
             .catch(this.handleError);
     }
     
-    public getReviews(resourceId: number,
-        done: (review) => void,
-        error: (err) => void) 
-        {
+    public getReviews(resourceId: number)
+    {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', this.authenticationService.apiKey);
         
         return this.http.get(`${appSettings.apiRoot}resources/${resourceId}/reviews`, { headers} )
-            .map( res => <Review>res.json().review)
-            .subscribe(
-                reviews => done(reviews),
-                err => error(err)
-            );    
+            .map( res => <Review[]>res.json().data)
+            .catch(this.handleError);
     }
 
     public submitReview(review: Review,
@@ -62,20 +57,18 @@ export class AppsService {
         headers.append('x-access-token', this.authenticationService.apiKey);
 
         this.http.post(`${appSettings.apiRoot}reviews/create`,
-            JSON.stringify({
-                resource_id: review.resourceId,
+            JSON.stringify({ 
+                resource_id: review.resource_id,
                 title: review.title,
                 description: review.description,
-                rating: review.rating
-            }), { headers })
-            .map(res => res.json())
+                rating: review.rating }), 
+                { headers })
+            .map(res => <Review>res.json())
             .subscribe(
                 review => done(review),
                 err => error(err)
             );
     }
-    
-    public 
 
     private handleError(error: Response) {
         return Observable.throw(error);

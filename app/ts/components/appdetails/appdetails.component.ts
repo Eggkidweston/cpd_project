@@ -1,4 +1,4 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input, AfterViewInit, ChangeDetectorRef } from 'angular2/core';
 import { RatingComponent } from '../rating/rating.component';
 import { NgFor } from 'angular2/common';
 import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from 'angular2/router';
@@ -15,30 +15,51 @@ import { Review } from '../../models';
   styles: [require('../../../sass/appdetails.scss').toString()],
   directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent]
 })
-export class AppDetailsComponent {
+export class AppDetailsComponent implements AfterViewInit {
     public app: StoreApp;
     public resourceId: number;
-    public reviews: Array<Review>;
+    public reviews: Array<Review> = new Array<Review>();
     
     addingReview: boolean = false;
     
-    constructor( public authenticationService: AuthenticationService, public appsService: AppsService, params: RouteParams ) {
+    constructor( public authenticationService: AuthenticationService, 
+        public appsService: AppsService, 
+        public cdr: ChangeDetectorRef,
+        params: RouteParams ) {
         this.resourceId = +params.get('id');
-        
+    }
+    
+    ngAfterViewInit() {
+        this.loadApp();
+        this.loadReviews();
+    }
+    
+    loadApp() {
         this.appsService.getApp( this.resourceId )
             .subscribe(
                 storeApp => this.app = storeApp,
                 (error: any) => AppComponent.generalError(error.status)
             );
-        
-        this.appsService.getReviews( this.resourceId,
-            reviews => this.reviews = reviews,
-            (error: any) => AppComponent.generalError(error.status)
-        );
     }
-    
+
+    loadReviews() {
+        this.appsService.getReviews( this.resourceId )
+            .subscribe(
+                reviews => this.reviews = reviews,
+                (error: any) => AppComponent.generalError(error.status)
+            );
+    }
+
     reviewAdded(review: Review) {
-        //this.reviews.push(review);
+        // TODO We really ought to be able to just push
+        // push the review onto the array but for some
+        // reason the description is not appearing.
+        // It's 11pm and I just want to get it working
+        
+        // this.reviews.push(review);
+        // this.cdr.detectChanges();
+        
+        this.loadReviews();
     }
     
     submitReview() {

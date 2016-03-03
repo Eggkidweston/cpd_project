@@ -48,12 +48,10 @@
                     </div>
                 </section>
                 <section>
-                    <h3>Reviews</h3>
                     <h4 *ngIf="!authenticationService?.userSignedIn"><a [routerLink]="['SignIn']">Sign In</a> to submit a review</h4>
-                    <submit-review *ngIf="authenticationService?.userSignedIn" [reviewAdded]="reviewAdded(review)"></submit-review>
+                    <submit-review *ngIf="authenticationService?.userSignedIn" (reviewAdded)="reviewAdded(review)" [resourceId]="resourceId"></submit-review>
                     <div *ngFor="#review of reviews" style="padding-top:12px;" class="clearfix">
-                        <img src="https://jisc-store-media.s3.amazonaws.com/508f0938-1636-40d1-a169-52599cf7410c.png" width="36" height="36" class="pull-left"
-                        />
+                        <img src="https://jisc-store-media.s3.amazonaws.com/508f0938-1636-40d1-a169-52599cf7410c.png" width="36" height="36" class="pull-left" />
                         <div style="background-color: white; margin-left:52px;">{{ review?.description }}</div>
                     </div>
                 </section>

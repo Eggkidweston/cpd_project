@@ -1,10 +1,9 @@
 <div class="row">
+    <div [hidden]="reviewing" class="form-group col-xs-11">
+        <button [disabled]="busy" class="btn btn-primary" (click)="submitReview()">
+            Submit review</button>
+    </div>
     <form [ngFormModel]="reviewForm" (submit)="onSubmit(reviewForm.value)" novalidate>
-        <div [hidden]="reviewing" class="form-group col-xs-11">
-            <button [disabled]="busy" class="btn btn-primary" (click)="submitReview()">
-                Submit review</button>
-        </div>
-
         <div [hidden]="!reviewing" class="form-group col-xs-11">
             <label for="reviewTitle">Title</label>
             <input [ngFormControl]="reviewTitle" id="reviewTitle" class="form-control" style="padding: 4px;">

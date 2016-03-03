@@ -9,7 +9,7 @@ import { Review } from '../../models'
 })
 export class SubmitReviewComponent {
     @Input() resourceId: number;
-//    @Output() reviewAdded: EventEmitter<Review> = new EventEmitter();
+    @Output() reviewAdded: EventEmitter<Review> = new EventEmitter();
     
     reviewForm: ControlGroup;
     reviewTitle: AbstractControl;
@@ -39,13 +39,15 @@ export class SubmitReviewComponent {
         if( this.reviewForm.valid ) {
             this.busy = true;
             
+            // TODO Grab value from rating
+            this.reviewRating = 1;
             let review = new Review(this.resourceId, this.reviewTitle.value, this.reviewDescription.value, this.reviewRating);
                 
             this.appsService.submitReview(review,
                 (review) => {
                     this.busy = false;
                     this.reviewing = false;
-                    //this.reviewAdded.emit(review);
+                    this.reviewAdded.emit(review);
                 },
                 (err) => {
                     console.log(err);

@@ -38,7 +38,7 @@ enum LicenseType {
 
 export class Review {
     constructor( 
-        public resourceId: number, 
+        public resource_id: number, 
         public title: string, 
         public description: string, 
         public rating: number ) {};
