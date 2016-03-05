@@ -51,10 +51,9 @@ export class AppDetailsComponent implements AfterViewInit {
     }
 
     reviewAdded(review: Review) {
-        // TODO We really ought to be able to just push
+        // TODO We really ought to be able to just
         // push the review onto the array but for some
         // reason the description is not appearing.
-        // It's 11pm and I just want to get it working
         
         // this.reviews.push(review);
         // this.cdr.detectChanges();

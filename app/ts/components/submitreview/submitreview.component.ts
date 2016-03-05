@@ -1,11 +1,13 @@
 import { Component, ViewChild, Input, Output, EventEmitter } from 'angular2/core';
 import { ControlGroup, FormBuilder, AbstractControl, Validators } from 'angular2/common';
+import { RatingComponent } from '../rating/rating.component';
 import { AppsService } from '../../services/services';
-import { Review } from '../../models'
-;
+import { Review } from '../../models';
+
 @Component({
     selector: 'submit-review',
-    template: require('./submitreview.component.html')
+    template: require('./submitreview.component.html'),
+    directives: [RatingComponent]
 })
 export class SubmitReviewComponent {
     @Input() resourceId: number;

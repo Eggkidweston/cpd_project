@@ -14,7 +14,7 @@
                     <span class="rating-text">4.0</span>
                 </div>
                 <div class="col-md-12" style="text-align: center; margin-top: 0px;">
-                    <rating style="font-size:18px;"></rating>
+                    <rating style="font-size:18px;" rating="4"></rating>
                 </div> 
                 <div class="col-md-12" style="text-align: center; margin-top: 0px;">
                     1 Ratings
@@ -52,7 +52,11 @@
                     <submit-review *ngIf="authenticationService?.userSignedIn" (reviewAdded)="reviewAdded(review)" [resourceId]="resourceId"></submit-review>
                     <div *ngFor="#review of reviews" style="padding-top:12px;" class="clearfix">
                         <img src="https://jisc-store-media.s3.amazonaws.com/508f0938-1636-40d1-a169-52599cf7410c.png" width="36" height="36" class="pull-left" />
-                        <div style="background-color: white; margin-left:52px;">{{ review?.description }}</div>
+                        <div style="background-color: white; margin-left:52px; padding:12px;">{{ review?.description }}
+                            <div style="margin-top:12px;">
+                            <rating rating="{{ review.rating }}"></rating>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
