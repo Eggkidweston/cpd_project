@@ -10,7 +10,7 @@
             <label for="reviewDescription">Your review</label>
             <textarea [ngFormControl]="reviewDescription" id="reviewText" class="form-control" style="padding: 8px;"></textarea>
             <div style="padding-top: 12px;">
-                <rating editable="true" rating="0"></rating>
+                <label>Rate this resource</label><rating (ratingChanged)="ratingChanged($event)" editable="true" rating="0"></rating>
             </div>
             <div style="padding-top: 12px;">
                 <button [disabled]="busy" class="btn btn-primary" type="submit">Submit review</button>

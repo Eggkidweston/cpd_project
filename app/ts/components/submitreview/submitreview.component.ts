@@ -16,8 +16,6 @@ export class SubmitReviewComponent {
     reviewForm: ControlGroup;
     reviewTitle: AbstractControl;
     reviewDescription: AbstractControl;
-    
-    // replace this with reference to rating component
     reviewRating: number;
     
     busy: boolean = false;
@@ -41,8 +39,6 @@ export class SubmitReviewComponent {
         if( this.reviewForm.valid ) {
             this.busy = true;
             
-            // TODO Grab value from rating
-            this.reviewRating = 1;
             let review = new Review(this.resourceId, this.reviewTitle.value, this.reviewDescription.value, this.reviewRating);
                 
             this.appsService.submitReview(review,
@@ -58,6 +54,10 @@ export class SubmitReviewComponent {
                 }
             );
         }
+    }
+    
+    ratingChanged(newRating: number) {
+        this.reviewRating = newRating;
     }
     
     cancelClicked() {
