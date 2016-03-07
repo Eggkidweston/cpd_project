@@ -35,7 +35,7 @@ export class AppDetailsComponent implements AfterViewInit {
     }
     
     loadApp() {
-        this.appsService.getApp( this.resourceId )
+        this.appsService.getAppDetails( this.resourceId )
             .subscribe(
                 storeApp => this.app = storeApp,
                 (error: any) => AppComponent.generalError(error.status)
@@ -59,6 +59,11 @@ export class AppDetailsComponent implements AfterViewInit {
         // this.cdr.detectChanges();
         
         this.loadReviews();
+    }
+    
+    getApp() {
+        // waiting on API
+        this.appsService.getApp( this. resourceId );
     }
     
     submitReview() {

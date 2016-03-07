@@ -31,7 +31,7 @@ export class AppsService {
             .catch(this.handleError);
     }
 
-    public getApp(appId: number) {
+    public getAppDetails(appId: number) {
         return this.http.get(`${appSettings.apiRoot}resources/${appId}`)
             .map(res => <StoreApp>res.json().resource)
             .catch(this.handleError);
@@ -51,7 +51,7 @@ export class AppsService {
     public submitReview(review: Review,
         done: (review) => void,
         error: (err) => void) 
-        {
+    {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', this.authenticationService.apiKey);
@@ -70,6 +70,10 @@ export class AppsService {
             );
     }
 
+    public getApp( resourceId: number ) {
+        // waiting on API
+    }
+    
     private handleError(error: Response) {
         return Observable.throw(error);
     }

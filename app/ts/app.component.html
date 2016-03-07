@@ -7,7 +7,7 @@
                 </p>
             </div>
             <div class="nav-image">
-                <a class="" href="/"><img src='../images/jisc-logo.png'></a>
+                <a [routerLink]="['Home']"><img src='../images/jisc-logo.png'></a>
             </div>
             <div *ngIf="authenticationService.userSignedIn" class="pull-right">
                 <span style="color: white; font-size:16px; font-weight:600;">Hello {{ authenticationService.user.name }}</span>&nbsp;
