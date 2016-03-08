@@ -1,3 +1,15 @@
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
+
 .app-widgets {
     padding-bottom: 38px;
+    display: -webkit-flex;
+    display: flex;
+    width:100vw;
+    max-width: 1136px;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap; 
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    -webkit-justify-content: center;
+    justify-content: center;
 }

@@ -1,11 +1,3 @@
-<div class="container app-widgets">
-    <div class="row">
-        <div class="col-sm-10 col-sm-offet-1">
-            <div class="container">
-                <div class="row">
-                    <app-widget *ngFor="#app of apps" [app]="app"></app-widget>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="app-widgets">
+    <app-widget *ngFor="#app of apps" [app]="app"></app-widget>
 </div>

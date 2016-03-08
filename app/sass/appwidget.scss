@@ -1,21 +1,20 @@
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
 
 .app-widget {
-    padding:0;
+    margin:15px;
+    width:100%;
 }
 
-@media screen and (max-width:$screen-md-max) {
-    .app-widget {
-        width: 300px;
-    }
+app-widget {
+   width: 23%;
+   margin: 8px;
+   min-width: 254px;
 }
 
 .app-widget-container {
     font-size: 16px;
     background-color: #fff;
     box-shadow: 0 1px 6px rgba(0,0,0,.12), 0 1px 4px rgba(0,0,0,.24);	
-    -webkit-transition: all .45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-	transition: all .45s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
     width: 254px;
 }
 
