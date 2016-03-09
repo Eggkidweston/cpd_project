@@ -31,7 +31,6 @@
     "zone.js": "0.5.10"
   },
   "devDependencies": {
-    "bootstrap-sass": "3.3.5",
     "chunk-manifest-webpack-plugin": "0.0.1",
     "css-loader": "0.15.5",
     "exports-loader": "0.6.2",
