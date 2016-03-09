@@ -5,14 +5,14 @@ var webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     WebpackNotifierPlugin = require('webpack-notifier'),
     ExtractTextPlugin = require("extract-text-webpack-plugin");
- 
+
 /**
  * optimist has been depracted. Find an alternative? minimist?  
  */
 var argv = require('optimist')
     .alias('r', 'release').default('r', false)
     .argv;
- 
+
 /**
  * Useful variables
  */
@@ -60,7 +60,7 @@ function makeConfig(options) {
             filename: "[name].js",
             publicPath: "/",
             chunkFilename: "[id].bundle.js",
- 
+
             // Hot Module Replacement settings:
             hotUpdateMainFilename: "updates/[hash].update.json",
             hotUpdateChunkFilename: "updates/[hash].[id].update.js"
@@ -69,6 +69,10 @@ function makeConfig(options) {
             new webpack.IgnorePlugin(/spec\.js$/),
             new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js', minChunks: Infinity }),
             new webpack.optimize.CommonsChunkPlugin({ name: 'common', filename: 'common.js', minChunks: 2, chunks: ['app', 'vendor'] }),
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery"
+            }),
             new ExtractTextPlugin("styles.css"),
             new webpack.DefinePlugin({
                 VERSION: JSON.stringify(version),
@@ -95,32 +99,41 @@ function makeConfig(options) {
             extensions: ["", ".ts", ".js", ".json", ".css"],
             alias: {
                 'app': 'app',
-                'scripts': npmRoot
-            }
+                'scripts': npmRoot,
+                jquery: "jquery/src/jquery"
+            },
         },
         module: {
             preLoaders: [
                 { test: /\.ts$/, loader: "tslint" }
             ],
-
             loaders: [
                 { test: /\.(png|jp?g|gif)$/, loaders: ["url", "image"] },
                 { test: /\.json$/, loader: 'json' },
                 { test: /^(?!.*\.min\.css$).*\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap") },
                 { test: /\.scss$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap'] },
-//                { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader" },
+                //                { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader" },
                 { test: /\.html$/, loader: "html" },
                 { test: /\.ts$/, loader: 'ts', exclude: [/test/, /node_modules/] },
                 { test: /vendor\/.*\.(css|js)/, loader: 'file-loader?name=[path][name].[ext]', exclude: [/node_modules/] },
                 {
                     test: /\.(woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-//                    loader: "file-loader"
+                    //                    loader: "file-loader"
                     loader: "url-loader"
                 },
                 {
                     test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                     loader: "url-loader"
                 }
+                // ,
+                // {
+                //     test: /[\/\\]node_modules[\/\\]some-module[\/\\]index\.js$/,
+                //     loader: "imports?this=>window"
+                // },
+                // {
+                //     test: /[\/\\]node_modules[\/\\]some-module[\/\\]index\.js$/,
+                //     loader: "imports?define=>false"
+                // }
             ],
             noParse: [
                 /\.min\.js/,

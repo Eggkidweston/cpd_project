@@ -7,13 +7,14 @@ import { AuthenticationService } from '../../services/services';
 import { AppsService } from '../../services/services';
 import { StoreApp } from '../../models';
 import { AppComponent } from '../../app.component';
+import { MediaCarouselComponent } from '../media-carousel/media-carousel.component';
 import { Review } from '../../models';
 
 @Component({
   selector: 'app-details',
   template: require('./appdetails.component.html'),
   styles: [require('../../../sass/appdetails.scss').toString()],
-  directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent]
+  directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent]
 })
 export class AppDetailsComponent implements AfterViewInit {
     public app: StoreApp;
@@ -54,10 +55,8 @@ export class AppDetailsComponent implements AfterViewInit {
         // TODO We really ought to be able to just
         // push the review onto the array but for some
         // reason the description is not appearing.
-        
         // this.reviews.push(review);
         // this.cdr.detectChanges();
-        
         this.loadReviews();
     }
     
@@ -68,5 +67,9 @@ export class AppDetailsComponent implements AfterViewInit {
     
     submitReview() {
         this.addingReview = true;
+    }
+    
+    get averageRating(): number {
+        return this.app ? Math.floor(this.app.average_rating * 10) / 10 : 0;
     }
 }

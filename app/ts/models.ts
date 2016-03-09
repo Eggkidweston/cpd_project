@@ -12,7 +12,6 @@ export class User {
 export class StoreApp {
     id: string;
     
-    averageRating: number;
     createdBy: User;
     createdDate: string;
     description: string;
@@ -30,6 +29,7 @@ export class StoreApp {
     updateHistory: Array<UpdateHistory>;
     widgetDescription: string;
     widgetImageSrc: string;
+    average_rating: number;
 }
 
 enum LicenseType {
