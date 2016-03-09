@@ -17,7 +17,7 @@
     "es6-shim": "0.33.3",
     "es7-reflect-metadata": "1.2.0",
     "html-loader": "^0.4.0",
-    "jquery": "^2.2.1",
+    "jquery": "2.2.0",
     "jquery-ui": "^1.10.5",
     "lodash": "3.10.1",
     "moment": "2.10.6",
@@ -25,6 +25,7 @@
     "optimist": "0.6.1",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.0",
+    "sizzle": "2.3.0",
     "underscore": "1.8.3",
     "uuid": "2.0.1",
     "zone.js": "0.5.10"
