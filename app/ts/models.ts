@@ -18,7 +18,7 @@ export class StoreApp {
     downloadCount: number;
     isFree: boolean;
     lastUpdatedDate: string;
-    licenseType: LicenseType;
+    licensetype_id: LicenseType;
     likes: number;
     media: Array<Medium>;
     myRating: number;
@@ -32,8 +32,8 @@ export class StoreApp {
     average_rating: number;
 }
 
-enum LicenseType {
-    LicenseType1, LicenseType2, LicenseType3
+export enum LicenseType {
+    Free, Paid
 }
 
 export class Review {

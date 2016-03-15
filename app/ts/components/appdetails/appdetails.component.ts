@@ -9,6 +9,7 @@ import { StoreApp } from '../../models';
 import { AppComponent } from '../../app.component';
 import { MediaCarouselComponent } from '../media-carousel/media-carousel.component';
 import { Review } from '../../models';
+import { LicenseType } from '../../models';
 
 @Component({
   selector: 'app-details',
@@ -71,5 +72,11 @@ export class AppDetailsComponent implements AfterViewInit {
     
     get averageRating(): number {
         return this.app ? Math.floor(this.app.average_rating * 10) / 10 : 0;
+    }
+    
+    get licenseType(): string {
+        // for some reaosn, this does not work as a method on StoreApp. Grrr. TypeScript quirk.
+        if( this.app ) return LicenseType[this.app.licensetype_id];
+        else return "";
     }
 }

@@ -15,6 +15,7 @@ import { AppComponent } from '../../app.component';
         private storeApps: Array<StoreApp>;
 
         constructor(private _appsService: AppsService) {
+            this.recentSelected();
         }
 
         recentSelected() {
