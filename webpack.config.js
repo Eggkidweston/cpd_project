@@ -104,9 +104,9 @@ function makeConfig(options) {
             },
         },
         module: {
-            preLoaders: [
-                { test: /\.ts$/, loader: "tslint" }
-            ],
+            // preLoaders: [
+            //     { test: /\.ts$/, loader: "tslint" }
+            // ],
             loaders: [
                 { test: /\.(png|jp?g|gif)$/, loaders: ["url", "image"] },
                 { test: /\.json$/, loader: 'json' },
@@ -139,11 +139,11 @@ function makeConfig(options) {
                 /\.min\.js/,
                 /vendor[\/\\].*?\.(js|css)$/
             ]
-        },
+        }/*,
         tslint: {
             emitErrors: false,
             failOnHint: false
-        }
+        }*/
     }
 }
 
