@@ -64,7 +64,11 @@ export class AppDetailsComponent implements AfterViewInit {
     
     getApp() {
         // waiting on API
-        this.appsService.getApp( this. resourceId );
+        this.appsService.getApp( this.resourceId )
+            .subscribe(
+                url => window.open(url),
+                (error: any) => AppComponent.generalError(error.status)
+            );
     }
     
     submitReview() {

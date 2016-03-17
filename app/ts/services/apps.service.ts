@@ -70,8 +70,10 @@ export class AppsService {
             );
     }
 
-    public getApp( resourceId: number ) {
-        // waiting on API
+    public getApp(appId: number) {
+        return this.http.get(`${appSettings.apiRoot}resources/${appId}/download`)
+            .map(res => res.json().url)
+            .catch(this.handleError);
     }
     
     private handleError(error: Response) {
