@@ -14,8 +14,8 @@ import { AppDetailsComponent } from './components/appdetails/appdetails.componen
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AppEditComponent } from './components/appedit/appedit.component';
 import { AuthenticationService } from './services/services';
-
 
 @Component({
     selector: 'appstore-app',
@@ -25,7 +25,8 @@ import { AuthenticationService } from './services/services';
 })
 @RouteConfig([
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
-    { path: '/appdetails/:id', name: 'AppDetails', component: AppDetailsComponent },
+    { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
+    { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
     { path: '/error', name: 'Error', component: ErrorComponent },
     { path: '/signin', name: 'SignIn', component: SignInComponent },
     { path: '/register', name: 'Register', component: RegisterComponent }

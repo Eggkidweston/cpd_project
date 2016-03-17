@@ -27,7 +27,8 @@ export class AppDetailsComponent implements AfterViewInit {
     constructor( public authenticationService: AuthenticationService, 
         public appsService: AppsService, 
         public cdr: ChangeDetectorRef,
-        params: RouteParams ) {
+        params: RouteParams ) 
+    {
         this.resourceId = +params.get('id');
     }
     
