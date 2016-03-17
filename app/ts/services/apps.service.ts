@@ -30,7 +30,13 @@ export class AppsService {
             .map(res => <StoreApp[]>res.json().data)
             .catch(this.handleError);
     }
-
+    
+    public getApps() {
+        return this.http.get(`${appSettings.apiRoot}resources`)
+            .map(res => <StoreApp[]>res.json().data)
+            .catch(this.handleError);
+    }
+    
     public getAppDetails(appId: number) {
         return this.http.get(`${appSettings.apiRoot}resources/${appId}`)
             .map(res => <StoreApp>res.json().resource)

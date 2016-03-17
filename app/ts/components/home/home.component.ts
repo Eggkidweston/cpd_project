@@ -15,9 +15,17 @@ import { AppComponent } from '../../app.component';
         private storeApps: Array<StoreApp>;
 
         constructor(private _appsService: AppsService) {
-            this.recentSelected();
+            this.loadApps();
         }
 
+        loadApps() {
+            this._appsService.getApps()
+                .subscribe(
+                    storeApps => this.storeApps = storeApps,
+                    (error: any) => AppComponent.generalError(error.status)
+                );
+        }
+        
         recentSelected() {
             this._appsService.getRecentApps()
                 .subscribe(
