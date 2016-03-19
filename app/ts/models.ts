@@ -30,6 +30,7 @@ export class StoreApp {
     widgetDescription: string;
     widgetImageSrc: string;
     average_rating: number;
+    tags: Array<string>;
 }
 
 export enum LicenseType {

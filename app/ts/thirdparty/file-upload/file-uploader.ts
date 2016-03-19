@@ -11,7 +11,7 @@ function isFileLikeObject(value:any) {
 
 export class FileUploader {
   public url:string;
-  public authToken:string;
+  public accessToken:string;
   public isUploading:boolean = false;
   public queue:Array<any> = [];
   public progress:number = 0;
@@ -26,7 +26,7 @@ export class FileUploader {
   constructor(public options:any) {
     // Object.assign(this, options);
     this.url = options.url;
-    this.authToken = options.authToken;
+    this.accessToken = options.accessToken;
     this.filters.unshift({name: 'queueLimit', fn: this._queueLimitFilter});
     this.filters.unshift({name: 'folder', fn: this._folderFilter});
   }
@@ -295,7 +295,8 @@ export class FileUploader {
       throw new TypeError('The file specified is no longer valid');
     }
 
-    form.append(item.alias, item._file, item.file.name);
+//    form.append(item.alias, item._file, item.file.name);
+    form.append("media", item._file, item.file.name);
 
     xhr.upload.onprogress = (event) => {
       let progress = Math.round(event.lengthComputable ? event.loaded * 100 / event.total : 0);
@@ -326,16 +327,18 @@ export class FileUploader {
     };
 
     xhr.open(item.method, item.url, true);
-    xhr.withCredentials = item.withCredentials;
+    xhr.withCredentials = true;
 
     // todo
     /*item.headers.map((value, name) => {
      xhr.setRequestHeader(name, value);
      });*/
 
-    if (this.authToken) {
-      xhr.setRequestHeader('Authorization', this.authToken);
-    }
+    xhr.setRequestHeader("x-access-token", this.accessToken);
+
+    // if (this.accessToken) {
+    //   xhr.setRequestHeader('Authorization', this.accessToken);
+    // }
 
     xhr.send(form);
     this._render();
