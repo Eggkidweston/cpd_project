@@ -102,13 +102,20 @@
         <div class="col-xs-11">
             <h2>Tags</h2>
             <div class="tag-destination-wrapper">
-                <h4>Resource tags</h4>
+                <div>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label class="control-label" for="newTanewTagNameg">Add new tag</label>
+                            <input class="form-control" type="text" [(ngModel)]="newTagName" id="newTagName">
+                            <button (click)="addNewTag()" class="btn btn-primary">+</button>
+                        </div>
+                    </form>
+                </div>
                 <div id="tag-destination" class="col-xs-12 tag-destination">
                     <tag *ngFor="#tagName of app?.tags" [tagName]="tagName" [isSourceTag]="false" (tagClicked)="removeTag($event)"></tag>
                 </div>
             </div>
             <div class="tag-source-wrapper">
-                <h4>Available tags</h4>
                 <div id="tag-source" class="col-xs-12 tag-source">
                     <tag *ngFor="#tagName of sourceTags" [tagName]="tagName" [isSourceTag]="true" (tagClicked)="addTag($event)"></tag>
                 </div>

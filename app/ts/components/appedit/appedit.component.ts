@@ -23,6 +23,7 @@ export class AppEditComponent implements AfterViewInit {
     private hasBaseDropZoneOver: boolean = false;
     private hasAnotherDropZoneOver: boolean = false;
     public sourceTags: Array<string>;
+    public newTagName: string;
 
     constructor(
         public appsService: AppsService,
@@ -57,17 +58,36 @@ export class AppEditComponent implements AfterViewInit {
             (error: any) => AppComponent.generalError(error.status)
             )
     }
-    
+
     // would be nice to use the RxJS library to do this
     addTag(tagName: string) {
-        this.app.tags.push(tagName);
+        var index = this.app.tags.indexOf(tagName, 0);
+        if (index === -1) {
+            this.app.tags.push(tagName);
+        }
     }
-    
+
     removeTag(tagName: string) {
         var index = this.app.tags.indexOf(tagName, 0);
         if (index > -1) {
             this.app.tags.splice(index, 1);
         }
+    }
+
+    addNewTag() {
+        var newTagName = this.newTagName.replace(/^\s+|\s+$/g, '');
+
+        if (newTagName.length > 0) {
+            if (this.app.tags.indexOf(newTagName, 0) === -1) {
+                this.app.tags.push(newTagName);
+
+                if (this.sourceTags.indexOf(newTagName, 0) === -1) {
+                    this.sourceTags.push(newTagName);
+                };
+
+                this.newTagName = "";
+            };
+        };
     }
 
     private fileOverBase(e: any) {
