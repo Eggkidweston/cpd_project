@@ -1,5 +1,6 @@
 import {FileLikeObject} from './file-like-object';
 import {FileItem} from './file-item';
+import { StoreApp } from '../../models'
 
 function isFile(value:any) {
   return (File && value instanceof File);
@@ -22,6 +23,8 @@ export class FileUploader {
   public _nextIndex = 0;
   public filters:Array<any> = [];
   private _failFilterIndex:number;
+  public app: StoreApp;
+  private method: string = "POST";
 
   constructor(public options:any) {
     // Object.assign(this, options);
@@ -29,6 +32,7 @@ export class FileUploader {
     this.accessToken = options.accessToken;
     this.filters.unshift({name: 'queueLimit', fn: this._queueLimitFilter});
     this.filters.unshift({name: 'folder', fn: this._folderFilter});
+    this.app = options.app;
   }
 
   public addToQueue(files:any[], options:any, filters:any) {
@@ -111,13 +115,24 @@ export class FileUploader {
   }
 
   public uploadAll() {
-    let items = this.getNotUploadedItems().filter(item => !item.isUploading);
-    if (!items.length) {
-      return;
-    }
+    this.uploadAllTogether();
+    return;
+    
+    // let items = this.getNotUploadedItems().filter(item => !item.isUploading);
+    // if (!items.length) {
+    //   return;
+    // }
+
+    // items.map(item => item._prepareToUploading());
+    // items[0].upload();
+  }
+  
+  // my new method
+  public uploadAllTogether() {
+   let items = this.getNotUploadedItems().filter(item => !item.isUploading);
 
     items.map(item => item._prepareToUploading());
-    items[0].upload();
+    this._xhrTransportTogether(items);
   }
 
   public cancelAll() {
@@ -295,7 +310,6 @@ export class FileUploader {
       throw new TypeError('The file specified is no longer valid');
     }
 
-//    form.append(item.alias, item._file, item.file.name);
     form.append("media", item._file, item.file.name);
 
     xhr.upload.onprogress = (event) => {
@@ -344,6 +358,54 @@ export class FileUploader {
     this._render();
   }
 
+  _xhrTransportTogether(items:Array<any>) {
+    let xhr =  new XMLHttpRequest();
+    let form = new FormData();
+
+    items.map( item => {
+        form.append("media", item._file, item.file.name);
+        this._onBeforeUploadItem(item);
+
+        xhr.upload.onprogress = (event) => {
+        let progress = Math.round(event.lengthComputable ? event.loaded * 100 / event.total : 0);
+        this._onProgressItem(item, progress);
+        };
+
+        xhr.onload = () => {
+        let headers = this._parseHeaders(xhr.getAllResponseHeaders());
+        let response = this._transformResponse(xhr.response, headers);
+        let gist = this._isSuccessCode(xhr.status) ? 'Success' : 'Error';
+        let method = '_on' + gist + 'Item';
+        (<any>this)[method](item, response, xhr.status, headers);
+        this._onCompleteItem(item, response, xhr.status, headers);
+        };
+
+        xhr.onerror = () => {
+        let headers = this._parseHeaders(xhr.getAllResponseHeaders());
+        let response = this._transformResponse(xhr.response, headers);
+        this._onErrorItem(item, response, xhr.status, headers);
+        this._onCompleteItem(item, response, xhr.status, headers);
+        };
+
+        xhr.onabort = () => {
+        let headers = this._parseHeaders(xhr.getAllResponseHeaders());
+        let response = this._transformResponse(xhr.response, headers);
+        this._onCancelItem(item, response, xhr.status, headers);
+        this._onCompleteItem(item, response, xhr.status, headers);
+        };
+    });
+    
+    form.append("tags", JSON.stringify(this.app.tags));
+    
+    xhr.open(this.method, this.url, true);
+    xhr.withCredentials = false;
+
+    xhr.setRequestHeader("x-access-token", this.accessToken);
+
+    xhr.send(form);
+    this._render();
+  }
+  
   private _iframeTransport(item:any) {
     // todo: implement it later
   }

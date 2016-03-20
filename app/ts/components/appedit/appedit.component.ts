@@ -17,7 +17,7 @@ import { appSettings } from '../../services/services';
     directives: [FileDrop, FileSelect, TagComponent]
 })
 export class AppEditComponent implements AfterViewInit {
-    private app: StoreApp;
+    public app: StoreApp;
     private resourceId: number;
     private uploader: FileUploader;
     private hasBaseDropZoneOver: boolean = false;
@@ -29,15 +29,29 @@ export class AppEditComponent implements AfterViewInit {
         public appsService: AppsService,
         public authenticationService: AuthenticationService,
         public tagsService: TagsService,
+        public router: Router,
         params: RouteParams) {
         this.resourceId = +params.get('id');
         this.uploader = new FileUploader({
             url: `${appSettings.apiRoot}resources/${this.resourceId}/edit`,
             resourceId: this.resourceId,
-            accessToken: authenticationService.apiKey
+            accessToken: authenticationService.apiKey,
         });
     }
 
+    // for some reason this closure isn't working
+    // attachResourceProperties(form: FormData) {
+    //     console.log(`Tags ${this.app.tags}`);
+    //     form.append("tags", this.app.tags); 
+    //     form.append("id", this.app.id);
+    // }
+    
+    save() {
+        this.uploader.app = this.app;
+        this.uploader.uploadAll();
+        this.router.navigate( ['AppDetails', { id: this.app.id }] );
+    }
+    
     ngAfterViewInit() {
         this.loadApp();
         this.loadSourceTags();
