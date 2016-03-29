@@ -2,14 +2,12 @@
 
 .signin-alt {
     min-height:100%;
-    width:100vw;
-    background-color: #373746;
+    margin-top:10px;
+    
     display: flex;
     align-items: center;
     justify-content: center;
     display: -webkit-flex;
-    -webkit-align-items: center;
-    -webkit-justify-content: center;
 }
 
 .authenty {
@@ -41,7 +39,7 @@
 			outline-offset: 0;
 		}
 		&:hover, &:focus {
-			color: #fff;
+			
 		}
 	}
 	.form-control:focus {
@@ -81,8 +79,8 @@
 
 
 .authenty.signin-alt {
-	background-color: #373746;
-	color: #eaeaea;
+	
+	color: #000000;
 	.section-content {
 		padding: 0;
 	}
@@ -99,31 +97,16 @@
 	.bottom-wrap {
 		padding-top: 30px;	
 		border-top: 1px solid #7A8086;
-		&.top-buffer {
-			margin-top: 130px;
-			a {
-				color: #fff;
-				-webkit-transition: color 300ms linear;
-				-moz-transition: color 300ms linear;
-				-o-transition: color 300ms linear;
-				-ms-transition: color 300ms linear;
-				transition: color 300ms linear;
-				&:hover {
-					color: #ff7000;
-				}
-			}
-		}
+		
 	}
 	.normal-signin {
 		.un-wrap {
 			position: relative;
 			.fa-user {
 				position: absolute;
-				top: 2px;
-				left: 1px;
+				
 				color: #515561;
 				font-size: 14pt;
-				padding: 10px 14px;
 				background-color: #1C1F25;
 			}
 		}
@@ -140,19 +123,16 @@
 			}
 		}
 		input[type="text"], input[type="password"] {
-			padding-left: 60px;
+			
 			border-radius: 0;
-			border: 1px solid #7A8086;
+			
 			margin-bottom: 20px;
-			color: #ccc;
-			background-color: #282A38;
+			color: #000000;
+			background-color: #ffffff;
 			height: 42px;
+			width:100%;
 		}
 		.signin {
-			padding: 10px 15px;
-			background-color: #3e4764;
-			border: 1px solid #7A8086;
-			color: #fff;
 			-webkit-transition: background-color 300ms linear;
 			-moz-transition: background-color 300ms linear;
 			-o-transition: background-color 300ms linear;
@@ -179,7 +159,7 @@
 			font-size: 18px;
 			background: #3e4764;
 			border-radius: 50%;
-			color: #fff;
+			color: #000000;
 		}
 	}
 	.sns-signin {
@@ -187,7 +167,7 @@
 		a {
 			margin-bottom: 22px;
 			display: block;
-			color: #fff;
+			color: #000;
 			span {
 				margin-left: 30px;
 			}
@@ -350,20 +330,6 @@
 	animation-name: fadeInLeft;
 }
 
-.signin-height-adjust {
-    padding-bottom: 38px;
-}
-
-@media screen and (min-height:707px) and (min-width: $screen-md-min)
-{
-    .signin-height-adjust {
-        height: calc(100vh - 242px);
-    }
-}
-
-@media screen and (min-height:900px) and (max-width: $screen-md-max)
-{
-    .signin-height-adjust {
-        height: calc(100vh - 242px);
-    }
+legend {
+	border-bottom:0px !important;
 }

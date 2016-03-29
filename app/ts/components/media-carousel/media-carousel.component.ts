@@ -9,6 +9,7 @@ require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
     template: require('./media-carousel.component.html'),
     styles: [require('../../../sass/media-carousel.scss').toString()]
 })
+
 export class MediaCarouselComponent {
     @Input() resource: StoreApp;
 }

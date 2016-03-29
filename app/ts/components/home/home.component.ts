@@ -1,5 +1,6 @@
 import { Component } from 'angular2/core';
 import { AppWidgetsComponent } from '../appwidgets/appwidgets.component';
+import { SearchComponent } from '../search/search.component';
 import { RecommendedRecentComponent } from '../recommended-recent/recommended-recent.component';
 import { AppsService } from '../../services/services';
 import { StoreApp } from '../../models';
@@ -9,7 +10,7 @@ import { AppComponent } from '../../app.component';
         selector: 'home',
         template: require('./home.component.html'),
         styles: [require('../../../sass/home.scss').toString()],
-        directives: [AppWidgetsComponent, RecommendedRecentComponent]
+        directives: [AppWidgetsComponent, SearchComponent, RecommendedRecentComponent]
     })
     export class HomeComponent {
         private storeApps: Array<StoreApp>;

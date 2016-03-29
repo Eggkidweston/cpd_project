@@ -5,11 +5,10 @@
     display: -webkit-flex;
     display: flex;
     width:100vw;
-    max-width: 1136px;
+    max-width: 100%;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap; 
     -webkit-align-items: stretch;
     align-items: stretch;
-    -webkit-justify-content: center;
-    justify-content: center;
+
 }

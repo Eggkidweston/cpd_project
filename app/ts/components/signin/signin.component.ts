@@ -24,6 +24,7 @@ export class SignInComponent implements AfterViewInit {
     emailOrUsername: AbstractControl;
     password: AbstractControl;
     //rememberMe: AbstractControl;
+    
 
     constructor(public authenticationService: AuthenticationService, private router: Router, fb: FormBuilder) {
         this.signInForm = fb.group({
@@ -36,6 +37,7 @@ export class SignInComponent implements AfterViewInit {
         this.emailOrUsername = this.signInForm.controls['emailOrUsername'];
         this.password = this.signInForm.controls['password'];
         //this.rememberMe = this.signInForm.controls['rememberMe'];
+       
     }
 
     onSubmit(formValues: any) {
@@ -67,7 +69,7 @@ export class SignInComponent implements AfterViewInit {
         this.shaking = true;
         setTimeout(() => {
             this.shaking = false;
-        }, 1000);
+        }, 500);
     }
 
     ngAfterViewInit() {

@@ -10,12 +10,13 @@ import { AppComponent } from '../../app.component';
 import { MediaCarouselComponent } from '../media-carousel/media-carousel.component';
 import { Review } from '../../models';
 import { LicenseType } from '../../models';
+import { AppWidgetComponent } from '../appwidget/appwidget.component';
 
 @Component({
   selector: 'app-details',
   template: require('./appdetails.component.html'),
   styles: [require('../../../sass/appdetails.scss').toString()],
-  directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent]
+  directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
 })
 export class AppDetailsComponent implements AfterViewInit {
     public app: StoreApp;

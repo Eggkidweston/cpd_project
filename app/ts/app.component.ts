@@ -15,7 +15,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppEditComponent } from './components/appedit/appedit.component';
-import { AuthenticationService } from './services/services';
+import { AuthenticationService, appInfo } from './services/services';
 
 @Component({
     selector: 'appstore-app',
@@ -35,8 +35,13 @@ export class AppComponent {
     static router: Router;
     private currentRoute: string;
     public atSignIn: boolean = false;
-    
+    public appInfoname: String;
+    private appVersion: String;
+
     constructor(public authenticationService: AuthenticationService, router: Router) {
+        this.appInfoname = appInfo.name;
+        this.appVersion = appInfo.version;
+        
         AppComponent.router = router;
         router.subscribe((value: any) => {
             this.currentRoute = value;

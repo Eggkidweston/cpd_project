@@ -11,3 +11,5 @@ export var servicesInjectables: Array<any> = [
 ];
 
 export var appSettings = { apiRoot: 'http://store-staging.data.alpha.jisc.ac.uk:8080/' };
+
+export var appInfo = { name: 'Application and resource store', version: 'ALPHA'}

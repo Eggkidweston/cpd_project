@@ -1,13 +1,13 @@
 .rating-outer {
 	padding: 0;
-
     .rating-inner {
         direction: rtl;
         unicode-bidi: bidi-override;
         text-align: left;
         display: inline-block;
         line-height: normal;
-        font-size: 1.3em
+        font-size: 1.3em;
+        
     }
 }
 
@@ -22,6 +22,7 @@
 .rating-text {
     font-weight: 200;
     font-size: 3em; 
+
 }
 
 .rating-editable {

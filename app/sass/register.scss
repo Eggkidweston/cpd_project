@@ -1,19 +1,10 @@
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
 
 .register-window {
-    min-height:100%;
-    width: 100vw;
-    background-color: #eaeaea;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    display: -webkit-flex;
-    -webkit-align-items: center;
-    -webkit-justify-content: center;
+   
 }
 
 .authenty {
-	font-family: 'Open Sans', sans-serif;
 	[data-animation] {
 		opacity: 0;
 	}
@@ -41,38 +32,30 @@
 			outline-offset: 0;
 		}
 		&:hover, &:focus {
-			color: #fff;
+			color: #000;
 		}
 	}
-	.form-control:focus {
-		border-color: #ff7000;
-		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 112, 0, 0.6);
-		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 122, 0, 0.6);
-		transition: border-color 0.7s, box-shadow 0.7s;
-		-webkit-transition: border-color 0.7s, box-shadow 0.7s;
-	}
+	
 	.wrap {
 		width: 100%;
 	}
-	.top-buffer {
-		margin-top: 20px;
-	}
+	
     a {
         line-height: 2.5;
-        color: #ccc;
+        color: #000000;
         -webkit-transition: color 300ms linear;
         -moz-transition: color 300ms linear;
         -o-transition: color 300ms linear;
         -ms-transition: color 300ms linear;
         transition: color 300ms linear;
         &:hover {
-            color: #78B310;
+            color: #cccccc;
         }
     }
 }
 
 .register-window {
-	background-color: #eaeaea;
+	
 	.title, .prompt {
 		text-align: left;
 		color: #ccc;
@@ -81,7 +64,7 @@
 		padding-top: 250px;
 	}
 	.form-wrap {
-		background-color: #333;
+		
 		padding: 50px 50px 100px 50px;
 		position: relative;
 		.fa-times-circle {
@@ -144,7 +127,7 @@
 	.normal-register {
 		.register {
 			padding: 8px 15px;
-			background-color: #78B310;
+			
 			color: #fff;
 			-webkit-transition: background-color 300ms linear;
 			-moz-transition: background-color 300ms linear;

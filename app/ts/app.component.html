@@ -1,40 +1,89 @@
-<div class="flex-container">
-    <nav class="flex-nav navbar navbar-default">
-        <div class="container-fluid">
-            <div class="pull-left">
-                <p class="navbar-text no-text-decoration">
-                    <a href="/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a>
-                </p>
-            </div>
-            <div class="nav-image">
-                <a [routerLink]="['Home']"><img src='../images/jisc-logo.png'></a>
-            </div>
-            <div *ngIf="authenticationService.userSignedIn" class="pull-right">
-                <span style="color: white; font-size:16px; font-weight:600;">Hello {{ authenticationService.user.name }}</span>&nbsp;
-                <a class="btn btn-warning navbar-btn" (click)="signOut()" href="#">Sign Out</a>
-            </div>
-            <div *ngIf="!authenticationService.userSignedIn && !atSignIn" class="pull-right">
-                <a class="btn btn-warning navbar-btn" [routerLink]="['SignIn']">Sign In</a>
-            </div>
+    <div class="masthead" role="banner" data-mobilemenu>
+      <div class="masthead__top">
+        <div class="inner">
+          <a id="skiplinks" class="visuallyhidden focusable in-page" href="#main" tabindex="1">
+            <span>Skip to main content</span>
+          </a>
+          <a class="masthead__logo" href="//jisc.ac.uk">
+            <img alt="Jisc logo" src="http://ux.jisc.ac.uk/ui/img/logo.png">
+          </a>
+          <div class=" masthead__nav--primary masthead__nav--secondary">
+            {{ appVersion }}
+          </div>
+      </div>
+      <div class="masthead__main masthead__main--with-content">
+        <div class="inner">
+          <h1 class="masthead__title masthead__title--long">{{ appInfoname }}</h1>
+          <div class="nav-wrapper">
+            <nav class="masthead__nav header__nav--primary" role="navigation" data-dropdown>
+              <ul>
+                <li class="nav__item  active">
+                  <a [routerLink]="['Home']">Search</a>
+                </li>
+                <!--<li class="nav__item  ">
+                  <a href="#">Events &amp; Training</a>
+                </li>-->
+              </ul>
+            </nav>
+            <nav class="masthead__nav masthead__nav--secondary" role="navigation" data-dropdown>
+              <ul>
+                <li class="nav__item" *ngIf="!authenticationService?.userSignedIn">
+                  <a [routerLink]="['SignIn']">Sign in</a>
+                </li>
+                <li class="nav__item" *ngIf="authenticationService?.userSignedIn">
+                  <a>Sign out</a>
+                </li>
+                <li class="nav__item has-popup " data-dropdown-item>
+                  <a href="#">Help</a>
+                  <div class="submenu">
+                    <ul>
+                      <li><a href="#">About the Jisc Store</a></li>
+                      <li><a href="#">Who can register?</a></li>
+                      <li><a href="#">Feedback</a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
-    </nav>
-
-    <div class="flex-fill">
-        <main>
-            <router-outlet></router-outlet>
-        </main>
+      </div>
     </div>
-
-    <footer class="footer footer2 flex-footer" role="contentinfo">
-        <div class="inner-footer"><img alt="Logo" src="../images/jisc-logo.png"></div>
-        <ul>
-            <li><a href="/">About</a></li>
-        </ul>
-        <div class="terms-privacy">
-            <ul>
-                <li><a class="" href="/">Terms &amp; Conditions</a></li>
-                <li><a class="" href="/">Privacy Policy</a></li>
-            </ul>
+  </div>
+    <main id="main" role="main" class="main">
+      <div class="inner l-pull-left featured">
+        <div class="l-centre-offset">
+          <div class="row"><br><br>
+            <router-outlet></router-outlet><br><br><br><br><br><br><br><br>
+          </div>
         </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="inner l-pull-left medium bottom-section">
+        <div class="l-centre-offset">
+            <div class="l-gutter--right">
+              <div class="divisional-info">
+                <div class="divisional-info__side span-3">
+                  <a href="https://jisc.ac.uk">
+                    <img alt="Jisc logo" src="http://ux.jisc.ac.uk/ui/img/jisc-logo.png" height="50">
+                  </a>&nbsp;&nbsp;
+                  ©2016 Jisc
+                </div>
+              </div>
+            </div>
+         </div>
+      </div>
+      <div class="inner l-pull-left heavy bottom-section">
+        <div class="l-centre-offset">
+            <div class="l-gutter--right">
+              &nbsp;
+            </div>
+         </div>
+      </div>
     </footer>
-</div>
+
+
+
+
