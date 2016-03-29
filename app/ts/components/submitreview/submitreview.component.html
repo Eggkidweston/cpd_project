@@ -1,21 +1,25 @@
-<div class="row" style="padding-top:12px;">
-    <div [hidden]="reviewing" class="form-group col-xs-11">
-        <button [disabled]="busy" class="btn btn-primary" (click)="submitReview()">
-            Submit review</button>
-    </div>
-    <form [ngFormModel]="reviewForm" (submit)="onSubmit(reviewForm.value)" novalidate>
-        <div [hidden]="!reviewing" class="form-group col-xs-11">
-            <label for="reviewTitle">Title</label>
-            <input [ngFormControl]="reviewTitle" id="reviewTitle" class="form-control" style="padding: 4px;">
-            <label for="reviewDescription">Your review</label>
-            <textarea [ngFormControl]="reviewDescription" id="reviewText" class="form-control" style="padding: 8px;"></textarea>
-            <div style="padding-top: 12px;">
-                <label>Rate this resource</label><rating (ratingChanged)="ratingChanged($event)" editable="true" rating="0"></rating>
-            </div>
-            <div style="padding-top: 12px;">
-                <button [disabled]="busy" class="btn btn-primary" type="submit">Submit review</button>
-                <button [disabled]="busy" class="btn btn-primary" (click)="cancelClicked()">Cancel</button>
-            </div>
+<div class="row">
+    <fieldset class="form__fieldset">
+        <div [hidden]="reviewing">
+            <button [disabled]="busy" class="btn submit-review" (click)="submitReview()">Submit review</button>
         </div>
-    </form>
+   
+        <form [ngFormModel]="reviewForm" (submit)="onSubmit(reviewForm.value)" novalidate>
+            <div [hidden]="!reviewing" class="">
+                <label for="reviewTitle">Title</label>
+                <input [ngFormControl]="reviewTitle" id="reviewTitle" class="form-control" style="padding: 4px;">
+                <label for="reviewDescription">Your review</label>
+                <textarea [ngFormControl]="reviewDescription" id="reviewText" class="form-control" style="padding: 8px;"></textarea>
+                <div class="review-rating-stars">
+                    <label>Rate this resource</label><rating (ratingChanged)="ratingChanged($event)" editable="true" rating="1"></rating>
+                </div>
+                <div style="padding-top: 12px;">
+                    <button [disabled]="busy" class="btn submit-review-half" type="submit">Submit review</button>
+                    <button [disabled]="busy" class="btn submit-review-half" (click)="cancelClicked()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </fieldset>
 </div>
+
+

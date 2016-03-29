@@ -13,10 +13,7 @@
         font-size: 16px;
         font-weight: bold;
     }
-    
-    section {
-        padding-bottom: 16px;
-    }
+
 
     .detail-image {
         border: 9px solid #fff;
@@ -40,5 +37,37 @@
 
     .rating-group {
         text-align:center;
+    }
+
+    .related {
+        background:#efefef;
+    }
+
+    .app-widgets {
+        padding-bottom:0px;
+    }
+
+    .meta-section {
+        padding-bottom:150px;
+        display:inline-block;
+    }
+
+    .detail-review {
+        padding-bottom:10px;
+    }
+    .form__fieldset {
+        padding-top:15px;
+    }
+    .submit-review {
+        width:100%;
+    }
+    
+    .review-rating-stars {
+        rating {
+            font-size:2.29em;
+        }
+    }
+    .reviews-list {
+        margin-right:57px;
     }
 }

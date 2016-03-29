@@ -4,7 +4,7 @@
             <div class="col span-2">
                 <div class="detail-image">
                     <img style="width:128px; height:128px;" src="{{ app?.image }}">
-                    <button class="btn btn--3d" role="button" (click)="getApp()">Get it</button>
+                    <button class="btn" role="button" (click)="getApp()">Get it</button>
                 </div>
             </div>
             <div class="col span-6">
@@ -27,40 +27,34 @@
                 <div>{{ app?.downloadcount || 0 }} download<span *ngIf="app?.downloadcount!=1">s</span></div>
             </div>
         </div>
-    
 
-    <div class="col span-12">
+    <a [routerLink]="['AppEdit', { id: app?.id }]" class="btn btn-md btn-default">Edit</a>
+
+    <div class="col span-11 meta-section">
         <div *ngIf="app?.related?.length >0">
+            <hr>
             <h3>Related content</h3>
             <div class="app-widgets">
                 <app-widget class="small" *ngFor="#relatedContent of app.related" [app]="relatedContent"></app-widget>
             </div>
-        <div>
-           <!-- <media-carousel [resource]="app"></media-carousel>-->
+            <hr>
         </div>
-        <div class="row">
-
-
-        <section>
-                    <h4 *ngIf="!authenticationService?.userSignedIn"><a [routerLink]="['SignIn']">Sign In</a> to submit a review</h4>
-                    <submit-review *ngIf="authenticationService?.userSignedIn" (reviewAdded)="reviewAdded(review)" [resourceId]="resourceId"></submit-review>
-                    <div *ngFor="#review of reviews" style="padding-top:12px;" class="clearfix">
-                        <img src="https://jisc-store-media.s3.amazonaws.com/508f0938-1636-40d1-a169-52599cf7410c.png" width="36" height="36" class="pull-left"
-                        />
-                        <div style="background-color: white; margin-left:52px; padding:12px;">{{ review?.description }}
-                            <div style="margin-top:12px;">
-                                <rating rating="{{ review?.rating }}"></rating>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+        <!--<div>
+           <media-carousel [resource]="app"></media-carousel>
+        </div>-->
+        <div *ngIf="reviews.length >0" class="col span-7 reviews-list">        
+            <h3>Reviews<span *ngIf="!authenticationService?.userSignedIn"> - <a [routerLink]="['SignIn']" >Sign In</a> to submit a review</span></h3>    
+            <div *ngFor="#review of reviews">
+                <hr>
+                <div class="detail-review"><b>{{ review?.title }}</b><br>{{ review?.description }}<br></div>
+                <div>
+                    <rating rating="{{ review?.rating }}"></rating>
+                </div>
             </div>
-            <div class="row">
+        </div>
+        <div class="col span-4">
             
-            <aside class="col-lg-4">
-                <a [routerLink]="['AppEdit', { id: app?.id }]" class="btn btn-md btn-default">Edit</a>
-            </aside>
-            </div>
+            <submit-review *ngIf="authenticationService?.userSignedIn" (reviewAdded)="reviewAdded(review)" [resourceId]="resourceId"></submit-review>
         </div>
-
+    </div>
 </div>
