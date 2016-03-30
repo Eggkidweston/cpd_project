@@ -1,8 +1,8 @@
 <div class="col span-12">
-   	<search></search>
+   	<search (updateSimple)="term = $event"></search>
 </div>
 
 <div class="col span-12">
-   	<app-widgets [apps]="storeApps"></app-widgets>
+   	<app-widgets [apps]="storeApps" [term]="term"></app-widgets>
 </div>
 

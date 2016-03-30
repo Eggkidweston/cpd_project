@@ -11,4 +11,8 @@ import { StoreApp } from '../../models';
 })
 export class AppWidgetComponent {
     @Input() app: StoreApp;
+
+    appTitleToFit(appTitle: String) {
+    	return (appTitle.length>18) ? (appTitle.substr(0, 16)+'...') : appTitle;
+    }
 }

@@ -6,7 +6,7 @@
                     </div>
             <div>
             
-                <div class="title-text">{{ (app?.title.length>17) ? (app?.title.substr(0, 14)+'...') : app?.title }}</div>
+                <div class="title-text">{{ appTitleToFit(app?.title)}}</div>
                 <div class="rating">
                     <rating [rating]="app?.average_rating"></rating>
                 </div>

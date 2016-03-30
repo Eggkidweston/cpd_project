@@ -1,5 +1,14 @@
-<div> 
- <form >
-    <input class="input--search" placeholder="Search for apps and resources" type="searchTerm" id="searchTerm">
- </form>
+<div class="row">
+<div [hidden]="advanced">
+	<form class="form">
+    	<input #input (input)="updateSimple.emit(input.value)" class="input--search" placeholder="Search by NAME" type="text">
+ 	</form>
+	<!--<a href="javascript:void(0);" (click)="advancedSearch()">Tag search</a>-->
+</div>
+<div [hidden]="!advanced">
+	<form class="form">
+    	<input #inputTag (input)="update.emit(inputTag.value)" class="input--search" placeholder="Search by TAG" type="text">
+ 	</form>
+ 	<div><a href="javascript:void(0);" (click)="simpleSearch()">Name search</a></div>
+</div>
 </div>
