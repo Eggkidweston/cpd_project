@@ -10,6 +10,9 @@ import { Directive, Component, ElementRef, Renderer } from 'angular2/core'
 import { RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
 import { Http, Headers } from 'angular2/http';
 import { HomeComponent } from './components/home/home.component';
+import { AboutComponent } from './components/about/about.component';
+import { WhoComponent } from './components/whocanregister/who.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
 import { AppDetailsComponent } from './components/appdetails/appdetails.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
@@ -29,8 +32,12 @@ import { AuthenticationService, appInfo } from './services/services';
     { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
     { path: '/error', name: 'Error', component: ErrorComponent },
     { path: '/signin', name: 'SignIn', component: SignInComponent },
-    { path: '/register', name: 'Register', component: RegisterComponent }
+    { path: '/register', name: 'Register', component: RegisterComponent },
+    { path: '/about', name: 'About', component: AboutComponent },
+    { path: '/whocanregister', name: 'Who', component: WhoComponent },
+    { path: '/feedback', name: 'Feedback', component: FeedbackComponent }
 ])
+
 export class AppComponent {
     static router: Router;
     private currentRoute: string;

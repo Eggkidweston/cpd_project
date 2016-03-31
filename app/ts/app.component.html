@@ -34,12 +34,12 @@
                   <a>Sign out</a>
                 </li>
                 <li class="nav__item has-popup " data-dropdown-item>
-                  <a href="#">Help</a>
+                  <a href="javascript:void(0);">Help</a>
                   <div class="submenu">
                     <ul>
-                      <li><a href="#">About the Jisc Store</a></li>
-                      <li><a href="#">Who can register?</a></li>
-                      <li><a href="#">Feedback</a></li>
+                      <li><a [routerLink]="['About']">About the Jisc Store</a></li>
+                      <li><a [routerLink]="['Who']">Who can register?</a></li>
+                      <li><a [routerLink]="['Feedback']">Feedback</a></li>
                     </ul>
                   </div>
                 </li>

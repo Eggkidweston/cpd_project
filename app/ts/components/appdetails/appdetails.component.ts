@@ -26,6 +26,7 @@ export class AppDetailsComponent implements AfterViewInit {
     addingReview: boolean = false;
     
     constructor( public authenticationService: AuthenticationService, 
+        public router: Router,
         public appsService: AppsService, 
         public cdr: ChangeDetectorRef,
         params: RouteParams ) 
@@ -64,16 +65,24 @@ export class AppDetailsComponent implements AfterViewInit {
     }
     
     getApp() {
-        // waiting on API
-        this.appsService.getApp( this.resourceId )
-            .subscribe(
-                url => window.open(url),
-                (error: any) => AppComponent.generalError(error.status)
-            );
+        if(!this.authenticationService.userSignedIn) {
+            this.openSignIn();
+        } else {
+            // waiting on API
+            this.appsService.getApp( this.resourceId )
+                .subscribe(
+                    url => window.open(url),
+                    (error: any) => AppComponent.generalError(error.status)
+                );
+        }
     }
     
     submitReview() {
         this.addingReview = true;
+    }
+    
+    openSignIn() {
+        this.router.navigate( ['SignIn'] );
     }
     
     get averageRating(): number {
