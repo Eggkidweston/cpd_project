@@ -13,45 +13,56 @@ import { LicenseType } from '../../models';
 import { AppWidgetComponent } from '../appwidget/appwidget.component';
 
 @Component({
-  selector: 'app-details',
-  template: require('./appdetails.component.html'),
-  styles: [require('../../../sass/appdetails.scss').toString()],
-  directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
+    selector: 'app-details',
+    template: require('./appdetails.component.html'),
+    styles: [require('../../../sass/appdetails.scss').toString()],
+    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
 })
 export class AppDetailsComponent implements AfterViewInit {
     public app: StoreApp;
     public resourceId: number;
+    public alsoBy: Array<StoreApp>;
     public reviews: Array<Review> = new Array<Review>();
-    
+
     addingReview: boolean = false;
-    
-    constructor( public authenticationService: AuthenticationService, 
+
+    constructor(public authenticationService: AuthenticationService,
         public router: Router,
-        public appsService: AppsService, 
+        public appsService: AppsService,
         public cdr: ChangeDetectorRef,
-        params: RouteParams ) 
-    {
+        params: RouteParams) {
         this.resourceId = +params.get('id');
     }
-    
+
     ngAfterViewInit() {
         this.loadApp();
         this.loadReviews();
     }
-    
+
     loadApp() {
-        this.appsService.getAppDetails( this.resourceId )
+        this.appsService.getAppDetails(this.resourceId)
             .subscribe(
-                storeApp => this.app = storeApp,
-                (error: any) => AppComponent.generalError(error.status)
+            storeApp => {
+                this.app = storeApp;
+                this.loadAlsoBy();
+            },
+            (error: any) => AppComponent.generalError(error.status)
             );
     }
 
     loadReviews() {
-        this.appsService.getReviews( this.resourceId )
+        this.appsService.getReviews(this.resourceId)
             .subscribe(
-                reviews => this.reviews = reviews,
-                (error: any) => AppComponent.generalError(error.status)
+            reviews => this.reviews = reviews,
+            (error: any) => AppComponent.generalError(error.status)
+            );
+    }
+
+    loadAlsoBy() {
+        this.appsService.getByCreator(this.app.createdby)
+            .subscribe(
+            alsoBy => this.alsoBy = alsoBy.filter( app => this.app.id != app.id ),
+            (error: any) => AppComponent.generalError(error.status)
             );
     }
 
@@ -63,35 +74,34 @@ export class AppDetailsComponent implements AfterViewInit {
         // this.cdr.detectChanges();
         this.loadReviews();
     }
-    
+
     getApp() {
-        if(!this.authenticationService.userSignedIn) {
+        if (!this.authenticationService.userSignedIn) {
             this.openSignIn();
         } else {
-            // waiting on API
-            this.appsService.getApp( this.resourceId )
+            this.appsService.getApp(this.resourceId)
                 .subscribe(
-                    url => window.open(url),
-                    (error: any) => AppComponent.generalError(error.status)
+                url => window.open(url),
+                (error: any) => AppComponent.generalError(error.status)
                 );
         }
     }
-    
+
     submitReview() {
         this.addingReview = true;
     }
-    
+
     openSignIn() {
-        this.router.navigate( ['SignIn'] );
+        this.router.navigate(['SignIn']);
     }
-    
+
     get averageRating(): number {
         return this.app ? Math.floor(this.app.average_rating * 10) / 10 : 0;
     }
-    
+
     get licenseType(): string {
         // for some reaosn, this does not work as a method on StoreApp. Grrr. TypeScript quirk.
-        if( this.app ) return LicenseType[this.app.licensetype_id];
+        if (this.app) return LicenseType[this.app.licensetype_id];
         else return "";
     }
 }

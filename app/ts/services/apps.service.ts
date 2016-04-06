@@ -37,13 +37,22 @@ export class AppsService {
             .catch(this.handleError);
     }
     
+    public getByCreator(createdBy: number) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.get(`${appSettings.apiRoot}resources?creator_id=${ createdBy }`, { headers })
+            .map( res => <StoreApp[]>res.json().data )
+            .catch(this.handleError);
+    }
+    
     public getReviews(resourceId: number)
     {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', this.authenticationService.apiKey);
         
-        return this.http.get(`${appSettings.apiRoot}resources/${resourceId}/reviews`, { headers} )
+        return this.http.get(`${appSettings.apiRoot}resources/${resourceId}/reviews`, { headers } )
             .map( res => <Review[]>res.json().data)
             .catch(this.handleError);
     }

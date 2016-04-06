@@ -12,7 +12,7 @@ export class User {
 export class StoreApp {
     id: string;
     
-    createdBy: User;
+    createdby: number;
     createdDate: string;
     description: string;
     downloadCount: number;
