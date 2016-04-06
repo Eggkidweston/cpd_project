@@ -17,7 +17,7 @@
           <div class="nav-wrapper">
             <nav class="masthead__nav header__nav--primary" role="navigation" data-dropdown>
               <ul>
-                <li class="nav__item  active">
+                <li [class.active]="isRouteActive(['Home'])" class="nav__item">
                   <a [routerLink]="['Home']">Search</a>
                 </li>
                 <!--<li class="nav__item  ">
@@ -27,13 +27,13 @@
             </nav>
             <nav class="masthead__nav masthead__nav--secondary" role="navigation" data-dropdown>
               <ul>
-                <li class="nav__item" *ngIf="!authenticationService?.userSignedIn">
+                <li [class.active]="isRouteActive(['SignIn']) || isRouteActive(['Register'])" class="nav__item" *ngIf="!authenticationService?.userSignedIn">
                   <a [routerLink]="['SignIn']">Sign in</a>
                 </li>
                 <li class="nav__item" *ngIf="authenticationService?.userSignedIn">
                   <a>Sign out</a>
                 </li>
-                <li class="nav__item has-popup " data-dropdown-item>
+                <li [class.active]="isRouteActive(['About']) || isRouteActive(['Who']) || isRouteActive(['Feedback'])" class="nav__item has-popup " data-dropdown-item>
                   <a href="javascript:void(0);">Help</a>
                   <div class="submenu">
                     <ul>

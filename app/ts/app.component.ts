@@ -22,7 +22,7 @@ import { AuthenticationService, SigninRegisterService, appInfo } from './service
 
 @Component({
     selector: 'appstore-app',
-    directives: [ ...ROUTER_DIRECTIVES ],
+    directives: [...ROUTER_DIRECTIVES],
     styles: [require('../sass/appstore.scss').toString()],
     template: require('./app.component.html')
 })
@@ -41,32 +41,32 @@ import { AuthenticationService, SigninRegisterService, appInfo } from './service
 export class AppComponent {
     static router: Router;
     private currentRoute: string;
-    public atSignIn: boolean = false;
     public appInfoname: String;
     private appVersion: String;
     private static lastRoute: string = 'Home';
 
     constructor(
-        public authenticationService: AuthenticationService, 
+        public authenticationService: AuthenticationService,
         public loginRegisterService: SigninRegisterService,
-        router: Router )
+        router: Router) 
     {
         this.appInfoname = appInfo.name;
         this.appVersion = appInfo.version;
-        
         AppComponent.router = router;
-        
-        router.subscribe((value: any) => {
-            this.currentRoute = value;
-            this.atSignIn = this.currentRoute === "signin";
-        })
     }
-    
+
     signOut() {
         this.authenticationService.signOut();
     }
-    
+
+    isRouteActive(instruction: any[]): boolean {
+        return AppComponent.router.isRouteActive(AppComponent.router.generate(instruction));
+    }
+
+    // ok, I confess, this needs refactoring. This is not a good
+    // approach to intercomponent communication. And it creates 
+    // a necessity for a static router, which is smelly
     static generalError(status: any) {
-        AppComponent.router.navigate(['Error', {status: status}]);
+        AppComponent.router.navigate(['Error', { status: status }]);
     }
 }

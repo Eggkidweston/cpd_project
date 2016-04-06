@@ -8,14 +8,12 @@ export class SigninRegisterService {
 
     constructor(public router: Router) {
         router.subscribe((value: any) => {
-            console.log(`Navigated to ${value}`);
             if( value !== 'signin' && value !== 'register' ) 
                 this.lastRoute = value;
         })
     };
     
     resumeAfterSigninOrRegister() {
-        console.log(`About to navigate to ${this.lastRoute}`);
         if( this.lastRoute ) {
             this.router.navigateByUrl(this.lastRoute);
         } else {
