@@ -1,7 +1,7 @@
 import { Component, ViewChild } from 'angular2/core';
 import { ControlGroup, FormBuilder, AbstractControl, Validators } from 'angular2/common';
 import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
-import { AuthenticationService } from '../../services/services';
+import { AuthenticationService, SigninRegisterService } from '../../services/services';
 import { AppComponent } from '../../app.component';
 import 'rxjs/add/operator/debounceTime.js';
 import 'rxjs/add/operator/distinctUntilChanged.js';
@@ -49,7 +49,12 @@ export class RegisterComponent {
     password: AbstractControl;
     repeatPassword: AbstractControl;
 
-    constructor(public authenticationService: AuthenticationService, private router: Router, fb: FormBuilder) {
+    constructor(
+        public authenticationService: AuthenticationService, 
+        public signinRegisterService: SigninRegisterService,
+        private router: Router, 
+        fb: FormBuilder) 
+    {
         this.registerForm = fb.group({
                 "email": ["", emailValidator],
                 "username": ["", Validators.required],
@@ -110,7 +115,7 @@ export class RegisterComponent {
                 .register(formValues.email, formValues.username, formValues.password,
                     () => {
                         this.busy = false;
-                        this.router.navigate(['Home']);
+                        this.signinRegisterService.resumeAfterSigninOrRegister();
                     },
                     (res: any) => {
                         if( res.status === 409 || res.status === 400 ) {

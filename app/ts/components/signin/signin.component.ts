@@ -1,43 +1,37 @@
 import { Component, AfterViewInit, ViewChild } from 'angular2/core';
 import { ControlGroup, FormBuilder, AbstractControl, Validators } from 'angular2/common';
 import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
-import { AuthenticationService } from '../../services/services';
+import { AuthenticationService, SigninRegisterService } from '../../services/services';
 import { AppComponent } from '../../app.component';
-
-// var jQuery: any = require("jquery");
-// require('../../../js/jquery.icheck.min.js');
-// require('../../../css/checkbox/orange.css');
 
 @Component({
     selector: 'signin',
     directives: [RouterOutlet, RouterLink],
     styles: [require('../../../sass/signin.scss').toString()],
-    template: require('./signin.component.html')
+    template: require('./signin.component.html'),
 })
-export class SignInComponent implements AfterViewInit {
-    //@ViewChild('rememberMeElement') rememberMeElement;
-
+export class SignInComponent {
     busy: boolean = false;
     shaking: boolean = false;
 
     signInForm: ControlGroup;
     emailOrUsername: AbstractControl;
     password: AbstractControl;
-    //rememberMe: AbstractControl;
     
-
-    constructor(public authenticationService: AuthenticationService, private router: Router, fb: FormBuilder) {
+    constructor(
+        public authenticationService: AuthenticationService, 
+        public signinRegisterService: SigninRegisterService,
+        private router: Router, 
+        fb: FormBuilder ) 
+    {
         this.signInForm = fb.group({
             "emailOrUsername": ["", Validators.required],
-            "password": ["", Validators.required]/*,
-            "rememberMe": [""]*/
+            "password": ["", Validators.required]
         }
         );
 
         this.emailOrUsername = this.signInForm.controls['emailOrUsername'];
         this.password = this.signInForm.controls['password'];
-        //this.rememberMe = this.signInForm.controls['rememberMe'];
-       
     }
 
     onSubmit(formValues: any) {
@@ -48,7 +42,7 @@ export class SignInComponent implements AfterViewInit {
                 .signIn(formValues.emailOrUsername, formValues.password,
                 () => {
                     this.busy = false;
-                    this.router.navigate(['Home']);
+                    this.signinRegisterService.resumeAfterSigninOrRegister();
                 },
                 (res: any) => {
                     if (res.status === 403 || res.status === 400) {
@@ -70,14 +64,5 @@ export class SignInComponent implements AfterViewInit {
         setTimeout(() => {
             this.shaking = false;
         }, 500);
-    }
-
-    ngAfterViewInit() {
-        // nasty legacy stuff
-        // jQuery(this.rememberMeElement.nativeElement).iCheck({
-        //     checkboxClass: 'icheckbox_minimal-orange',
-        //     radioClass: 'iradio_minimal-orange',
-        //     increaseArea: '20%'
-        // });    
     }
 }
