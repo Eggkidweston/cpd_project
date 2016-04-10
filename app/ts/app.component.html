@@ -18,7 +18,12 @@
             <nav class="masthead__nav header__nav--primary" role="navigation" data-dropdown>
               <ul>
                 <li [class.active]="isRouteActive(['Home'])" class="nav__item">
+
                   <a [routerLink]="['Home']">Search</a>
+                </li>
+                <li  class="nav__item">
+
+                  <a [routerLink]="['TagCloud']">TagCloud</a>
                 </li>
                 <!--<li class="nav__item  ">
                   <a href="#">Events &amp; Training</a>

@@ -1,7 +1,7 @@
 import { Injectable, Input, bind } from 'angular2/core';
 import { Http, Response, Headers } from 'angular2/http';
 import { Observable } from 'rxjs/Observable';
-import { StoreApp } from '../models';
+import {StoreApp, TagCloud} from '../models';
 import { appSettings } from './services';
 import { AuthenticationService } from './authentication.service';
 import { Review } from '../models';
@@ -14,7 +14,7 @@ export class AppsService {
     }
 
     public getAllApps() {
-        return this.http.get(`${appSettings.apiRoot}resources`)
+        return this.http.get(`${appSettings.apiRoot}resources?limit=100`)
             .map(res => <StoreApp[]>res.json().data)
             .catch(this.handleError);
     }
@@ -23,6 +23,26 @@ export class AppsService {
         return this.http.get(`${appSettings.apiRoot}resources/recent`)
             .map(res => <StoreApp[]>res.json().data)
             .catch(this.handleError);
+    }
+
+    public getTagCloud() {
+        return this.http.get(`${appSettings.apiRoot}tags`)
+            .map(res => <TagCloud>res.json().data)
+            .catch(this.handleError);
+    }
+
+    public getByTag(tag) {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('x-access-token', this.authenticationService.apiKey);
+
+        console.log(this.authenticationService.apiKey);
+
+        return this.http.get(`${appSettings.apiRoot}tags/${tag.name}`, { headers } )
+            .map( res => <StoreApp[]>res.json().resources)
+            .catch(this.handleError);
+
     }
 
     public getRecommendedApps() {

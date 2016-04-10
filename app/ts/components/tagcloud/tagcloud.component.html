@@ -1,0 +1,13 @@
+
+<h4>Tag Cloud</h4>
+<div *ngIf = "tagcloud">
+        <button class="btn btn-success" *ngFor="#tag of tagcloud" (click)="getTaggedApps(tag)"> {{tag.name}}</button>
+
+    <div class="col span-12">
+        <app-widgets [apps]="storeApps"></app-widgets>
+    </div>
+
+
+</div>
+
+

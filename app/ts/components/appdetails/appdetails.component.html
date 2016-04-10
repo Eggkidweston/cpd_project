@@ -1,6 +1,5 @@
 <div class="app-details">
 
-    <div class="row">
         <div class="col span-2">
             <div class="detail-image">
                 <img style="width:128px; height:128px;" src="{{ app?.image }}">
@@ -12,9 +11,11 @@
             <h4>{{ app?.overview }}</h4>
             <p>{{ app?.description }}</p>
             <p>Created by <span class="creator-name">{{ app?.creator?.username }}</span></p>
-            <p>License Type: {{ licenseType }}</p>
+
         </div>
-        <div class="col span-2 push-1 rating-group">
+
+
+    <div class="col span-2 push-1 rating-group">
             <div>
                 <span class="rating-text">{{ averageRating }}</span>
             </div>
@@ -28,9 +29,67 @@
         </div>
     </div>
 
-    <a [routerLink]="['AppEdit', { id: app?.id }]" class="btn btn-md btn-default">Edit</a>
+<div class = "row">
+
+
+
+<div class="col span-12" *ngIf="app?.tags?.length > 0">
+
+
+            <button class="btn btn-success" *ngFor="#tag of app.tags" > {{tag.name}}</button>
+
+
+</div>
+
+
+<div class="row">
+<BR>
+    <div class="col span-9">
+
+        <media-carousel [resource]="shadowApp"></media-carousel>
+
+        <button type="button" class="btn btn-primary btn-xs" (click)="goTry()">Try It</button>
+    </div>
+
+
+
+    <div class="col span-2">
+
+        <h4>Cost</h4>
+
+        {{ shadowApp?.costs }}
+
+        <h4>License</h4>
+
+        <button type="button" class="btn btn-primary btn-xs" (click)="goLicense()">{{ shadowApp?.license }}</button>
+
+        <h4>Curated?</h4>
+
+       <p> {{ shadowApp?.curated }}</p>
+
+        <button type="button" class="btn btn-primary btn-xs" (click)="goCuration()">Go to Curation</button>
+
+
+        <h4>Remixable</h4>
+
+        <p> {{ shadowApp?.remixable }}</p>
+
+        <button type="button" class="btn btn-primary btn-xs" (click)="goDownloadSource()">Download Source</button>
+
+
+    </div>
+
+    </div>
+
 
     <div class="col span-11 meta-section">
+        <div *ngIf="app?.related?.length > 0">
+            <hr>
+            <h3>Remixes</h3>
+            <div class="app-widgets">
+                <app-widget class="small" *ngFor="#relatedContent of app.related" [app]="relatedContent"></app-widget>
+            </div>
+        </div>
         <div *ngIf="app?.related?.length > 0">
             <hr>
             <h3>Related content</h3>
