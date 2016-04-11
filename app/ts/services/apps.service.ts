@@ -61,7 +61,8 @@ export class AppsService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        return this.http.get(`${appSettings.apiRoot}resources?creator_id=${ createdBy }`, { headers })
+        return this.http.get(`${appSettings.apiRoot}resources?$top=3`)
+       // return this.http.get(`${appSettings.apiRoot}resources?$filter=createdby%20eq%20'${ createdBy }'`, { headers })
             .map( res => <StoreApp[]>res.json().data )
             .catch(this.handleError);
     }
