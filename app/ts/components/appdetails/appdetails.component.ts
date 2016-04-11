@@ -83,7 +83,7 @@ export class AppDetailsComponent implements AfterViewInit {
 
     goCuration(){
 
-        var url = 'http://localhost:3000/#/curation/'+this.app.id
+        var url = 'http://curation-staging.data.alpha.jisc.ac.uk/#/curation/'+this.app.id
 
 
         window.location.href=url;
