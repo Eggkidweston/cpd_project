@@ -14,7 +14,7 @@ export class AppsService {
     }
 
     public getAllApps() {
-        return this.http.get(`${appSettings.apiRoot}resources?$top=100`)
+        return this.http.get(`${appSettings.apiRoot}resources?limit=100`)
             .map(res => <StoreApp[]>res.json().data)
             .catch(this.handleError);
     }
