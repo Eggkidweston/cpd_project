@@ -33,8 +33,42 @@ export class StoreApp {
     tags: Array<string>;
 }
 
+export class TagCloud{
+
+    constructor(
+        public tags: Tag[]
+    ){}
+
+}
+
+export class  Tag{
+
+    public id:number;
+    public name:string;
+    public resource_count :string;
+    
+}
+
+
+export class ShadowApp{
+    constructor(
+    public _id: string,
+    public media: Array<ShadowMedium>,
+    public storeID:string,
+    public license:string,
+    public remixable:string,
+    public licenseLink:String,
+    public runURL:String,
+){}
+}
+
+export class ShadowMedium {
+    url: string;
+    type_id: string;
+}
+
 export enum LicenseType {
-    Free, Paid
+    GPL, Paid
 }
 
 export class Review {

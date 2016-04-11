@@ -1,6 +1,7 @@
 import { Component, Input } from 'angular2/core';
 import { NgFor } from 'angular2/common';
 import { StoreApp } from '../../models';
+import { ShadowApp } from '../../models';
 
 require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js");
 
@@ -11,5 +12,5 @@ require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
 })
 
 export class MediaCarouselComponent {
-    @Input() resource: StoreApp;
+    @Input() resource: ShadowApp;
 }

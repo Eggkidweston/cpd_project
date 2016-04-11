@@ -16,15 +16,20 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
 import { AppDetailsComponent } from './components/appdetails/appdetails.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
+import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppEditComponent } from './components/appedit/appedit.component';
 import { AuthenticationService, SigninRegisterService, appInfo } from './services/services';
+import {Apps2Service} from "./services/apps2.service";
 
 @Component({
     selector: 'appstore-app',
     directives: [...ROUTER_DIRECTIVES],
     styles: [require('../sass/appstore.scss').toString()],
-    template: require('./app.component.html')
+    template: require('./app.component.html'),
+    providers: [
+        Apps2Service
+    ]
 })
 @RouteConfig([
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
@@ -35,6 +40,7 @@ import { AuthenticationService, SigninRegisterService, appInfo } from './service
     { path: '/register', name: 'Register', component: RegisterComponent },
     { path: '/about', name: 'About', component: AboutComponent },
     { path: '/whocanregister', name: 'Who', component: WhoComponent },
+    { path: '/tagcloud', name: 'TagCloud', component: TagCloudComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent }
 ])
 
