@@ -26,7 +26,7 @@ export class AppsService {
     }
 
     public getTagCloud() {
-        return this.http.get(`${appSettings.apiRoot}tags`)
+        return this.http.get(`${appSettings.apiRoot}tags?limit=100`)
             .map(res => <TagCloud>res.json().data)
             .catch(this.handleError);
     }
@@ -39,7 +39,7 @@ export class AppsService {
 
         console.log(this.authenticationService.apiKey);
 
-        return this.http.get(`${appSettings.apiRoot}tags/${tag.name}`, { headers } )
+        return this.http.get(`${appSettings.apiRoot}tags/${tag.name}?limit=100`, { headers } )
             .map( res => <StoreApp[]>res.json().resources)
             .catch(this.handleError);
 
