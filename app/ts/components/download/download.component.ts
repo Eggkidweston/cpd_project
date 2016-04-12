@@ -58,9 +58,9 @@ export class DownloadSourceComponent implements AfterViewInit {
                 shadowApps => {
                     this.shadowApps = shadowApps,
                         this.getShadow()
-                }
-        error =>  this.errorMessage = <any>error
-    );
+                },
+                (error: any)  =>  this.errorMessage = <any>error
+            );
 
     }
 

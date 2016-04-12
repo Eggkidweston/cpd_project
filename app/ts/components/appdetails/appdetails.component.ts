@@ -66,8 +66,8 @@ export class AppDetailsComponent implements AfterViewInit {
                 shadowApps => {
                     this.shadowApps = shadowApps,
                         this.getShadow()
-                }
-                error =>  this.errorMessage = <any>error
+                },
+                (error: any) =>  this.errorMessage = <any>error
             );
 
     }
@@ -101,6 +101,8 @@ export class AppDetailsComponent implements AfterViewInit {
         console.log(this.shadowApps);
 
     }
+
+
 
     loadReviews() {
         this.appsService.getReviews(this.resourceId)
@@ -156,4 +158,6 @@ export class AppDetailsComponent implements AfterViewInit {
         if (this.app) return LicenseType[this.app.licensetype_id];
         else return "";
     }
+
+
 }

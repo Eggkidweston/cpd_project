@@ -1,8 +1,6 @@
 
-<div *ngIf="resource">
+<div *ngIf="resource" class="media-container">
 
-
-    <div class="row">
 
 
 
@@ -17,14 +15,14 @@
             <div *ngIf="i==0">
             <div *ngIf="media.type_id=='2'" class="item active">
 
-                <div class="container">
+                <div class="">
                     <iframe id="ytplayer" type="text/html" width="640" height="390" src="{{media.url}}?autoplay=0&controls=1"
                             frameborder="0"></iframe>
                 </div>
             </div>
             <div  *ngIf="media.type_id==1" class="item active">
 
-                <div class="container">
+                <div class="">
 
                     <img src="{{media.url}}" style="width: 640px;" class="img-responsive"
                     />
@@ -36,7 +34,7 @@
         </div>
     </div>
 
-</div>
+
 
 
 </div>

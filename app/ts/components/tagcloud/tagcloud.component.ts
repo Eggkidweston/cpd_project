@@ -11,7 +11,6 @@ import { ShadowApp } from '../../models';
 import { AppComponent } from '../../app.component';
 
 
-import { Component } from 'angular2/core';
 import { AppWidgetsComponent } from '../appwidgets/appwidgets.component';
 
 
@@ -20,7 +19,7 @@ require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
 @Component({
     selector: 'tagcloud',
     template: require('tagcloud.component.html'),
-    styles: [require('../../../sass/appdetails.scss').toString()],
+    styles: [require('../../../sass/tagcloud.scss').toString()],
 
     directives: [ AppWidgetsComponent,RouterOutlet, RouterLink, RatingComponent]
 })
@@ -44,23 +43,17 @@ export class TagCloudComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         this.loadCloud();
-
-
     }
 
-    getTaggedApps(tag)
-
-    {
+    getTaggedApps(tag){
         this.appsService.getByTag(tag)
             .subscribe(
                 storeApps => {this.storeApps = storeApps;
 
-                    console.log("GOTTT  by Tagg" +  JSON.stringify(storeApps);
+                    console.log("GOTTT  by Tagg" +  JSON.stringify(storeApps));
                 },
                 (error: any) => AppComponent.generalError(error.status)
-            )
-
-
+            );
     }
 
     getSomeApps(){
@@ -85,8 +78,7 @@ export class TagCloudComponent implements AfterViewInit {
                 (error: any) => AppComponent.generalError(error.status)
             );
 
-        error =>  this.errorMessage = <any>error
-    );
+        error =>  this.errorMessage = <any>error;
 
     }
 

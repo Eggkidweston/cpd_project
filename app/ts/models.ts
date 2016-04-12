@@ -58,7 +58,7 @@ export class ShadowApp{
     public license:string,
     public remixable:string,
     public licenseLink:String,
-    public runURL:String,
+    public runURL:String
 ){}
 }
 
