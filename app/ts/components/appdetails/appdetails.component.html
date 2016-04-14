@@ -3,14 +3,15 @@
         <div class="detail-image">
             <img style="width:128px; height:128px;" src="{{ app?.image }}">
             <button class="btn" role="button" (click)="getApp()">Get it</button>
-            <button *ngIf="shadowApp?.runURL" class="btn" role="button"  (click)="goTry()">Try It</button>
+            <button *ngIf="shadowApp?.runURL" class="btn" role="button" (click)="goTry()">Try It</button>
         </div>
     </div>
     <div class="col span-6">
         <h2>{{ app?.title }}</h2>
         <h4>{{ app?.overview }}</h4>
         <p>{{ app?.description }}</p>
-        <p><img src="http://media.data.alpha.jisc.ac.uk/media/type-android.png" width="36">Created by <span class="creator-name">{{ app?.creator?.username }}</span></p>
+        <p><i class="fa fa-android fa-2x" aria-hidden="true" style="padding-right: 8px;"></i>Created by <span class="creator-name">{{ app?.creator?.username }}</span>
+            <span style="padding-left: 4px;"><a [routerLink]="['UserInfo', { id: app?.creator?.id }]">find out more</a></span></p>
     </div>
     <div class="col span-2 push-1 rating-group">
         <div>
@@ -25,88 +26,64 @@
         <div>
             {{ app?.downloadcount || 0 }} download<span *ngIf="app?.downloadcount!=1">s</span>
         </div>
-    </div>    
+        <div style="padding-top: 12px;">
+            <span><a [routerLink]="['AppInfo', { id: app?.id }]">find out more</a></span>
+        </div>
+    </div>
 </div>
 
 <div class="row tagcloud" *ngIf="app?.tags?.length > 0">
-    <button class="btn " *ngFor="#tag of app.tags" > {{tag.name}}</button>
+    <button class="btn " *ngFor="#tag of app.tags"> {{tag.name}}</button>
 </div>
 
 <div class="row">
-
-    <div class="col media-container">
-
+    <div class="col span-6 media-container">
         <media-carousel [resource]="shadowApp"></media-carousel>
-
-
     </div>
-
-
 
     <div class="col span-3 push-1">
-
-        <h4>Cost</h4>
-
-        {{ shadowApp?.costs }}
-
+        <h4>Cost</h4> {{ shadowApp?.costs }}
         <h4>License</h4>
-
         <button type="button" class="btn btn-primary btn-xs" (click)="goLicense()">{{ shadowApp?.license }}</button>
-
         <h4>Curated?</h4>
-
-       <p> {{ shadowApp?.curated }}</p>
-
+        <p> {{ shadowApp?.curated }}</p>
         <button type="button" class="btn btn-primary btn-xs" (click)="goCuration()">Go to Curation</button>
-
-
         <h4>Remixable</h4>
-
         <p> {{ shadowApp?.remixable }}</p>
-
         <button type="button" class="btn btn-primary btn-xs" (click)="goDownloadSource()">Download Source</button>
-
-
     </div>
+</div>
 
-    </div>
-
-
-    <div class="col span-11 meta-section">
-
-        <div *ngIf="app?.related?.length > 0">
-            <hr>
-            <h3>Related content</h3>
-            <div class="app-widgets">
-                <app-widget class="small" *ngFor="#relatedContent of app.related" [app]="relatedContent"></app-widget>
-            </div>
+<div class="col span-11 meta-section">
+    <div *ngIf="app?.related?.length > 0">
+        <hr>
+        <h3>Related content</h3>
+        <div class="app-widgets">
+            <app-widget class="small" *ngFor="#relatedContent of app.related" [app]="relatedContent"></app-widget>
         </div>
-        <div *ngIf="alsoBy?.length > 0">
+    </div>
+    <div *ngIf="alsoBy?.length > 0">
+        <hr>
+        <h3>Also by {{ app?.creator?.username }}</h3>
+        <div class="app-widgets">
+            <app-widget class="small" *ngFor="#alsoBy of alsoBy" [app]="alsoBy"></app-widget>
+        </div>
+        <div class="col span-7 reviews-list">
             <hr>
-            <h3>Also by {{ app?.creator?.username }}</h3>
-            <div class="app-widgets">
-                <app-widget class="small" *ngFor="#alsoBy of alsoBy" [app]="alsoBy"></app-widget>
-            </div>
-            <!--<div>
-           <media-carousel [resource]="app"></media-carousel>
-        </div>-->
-            <div class="col span-7 reviews-list">
+            <h3>Reviews<span *ngIf="!authenticationService?.userSignedIn"> - <a [routerLink]="['SignIn']" >Sign In</a> to submit a review</span></h3>
+            <div *ngFor="#review of reviews">
                 <hr>
-                <h3>Reviews<span *ngIf="!authenticationService?.userSignedIn"> - <a [routerLink]="['SignIn']" >Sign In</a> to submit a review</span></h3>
-                <div *ngFor="#review of reviews">
-                    <hr>
-                    <div class="detail-review"><b>{{ review?.title }}</b>
-                        <br>{{ review?.description }}
-                        <br>
-                    </div>
-                    <div>
-                        <rating rating="{{ review?.rating }}"></rating>
-                    </div>
+                <div class="detail-review"><b>{{ review?.title }}</b>
+                    <br>{{ review?.description }}
+                    <br>
+                </div>
+                <div>
+                    <rating rating="{{ review?.rating }}"></rating>
                 </div>
             </div>
-            <div class="col span-4">
-
-                <submit-review *ngIf="authenticationService?.userSignedIn" (reviewAdded)="reviewAdded(review)" [resourceId]="resourceId"></submit-review>
-            </div>
+        </div>
+        <div class="col span-4">
+            <submit-review *ngIf="authenticationService?.userSignedIn" (reviewAdded)="reviewAdded(review)" [resourceId]="resourceId"></submit-review>
         </div>
     </div>
+</div>

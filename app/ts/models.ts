@@ -65,6 +65,7 @@ export class ShadowApp{
 export class ShadowMedium {
     url: string;
     type_id: string;
+    previewUrl: string;
 }
 
 export enum LicenseType {

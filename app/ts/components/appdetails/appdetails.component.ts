@@ -22,9 +22,8 @@ require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
     selector: 'app-details',
     template: require('./appdetails.component.html'),
     styles: [require('../../../sass/appdetails.scss').toString(),
-        require('../../../sass/media-carousel.scss').toString()],
-
-    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent,MediaCarouselComponent, AppWidgetComponent]
+    require('../../../sass/media-carousel.scss').toString()],
+    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
 })
 export class AppDetailsComponent implements AfterViewInit {
     public app: StoreApp;
@@ -34,7 +33,7 @@ export class AppDetailsComponent implements AfterViewInit {
     public alsoBy: Array<StoreApp>;
     public reviews: Array<Review> = new Array<Review>();
 
-    public errorMessage:string;
+    public errorMessage: string;
 
     addingReview: boolean = false;
 
@@ -61,48 +60,55 @@ export class AppDetailsComponent implements AfterViewInit {
             (error: any) => AppComponent.generalError(error.status)
             );
 
-       this.apps2Service.getApp(this.resourceId)
+        this.apps2Service.getApp(this.resourceId)
             .subscribe(
-                shadowApps => {
-                    this.shadowApps = shadowApps,
-                        this.getShadow()
-                },
-                (error: any) =>  this.errorMessage = <any>error
+            shadowApps => {
+                this.shadowApps = shadowApps,
+                    this.getShadow()
+            },
+            (error: any) => this.errorMessage = <any>error
             );
 
     }
 
-    goTry(){
+    goTry() {
 
         var url = this.shadowApp.runURL
 
 
-        window.location.href=url;
+        // window.location.href=url;
 
     }
 
-    goCuration(){
+    goCuration() {
 
-        var url = 'http://curation-staging.data.alpha.jisc.ac.uk/#/curation/'+this.app.id
+        var url = 'http://curation-staging.data.alpha.jisc.ac.uk/#/curation/' + this.app.id
 
 
-        window.location.href=url;
-
-    }
-
-    goDownloadSource(){}
-
-    goLicenseType(){}
-
-    getShadow()
-    {
-
-        this.shadowApp=this.shadowApps[0];
-        console.log(this.shadowApps);
+        window.location.href = url;
 
     }
 
+    goDownloadSource() { }
 
+    goLicenseType() { }
+
+    getShadow() {
+
+        this.shadowApp = this.shadowApps[0];
+        
+        for(var medium of this.shadowApp.media) {
+            if( medium.type_id=='2' ) {
+                var index = medium.url.lastIndexOf("/");
+                var youTubeId = medium.url.substr(index + 1);
+                medium.previewUrl = `http://img.youtube.com/vi/${ youTubeId }/0.jpg`;
+            }
+        }
+
+        this.shadowApp.media[1] = this.shadowApp.media[0];
+        this.shadowApp.media[2] = this.shadowApp.media[0];
+        this.shadowApp.media[3] = this.shadowApp.media[0];
+    }
 
     loadReviews() {
         this.appsService.getReviews(this.resourceId)
@@ -115,7 +121,7 @@ export class AppDetailsComponent implements AfterViewInit {
     loadAlsoBy() {
         this.appsService.getByCreator(this.app.createdby)
             .subscribe(
-            alsoBy => this.alsoBy = alsoBy.filter( app => this.app.id != app.id ),
+            alsoBy => this.alsoBy = alsoBy.filter(app => this.app.id != app.id),
             (error: any) => AppComponent.generalError(error.status)
             );
     }

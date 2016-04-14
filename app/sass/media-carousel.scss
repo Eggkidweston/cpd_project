@@ -1,30 +1,46 @@
-.carousel {
-        width:100%;
-    }
-    
-    .carousel-caption {
-        z-index: 10;
-    }
-    /* Declare heights because of positioning of img element */
-    
-    .carousel .item {
-     padding-bottom:20px;
-    }
-    
-    .carousel-control {
-        z-index: 100;
-        background-image: none;
-    }
-    
-    .carousel-inner > .item > img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        min-width: 100%;
-    }
-    .media-container {
+.carousel-container {
+    .media-container 
+    {
+        display: -webkit-flex;
+        display: flex;
+        max-width: 100%;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap; 
+        flex: auto;
         border-radius: 15px;
         box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.19);
         background:#fff;
         overflow:hidden;
+        -webkit-align-items: stretch;
+        align-items: stretch;
+        
+        .medium {
+            padding: 16px;
+        }
+        
+        .medium-selected {
+            border: 2px ridge #337ab7;
+        }
+        
+        .medium-unselected {
+            border: 2px solid transparent;
+        }
+        
+        .medium-thumbnail {
+            cursor: pointer;
+            cursor: -moz-pointer;
+            cursor: -webkit-pointer;        
+        }
     }
+    
+    .medium-full-size {
+        width: 664px;
+        padding: 0 0 16px 16px;
+    }
+    
+    .yt-full-size {
+        padding: 0 0 16px 27px;
+        width: 640px;
+        height: 360px;
+    }
+}

@@ -13,4 +13,9 @@ require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
 
 export class MediaCarouselComponent {
     @Input() resource: ShadowApp;
+    private selectedMedium: number = 0;
+
+    mediumSelected(i: number) {
+        this.selectedMedium = i;
+    }
 }

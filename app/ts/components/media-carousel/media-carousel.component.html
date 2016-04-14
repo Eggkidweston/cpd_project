@@ -1,40 +1,25 @@
-
-<div *ngIf="resource" class="media-container">
-
-
-
-
-
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-
-        </ol>
-        <div class="carousel-inner" role="listbox" *ngFor="#media of resource.media #i = index">
-            <div *ngIf="i==0">
-            <div *ngIf="media.type_id=='2'" class="item active">
-
-                <div class="">
-                    <iframe id="ytplayer" type="text/html" width="640" height="390" src="{{media.url}}?autoplay=0&controls=1"
-                            frameborder="0"></iframe>
-                </div>
-            </div>
-            <div  *ngIf="media.type_id==1" class="item active">
-
-                <div class="">
-
-                    <img src="{{media.url}}" style="width: 640px;" class="img-responsive"
+<div class="carousel-container">
+    <div class="media-container">
+        <div class="medium" *ngFor="#medium of resource?.media; #i = index">
+            <div *ngIf="medium.type_id=='2'">
+                <div [ngClass]="{'medium-selected': i===selectedMedium, 'medium-unselected': i!==selectedMedium}">
+                    <img src="{{medium.previewUrl}}" (click)="mediumSelected(i)" style="width: 133px;" class="img-responsive medium-thumbnail"
                     />
-
                 </div>
             </div>
+            <div *ngIf="medium.type_id==1">
+                <div [ngClass]="{'medium-selected': i===selectedMedium, 'medium-unselected': i!==selectedMedium}">
+                    <img src="{{medium.url}}" (click)="mediumSelected(i)" style="width: 133px;" class="img-responsive medium-thumbnail" />
                 </div>
+            </div>
+        </div>
 
+        <div *ngIf="resource?.media && resource?.media[selectedMedium].type_id=='2'">
+            <iframe *ngIf="resource?.media" id="ytplayer" type="text/html" class="yt-full-size" src="{{resource?.media[selectedMedium]?.url}}?autoplay=0&controls=1"
+            frameborder="0"></iframe>
+        </div>
+        <div *ngIf="resource?.media && resource?.media[selectedMedium].type_id=='1'">
+            <img *ngIf="resource?.media" src="{{ resource?.media[selectedMedium].url }}" class="img-responsive medium-full-size" />
         </div>
     </div>
-
-
-
-
 </div>
