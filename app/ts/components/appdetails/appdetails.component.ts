@@ -102,6 +102,8 @@ export class AppDetailsComponent implements AfterViewInit {
                 var index = medium.url.lastIndexOf("/");
                 var youTubeId = medium.url.substr(index + 1);
                 medium.previewUrl = `http://img.youtube.com/vi/${ youTubeId }/0.jpg`;
+            } else {
+                medium.previewUrl = medium.url;
             }
         }
 

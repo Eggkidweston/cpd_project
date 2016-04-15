@@ -3,7 +3,7 @@
     {
         display: -webkit-flex;
         display: flex;
-        max-width: 100%;
+        width: 100%;
         -webkit-flex-wrap: wrap;
         flex-wrap: wrap; 
         flex: auto;
@@ -15,7 +15,6 @@
         align-items: stretch;
         
         .medium {
-            padding: 16px;
         }
         
         .medium-selected {
@@ -29,18 +28,27 @@
         .medium-thumbnail {
             cursor: pointer;
             cursor: -moz-pointer;
-            cursor: -webkit-pointer;        
+            cursor: -webkit-pointer;   
+            width: calc(25% - 18px);
+            margin: 12px 0px 12px 12px;
         }
     }
     
     .medium-full-size {
-        width: 664px;
+        width: calc(100% - 16px);
         padding: 0 0 16px 16px;
     }
     
     .yt-full-size {
-        padding: 0 0 16px 27px;
-        width: 640px;
-        height: 360px;
+        padding-bottom: 16px;
+        width: 426px;
+        height: 240px;
+    }
+    
+    .yt-container {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        -webkit-justify-content: center;
     }
 }
