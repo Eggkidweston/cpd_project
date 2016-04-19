@@ -14,7 +14,6 @@
         font-weight: bold;
     }
 
-
     .detail-image {
         border: 9px solid #fff;
         border-radius: 15px;
@@ -22,6 +21,10 @@
         width:148px;
         img {
             border-radius: 10px;
+        }
+        .button-container {
+            margin-top: 10px;
+            margin-left: -6px;
         }
         button {
             width: 128px;

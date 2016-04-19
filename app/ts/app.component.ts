@@ -21,6 +21,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AppEditComponent } from './components/appedit/appedit.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { AppInfoComponent } from './components/app-info/app-info.component';
+import { SubmitResourceComponent } from './components/submit-resource/submit-resource.component';
 import { AuthenticationService, SigninRegisterService, appInfo } from './services/services';
 import { Apps2Service } from "./services/apps2.service";
 
@@ -44,6 +45,7 @@ import { Apps2Service } from "./services/apps2.service";
     { path: '/about', name: 'About', component: AboutComponent },
     { path: '/whocanregister', name: 'Who', component: WhoComponent },
     { path: '/tagcloud', name: 'TagCloud', component: TagCloudComponent },
+    { path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent },
     { path: '/user/:id', name: 'UserInfo', component: UserInfoComponent }
 ])
