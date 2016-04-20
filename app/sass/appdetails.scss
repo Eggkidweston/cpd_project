@@ -22,10 +22,12 @@
         img {
             border-radius: 10px;
         }
-        .button-container {
-            margin-top: 10px;
-            margin-left: -6px;
-        }
+    }
+
+    .button-container {
+        margin-top: 8px;
+        margin-bottom: 12px;
+
         button {
             width: 128px;
             margin-top: 10px;
@@ -34,6 +36,7 @@
             font-weight:700;
         }
     }
+
     .creator-name {
         font-weight:700;
     }

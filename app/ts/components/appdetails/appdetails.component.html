@@ -2,10 +2,10 @@
     <div class="col span-2">
         <div class="detail-image">
             <img src="{{ app?.image }}">
-            <div class="button-container">
-                <button class="btn" role="button" (click)="getApp()">Get it</button>
-                <button *ngIf="shadowApp?.runURL" class="btn" role="button" (click)="goTry()">Try It</button>
-            </div>
+        </div>
+        <div class="button-container">
+            <button class="btn" role="button" (click)="getApp()">Get it</button>
+            <button *ngIf="shadowApp?.runURL" class="btn" role="button" (click)="goTry()">Try It</button>
         </div>
     </div>
     <div class="col span-6">
