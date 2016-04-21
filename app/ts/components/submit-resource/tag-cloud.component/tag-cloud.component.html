@@ -1,0 +1,3 @@
+<div class="tag-cloud-container">
+    <button class="btn" *ngFor="#tag of tags | async" (click)="clicked(tag)">{{ tag.name }}</button>
+</div>

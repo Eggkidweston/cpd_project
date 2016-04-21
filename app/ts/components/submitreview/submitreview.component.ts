@@ -11,7 +11,7 @@ import { Review } from '../../models';
 })
 export class SubmitReviewComponent {
     @Input() resourceId: number;
-    @Output() reviewAdded: EventEmitter<Review> = new EventEmitter();
+    @Output() reviewAdded: EventEmitter<Review> = new EventEmitter<Review>();
     
     reviewForm: ControlGroup;
     reviewTitle: AbstractControl;

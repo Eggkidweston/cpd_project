@@ -70,7 +70,9 @@
         </div>
         <div class="row">
             <div class="formfield-container span-6 pull-left">
-                <div class="tag-area"></div>
+                <div class="tag-area">
+                    <button class="btn" *ngFor="#tag of resourceTags | async" (click)="clicked(tag)">{{ tag.name }}</button>
+                </div>
             </div>
             <div class="annotation-container span-5 pull-left">
                 tags you want to associate your resource to selected from the TagCloud
@@ -82,7 +84,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="tagcloud span-6"></div>
+            <div class="tagcloud span-6">
+                <tag-cloud (tagClicked)="tagClicked($event)"></tag-cloud>
+            </div>
         </div>
         <div class="row">
             <div class="formfield-container span-6 pull-left">

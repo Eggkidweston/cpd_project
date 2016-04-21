@@ -6,11 +6,14 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noEmitHelpers": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "moduleResolution": "node"
   },
   "filesGlob": [
     "./app/**/*.ts",
-    "!./node_modules/**/*.ts"
+    "!./node_modules/**/*.ts",
+    "!./typings/main",
+    "!./typings/main.d.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false

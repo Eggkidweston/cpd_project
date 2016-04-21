@@ -1,8 +1,9 @@
 .tagcloud {
         padding-top:10px;
         padding-bottom:10px;
+
         button {
-        color:#fff;
+            color:#fff;
         	font-size:0.8em;
             margin-top: 10px;
             border-radius: 10px;
@@ -15,3 +16,8 @@
 .row {
 	padding-top:10px;
 }
+
+    // "webpack": "^1.12.9",
+    // "webpack-dev-server": "1.12.1",
+    // "webpack-notifier": "1.2.1",
+    // "webpack-reload-plugin": "0.1.2"
