@@ -71,7 +71,7 @@
         <div class="row">
             <div class="formfield-container span-6 pull-left">
                 <div class="tag-area">
-                    <button class="btn" *ngFor="#tag of resourceTags | async" (click)="clicked(tag)">{{ tag.name }}</button>
+                    <button class="btn" *ngFor="#tag of resourceTags | async" (click)="removeTagFromResource(tag)">{{ tag.name }}</button>
                 </div>
             </div>
             <div class="annotation-container span-5 pull-left">
@@ -85,7 +85,7 @@
         </div>
         <div class="row">
             <div class="tagcloud span-6">
-                <tag-cloud (tagClicked)="tagClicked($event)"></tag-cloud>
+                <tag-cloud (tagClicked)="addTagToResource($event)"></tag-cloud>
             </div>
         </div>
         <div class="row">

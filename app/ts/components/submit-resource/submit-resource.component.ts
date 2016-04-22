@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from 'angular2/core';
-import { Subject, Observable } from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import { TagsService } from '../../services/services';
 import { Tag } from '../../models';
 import { TagCloudComponent } from './tag-cloud.component/tag-cloud.component';
@@ -9,6 +10,8 @@ interface ITagsOperation extends Function {
 }
 
 let initialTags: Tag[] = [];
+
+let _ = require('underscore');
 
 @Component({
     selector: 'submit-resource',
@@ -21,6 +24,7 @@ export class SubmitResourceComponent {
     private _resourceTags: Observable<Tag[]>;
     private _tagUpdates: Subject<any> = new Subject<any>();
     private _create: Subject<Tag> = new Subject<Tag>();
+    private _remove: Subject<Tag> = new Subject<Tag>();
 
     constructor() {
         this._resourceTags = this._tagUpdates
@@ -29,9 +33,11 @@ export class SubmitResourceComponent {
             .refCount();
 
         this._create
-            .map((tag: Tag): ITagsOperation => {
-                return (tags: Tag[]) => tags.concat(tag)
-            })
+            .map((tag: Tag): ITagsOperation => (tags: Tag[]) => _.uniq(tags.concat(tag)))
+            .subscribe(this._tagUpdates);
+
+        this._remove
+            .map((tag: Tag): ITagsOperation => (tags: Tag[]) => _.without(tags, tag))
             .subscribe(this._tagUpdates);
 
         this._newResourceTags.subscribe(this._create);
@@ -41,11 +47,11 @@ export class SubmitResourceComponent {
         return this._resourceTags;
     } 
     
-    protected tagClicked(tag: Tag) {
-        this.addTagToResource(tag);
-    }
-
     protected addTagToResource(tag: Tag): void {
-        this._newResourceTags.next(tag);
+        this._create.next(tag);
+    }
+    
+    protected removeTagFromResource(tag: Tag): void {
+        this._remove.next(tag);
     }
 }
