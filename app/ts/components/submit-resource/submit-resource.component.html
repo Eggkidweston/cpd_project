@@ -1,6 +1,6 @@
 <div class="submit-resource-container">
     <h2>Submit a new resource</h2>
-    <form class="form-container">
+    <form [class.shake]="shaking" [class.animated]="shaking" class="form-container" [ngFormModel]="submitResourceForm" (submit)="onSubmit(submitResourceForm.value)" novalidate>
         <div class="row">
             <div class="header-container span-6">
                 <h3>Some basic details</h3>
@@ -8,7 +8,7 @@
         </div>
         <div class="row">
             <div class="formfield-container span-6 pull-left">
-                <input type="text" placeholder="title">
+                <input type="text" placeholder="title" [ngFormControl]="basicDetailsText" required="required" [class.input-error]="submitted&&!basicDetailsText.valid">
             </div>
             <div class="annotation-container span-5 pull-left">
                 the title or name of your resource
@@ -16,7 +16,7 @@
         </div>
         <div class="row">
             <div class="formfield-container span-6 pull-left">
-                <input type="text" placeholder="overview">
+                <input type="text" placeholder="overview" [ngFormControl]="overviewText" required="true" [class.input-error]="submitted&&!overviewText.valid">
             </div>
             <div class="annotation-container span-5 pull-left">
                 a short overview of what your resource is
@@ -24,7 +24,7 @@
         </div>
         <div class="row">
             <div class="formfield-container span-6 pull-left">
-                <textarea rows="4" placeholder="description"></textarea>
+                <textarea rows="4" placeholder="description" [ngFormControl]="descriptionText" required="required" [class.input-error]="submitted&&!descriptionText.valid"> </textarea>
             </div>
             <div class="annotation-container span-5 pull-left">
                 a brief paragraph about your resource, what the features are and how it can be of benefit to others
@@ -37,7 +37,7 @@
         </div>
         <div class="row">
             <div class="formfield-container span-6 pull-left">
-                <input type="text" placeholder="trial/demo URL">
+                <input type="text" placeholder="trial/demo URL" [ngFormControl]="trialUrl" required="true" [class.input-error]="submitted&&!trialUrl.valid"> 
             </div>
             <div class="annotation-container span-5 pull-left">
                 the URL of a trial/demo the user can visit to try your resource out
@@ -45,7 +45,7 @@
         </div>
         <div class="row">
             <div class="formfield-container span-6 pull-left">
-                <input type="text" placeholder="video URL">
+                <input type="text" placeholder="video URL" [ngFormControl]="videoUrl" required="true" [class.input-error]="submitted&&!videoUrl.valid">
             </div>
             <div class="annotation-container span-5 pull-left">
                 the URL of a youtube video about your resource
@@ -60,8 +60,7 @@
                         <input type="file" ng2-file-select [uploader]="uploader" multiple class="file-upload-btn" #fileUploadButton />
                     </div>
                     <div *ngIf="uploader.queue.length!==0" class="drop-area-with-files">
-                        <div *ngFor="#file of uploader.queue" (click)="file.remove()"><span class="remove-btn glyphicon glyphicon-remove-sign" aria-hidden="true"></span> {{ file.file.name
-                            }}</div>
+                        <div *ngFor="#file of uploader.queue" (click)="file.remove()"><span class="remove-btn glyphicon glyphicon-remove-sign" aria-hidden="true"></span> {{ file.file.name }}</div>
                     </div>
                 </div>
             </div>
@@ -81,7 +80,7 @@
         <div class="row">
             <div class="formfield-container span-6 pull-left">
                 <div class="tag-area">
-                    <button class="btn" *ngFor="#tag of resourceTags | async" (click)="removeTagFromResource(tag)">{{ tag.name }}</button>
+                    <button class="btn" *ngFor="#tag of resourceTags | async" (click)="removeTagFromResource(tag)" type="button">{{ tag.name }}</button>
                 </div>
             </div>
             <div class="annotation-container span-5 pull-left">
@@ -101,7 +100,7 @@
         <div class="row">
             <div class="formfield-container span-6 pull-left">
                 <div class="horizontal-center">
-                    <button class="btn btn--3d btn--primary">continue</button>
+                    <button class="btn btn--3d btn--primary" type="submit">continue</button>
                 </div>
             </div>
         </div>

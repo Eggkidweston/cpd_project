@@ -88,6 +88,11 @@ $input-height: 2em;
                     margin-right:3px;
                 } 
             }
+            
+            .input-error {
+                border: 1px solid red;
+                background-color: #ffe3e7;
+            }
         }
         
         .annotation-container {
