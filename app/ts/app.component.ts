@@ -17,7 +17,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
 import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
 import { RegisterComponent } from './components/register/register.component';
-// import { AppEditComponent } from './components/appedit/appedit.component';
+import { AppEditComponent } from './components/appedit/appedit.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { AppInfoComponent } from './components/app-info/app-info.component';
 import { SubmitResourceComponent } from './components/submit-resource/submit-resource.component';
@@ -36,7 +36,7 @@ import { Apps2Service } from "./services/apps2.service";
 @RouteConfig([
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
     { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
-    // { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
+    { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
     { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
     { path: '/error', name: 'Error', component: ErrorComponent },
     { path: '/signin', name: 'SignIn', component: SignInComponent },

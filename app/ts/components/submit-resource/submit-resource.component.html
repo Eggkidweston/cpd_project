@@ -53,7 +53,17 @@
         </div>
         <div class="row">
             <div class="formfield-container span-6 pull-left">
-                <div class="drop-area">drag and drop up to 3 images here or&nbsp;<a>click to upload</a></div>
+                <div class="drop-area" ng2-file-drop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (file-over)="fileOverBase($event)"
+                    [uploader]="uploader">
+                    <div *ngIf="uploader.queue.length===0" class="drop-area-empty">
+                        <span>drag and drop up to 3 images here or&nbsp;<a (click)="uploadFileButtonClicked()">click to upload</a></span>
+                        <input type="file" ng2-file-select [uploader]="uploader" multiple class="file-upload-btn" #fileUploadButton />
+                    </div>
+                    <div *ngIf="uploader.queue.length!==0" class="drop-area-with-files">
+                        <div *ngFor="#file of uploader.queue" (click)="file.remove()"><span class="remove-btn glyphicon glyphicon-remove-sign" aria-hidden="true"></span> {{ file.file.name
+                            }}</div>
+                    </div>
+                </div>
             </div>
             <div class="annotation-container span-5 pull-left">
                 three images that preview the content in your resource<br/>

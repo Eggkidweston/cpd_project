@@ -5,7 +5,6 @@ $input-height: 2em;
     width: 100%;
     background-color: white;
     border: solid 1px #d5dee3;
-
 }
 
 .submit-resource-container {
@@ -48,11 +47,32 @@ $input-height: 2em;
 
             .drop-area {
                 @extend %input-style;
-                @extend .horizontal-center;
-                @extend .vertical-center;
                 height: 85px;
+
+                .drop-area-empty {
+                    @extend .horizontal-center;
+                    @extend .vertical-center;
+                    height: 100%;
+                    
+                    .file-upload-btn {
+                        display: none;
+                    }
+                    
+                    a:hover {
+                        cursor: pointer;
+                    }
+                }
+                
+                .drop-area-with-files {
+                    padding: 12px;
+                    
+                    .remove-btn {
+                        color: red;
+                        cursor: pointer;
+                    }
+                }
             }
-            
+
             .tag-area {
                 @extend %input-style;
                 min-height: $input-height;
