@@ -10,11 +10,10 @@ import { FileDrop } from '../../thirdparty/file-upload/file-drop';
 import { FileSelect } from '../../thirdparty/file-upload/file-select';
 
 interface ITagsOperation extends Function {
-    (messages: Tag[]): Tag[];
+    (tags: Tag[]): Tag[];
 }
 
 let initialTags: Tag[] = [];
-
 let _ = require('underscore');
 
 @Component({
