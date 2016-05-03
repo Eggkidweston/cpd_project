@@ -1,6 +1,15 @@
 {
+  "name": "jisc-appstore",
+  "version": false,
+  "files": [
+    "typings/browser.d.ts",
+    "src/main.ts"
+  ],
   "ambientDependencies": {
-    "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
-    "require": "registry:dt/require#2.1.20+20160316155526"
+    "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#86dbea8fc37d9473fee465da4f0a21bea4f8cbd9",
+    "moment": "github:DefinitelyTyped/DefinitelyTyped/moment/moment.d.ts#b2345aee407127928f247165c91e18bd7dc1a14a",
+    "moment-node": "github:DefinitelyTyped/DefinitelyTyped/moment/moment-node.d.ts#b2345aee407127928f247165c91e18bd7dc1a14a",
+    "require": "registry:dt/require#2.1.20+20160316155526",
+    "underscore": "github:DefinitelyTyped/DefinitelyTyped/underscore/underscore.d.ts#38fb591c6eba840e0b53d1110302b8e4fb04651c"
   }
 }

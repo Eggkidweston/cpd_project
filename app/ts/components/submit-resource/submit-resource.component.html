@@ -60,7 +60,7 @@
                         <input type="file" ng2-file-select [uploader]="uploader" multiple class="file-upload-btn" #fileUploadButton />
                     </div>
                     <div *ngIf="uploader.queue.length!==0" class="drop-area-with-files">
-                        <div *ngFor="#file of uploader.queue" (click)="file.remove()"><span class="remove-btn glyphicon glyphicon-remove-sign" aria-hidden="true"></span> {{ file.file.name }}</div>
+                        <div *ngFor="let file of uploader.queue" (click)="file.remove()"><span class="remove-btn glyphicon glyphicon-remove-sign" aria-hidden="true"></span> {{ file.file.name }}</div>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
         <div class="row">
             <div class="formfield-container span-6 pull-left">
                 <div class="tag-area">
-                    <button class="btn" *ngFor="#tag of resourceTags | async" (click)="removeTagFromResource(tag)" type="button">{{ tag.name }}</button>
+                    <button class="btn" *ngFor="let tag of resourceTags | async" (click)="removeTagFromResource(tag)" type="button">{{ tag.name }}</button>
                 </div>
             </div>
             <div class="annotation-container span-5 pull-left">

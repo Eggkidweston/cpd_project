@@ -8,6 +8,7 @@ import { TagCloudComponent } from './tag-cloud.component/tag-cloud.component';
 import { FileUploader } from '../../thirdparty/file-upload/file-uploader';
 import { FileDrop } from '../../thirdparty/file-upload/file-drop';
 import { FileSelect } from '../../thirdparty/file-upload/file-select';
+import 'rxjs/add/operator/scan';
 
 interface ITagsOperation extends Function {
     (tags: Tag[]): Tag[];

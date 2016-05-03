@@ -3,10 +3,10 @@ import { ControlGroup, FormBuilder, AbstractControl, Validators } from 'angular2
 import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
 import { AuthenticationService, SigninRegisterService } from '../../services/services';
 import { AppComponent } from '../../app.component';
-import 'rxjs/add/operator/debounceTime.js';
-import 'rxjs/add/operator/distinctUntilChanged.js';
-import 'rxjs/add/operator/switchMap.js';
-import 'rxjs/add/operator/do.js';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/do';
 
 function emailValidator(control) {
     if (!control.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {

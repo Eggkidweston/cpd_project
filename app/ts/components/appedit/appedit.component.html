@@ -46,7 +46,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="#item of uploader.queue">
+                        <tr *ngFor="let item of uploader.queue">
                             <td><strong>{{ item?.file?.name }}</strong></td>
                             <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
                             <td nowrap>
@@ -80,12 +80,12 @@
                     </form>
                 </div>
                 <div id="tag-destination" class="col-xs-12 tag-destination">
-                    <tag *ngFor="#tagName of app?.tags" [tagName]="tagName" [isSourceTag]="false" (tagClicked)="removeTag($event)"></tag>
+                    <tag *ngFor="let tagName of app?.tags" [tagName]="tagName" [isSourceTag]="false" (tagClicked)="removeTag($event)"></tag>
                 </div>
             </div>
             <div class="tag-source-wrapper">
                 <div id="tag-source" class="col-xs-12 tag-source">
-                    <tag *ngFor="#tagName of sourceTags" [tagName]="tagName" [isSourceTag]="true" (tagClicked)="addTag($event)"></tag>
+                    <tag *ngFor="let tagName of sourceTags" [tagName]="tagName" [isSourceTag]="true" (tagClicked)="addTag($event)"></tag>
                 </div>
             </div>
         </div>

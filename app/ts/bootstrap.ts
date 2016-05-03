@@ -3,7 +3,9 @@
 
 import { provide } from 'angular2/core';
 import { bootstrap } from 'angular2/platform/browser';
-import { ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy } from 'angular2/router';
+import { ROUTER_PROVIDERS } from 'angular2/router';
+import { LocationStrategy, HashLocationStrategy } from 'angular2/platform/common';
+
 import { AppComponent } from './app.component';
 import { HTTP_BINDINGS } from 'angular2/http';
 import { servicesInjectables } from './services/services';

@@ -1,7 +1,7 @@
 <div class="carousel-container">
     <div class="media-container">
         <div>
-            <template ngFor #medium="$implicit" [ngForOf]="resource?.media" #i="index">
+            <template ngFor let-medium [ngForOf]="resource?.media" let-i="index">
                 <img *ngIf="medium.type_id==1 || medium.type_id==2" src="{{medium.previewUrl}}" [ngClass]="{'medium-selected': i===selectedMedium, 'medium-unselected': i!==selectedMedium}"
                     (click)="mediumSelected(i)" style="display: inline;" class="img-responsive medium-thumbnail" />
             </template>

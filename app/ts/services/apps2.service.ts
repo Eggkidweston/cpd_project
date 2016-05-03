@@ -3,7 +3,7 @@ import {Http, Response} from 'angular2/http';
 import {ShadowApp}           from '../models';
 import {Observable}     from 'rxjs/Observable';
 import {Headers, RequestOptions} from 'angular2/http';
-
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class Apps2Service {
