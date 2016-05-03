@@ -89,3 +89,23 @@ export class UpdateHistory {
     comment: string;
     date: string;
 }
+
+export class Contributor {
+    activity: Array<Activity>;
+    content: Array<Content>;
+    imageUrl: string;
+    name: string;
+    registeredDate: string;
+    reputation: number;
+    username: string;
+}
+
+export interface Activity {
+    type: string;
+    comment: string;
+    date: string;
+}
+
+export class Content {
+    
+}

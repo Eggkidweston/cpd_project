@@ -1,0 +1,30 @@
+<div class="contributor-container">
+    <div class="col span-2">
+        <div class="contributor-image">
+            <img src="{{ contributor?.imageUrl }}">
+        </div>
+    </div>
+    <div class="col span-6">
+        <h2>{{ contributor?.username }}</h2>
+        <p><strong>Registered</strong> {{ contributor?.registeredDate }}</p>
+        <p><strong>Reputation</strong> {{ contributor?.reputation }}</p>
+    </div>
+    <div class="row span-12 activity">
+        <hr/>
+        <h2>Activity</h2>
+        <div class="activity-table span-12">
+            <div *ngFor="let activity of contributor?.activity" class="span-12">
+                <div class="badge-container span-2">
+                    <span class="badge activity-new-content-badge">{{ activity.type }}</span>
+                </div><div class="comment-container span-8">
+                    <span>{{ activity.comment }}</span>
+                </div><div class="ago-container span-2">
+                    <span>{{ activity.date }}</span>
+                </div>
+                <hr/>
+            </div>
+        </div>
+        <hr/>
+        <h2>Content by {{ contributor?.username }}</h2>
+    </div>
+</div>
