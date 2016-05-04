@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component } from '@angular/core';
 import { AppWidgetsComponent } from '../appwidgets/appwidgets.component';
 import { SearchComponent } from '../search/search.component';
 import { RecommendedRecentComponent } from '../recommended-recent/recommended-recent.component';

@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter } from 'angular2/core';
-import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
-import { NgClass } from 'angular2/common';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'rating',

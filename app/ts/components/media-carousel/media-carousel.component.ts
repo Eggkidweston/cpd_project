@@ -1,5 +1,5 @@
-import { Component, Input } from 'angular2/core';
-import { NgFor } from 'angular2/common';
+import { Component, Input } from '@angular/core';
+import { NgFor } from '@angular/common';
 import { StoreApp } from '../../models';
 import { ShadowApp } from '../../models';
 

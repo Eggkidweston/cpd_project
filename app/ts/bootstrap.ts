@@ -1,13 +1,11 @@
-/// <reference path="../../node_modules/angular2/typings/browser.d.ts" />
-/// <reference path="../../typings/main.d.ts" />
+/// <reference path="../../typings/browser.d.ts" />
 
-import { provide } from 'angular2/core';
-import { bootstrap } from 'angular2/platform/browser';
-import { ROUTER_PROVIDERS } from 'angular2/router';
-import { LocationStrategy, HashLocationStrategy } from 'angular2/platform/common';
-
+import { provide } from '@angular/core';
+import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common/index';
+import { bootstrap }    from '@angular/platform-browser-dynamic';
 import { AppComponent } from './app.component';
-import { HTTP_BINDINGS } from 'angular2/http';
+import { HTTP_BINDINGS } from '@angular/http';
 import { servicesInjectables } from './services/services';
 
 bootstrap(AppComponent, [

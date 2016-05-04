@@ -1,6 +1,6 @@
-import { Component, AfterViewInit, ViewChild } from 'angular2/core';
-import { ControlGroup, FormBuilder, AbstractControl, Validators } from 'angular2/common';
-import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular/common';
+import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AuthenticationService, SigninRegisterService } from '../../services/services';
 import { AppComponent } from '../../app.component';
 

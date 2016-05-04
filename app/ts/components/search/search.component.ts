@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter } from 'angular2/core';
-import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AppComponent } from '../../app.component';
 
 

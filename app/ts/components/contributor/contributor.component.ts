@@ -1,10 +1,10 @@
-import { Component } from 'angular2/core';
-import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from 'angular2/router';
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { ContributorService } from '../../services/services';
 import { AppComponent } from '../../app.component';
 import { AppWidgetComponent } from '../appwidget/appwidget.component';
 import { Contributor, Activity } from '../../models';
-import { NgFor } from 'angular2/common';
+import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'contributor',

@@ -5,9 +5,9 @@
  * </license>
  */
 
-import { Directive, Component, ElementRef, Renderer } from 'angular2/core'
-import { RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
-import { Http, Headers } from 'angular2/http';
+import { Directive, Component, ElementRef, Renderer } from '@angular/core'
+import { RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { Http, Headers } from '@angular/http';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { WhoComponent } from './components/whocanregister/who.component';

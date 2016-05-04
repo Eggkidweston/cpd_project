@@ -7,11 +7,15 @@ import 'zone.js/dist/zone';
 import 'zone.js/dist/long-stack-trace-zone';
 
 // Angular 2
-import 'angular2/platform/browser';
-import 'angular2/platform/common_dom';
-import 'angular2/core';
-import 'angular2/router';
-import 'angular2/http';
+import '@angular/common';
+import '@angular/compiler';
+import '@angular/core';
+import '@angular/http';
+import '@angular/platform-browser';
+import '@angular/platform-browser-dynamic';
+import '@angular/router-deprecated';
+import '@angular/router-deprecated';
+import '@angular/upgrade';
 
 // RxJS
 import 'rxjs';

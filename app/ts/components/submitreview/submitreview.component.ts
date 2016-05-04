@@ -1,5 +1,5 @@
-import { Component, ViewChild, Input, Output, EventEmitter } from 'angular2/core';
-import { ControlGroup, FormBuilder, AbstractControl, Validators } from 'angular2/common';
+import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular/common';
 import { RatingComponent } from '../rating/rating.component';
 import { AppsService } from '../../services/services';
 import { Review } from '../../models';

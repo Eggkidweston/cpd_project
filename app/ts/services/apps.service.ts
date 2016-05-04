@@ -1,5 +1,5 @@
-import { Injectable, Input, bind } from 'angular2/core';
-import { Http, Response, Headers } from 'angular2/http';
+import { Injectable, Input, bind } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {StoreApp, TagCloud} from '../models';
 import { appSettings } from './services';

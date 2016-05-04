@@ -1,6 +1,5 @@
-import { Injectable, bind } from 'angular2/core';
-import { Http, Headers } from 'angular2/http';
-import { Response } from '../../../node_modules/angular2/src/http/static_response.d.ts';
+import { Injectable, bind } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { appSettings } from './services';

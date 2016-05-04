@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, ViewChild } from 'angular2/core';
-import { ControlGroup, FormBuilder, AbstractControl, Validators } from 'angular2/common';
+import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular/common';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { TagsService } from '../../services/services';

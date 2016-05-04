@@ -1,5 +1,5 @@
-import { Component, Input, AfterViewInit } from 'angular2/core';
-import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from 'angular2/router';
+import { Component, Input, AfterViewInit } from '@angular/core';
+import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { FileUploader } from '../../thirdparty/file-upload/file-uploader';
 import { FileDrop } from '../../thirdparty/file-upload/file-drop';
 import { FileSelect } from '../../thirdparty/file-upload/file-select';

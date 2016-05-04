@@ -1,8 +1,8 @@
-import { Component, Input, AfterViewInit, ChangeDetectorRef } from 'angular2/core';
+import { Component, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { RatingComponent } from '../rating/rating.component';
-import { NgFor } from 'angular2/common';
-import { NgIf} from 'angular2/common';
-import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from 'angular2/router';
+import { NgFor } from '@angular/common';
+import { NgIf} from '@angular/common';
+import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { SubmitReviewComponent } from '../submitreview/submitreview.component';
 import { AuthenticationService } from '../../services/services';
 import { AppsService } from '../../services/services';

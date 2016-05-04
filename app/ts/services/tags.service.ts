@@ -1,6 +1,5 @@
-import { Injectable, Input, bind } from 'angular2/core';
-import { Http } from 'angular2/http';
-import { Response } from '../../../node_modules/angular2/src/http/static_response.d.ts';
+import { Injectable, Input, bind } from '@angular/core';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
