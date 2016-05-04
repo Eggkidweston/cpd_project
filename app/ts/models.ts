@@ -92,20 +92,17 @@ export class UpdateHistory {
 
 export class Contributor {
     activity: Array<Activity>;
-    content: Array<Content>;
+    content: Array<StoreApp>;
     imageUrl: string;
     name: string;
     registeredDate: string;
     reputation: number;
     username: string;
+    
 }
 
 export interface Activity {
     type: string;
     comment: string;
     date: string;
-}
-
-export class Content {
-    
 }

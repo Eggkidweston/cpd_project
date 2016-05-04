@@ -26,5 +26,8 @@
         </div>
         <hr/>
         <h2>Content by {{ contributor?.username }}</h2>
+        <div class="app-widgets">
+            <app-widget class="small" *ngFor="let alsoBy of contributor?.content" [app]="alsoBy"></app-widget>
+        </div>
     </div>
 </div>
