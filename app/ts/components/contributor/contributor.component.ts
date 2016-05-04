@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { RouteParams } from '@angular/router-deprecated';
 import { ContributorService } from '../../services/services';
 import { AppComponent } from '../../app.component';
 import { AppWidgetComponent } from '../appwidget/appwidget.component';
-import { Contributor, Activity } from '../../models';
-import { NgFor } from '@angular/common';
+import { Contributor } from '../../models';
+import { AgoPipe } from 'ago.pipe';
 
 @Component({
     selector: 'contributor',
     template: require('./contributor.component.html'),
     styles: [require('./contributor.component.scss').toString()],
+    pipes: [ AgoPipe ],
     directives: [ AppWidgetComponent ] 
 })
 export class ContributorComponent {

@@ -22,12 +22,12 @@ export class ContributorService {
                 {
                     "type":"New content",
                     "comment":"Uploaded new content - Technical Writing",
-                    "date":"12/02/2016"
+                    "date":"2016-01-10T07:24:31.613Z"
                 },
                 {
                     "type":"Comment",
                     "comment":"I have some new content coming that you can remix",
-                    "date":"12/02/2016"
+                    "date":"2016-05-04T19:24:31.613Z"
                 }
             ],
             "content": [
