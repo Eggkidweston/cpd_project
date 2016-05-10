@@ -19,8 +19,9 @@ import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppEditComponent } from './components/appedit/appedit.component';
 import { AppInfoComponent } from './components/app-info/app-info.component';
-import { ContributorComponent } from './components/contributor/contributor.component';
-import { SubmitResourceComponent } from './components/submit-resource/submit-resource.component';
+import { ContributorComponent } from 'components/store-front/contributor/contributor.component';
+import { SubmitResourceComponent } from 'components/administration/submit-resource/submit-resource.component';
+import { ResourceMetricsComponent } from './components/store-front/resource-metrics/resource-metrics.component';
 import { AuthenticationService, SigninRegisterService, appInfo } from './services/services';
 import { Apps2Service } from "./services/apps2.service";
 
@@ -38,6 +39,7 @@ import { Apps2Service } from "./services/apps2.service";
     { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
     { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
     { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
+    { path: '/resource/mertics/:id', name: 'AppInfo', component: ResourceMetricsComponent },
     { path: '/contributor/:id', name: 'Contributor', component: ContributorComponent },
     { path: '/error', name: 'Error', component: ErrorComponent },
     { path: '/signin', name: 'SignIn', component: SignInComponent },

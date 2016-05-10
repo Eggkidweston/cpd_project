@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
-import { ContributorService } from '../../services/services';
-import { AppComponent } from '../../app.component';
-import { AppWidgetComponent } from '../appwidget/appwidget.component';
-import { Contributor } from '../../models';
-import { AgoPipe } from 'ago.pipe';
+import { ContributorService } from 'services/services';
+import { AppComponent } from 'app.component';
+import { AppWidgetComponent } from 'appwidget/appwidget.component';
+import { Contributor } from 'models';
+import { AgoPipe } from 'ago.pipe.ts';
 
 @Component({
     selector: 'contributor',

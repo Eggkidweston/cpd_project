@@ -35,7 +35,6 @@
     //     });
     // });
 
-        alert();
     $('[data-animation]').waypoint(function (direction) {
         if (direction == "down") {
             $(this).addClass("animated " + $(this).data("animation"));

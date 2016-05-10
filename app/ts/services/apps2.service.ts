@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable, bind } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {ShadowApp}           from '../models';
 import {Observable}     from 'rxjs/Observable';
@@ -35,3 +35,7 @@ export class Apps2Service {
     }
 
 }
+
+export var apps2ServiceInjectables: Array<any> = [
+    bind(Apps2Service).toClass(Apps2Service)
+];

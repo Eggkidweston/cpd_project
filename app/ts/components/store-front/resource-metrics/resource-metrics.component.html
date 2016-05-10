@@ -1,0 +1,31 @@
+<div class="resource-metrics-container">
+    <div class="row">
+        <div class="resource-image col">
+            <img src="{{ resource?.image }}">
+        </div>
+        <div class="col span-4 resource-details">
+            <h2>{{ resource?.title }}</h2>
+            <h4>{{ resource?.overview }}</h4>
+            <p>{{ resource?.description }}</p>
+        </div>
+        <div class="col span-3 push-2">
+            <h4>Remixed from</h4>
+            <div class="remixed-from-resource-image col">
+                <img src="{{ remixedFromResource?.image }}">
+            </div>
+            <div class="col remixed-resource-details">
+                <h3>{{ remixedFromResource?.title }}</h3>
+                <p>
+                    <strong>8 days ago</strong><br/>
+                    <span class="updated">updated 4 days ago</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row downloads">
+        <h2>Downloads</h2>
+    </div>
+
+    <canvas id="chartCanvas" #chartCanvas class="col span-12" height="120px"></canvas>
+</div>

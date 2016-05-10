@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { TagsService } from '../../../services/services';
-import { Tag } from '../../../models';
+import { TagsService } from '../../../../services/services';
+import { Tag } from '../../../../models';
 
 @Component({
     // we really need to refactor tagcloud.component.x

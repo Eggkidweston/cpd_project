@@ -106,3 +106,10 @@ export interface Activity {
     comment: string;
     date: string;
 }
+
+export interface ResourceMetrics {
+    dateFrom: string;
+    dateTo: string;
+
+    downloadCount: Array<number>;
+}

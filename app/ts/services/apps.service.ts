@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import {StoreApp, TagCloud} from '../models';
 import { appSettings } from './services';
 import { AuthenticationService } from './authentication.service';
-import { Review } from '../models';
+import { Review, ResourceMetrics } from 'models';
 
 @Injectable()
 export class AppsService {
@@ -104,6 +104,21 @@ export class AppsService {
         return this.http.get(`${appSettings.apiRoot}resources/${appId}/download`)
             .map(res => res.json().url)
             .catch(this.handleError);
+    }
+
+    public getResourceMetrics(resourceId: number): ResourceMetrics {
+        let metrics: ResourceMetrics = JSON.parse(`
+        {
+            "dateFrom": "2016-01-01T00:00:00.000Z",
+            "dateTo": "2016-01-07T00:00:00.000Z",
+            "downloadCount": [ 10, 20, 15, 35, 50, 12, 12 ]
+        }
+        `);
+
+        return metrics;
+        // return this.http.get(`${appSettings.apiRoot}resources/${resourceId}/metrics`)
+        //     .map(res => <Observable<ResourceMetrics>>res.json().data)
+        //     .catch(this.handleError);
     }
     
     private handleError(error: Response) {

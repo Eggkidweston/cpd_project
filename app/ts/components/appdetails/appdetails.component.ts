@@ -96,7 +96,7 @@ export class AppDetailsComponent implements AfterViewInit {
     getShadow() {
 
         this.shadowApp = this.shadowApps[0];
-        
+
         for(var medium of this.shadowApp.media) {
             if( medium.type_id=='2' ) {
                 var index = medium.url.lastIndexOf("/");
