@@ -23,9 +23,26 @@
         </div>
     </div>
 
+    <hr/>
+
     <div class="row downloads">
         <h2>Downloads</h2>
     </div>
 
-    <canvas id="chartCanvas" #chartCanvas class="col span-12" height="120px"></canvas>
+    <canvas id="chartCanvas" #chartCanvas class="col span-12" height="80px"></canvas>
+
+    <div class="download-collation span-12">
+        <div class="today-downloads">
+            <div class="download-period">Today</div>
+            <div class="digits">{{ todayCount }} <i class="fa fa-caret-right indicator-right" aria-hidden="true"></i></div>
+        </div>
+        <div class="week-downloads">
+            <div class="download-period">Week</div>
+            <div class="digits">{{ weekCount }} <i class="fa fa-caret-up indicator-up" aria-hidden="true"></i></div>
+        </div>
+        <div class="month-downloads">
+            <div class="download-period">Month</div>
+            <div class="digits">{{ monthCount }} <i class="fa fa-caret-down indicator-down" aria-hidden="true"></i></div>
+        </div>
+    </div>
 </div>

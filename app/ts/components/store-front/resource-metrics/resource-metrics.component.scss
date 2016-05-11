@@ -1,3 +1,63 @@
+%download-metrics-box {
+  border: 9px solid #fff;
+  border-radius: 15px;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.19);
+  width: 112px;
+  height: 112px;
+  margin-right: 24px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+
+  .download-period {
+    text-transform: uppercase;
+    font-size: 2em;
+    color: #ababab;
+  }
+
+  .digits {
+    font-size: 2em;
+    color: #333333;
+    font-weight: bold;
+  }
+
+  %indicator {
+    font-size: 1.2em;
+  }
+
+  .indicator-right {
+    @extend %indicator;
+    color: #9b9b9b;
+  }
+
+  .indicator-up {
+    @extend %indicator;
+    color: #749c56;
+  }
+
+  .indicator-down {
+    @extend %indicator;
+    color: #EC574B;
+  }
+}
+
+.download-collation {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding-top: 48px;
+}
+
 .resource-metrics-container {
   .resource-image {
     border: 9px solid #fff;
@@ -8,7 +68,6 @@
 
     img {
       border-radius: 10px;
-
     }
   }
 
@@ -43,5 +102,17 @@
 
   .downloads {
     margin-top: 24px;
+  }
+
+  .today-downloads {
+    @extend %download-metrics-box;
+  }
+
+  .week-downloads {
+    @extend %download-metrics-box;
+  }
+
+  .month-downloads {
+    @extend %download-metrics-box;
   }
 }

@@ -23,29 +23,41 @@ export class ResourceMetricsComponent implements AfterViewInit {
     private _resourceMetrics:ResourceMetrics;
     private resource:StoreApp;
     private remixedFromResource:StoreApp;
+    private todayCount: number;
+    private weekCount: number;
+    private monthCount: number;
 
     constructor(protected apps2Service:Apps2Service,
                 protected appsService:AppsService,
-                params:RouteParams) {
+                params:RouteParams)
+    {
         this._resourceId = +params.get('id');
         this.loadResource();
         this.loadResourceMetrics();
+        this.todayCount = 37;
+        this.weekCount = 229;
+        this.monthCount = 872;
     }
 
     ngAfterViewInit() {
         var ctx = this.chartCavnas.nativeElement;
         var now = moment();
         var labels = new Array<string>();
+        var data = new Array<number>();
 
-        for( var i = 0; i < 13;  i++ ) labels.unshift( now.add(-7, "d").format("MMM D") );
+        // randomize
+        for( var i = 0; i < 13; i++ ) labels.unshift( now.add(-7, "d").format("MMM D") );
+        for( var i = 0; i < 31; i++ ) data.push( Math.floor(Math.random() * 50) );
+        
+        Chart.defaults.global.legend.display = false;
 
         var myChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: labels,
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3]
+                    data: data,
+                    backgroundColor: "rgb(169, 33, 115)"
                 }]
             },
             options: {
