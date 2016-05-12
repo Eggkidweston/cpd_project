@@ -108,8 +108,10 @@ export interface Activity {
 }
 
 export interface ResourceMetrics {
-    dateFrom: string;
-    dateTo: string;
+    metrics: Array<ResourceMetric>;
+}
 
-    downloadCount: Array<number>;
+export interface ResourceMetric {
+    day: number;
+    total: number;
 }

@@ -1,15 +1,15 @@
-import { Injectable, Input, bind } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable, Input, bind} from '@angular/core';
+import {Http, Response, Headers} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import {StoreApp, TagCloud} from '../models';
-import { appSettings } from './services';
-import { AuthenticationService } from './authentication.service';
-import { Review, ResourceMetrics } from 'models';
+import {appSettings} from './services';
+import {AuthenticationService} from './authentication.service';
+import {Review, ResourceMetrics, ResourceMetric} from 'models';
 
 @Injectable()
 export class AppsService {
-    constructor(private http: Http,
-        private authenticationService: AuthenticationService) {
+    constructor(private http:Http,
+                private authenticationService:AuthenticationService) {
         this.getAllApps();
     }
 
@@ -39,8 +39,8 @@ export class AppsService {
 
         console.log(this.authenticationService.apiKey);
 
-        return this.http.get(`${appSettings.apiRoot}tags/${tag.name}?limit=100`, { headers } )
-            .map( res => <StoreApp[]>res.json().resources)
+        return this.http.get(`${appSettings.apiRoot}tags/${tag.name}?limit=100`, {headers})
+            .map(res => <StoreApp[]>res.json().resources)
             .catch(this.handleError);
 
     }
@@ -51,48 +51,47 @@ export class AppsService {
             .catch(this.handleError);
     }
 
-    public getAppDetails(appId: number) {
+    public getAppDetails(appId:number) {
         return this.http.get(`${appSettings.apiRoot}resources/${appId}`)
             .map(res => <StoreApp>res.json().resource)
             .catch(this.handleError);
     }
-    
-    public getByCreator(createdBy: number) {
+
+    public getByCreator(createdBy:number) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-      //  return this.http.get(`${appSettings.apiRoot}resources?$top=3`)
-        return this.http.get(`${appSettings.apiRoot}resources?$filter=createdby%20eq%20'${ createdBy }'`, { headers })
-            .map( res => <StoreApp[]>res.json().data )
+        //  return this.http.get(`${appSettings.apiRoot}resources?$top=3`)
+        return this.http.get(`${appSettings.apiRoot}resources?$filter=createdby%20eq%20'${ createdBy }'`, {headers})
+            .map(res => <StoreApp[]>res.json().data)
             .catch(this.handleError);
     }
-    
-    public getReviews(resourceId: number)
-    {
+
+    public getReviews(resourceId:number) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', this.authenticationService.apiKey);
-        
-        return this.http.get(`${appSettings.apiRoot}resources/${resourceId}/reviews`, { headers } )
-            .map( res => <Review[]>res.json().data)
+
+        return this.http.get(`${appSettings.apiRoot}resources/${resourceId}/reviews`, {headers})
+            .map(res => <Review[]>res.json().data)
             .catch(this.handleError);
     }
 
-    public submitReview(review: Review,
-        done: (review) => void,
-        error: (err) => void) 
-    {
+    public submitReview(review:Review,
+                        done:(review) => void,
+                        error:(err) => void) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', this.authenticationService.apiKey);
 
         this.http.post(`${appSettings.apiRoot}reviews/create`,
-            JSON.stringify({ 
+            JSON.stringify({
                 resource_id: review.resource_id,
                 title: review.title,
                 description: review.description,
-                rating: review.rating }), 
-                { headers })
+                rating: review.rating
+            }),
+            {headers})
             .map(res => <Review>res.json())
             .subscribe(
                 review => done(review),
@@ -100,32 +99,38 @@ export class AppsService {
             );
     }
 
-    public getApp(appId: number) {
+    public getApp(appId:number) {
         return this.http.get(`${appSettings.apiRoot}resources/${appId}/download`)
             .map(res => res.json().url)
             .catch(this.handleError);
     }
 
-    public getResourceMetrics(resourceId: number): ResourceMetrics {
-        let metrics: ResourceMetrics = JSON.parse(`
-        {
-            "dateFrom": "2016-01-01T00:00:00.000Z",
-            "dateTo": "2016-01-07T00:00:00.000Z",
-            "downloadCount": [ 10, 20, 15, 35, 50, 12, 12 ]
-        }
-        `);
+    public getResourceMetrics(resourceId:number, date:string,
+            done:(metrics) => void,
+            error:(err) => void) 
+    {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('x-access-token', this.authenticationService.apiKey);
 
-        return metrics;
-        // return this.http.get(`${appSettings.apiRoot}resources/${resourceId}/metrics`)
-        //     .map(res => <Observable<ResourceMetrics>>res.json().data)
-        //     .catch(this.handleError);
+        this.http.post(`${appSettings.apiRoot}resources/metrics`,
+            JSON.stringify({
+                id: resourceId,
+                timestamp: date
+            }),
+            {headers})
+            .map(res => <ResourceMetrics>(res.json() as Array<any>)[0])
+            .subscribe(
+                metrics => done(metrics),
+                err => error(err)
+            )
     }
-    
-    private handleError(error: Response) {
+
+    private handleError(error:Response) {
         return Observable.throw(error);
     }
 }
 
-export var appsServiceInjectables: Array<any> = [
+export var appsServiceInjectables:Array<any> = [
     bind(AppsService).toClass(AppsService)
 ];
