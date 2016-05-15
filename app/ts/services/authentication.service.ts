@@ -72,8 +72,10 @@ export class AuthenticationService {
                     headers.append('x-access-token', AuthenticationService.API_KEY);
                     this.http.get(`${appSettings.apiRoot}users/me`, { headers })
                         .map(res => res.json())
-                        .subscribe(data => AuthenticationService._user = data.user)
-                    next();
+                        .subscribe(data => {
+                            AuthenticationService._user = data.user;
+                            next();
+                        });
                 },
                 err => error(err)
             );

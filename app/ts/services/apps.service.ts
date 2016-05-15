@@ -129,18 +129,18 @@ export class AppsService {
     public getSignedUrl(filename:string, filetype:string,
                         next:(signedUrl) => void,
                         error:(err)=>void)
-    {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('x-access-token', this.authenticationService.apiKey);
+{
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('x-access-token', this.authenticationService.apiKey);
 
-        this.http.get(`${appSettings.apiRoot}resources/signed_url?fileName=${filename}&fileType=${filetype}`, {headers})
-            .map(res => <string>res.json())
-            .subscribe(
-                signedUrl => next(signedUrl),
-                err => error(err)
-            )
-    }
+    this.http.get(`${appSettings.apiRoot}resources/signed_url?fileName=${filename}&fileType=${filetype}`, {headers})
+        .map(res => <string>res.json())
+        .subscribe(
+            signedUrl => next(signedUrl),
+            err => error(err)
+        )
+}
 
     private handleError(error:Response) {
         return Observable.throw(error);

@@ -5,9 +5,8 @@
  * </license>
  */
 
-import { Directive, Component, ElementRef, Renderer } from '@angular/core'
+import { Component } from '@angular/core'
 import { RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-import { Http, Headers } from '@angular/http';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { WhoComponent } from './components/whocanregister/who.component';
@@ -37,9 +36,10 @@ import { Apps2Service } from "./services/apps2.service";
 @RouteConfig([
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
     { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
+    { path: '/profile', name: 'Profile', component: ContributorComponent },
     { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
     { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
-    { path: '/resource/mertics/:id', name: 'AppInfo', component: ResourceMetricsComponent },
+    { path: '/resource/metrics/:id', name: 'AppInfo', component: ResourceMetricsComponent },
     { path: '/contributor/:id', name: 'Contributor', component: ContributorComponent },
     { path: '/error', name: 'Error', component: ErrorComponent },
     { path: '/signin', name: 'SignIn', component: SignInComponent },

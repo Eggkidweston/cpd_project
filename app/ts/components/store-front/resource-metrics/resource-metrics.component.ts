@@ -23,17 +23,11 @@ export class ResourceMetricsComponent implements AfterViewInit {
     private resourceMetrics:ResourceMetrics;
     private resource:StoreApp;
     private remixedFromResource:StoreApp;
-    private todayCount:number;
-    private weekCount:number;
-    private monthCount:number;
 
     constructor(protected appsService:AppsService,
                 params:RouteParams) {
         this._resourceId = +params.get('id');
         this.loadResource();
-        this.todayCount = 37;
-        this.weekCount = 229;
-        this.monthCount = 872;
     }
 
     ngAfterViewInit() {
