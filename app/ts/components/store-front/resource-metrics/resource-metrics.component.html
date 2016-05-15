@@ -31,18 +31,27 @@
 
     <canvas id="chartCanvas" #chartCanvas class="col span-12" height="80px"></canvas>
 
-    <div class="download-collation span-12">
+    <div *ngIf="resource" class="download-collation span-12">
         <div class="today-downloads">
             <div class="download-period">Today</div>
-            <div class="digits">{{ todayCount }} <i class="fa fa-caret-right indicator-right" aria-hidden="true"></i></div>
+            <div class="digits">{{resource.metrics.downloads.today }}
+                <period-indicator [thisPeriod]="resource.metrics.downloads.today"
+                                  [previousPeriod]="resource.metrics.downloads.yesterday"></period-indicator>
+            </div>
         </div>
         <div class="week-downloads">
             <div class="download-period">Week</div>
-            <div class="digits">{{ weekCount }} <i class="fa fa-caret-up indicator-up" aria-hidden="true"></i></div>
+            <div class="digits">{{resource.metrics.downloads.thisWeek }}
+                <period-indicator [thisPeriod]="resource.metrics.downloads.thisWeek"
+                                  [previousPeriod]="resource.metrics.downloads.lastWeek"></period-indicator>
+            </div>
         </div>
         <div class="month-downloads">
             <div class="download-period">Month</div>
-            <div class="digits">{{ monthCount }} <i class="fa fa-caret-down indicator-down" aria-hidden="true"></i></div>
+            <div class="digits">{{resource.metrics.downloads.thisMonth }}
+                <period-indicator [thisPeriod]="resource.metrics.downloads.thisMonth"
+                                  [previousPeriod]="resource.metrics.downloads.lastMonth"></period-indicator>
+            </div>
         </div>
     </div>
 </div>

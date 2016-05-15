@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64bc0554-1a20-47a7-a017-b3bd65fab68a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.html" afterPath="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.scss" afterPath="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.ts" afterPath="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/models.ts" afterPath="$PROJECT_DIR$/app/ts/models.ts" />
     </list>
     <ignored path="store-front.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,27 +35,51 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="resource-metrics.component.ts" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.ts">
+          <file leaf-file-name="resource-metrics.component.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="872">
-                  <caret line="75" column="50" selection-start-line="75" selection-start-column="50" selection-end-line="75" selection-end-column="50" />
-                  <folding>
-                    <element signature="e#0#66#0" expanded="true" />
-                    <element signature="n#!!block;n#constructor#0;n#ResourceMetricsComponent#0" expanded="true" />
-                    <element signature="n#!!block;n#ngAfterViewInit#0;n#ResourceMetricsComponent#0" expanded="true" />
-                    <element signature="n#!!block;n#loadResource#0;n#ResourceMetricsComponent#0" expanded="true" />
-                    <element signature="e#2468#2622#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="884">
+                  <caret line="52" column="50" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
+                  <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="resource-metrics.component.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.html">
+          <file leaf-file-name="period-indicator.component.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="476">
-                  <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+                <state relative-caret-position="51">
+                  <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="period-indicator.component.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="170">
+                  <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="period-indicator.component.scss" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="238">
+                  <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="resource-metrics.component.scss" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="459">
+                  <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -58,27 +88,33 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="apps.service.ts" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/ts/services/apps.service.ts">
+        <leaf>
+          <file leaf-file-name="resource-metrics.component.ts" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="702">
-                  <caret line="118" column="25" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="25" />
+                <state relative-caret-position="765">
+                  <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
                   <folding>
-                    <element signature="e#0#54#0" expanded="true" />
-                    <element signature="n#!!block;n#constructor#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#getAllApps#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#getRecentApps#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#getTagCloud#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#getByTag#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#getRecommendedApps#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#getAppDetails#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#getByCreator#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#getReviews#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#submitReview#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#getApp#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#getSignedUrl#0;n#AppsService#0" expanded="true" />
-                    <element signature="n#!!block;n#handleError#0;n#AppsService#0" expanded="true" />
+                    <element signature="e#0#66#0" expanded="true" />
+                    <element signature="n#!!block;n#constructor#0;n#ResourceMetricsComponent#0" expanded="true" />
+                    <element signature="n#!!block;n#ngAfterViewInit#0;n#ResourceMetricsComponent#0" expanded="true" />
+                    <element signature="n#!!block;n#loadResourceMetrics#0;n#ResourceMetricsComponent#0" expanded="true" />
+                    <element signature="e#2113#3274#0" expanded="true" />
+                    <element signature="e#2380#2522#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="models.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/models.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="425">
+                  <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+                  <folding>
+                    <element signature="n#!!block;n#constructor#0;n#TagCloud#0" expanded="true" />
+                    <element signature="n#!!block;n#constructor#0;n#ShadowApp#0" expanded="true" />
+                    <element signature="n#!!block;n#constructor#0;n#Review#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -91,8 +127,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="HTML File" />
+        <option value="TypeScript File" />
+        <option value="SCSS File" />
       </list>
     </option>
   </component>
@@ -122,13 +159,18 @@
         <option value="$PROJECT_DIR$/app/ts/services/services.ts" />
         <option value="$PROJECT_DIR$/app/ts/thirdparty/ng2-charts/components/charts/charts.d.ts" />
         <option value="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/scratch.html" />
-        <option value="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.scss" />
         <option value="$PROJECT_DIR$/app/ts/components/appdetails/appdetails.component.ts" />
-        <option value="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.html" />
-        <option value="$PROJECT_DIR$/app/ts/models.ts" />
         <option value="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts" />
         <option value="$PROJECT_DIR$/app/ts/services/apps.service.ts" />
+        <option value="$PROJECT_DIR$/app/ts/components/store-front/period-indicator/period-indicator.component.scss" />
+        <option value="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.scss" />
+        <option value="$PROJECT_DIR$/app/ts/components/store-front/period-indicator/period-indicator.component.ts" />
+        <option value="$PROJECT_DIR$/app/ts/components/store-front/period-indicator/period-indicator.component.html" />
+        <option value="$PROJECT_DIR$/app/ts/models.ts" />
+        <option value="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.html" />
+        <option value="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.html" />
         <option value="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.ts" />
+        <option value="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.ts" />
       </list>
     </option>
   </component>
@@ -355,11 +397,71 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="submitreview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="store-front" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="store-front" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="store-front" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resource-metrics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="store-front" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="store-front" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="store-front" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resource-metrics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="period-indicator" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -481,14 +583,16 @@
     <property name="typescript-compiler-editor-notification" value="false" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/marknorgate/Documents/source/Jisc/appstore/store-front/app/ts/thirdparty/file-upload/file-uploader.ts" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/ts/components/administration" />
-      <recent name="$PROJECT_DIR$/app/ts/components/store-front" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/ts/thirdparty" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/ts/components/store-front/resource-metrics" />
+      <recent name="$PROJECT_DIR$/app/ts/components/administration" />
+      <recent name="$PROJECT_DIR$/app/ts/components/store-front" />
     </key>
   </component>
   <component name="RunManager">
@@ -568,12 +672,12 @@
       <workItem from="1462387809111" duration="3047000" />
       <workItem from="1462394815784" duration="26736000" />
       <workItem from="1462892447164" duration="30717000" />
-      <workItem from="1463322690638" duration="1437000" />
+      <workItem from="1463322690638" duration="4282000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67554000" />
+    <option name="totallyTimeSpent" value="70399000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -582,6 +686,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16914062" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -594,7 +699,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39985642" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32950467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -616,27 +720,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/contributor/ago.pipe.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="1" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/contributor/contributor.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/signup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/tag-cloud.component/tag-cloud.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -689,6 +772,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="37" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -733,6 +817,69 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4696">
           <caret line="383" column="59" selection-start-line="383" selection-start-column="59" selection-end-line="383" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#50#0" expanded="false" />
+            <element signature="n#!!block;n#isFile#0" expanded="false" />
+            <element signature="n#!!block;n#isFileLikeObject#0" expanded="false" />
+            <element signature="n#!!block;n#constructor#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#addToQueue#0;n#FileUploader#0" expanded="false" />
+            <element signature="e#1374#1820#0" expanded="false" />
+            <element signature="n#!!block;n#removeFromQueue#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#clearQueue#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#uploadItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#cancelItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#uploadAll#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#uploadAllTogether#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#cancelAll#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#isFile#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#isFileLikeObject#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#getIndexOfItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#getNotUploadedItems#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#getReadyItems#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#destroy#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onAfterAddingAll#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onAfterAddingFile#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onWhenAddingFileFailed#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onBeforeUploadItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onProgressItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onProgressAll#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onSuccessItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onErrorItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onCancelItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onCompleteItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#onCompleteAll#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_getTotalProgress#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_getFilters#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_render#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_folderFilter#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_queueLimitFilter#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_isValidFile#0;n#FileUploader#0" expanded="false" />
+            <element signature="e#6016#6104#0" expanded="false" />
+            <element signature="n#!!block;n#_isSuccessCode#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_transformResponse#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_parseHeaders#0;n#FileUploader#0" expanded="false" />
+            <element signature="e#6688#6907#0" expanded="false" />
+            <element signature="n#!!block;n#_headersGetter#0;n#FileUploader#0" expanded="false" />
+            <element signature="e#7006#7125#0" expanded="false" />
+            <element signature="n#!!block;n#_xhrTransport#0;n#FileUploader#0" expanded="false" />
+            <element signature="e#7620#7767#0" expanded="false" />
+            <element signature="e#7793#8181#0" expanded="false" />
+            <element signature="e#8208#8480#0" expanded="false" />
+            <element signature="e#8507#8780#0" expanded="false" />
+            <element signature="e#9460#9615#0" expanded="false" />
+            <element signature="e#9645#10049#0" expanded="false" />
+            <element signature="e#10395#10680#0" expanded="false" />
+            <element signature="n#!!block;n#_iframeTransport#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_onWhenAddingFileFailed#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_onAfterAddingFile#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_onAfterAddingAll#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_onBeforeUploadItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_onProgressItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_onSuccessItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_onErrorItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_onCancelItem#0;n#FileUploader#0" expanded="false" />
+            <element signature="n#!!block;n#_onCompleteItem#0;n#FileUploader#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -741,6 +888,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -749,6 +897,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -756,6 +905,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -763,6 +915,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#48#0" expanded="false" />
+            <element signature="n#!!block;n#ngOnInit#0;n#ErrorComponent#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -770,13 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="51" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="57" column="20" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -793,6 +942,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -860,6 +1010,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="833">
           <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+            <element signature="n#!!block;n#signIn#0;n#AuthenticationService#0" expanded="true" />
+            <element signature="e#2095#2509#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -867,6 +1022,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#68#0" expanded="false" />
+            <element signature="e#1553#1689#0" expanded="false" />
+            <element signature="e#1721#2007#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -874,6 +1034,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
           <caret line="51" column="15" selection-start-line="51" selection-start-column="15" selection-end-line="51" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -889,6 +1052,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -896,6 +1060,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -915,13 +1080,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/typescriptCompiler/external/lib.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="1159" column="10" selection-start-line="1159" selection-start-column="10" selection-end-line="1159" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="1266" column="48" selection-start-line="1266" selection-start-column="42" selection-end-line="1266" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/ts/services/apps.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="118" column="25" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="25" />
+        <state relative-caret-position="455">
+          <caret line="53" column="11" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
             <element signature="n#!!block;n#constructor#0;n#AppsService#0" expanded="true" />
@@ -935,6 +1117,7 @@
             <element signature="n#!!block;n#getReviews#0;n#AppsService#0" expanded="true" />
             <element signature="n#!!block;n#submitReview#0;n#AppsService#0" expanded="true" />
             <element signature="n#!!block;n#getApp#0;n#AppsService#0" expanded="true" />
+            <element signature="n#!!block;n#getResourceMetrics#0;n#AppsService#0" expanded="true" />
             <element signature="n#!!block;n#getSignedUrl#0;n#AppsService#0" expanded="true" />
             <element signature="n#!!block;n#handleError#0;n#AppsService#0" expanded="true" />
           </folding>
@@ -943,47 +1126,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/ts/models.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1870">
-          <caret line="110" column="4" selection-start-line="110" selection-start-column="4" selection-end-line="110" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="425">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!block;n#constructor#0;n#TagCloud#0" expanded="true" />
+            <element signature="n#!!block;n#constructor#0;n#ShadowApp#0" expanded="true" />
+            <element signature="n#!!block;n#constructor#0;n#Review#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/typescriptCompiler/external/lib.d.ts">
+    <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="1159" column="10" selection-start-line="1159" selection-start-column="10" selection-end-line="1159" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es5.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="659">
-          <caret line="1266" column="48" selection-start-line="1266" selection-start-column="42" selection-end-line="1266" selection-end-column="48" />
+        <state relative-caret-position="459">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="872">
-          <caret line="75" column="50" selection-start-line="75" selection-start-column="50" selection-end-line="75" selection-end-column="50" />
+        <state relative-caret-position="765">
+          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
           <folding>
             <element signature="e#0#66#0" expanded="true" />
             <element signature="n#!!block;n#constructor#0;n#ResourceMetricsComponent#0" expanded="true" />
             <element signature="n#!!block;n#ngAfterViewInit#0;n#ResourceMetricsComponent#0" expanded="true" />
-            <element signature="n#!!block;n#loadResource#0;n#ResourceMetricsComponent#0" expanded="true" />
-            <element signature="e#2468#2622#0" expanded="true" />
+            <element signature="n#!!block;n#loadResourceMetrics#0;n#ResourceMetricsComponent#0" expanded="true" />
+            <element signature="e#2113#3274#0" expanded="true" />
+            <element signature="e#2380#2522#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/resource-metrics.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="52" column="50" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/components/store-front/resource-metrics/period-indicator/period-indicator.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
