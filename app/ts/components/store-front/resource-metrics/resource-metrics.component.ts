@@ -56,21 +56,22 @@ export class ResourceMetricsComponent implements AfterViewInit {
     }
 
     protected loadResourceMetrics() {
-        var now = moment().date(1);
+        // set d to the first day of the next month
+        var d = moment().add(1, 'M').date(1);
 
-        this.appsService.getResourceMetrics(this._resourceId, now.format("YYYY-MM"),
+        this.appsService.getResourceMetrics(this._resourceId, moment().format("YYYY-MM"),
             (metrics: ResourceMetrics) => {
-                // this doesn't appear to set this.resourceMetrics
-                // this.resourceMetrics = metrics;
-
                 var ctx = this.chartCavnas.nativeElement;
                 var labels = new Array<string>();
                 var data = new Array<number>();
 
+                var dateCount = 0;
+
                 if (metrics) {
-                    _.each(metrics, (metric) => {
-                        data.push(metric.total);
-                        labels.push(now.date(metric.day).format("MMM D"));
+                    _.each(_.flatten(metrics), (metric) => {
+                        data.unshift(metric.total);
+                        d.subtract(1, 'd');
+                        if( ++dateCount % 7 ==0 ) labels.unshift(d.format("MMM D"));
                     });
 
                     Chart.defaults.global.legend.display = false;

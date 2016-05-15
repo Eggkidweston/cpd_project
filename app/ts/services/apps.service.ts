@@ -106,9 +106,8 @@ export class AppsService {
     }
 
     public getResourceMetrics(resourceId:number, date:string,
-            done:(metrics) => void,
-            error:(err) => void) 
-    {
+                              next:(metrics) => void,
+                              error:(err) => void) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', this.authenticationService.apiKey);
@@ -116,12 +115,29 @@ export class AppsService {
         this.http.post(`${appSettings.apiRoot}resources/metrics`,
             JSON.stringify({
                 id: resourceId,
-                timestamp: date
+                timestamp: date,
+                report: 1
             }),
             {headers})
             .map(res => <ResourceMetrics>(res.json() as Array<any>)[0])
             .subscribe(
-                metrics => done(metrics),
+                metrics => next(metrics),
+                err => error(err)
+            )
+    }
+
+    public getSignedUrl(filename:string, filetype:string,
+                        next:(signedUrl) => void,
+                        error:(err)=>void)
+    {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('x-access-token', this.authenticationService.apiKey);
+
+        this.http.get(`${appSettings.apiRoot}resources/signed_url?fileName=${filename}&fileType=${filetype}`, {headers})
+            .map(res => <string>res.json())
+            .subscribe(
+                signedUrl => next(signedUrl),
                 err => error(err)
             )
     }

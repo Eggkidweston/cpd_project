@@ -8,6 +8,7 @@ import { FileUploader } from '../../../thirdparty/file-upload/file-uploader';
 import { FileDrop } from '../../../thirdparty/file-upload/file-drop';
 import { FileSelect } from '../../../thirdparty/file-upload/file-select';
 import 'rxjs/add/operator/scan';
+import {AppsService} from "../../../services/apps.service";
 
 let _ = require('underscore');
 
@@ -44,7 +45,7 @@ export class SubmitResourceComponent {
     protected shaking: boolean = false;
     protected submitted: boolean = false;
 
-    constructor(fb: FormBuilder) {
+    constructor(private appsService: AppsService, fb: FormBuilder) {
         this.uploader = new FileUploader({});
 
         this.resourceTags = this.tagUpdates
@@ -103,7 +104,9 @@ export class SubmitResourceComponent {
     }
     
     protected submitResource() {
-
+        this.appsService.getSignedUrl("Test.jpg ", "jpeg",
+            (signedUrl) => alert(JSON.stringify(signedUrl)),
+            (err) => alert(JSON.stringify(err)));
     }
 
     protected shakeForm() {
