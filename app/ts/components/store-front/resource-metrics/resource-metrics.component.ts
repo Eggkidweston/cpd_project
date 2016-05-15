@@ -65,13 +65,10 @@ export class ResourceMetricsComponent implements AfterViewInit {
                 var labels = new Array<string>();
                 var data = new Array<number>();
 
-                var dateCount = 0;
-
                 if (metrics) {
-                    _.each(_.flatten(metrics), (metric) => {
-                        data.unshift(metric.total);
-                        d.subtract(1, 'd');
-                        if( ++dateCount % 7 ==0 ) labels.unshift(d.format("MMM D"));
+                    _.each(_.flatten(_.each(metrics, (monthMetrics) => monthMetrics.reverse())), (dayMetric) => {
+                        data.unshift(dayMetric.total);
+                        labels.unshift(d.subtract(1, 'd').format("MMM D"));
                     });
 
                     Chart.defaults.global.legend.display = false;
