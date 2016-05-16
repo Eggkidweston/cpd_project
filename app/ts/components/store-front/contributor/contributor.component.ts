@@ -6,7 +6,7 @@ import {AppWidgetComponent} from 'appwidget/appwidget.component';
 import {Contributor} from 'models';
 import {AgoPipe} from 'ago.pipe.ts';
 import {Router} from '@angular/router-deprecated';
-import {AuthenticationService} from "../../../services/services";
+import {AuthenticationService, SigninRegisterService} from "../../../services/services";
 
 @Component({
     selector: 'contributor',
@@ -22,11 +22,13 @@ export class ContributorComponent {
     constructor(protected authenticationService:AuthenticationService,
                 protected router:Router,
                 protected contributorService:ContributorService,
+                protected signinRegisterService:SigninRegisterService,
                 params:RouteParams)
     {
         if (this.isProfile) {
             if (!this.authenticationService.userSignedIn) {
                 this.router.navigate(['SignIn'])
+                signinRegisterService.redirectToProfileAfterSignin();
             }
             else {
                 this._contributorId = this.authenticationService.user.id;

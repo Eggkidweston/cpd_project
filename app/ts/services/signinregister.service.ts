@@ -8,8 +8,9 @@ export class SigninRegisterService {
 
     constructor(public router: Router) {
         router.subscribe((value: any) => {
-            if( value !== 'signin' && value !== 'register' )
+            if( value !== 'signin' && value !== 'register' ) {
                 this.lastRoute = value;
+            }
         })
     };
     
@@ -19,6 +20,10 @@ export class SigninRegisterService {
         } else {
             this.router.navigate(['Home']);
         }
+    }
+
+    redirectToProfileAfterSignin() {
+        this.lastRoute = 'Profile';
     }
 }
 

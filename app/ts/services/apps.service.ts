@@ -134,12 +134,35 @@ export class AppsService {
     headers.append('Content-Type', 'application/json');
     headers.append('x-access-token', this.authenticationService.apiKey);
 
+    var self = this;
+    var xhr = new XMLHttpRequest();
+    var returnUrl = "";
+    var token = this.authenticationService.apiKey;
+    var now = new Date().getTime();
+    var filename =  now + "-" + filename;
+    var url = `${appSettings.apiRoot}resources/signed_url?fileName=${filename}&fileType=${filetype}`;
+    xhr.open("GET", url);
+    xhr.setRequestHeader('x-access-token', token);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                alert(response);
+            } else {
+                alert("Could not get signed URL.");
+            }
+        }
+    };
+    xhr.send();
+
+/*
     this.http.get(`${appSettings.apiRoot}resources/signed_url?fileName=${filename}&fileType=${filetype}`, {headers})
         .map(res => <string>res.json())
         .subscribe(
             signedUrl => next(signedUrl),
             err => error(err)
         )
+*/
 }
 
     private handleError(error:Response) {

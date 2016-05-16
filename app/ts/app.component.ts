@@ -21,8 +21,8 @@ import { AppInfoComponent } from './components/app-info/app-info.component';
 import { ContributorComponent } from 'components/store-front/contributor/contributor.component';
 import { SubmitResourceComponent } from 'components/administration/submit-resource/submit-resource.component';
 import { ResourceMetricsComponent } from './components/store-front/resource-metrics/resource-metrics.component';
-import { AuthenticationService, SigninRegisterService, appInfo } from './services/services';
-import { Apps2Service } from "./services/apps2.service";
+import { AuthenticationService, appInfo } from './services/services';
+import { Apps2Service, SigninRegisterService } from "./services/services";
 
 @Component({
     selector: 'appstore-app',
@@ -53,15 +53,13 @@ import { Apps2Service } from "./services/apps2.service";
 
 export class AppComponent {
     static router: Router;
-    private currentRoute: string;
     public appInfoname: String;
     private appVersion: String;
-    private static lastRoute: string = 'Home';
 
     constructor(
         public authenticationService: AuthenticationService,
-        public loginRegisterService: SigninRegisterService,
-        router: Router) 
+        protected signinRegisterService:SigninRegisterService,
+        router: Router)
     {
         this.appInfoname = appInfo.name;
         this.appVersion = appInfo.version;

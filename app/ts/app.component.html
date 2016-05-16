@@ -23,7 +23,7 @@
               <li [class.active]="isRouteActive(['TagCloud'])" class="nav__item">
                 <a [routerLink]="['TagCloud']">TagCloud</a>
               </li>
-              <li [class.active]="isRouteActive(['Submissions'])" class="nav__item"><!-- *ngIf="authenticationService?.userSignedIn"-->
+              <li *ngIf="authenticationService?.userSignedIn" [class.active]="isRouteActive(['Submissions'])" class="nav__item">
                 <a [routerLink]="['Submissions']">Submissions</a>
               </li>
               <!--<li class="nav__item  ">
@@ -34,7 +34,7 @@
           <nav class="masthead__nav masthead__nav--secondary" role="navigation" data-dropdown>
             <ul>
               <li [class.active]="isRouteActive(['SignIn']) || isRouteActive(['Register'])" class="nav__item" *ngIf="!authenticationService?.userSignedIn">
-                <a [routerLink]="['SignIn']">Sign in</a>
+                <a [routerLink]="['Profile']">Sign in</a>
               </li>
               <li class="nav__item" *ngIf="authenticationService?.userSignedIn">
                 <a>Sign out</a>

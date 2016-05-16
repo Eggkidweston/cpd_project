@@ -104,7 +104,7 @@ export class SubmitResourceComponent {
     }
     
     protected submitResource() {
-        this.appsService.getSignedUrl("Test.jpg ", "jpeg",
+        this.appsService.getSignedUrl("Test.jpg", "jpeg",
             (signedUrl) => alert(JSON.stringify(signedUrl)),
             (err) => alert(JSON.stringify(err)));
     }
