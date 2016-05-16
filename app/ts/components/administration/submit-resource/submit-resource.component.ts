@@ -7,72 +7,76 @@ import { TagCloudComponent } from './tag-cloud.component/tag-cloud.component.ts'
 import { FileUploader } from '../../../thirdparty/file-upload/file-uploader';
 import { FileDrop } from '../../../thirdparty/file-upload/file-drop';
 import { FileSelect } from '../../../thirdparty/file-upload/file-select';
+import { AppsService } from '../../../services/services';
 import 'rxjs/add/operator/scan';
-import {AppsService} from "../../../services/apps.service";
 
-let _ = require('underscore');
+let _ = require( 'underscore' );
 
-let initialTags: Tag[] = [];
+let initialTags:Tag[] = [];
 
-interface ITagsOperation extends Function {
-    (tags: Tag[]): Tag[];
+interface ITagsOperation extends Function
+{
+    ( tags:Tag[] ):Tag[];
 }
 
-@Component({
+@Component( {
     selector: 'submit-resource',
-    template: require('./submit-resource.component.html'),
-    styles: [require('./submit-resource.scss').toString()],
+    template: require( './submit-resource.component.html' ),
+    styles: [require( './submit-resource.scss' ).toString()],
     directives: [TagCloudComponent, FileDrop, FileSelect]
-})
-export class SubmitResourceComponent {
-    @ViewChild('fileUploadButton') fileUploadButton;
+} )
+export class SubmitResourceComponent
+{
+    @ViewChild( 'fileUploadButton' ) fileUploadButton;
 
-    private newResourceTags: Subject<Tag> = new Subject<Tag>();
-    private resourceTags: Observable<Tag[]>;
-    private tagUpdates: Subject<any> = new Subject<any>();
-    private create: Subject<Tag> = new Subject<Tag>();
-    private remove: Subject<Tag> = new Subject<Tag>();
+    private newResourceTags:Subject<Tag> = new Subject<Tag>();
+    private resourceTags:Observable<Tag[]>;
+    private tagUpdates:Subject<any> = new Subject<any>();
+    private create:Subject<Tag> = new Subject<Tag>();
+    private remove:Subject<Tag> = new Subject<Tag>();
 
-    private submitResourceForm: ControlGroup;
-    private basicDetailsText: AbstractControl;
-    private overviewText: AbstractControl;
-    private descriptionText: AbstractControl;
-    private trialUrl: AbstractControl;
-    private videoUrl: AbstractControl;
+    private submitResourceForm:ControlGroup;
+    private basicDetailsText:AbstractControl;
+    private overviewText:AbstractControl;
+    private descriptionText:AbstractControl;
+    private trialUrl:AbstractControl;
+    private videoUrl:AbstractControl;
 
-    protected uploader: FileUploader;
-    
-    protected shaking: boolean = false;
-    protected submitted: boolean = false;
+    protected uploader:FileUploader;
 
-    constructor(private appsService: AppsService, fb: FormBuilder) {
-        this.uploader = new FileUploader({});
+    protected shaking:boolean = false;
+    protected submitted:boolean = false;
+
+    constructor( private appsService:AppsService, fb:FormBuilder )
+    {
+        this.uploader = new FileUploader( {} );
 
         this.resourceTags = this.tagUpdates
-            .scan((tags: Tag[], operation: ITagsOperation) => operation(tags), initialTags);
+            .scan( ( tags:Tag[], operation:ITagsOperation ) => operation( tags ), initialTags );
 
         this.create
-            .map((tag: Tag): ITagsOperation => (tags: Tag[]) => _.uniq(tags.concat(tag)))
-            .subscribe(this.tagUpdates);
+            .map( ( tag:Tag ):ITagsOperation => ( tags:Tag[] ) => _.uniq( tags.concat( tag ) ) )
+            .subscribe( this.tagUpdates );
 
         this.remove
-            .map((tag: Tag): ITagsOperation => (tags: Tag[]) => _.without(tags, tag))
-            .subscribe(this.tagUpdates);
+            .map( ( tag:Tag ):ITagsOperation => ( tags:Tag[] ) => _.without( tags, tag ) )
+            .subscribe( this.tagUpdates );
 
-        this.newResourceTags.subscribe(this.create);
+        this.newResourceTags.subscribe( this.create );
 
-        this.buildForm(fb);
+        this.buildForm( fb );
     }
 
 
-    protected buildForm(fb: FormBuilder) {
-        this.submitResourceForm = fb.group({
+    protected buildForm( fb:FormBuilder )
+    {
+        this.submitResourceForm = fb.group( {
             "basicDetailsText": ["", Validators.required],
             "overviewText": ["", Validators.required],
             "descriptionText": ["", Validators.required],
             "trialUrl": ["", Validators.required],
             "videoUrl": ["", Validators.required]
-        })
+        } )
 
         this.basicDetailsText = this.submitResourceForm.controls['basicDetailsText'];
         this.overviewText = this.submitResourceForm.controls['overviewText'];
@@ -81,38 +85,47 @@ export class SubmitResourceComponent {
         this.videoUrl = this.submitResourceForm.controls['videoUrl'];
     }
 
-    protected addTagToResource(tag: Tag): void {
-        this.create.next(tag);
+    protected addTagToResource( tag:Tag ):void
+    {
+        this.create.next( tag );
     }
 
-    protected removeTagFromResource(tag: Tag): void {
-        this.remove.next(tag);
+    protected removeTagFromResource( tag:Tag ):void
+    {
+        this.remove.next( tag );
     }
 
-    protected uploadFileButtonClicked() {
+    protected uploadFileButtonClicked()
+    {
         this.fileUploadButton.nativeElement.click();
     }
 
-    protected onSubmit(formValues: any) {
+    protected onSubmit( formValues:any )
+    {
         this.submitted = true;
-        
-        if (this.submitResourceForm.valid) {
+
+        if( true /*this.submitResourceForm.valid*/ ) {
             this.submitResource();
         } else {
             this.shakeForm();
         }
     }
-    
-    protected submitResource() {
-        this.appsService.getSignedUrl("Test.jpg", "jpeg",
-            (signedUrl) => alert(JSON.stringify(signedUrl)),
-            (err) => alert(JSON.stringify(err)));
+
+    protected submitResource()
+    {
+        this.uploader.queue.map( file => {
+            this.appsService.uploadFileToS3( file,
+                (filename) => console.log(`File: ${filename}`),
+                (err) => console.log(`Error: ${err}`) ) ;
+        });
     }
 
-    protected shakeForm() {
+    protected shakeForm()
+    {
         this.shaking = true;
-        setTimeout(() => {
+        setTimeout( () =>
+        {
             this.shaking = false;
-        }, 500);
+        }, 500 );
     }
 }

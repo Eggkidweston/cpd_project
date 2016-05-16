@@ -23,6 +23,7 @@ import { SubmitResourceComponent } from 'components/administration/submit-resour
 import { ResourceMetricsComponent } from './components/store-front/resource-metrics/resource-metrics.component';
 import { AuthenticationService, appInfo } from './services/services';
 import { Apps2Service, SigninRegisterService } from "./services/services";
+import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
 
 @Component({
     selector: 'appstore-app',
@@ -39,6 +40,7 @@ import { Apps2Service, SigninRegisterService } from "./services/services";
     { path: '/profile', name: 'Profile', component: ContributorComponent },
     { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
     { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
+    { path: '/resource/revision/:id', name: 'AppInfo', component: RevisionHistoryComponent },
     { path: '/resource/metrics/:id', name: 'AppInfo', component: ResourceMetricsComponent },
     { path: '/contributor/:id', name: 'Contributor', component: ContributorComponent },
     { path: '/error', name: 'Error', component: ErrorComponent },

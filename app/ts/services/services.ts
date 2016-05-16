@@ -4,6 +4,7 @@ import { authenticationServiceInjectables } from './authentication.service';
 import { tagsServiceInjectables } from './tags.service';
 import { signinRegisterServiceInjectables } from './signinregister.service'
 import { contributorServiceInjectables } from './contributor.service';
+import { versionControlServiceInjectables } from './version-control.service';
 
 export * from './apps.service';
 export * from './apps2.service';
@@ -11,6 +12,7 @@ export * from './authentication.service';
 export * from './tags.service';
 export * from './signinregister.service';
 export * from './contributor.service';
+export * from './version-control.service';
 
 export var servicesInjectables: Array<any> = [
     appsServiceInjectables,
@@ -18,7 +20,8 @@ export var servicesInjectables: Array<any> = [
     authenticationServiceInjectables, 
     tagsServiceInjectables, 
     signinRegisterServiceInjectables,
-    contributorServiceInjectables
+    contributorServiceInjectables,
+    versionControlServiceInjectables
 ];
 
 export var appSettings = { apiRoot: 'http://store-staging.data.alpha.jisc.ac.uk:8080/' };

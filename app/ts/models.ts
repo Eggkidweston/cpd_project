@@ -1,4 +1,5 @@
-export class User {
+export class User
+{
     id:number;
     name:string;
     username:string;
@@ -9,7 +10,8 @@ export class User {
     active:any;
 }
 
-export class StoreApp {
+export class StoreApp
+{
     id:string;
 
     createdby:number;
@@ -34,11 +36,13 @@ export class StoreApp {
     tags:Array<string>;
 }
 
-export class CollatedMetrics {
+export class CollatedMetrics
+{
     downloads:DownloadMetrics;
 }
 
-export class DownloadMetrics {
+export class DownloadMetrics
+{
     today:number;
     yesterday:number;
     thisWeek:number;
@@ -47,34 +51,37 @@ export class DownloadMetrics {
     lastMonth:number;
     total:number;
 }
-export class TagCloud {
-
-    constructor(public tags:Tag[]) {
+export class TagCloud
+{
+    constructor( public tags:Tag[] )
+    {
     }
-
 }
 
-export class Tag {
+export class Tag
+{
 
     public id:number;
     public name:string;
     public resource_count:string;
-
 }
 
 
-export class ShadowApp {
-    constructor(public _id:string,
-                public media:Array<ShadowMedium>,
-                public storeID:string,
-                public license:string,
-                public remixable:string,
-                public licenseLink:String,
-                public runURL:String) {
+export class ShadowApp
+{
+    constructor( public _id:string,
+                 public media:Array<ShadowMedium>,
+                 public storeID:string,
+                 public license:string,
+                 public remixable:string,
+                 public licenseLink:String,
+                 public runURL:String )
+    {
     }
 }
 
-export class ShadowMedium {
+export class ShadowMedium
+{
     url:string;
     type_id:string;
     previewUrl:string;
@@ -84,25 +91,30 @@ export enum LicenseType {
     GPL, Paid
 }
 
-export class Review {
-    constructor(public resource_id:number,
-                public title:string,
-                public description:string,
-                public rating:number) {
+export class Review
+{
+    constructor( public resource_id:number,
+                 public title:string,
+                 public description:string,
+                 public rating:number )
+    {
     };
 }
 
-export class Medium {
+export class Medium
+{
     downloadUrl:string;
     previewUrl:string;
 }
 
-export class UpdateHistory {
+export class UpdateHistory
+{
     comment:string;
     date:string;
 }
 
-export class Contributor {
+export class Contributor
+{
     activity:Array<Activity>;
     content:Array<StoreApp>;
     imageUrl:string;
@@ -113,17 +125,25 @@ export class Contributor {
 
 }
 
-export interface Activity {
+export interface Activity
+{
     type:string;
     comment:string;
     date:string;
 }
 
-export interface ResourceMetrics {
+export interface ResourceMetrics
+{
     metrics:Array<ResourceMetric>;
 }
 
-export interface ResourceMetric {
+export interface ResourceMetric
+{
     day:number;
     total:number;
+}
+
+export interface SignedUrl {
+    signed_request: string;
+    url: string;
 }
