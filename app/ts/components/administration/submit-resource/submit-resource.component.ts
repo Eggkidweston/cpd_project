@@ -1,14 +1,18 @@
 import { Component, ViewChild } from '@angular/core';
 import { ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular/common';
+import { Router } from '@angular/router-deprecated';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { Tag } from '../../../models';
+import { Tag, Resource } from '../../../models';
 import { TagCloudComponent } from './tag-cloud.component/tag-cloud.component.ts';
 import { FileUploader } from '../../../thirdparty/file-upload/file-uploader';
 import { FileDrop } from '../../../thirdparty/file-upload/file-drop';
 import { FileSelect } from '../../../thirdparty/file-upload/file-select';
 import { AppsService } from '../../../services/services';
+import { AuthenticationService } from '../../../services/authentication.service';
 import 'rxjs/add/operator/scan';
+import 'rxjs/Observable/bindNodeCallback';
+import 'rxjs/Observable/from';
 
 let _ = require( 'underscore' );
 
@@ -47,12 +51,17 @@ export class SubmitResourceComponent
     protected shaking:boolean = false;
     protected submitted:boolean = false;
 
-    constructor( private appsService:AppsService, fb:FormBuilder )
+    constructor( protected appsService:AppsService,
+                 protected authenticationService:AuthenticationService,
+                 protected router:Router,
+                 fb:FormBuilder )
     {
         this.uploader = new FileUploader( {} );
 
         this.resourceTags = this.tagUpdates
-            .scan( ( tags:Tag[], operation:ITagsOperation ) => operation( tags ), initialTags );
+            .scan( ( tags:Tag[], operation:ITagsOperation ) => operation( tags ), initialTags )
+            .publishReplay( 1 )
+            .refCount();
 
         this.create
             .map( ( tag:Tag ):ITagsOperation => ( tags:Tag[] ) => _.uniq( tags.concat( tag ) ) )
@@ -104,20 +113,64 @@ export class SubmitResourceComponent
     {
         this.submitted = true;
 
-        if( true /*this.submitResourceForm.valid*/ ) {
-            this.submitResource();
+        if( this.submitResourceForm.valid ) {
+            this.submitResource( formValues );
         } else {
             this.shakeForm();
         }
     }
 
-    protected submitResource()
+    protected submitResource( formValues:any )
     {
-        this.uploader.queue.map( file => {
-            this.appsService.uploadFileToS3( file,
-                (filename) => console.log(`File: ${filename}`),
-                (err) => console.log(`Error: ${err}`) ) ;
-        });
+        console.log( `Form values: ${ JSON.stringify( formValues )}` );
+
+        this.getS3ImageUrls( urls =>
+            {
+                this.resourceTags.subscribe(
+                    tags =>
+                    {
+                        let newResource = new Resource();
+                        newResource.type_id = 1;
+                        newResource.licensetype_id = 1;
+                        newResource.title = formValues.basicDetailsText ;
+                        newResource.description = formValues.descriptionText;
+                        newResource.url = formValues.trialUrl;
+                        newResource.image = formValues.image;
+                        newResource.active = true;
+                        newResource.isfree = true;
+                        newResource.overview = formValues.overview;
+                        newResource.recommended = true;
+                        newResource.relatedIds = new Array<number>();
+                        newResource.tags = tags;
+                        newResource.mediaUrls = urls;
+
+                        this.appsService.submitResource( newResource ).subscribe(
+                            resource => this.router.navigate( ['AppDetails', { id: newResource.id }] ),
+                            err => console.log( `Error submitting resource: ${err}` ) );
+                    }
+                )
+            }
+        )
+    }
+
+    protected getS3ImageUrls( next:( urls:Array<string> ) => void )
+    {
+        let urls = new Array<string>();
+
+        if( this.uploader.queue.length === 0 ) next( urls );
+        else {
+            //noinspection TypeScriptUnresolvedFunction
+            let uploadFile = Observable.bindNodeCallback( this.appsService.uploadFileToS3 );
+
+            //noinspection TypeScriptUnresolvedFunction
+            Observable.from( this.uploader.queue )
+                .flatMap( e => uploadFile( e, this.authenticationService.apiKey ) )
+                .subscribe(
+                    url => urls.push( url ),
+                    e => console.log( `Could not upload file: ${e}` ),
+                    () => next( urls )
+                );
+        }
     }
 
     protected shakeForm()

@@ -1,7 +1,7 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { StoreApp, TagCloud, SignedUrl } from '../models';
+import { StoreApp, TagCloud, SignedUrl, Resource } from '../models';
 import { appSettings } from './services';
 import { AuthenticationService } from './authentication.service';
 import { Review, ResourceMetrics, ResourceMetric } from 'models';
@@ -159,7 +159,8 @@ export class AppsService
             )
     }
 
-    public uploadFileToS3( file:any, next:( filename:string ) => void, error:( err ) => void )
+    // necessary to use node-style callback because we're using RxJS's Observable.bindNodeCallback()
+    public uploadFileToS3( file:any, apiKey:string, callback:( err:any, filename:string ) => void )
     {
         let xhr = new XMLHttpRequest();
 
@@ -168,7 +169,7 @@ export class AppsService
         var url = `${appSettings.apiRoot}resources/signed_url?fileName=${filename}&fileType=${file.file.type}`;
 
         xhr.open( "GET", url );
-        xhr.setRequestHeader( 'x-access-token', this.authenticationService.apiKey );
+        xhr.setRequestHeader( 'x-access-token', apiKey );
         xhr.onreadystatechange = () =>
         {
             if( xhr.readyState === 4 ) {
@@ -180,19 +181,28 @@ export class AppsService
                     s3xhr.onload = () =>
                     {
                         if( s3xhr.status === 200 ) {
-                            next( filename );
+                            callback( null, filename );
                         } else {
-                            error( "Could not upload file" );
+                            callback( "Could not upload file", null );
                         }
                     };
-                    s3xhr.onerror = ( err ) => error( err );
+                    s3xhr.onerror = ( err ) => callback( err, null );
                     s3xhr.send( file._file );
                 } else {
-                    error( "Could not get signed URL" );
+                    callback( "Could not get signed URL", null );
                 }
             }
         };
         xhr.send();
+    }
+
+    public submitResource( newResource: Resource ) {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', this.authenticationService.apiKey );
+
+        return this.http.post( `${appSettings.apiRoot}resources/create`, JSON.stringify( newResource ), { headers } )
+            .map( res => <Resource>res.json() );
     }
 
     private handleError( error:Response )
