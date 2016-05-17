@@ -202,7 +202,7 @@ export class AppsService
         headers.append( 'x-access-token', this.authenticationService.apiKey );
 
         return this.http.post( `${appSettings.apiRoot}resources/create`, JSON.stringify( newResource ), { headers } )
-            .map( res => <Resource>res.json() );
+            .map( res => <StoreApp>res.json() );
     }
 
     private handleError( error:Response )

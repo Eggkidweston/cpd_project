@@ -32,6 +32,7 @@ interface ITagsOperation extends Function
 export class SubmitResourceComponent
 {
     @ViewChild( 'fileUploadButton' ) fileUploadButton;
+    @ViewChild( 'iconUploadButton' ) iconUploadButton;
 
     private newResourceTags:Subject<Tag> = new Subject<Tag>();
     private resourceTags:Observable<Tag[]>;
@@ -45,11 +46,24 @@ export class SubmitResourceComponent
     private descriptionText:AbstractControl;
     private trialUrl:AbstractControl;
     private videoUrl:AbstractControl;
+    private iconFile:AbstractControl;
 
     protected uploader:FileUploader;
+    protected iconUploader:FileUploader;
 
     protected shaking:boolean = false;
     protected submitted:boolean = false;
+
+    public hasBaseDropZoneOver:boolean = false;
+    public hasAnotherDropZoneOver:boolean = false;
+
+    public fileOverBase(e:any):void {
+        this.hasBaseDropZoneOver = e;
+    }
+
+    public fileOverAnother(e:any):void {
+        this.hasAnotherDropZoneOver = e;
+    }
 
     constructor( protected appsService:AppsService,
                  protected authenticationService:AuthenticationService,
@@ -57,6 +71,7 @@ export class SubmitResourceComponent
                  fb:FormBuilder )
     {
         this.uploader = new FileUploader( {} );
+        this.iconUploader = new FileUploader( {} );
 
         this.resourceTags = this.tagUpdates
             .scan( ( tags:Tag[], operation:ITagsOperation ) => operation( tags ), initialTags )
@@ -82,6 +97,7 @@ export class SubmitResourceComponent
         this.submitResourceForm = fb.group( {
             "basicDetailsText": ["", Validators.required],
             "overviewText": ["", Validators.required],
+            "iconFile": ["", Validators.required],
             "descriptionText": ["", Validators.required],
             "trialUrl": ["", Validators.required],
             "videoUrl": ["", Validators.required]
@@ -92,6 +108,7 @@ export class SubmitResourceComponent
         this.descriptionText = this.submitResourceForm.controls['descriptionText'];
         this.trialUrl = this.submitResourceForm.controls['trialUrl'];
         this.videoUrl = this.submitResourceForm.controls['videoUrl'];
+        this.iconFile = this.submitResourceForm.controls['iconFile'];
     }
 
     protected addTagToResource( tag:Tag ):void
@@ -107,6 +124,11 @@ export class SubmitResourceComponent
     protected uploadFileButtonClicked()
     {
         this.fileUploadButton.nativeElement.click();
+    }
+
+    protected uploadIconButtonClicked()
+    {
+        this.iconUploadButton.nativeElement.click();
     }
 
     protected onSubmit( formValues:any )
@@ -129,23 +151,24 @@ export class SubmitResourceComponent
                 this.resourceTags.subscribe(
                     tags =>
                     {
-                        let newResource = new Resource();
-                        newResource.type_id = 1;
-                        newResource.licensetype_id = 1;
-                        newResource.title = formValues.basicDetailsText ;
-                        newResource.description = formValues.descriptionText;
-                        newResource.url = formValues.trialUrl;
-                        newResource.image = formValues.image;
-                        newResource.active = true;
-                        newResource.isfree = true;
-                        newResource.overview = formValues.overview;
-                        newResource.recommended = true;
-                        newResource.relatedIds = new Array<number>();
-                        newResource.tags = tags;
-                        newResource.mediaUrls = urls;
+                        let createdResource = {
+                            type_id: 1,
+                            licensetype_id: 1,
+                            title: formValues.basicDetailsText,
+                            description: formValues.descriptionText,
+                            url: formValues.trialUrl,
+                            image: formValues.image,
+                            active: true,
+                            isfree: true,
+                            overview: formValues.overview,
+                            recommended: false,
+                            relatedIds: new Array<number>(),
+                            tags: _.map(tags, (tag) => tag.name),
+                            mediaUrls: urls
+                        } as Resource;
 
-                        this.appsService.submitResource( newResource ).subscribe(
-                            resource => this.router.navigate( ['AppDetails', { id: newResource.id }] ),
+                        this.appsService.submitResource( createdResource ).subscribe(
+                            newResource => this.router.navigate( ['AppDetails', { id: newResource.id }] ),
                             err => console.log( `Error submitting resource: ${err}` ) );
                     }
                 )

@@ -162,7 +162,7 @@ export class AppDetailsComponent implements AfterViewInit {
     }
 
     get licenseType(): string {
-        // for some reaosn, this does not work as a method on StoreApp. Grrr. TypeScript quirk.
+        // for some reason, this does not work as a method on StoreApp. Grrr. TypeScript quirk.
         if (this.app) return LicenseType[this.app.licensetype_id];
         else return "";
     }
