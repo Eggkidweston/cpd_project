@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64bc0554-1a20-47a7-a017-b3bd65fab68a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/npm-debug.log" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts" afterPath="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/models.ts" afterPath="$PROJECT_DIR$/app/ts/models.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/services/apps.service.ts" afterPath="$PROJECT_DIR$/app/ts/services/apps.service.ts" />
     </list>
     <ignored path="store-front.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -95,8 +92,8 @@
           <file leaf-file-name="submit-resource.component.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="804">
-                  <caret line="198" column="23" selection-start-line="198" selection-start-column="23" selection-end-line="198" selection-end-column="23" />
+                <state relative-caret-position="204">
+                  <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#53#0" expanded="true" />
                     <element signature="n#!!block;n#fileOverBase#0;n#SubmitResourceComponent#0" expanded="true" />
@@ -109,10 +106,11 @@
                     <element signature="n#!!block;n#uploadIconButtonClicked#0;n#SubmitResourceComponent#0" expanded="true" />
                     <element signature="n#!!block;n#onSubmit#0;n#SubmitResourceComponent#0" expanded="true" />
                     <element signature="n#!!block;n#submitResource#0;n#SubmitResourceComponent#0" expanded="true" />
-                    <element signature="e#4888#5979#0" expanded="true" />
-                    <element signature="e#5680#5868#0" expanded="true" />
+                    <element signature="e#4824#5915#0" expanded="true" />
+                    <element signature="e#5616#5804#0" expanded="true" />
+                    <element signature="n#!!block;n#getS3IconUrl#0;n#SubmitResourceComponent#0" expanded="true" />
                     <element signature="n#!!block;n#shakeForm#0;n#SubmitResourceComponent#0" expanded="true" />
-                    <element signature="e#7616#7661#0" expanded="true" />
+                    <element signature="e#7552#7597#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -739,12 +737,12 @@
       <workItem from="1463473163958" duration="7524000" />
       <workItem from="1463493524451" duration="5004000" />
       <workItem from="1463501581357" duration="824000" />
-      <workItem from="1463577625248" duration="238000" />
+      <workItem from="1463577625248" duration="416000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112483000" />
+    <option name="totallyTimeSpent" value="112661000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -1206,8 +1204,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
-          <caret line="198" column="23" selection-start-line="198" selection-start-column="23" selection-end-line="198" selection-end-column="23" />
+        <state relative-caret-position="204">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding>
             <element signature="e#0#53#0" expanded="true" />
             <element signature="n#!!block;n#fileOverBase#0;n#SubmitResourceComponent#0" expanded="true" />
@@ -1220,10 +1218,11 @@
             <element signature="n#!!block;n#uploadIconButtonClicked#0;n#SubmitResourceComponent#0" expanded="true" />
             <element signature="n#!!block;n#onSubmit#0;n#SubmitResourceComponent#0" expanded="true" />
             <element signature="n#!!block;n#submitResource#0;n#SubmitResourceComponent#0" expanded="true" />
-            <element signature="e#4888#5979#0" expanded="true" />
-            <element signature="e#5680#5868#0" expanded="true" />
+            <element signature="e#4824#5915#0" expanded="true" />
+            <element signature="e#5616#5804#0" expanded="true" />
+            <element signature="n#!!block;n#getS3IconUrl#0;n#SubmitResourceComponent#0" expanded="true" />
             <element signature="n#!!block;n#shakeForm#0;n#SubmitResourceComponent#0" expanded="true" />
-            <element signature="e#7616#7661#0" expanded="true" />
+            <element signature="e#7552#7597#0" expanded="true" />
           </folding>
         </state>
       </provider>

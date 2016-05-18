@@ -10,8 +10,6 @@ import { FileDrop } from '../../../thirdparty/file-upload/file-drop';
 import { FileSelect } from '../../../thirdparty/file-upload/file-select';
 import { AppsService } from '../../../services/services';
 import { AuthenticationService } from '../../../services/authentication.service';
-import 'rxjs/add/operator/scan';
-import 'rxjs/Observable/from';
 
 let _ = require( 'underscore' );
 
