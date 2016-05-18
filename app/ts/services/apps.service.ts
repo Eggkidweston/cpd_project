@@ -160,12 +160,13 @@ export class AppsService
     }
 
     // necessary to use node-style callback because we're using RxJS's Observable.bindNodeCallback()
-    public uploadFileToS3( file:any, apiKey:string, callback:( err:any, filename:string ) => void )
+    public uploadFileToS3( file:any, apiKey:string, next:( err:any, filename:string ) => void )
     {
         let xhr = new XMLHttpRequest();
 
         var now = new Date().getTime();
         var filename = now + "-" + file.file.name;
+        console.log( `Attempting to upload file ${filename}` );
         var url = `${appSettings.apiRoot}resources/signed_url?fileName=${filename}&fileType=${file.file.type}`;
 
         xhr.open( "GET", url );
@@ -181,22 +182,24 @@ export class AppsService
                     s3xhr.onload = () =>
                     {
                         if( s3xhr.status === 200 ) {
-                            callback( null, filename );
+                            console.log( `File upload: ${filename}` );
+                            next( null, filename );
                         } else {
-                            callback( "Could not upload file", null );
+                            next( "Could not upload file", null );
                         }
                     };
-                    s3xhr.onerror = ( err ) => callback( err, null );
+                    s3xhr.onerror = ( err ) => next( err, null );
                     s3xhr.send( file._file );
                 } else {
-                    callback( "Could not get signed URL", null );
+                    next( "Could not get signed URL", null );
                 }
             }
         };
         xhr.send();
     }
 
-    public submitResource( newResource: Resource ) {
+    public submitResource( newResource:Resource )
+    {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
         headers.append( 'x-access-token', this.authenticationService.apiKey );

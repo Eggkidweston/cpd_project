@@ -10,6 +10,7 @@ export class User
     active:any;
 }
 
+// TODO Refactor: this is synonymous with Resource
 export class StoreApp
 {
     id:string;
@@ -148,6 +149,7 @@ export interface SignedUrl {
     url: string;
 }
 
+// TODO Refactor: this is synonymous with StoreApp
 export interface Resource {
     type_id: number;
     licensetype_id: number;

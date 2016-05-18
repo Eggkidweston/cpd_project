@@ -11,7 +11,6 @@ import { FileSelect } from '../../../thirdparty/file-upload/file-select';
 import { AppsService } from '../../../services/services';
 import { AuthenticationService } from '../../../services/authentication.service';
 import 'rxjs/add/operator/scan';
-import 'rxjs/Observable/bindNodeCallback';
 import 'rxjs/Observable/from';
 
 let _ = require( 'underscore' );
@@ -46,7 +45,6 @@ export class SubmitResourceComponent
     private descriptionText:AbstractControl;
     private trialUrl:AbstractControl;
     private videoUrl:AbstractControl;
-    private iconFile:AbstractControl;
 
     protected uploader:FileUploader;
     protected iconUploader:FileUploader;
@@ -57,11 +55,13 @@ export class SubmitResourceComponent
     public hasBaseDropZoneOver:boolean = false;
     public hasAnotherDropZoneOver:boolean = false;
 
-    public fileOverBase(e:any):void {
+    public fileOverBase( e:any ):void
+    {
         this.hasBaseDropZoneOver = e;
     }
 
-    public fileOverAnother(e:any):void {
+    public fileOverAnother( e:any ):void
+    {
         this.hasAnotherDropZoneOver = e;
     }
 
@@ -97,7 +97,6 @@ export class SubmitResourceComponent
         this.submitResourceForm = fb.group( {
             "basicDetailsText": ["", Validators.required],
             "overviewText": ["", Validators.required],
-            "iconFile": ["", Validators.required],
             "descriptionText": ["", Validators.required],
             "trialUrl": ["", Validators.required],
             "videoUrl": ["", Validators.required]
@@ -108,7 +107,6 @@ export class SubmitResourceComponent
         this.descriptionText = this.submitResourceForm.controls['descriptionText'];
         this.trialUrl = this.submitResourceForm.controls['trialUrl'];
         this.videoUrl = this.submitResourceForm.controls['videoUrl'];
-        this.iconFile = this.submitResourceForm.controls['iconFile'];
     }
 
     protected addTagToResource( tag:Tag ):void
@@ -144,39 +142,39 @@ export class SubmitResourceComponent
 
     protected submitResource( formValues:any )
     {
-        console.log( `Form values: ${ JSON.stringify( formValues )}` );
-
-        this.getS3ImageUrls( urls =>
+        // TODO Refactor to get out of callback hell
+        this.getS3MediaUrls( mediaUrls => this.getS3IconUrl( iconUrl => this.resourceTags.subscribe( tags =>
             {
-                this.resourceTags.subscribe(
-                    tags =>
-                    {
-                        let createdResource = {
-                            type_id: 1,
-                            licensetype_id: 1,
-                            title: formValues.basicDetailsText,
-                            description: formValues.descriptionText,
-                            url: formValues.trialUrl,
-                            image: formValues.image,
-                            active: true,
-                            isfree: true,
-                            overview: formValues.overview,
-                            recommended: false,
-                            relatedIds: new Array<number>(),
-                            tags: _.map(tags, (tag) => tag.name),
-                            mediaUrls: urls
-                        } as Resource;
+                let createdResource = {
+                    type_id: 1,
+                    licensetype_id: 1,
+                    title: formValues.basicDetailsText,
+                    description: formValues.descriptionText,
+                    url: formValues.trialUrl,
+                    image: iconUrl,
+                    active: true,
+                    isfree: true,
+                    overview: formValues.overview,
+                    recommended: false,
+                    relatedIds: new Array<number>(),
+                    tags: _.map( tags, ( tag ) => tag.name ),
+                    mediaUrls: mediaUrls
+                } as Resource;
 
-                        this.appsService.submitResource( createdResource ).subscribe(
-                            newResource => this.router.navigate( ['AppDetails', { id: newResource.id }] ),
-                            err => console.log( `Error submitting resource: ${err}` ) );
-                    }
+                this.appsService.submitResource( createdResource ).subscribe(
+                    newResource =>
+                    {
+                        console.log( `New resource ID: ${newResource.id}` );
+                        this.router.navigate( ['AppDetails', { id: newResource.id }] );
+                    },
+                    err => console.log( `Error submitting resource: ${err}` )
                 )
             }
-        )
+        ) ) );
     }
 
-    protected getS3ImageUrls( next:( urls:Array<string> ) => void )
+    // TODO Refactor these two methods into one
+    protected getS3MediaUrls( next:( urls:Array<string> ) => void )
     {
         let urls = new Array<string>();
 
@@ -192,6 +190,26 @@ export class SubmitResourceComponent
                     url => urls.push( url ),
                     e => console.log( `Could not upload file: ${e}` ),
                     () => next( urls )
+                );
+        }
+    }
+
+    protected getS3IconUrl( next:( url:string ) => void )
+    {
+        let url:string;
+
+        if( this.iconUploader.queue.length === 0 ) next( url );
+        else {
+            //noinspection TypeScriptUnresolvedFunction
+            let uploadFile = Observable.bindNodeCallback( this.appsService.uploadFileToS3 );
+
+            //noinspection TypeScriptUnresolvedFunction
+            Observable.from( this.iconUploader.queue )
+                .flatMap( e => uploadFile( e, this.authenticationService.apiKey ) )
+                .subscribe(
+                    u => url = u,
+                    e => console.log( `Could not upload file: ${e}` ),
+                    () => next( url )
                 );
         }
     }

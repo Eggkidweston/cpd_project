@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64bc0554-1a20-47a7-a017-b3bd65fab68a" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/npm-debug.log" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.html" afterPath="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts" afterPath="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.scss" afterPath="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/appdetails/appdetails.component.ts" afterPath="$PROJECT_DIR$/app/ts/components/appdetails/appdetails.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/models.ts" afterPath="$PROJECT_DIR$/app/ts/models.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/services/apps.service.ts" afterPath="$PROJECT_DIR$/app/ts/services/apps.service.ts" />
     </list>
     <ignored path="store-front.iws" />
@@ -36,28 +35,27 @@
           <file leaf-file-name="apps.service.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/ts/services/apps.service.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1037">
-                  <caret line="213" column="48" selection-start-line="213" selection-start-column="48" selection-end-line="213" selection-end-column="48" />
+                <state relative-caret-position="1076">
+                  <caret line="207" column="25" selection-start-line="207" selection-start-column="25" selection-end-line="207" selection-end-column="25" />
                   <folding>
                     <element signature="n#!!block;n#constructor#0;n#AppsService#0" expanded="true" />
                     <element signature="n#!!block;n#getByTag#0;n#AppsService#0" expanded="true" />
                     <element signature="n#!!block;n#submitReview#0;n#AppsService#0" expanded="true" />
                     <element signature="n#!!block;n#uploadFileToS3#0;n#AppsService#0" expanded="true" />
-                    <element signature="e#6081#7006#0" expanded="true" />
-                    <element signature="e#6494#6756#0" expanded="true" />
-                    <element signature="n#!!block;n#submitResource#0;n#AppsService#0" expanded="true" />
+                    <element signature="e#6141#7121#0" expanded="true" />
+                    <element signature="e#6554#6879#0" expanded="true" />
                     <element signature="n#!!block;n#handleError#0;n#AppsService#0" expanded="true" />
-                    <marker date="1463492169000" expanded="true" signature="7583:7637" placeholder="..." />
+                    <marker date="1463577778000" expanded="true" signature="7701:7755" placeholder="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="models.ts" pinned="false" current-in-tab="false">
+          <file leaf-file-name="models.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/ts/models.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-505">
-                  <caret line="60" column="13" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
+                <state relative-caret-position="578">
+                  <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
                   <folding>
                     <element signature="n#!!block;n#constructor#0;n#TagCloud#0" expanded="true" />
                     <element signature="n#!!block;n#constructor#0;n#ShadowApp#0" expanded="true" />
@@ -67,10 +65,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="submit-resource.scss" pinned="false" current-in-tab="true">
+          <file leaf-file-name="submit-resource.scss" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="765">
+                <state relative-caret-position="1462">
                   <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
                   <folding>
                     <element signature="e#1039#1078#0" expanded="false" />
@@ -80,15 +78,25 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="submit-resource.component.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="748">
+                  <caret line="44" column="81" selection-start-line="44" selection-start-column="81" selection-end-line="44" selection-end-column="81" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
         </leaf>
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="submit-resource.component.ts" pinned="false" current-in-tab="false">
+          <file leaf-file-name="submit-resource.component.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="663">
-                  <caret line="59" column="23" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="23" />
+                <state relative-caret-position="804">
+                  <caret line="198" column="23" selection-start-line="198" selection-start-column="23" selection-end-line="198" selection-end-column="23" />
                   <folding>
                     <element signature="e#0#53#0" expanded="true" />
                     <element signature="n#!!block;n#fileOverBase#0;n#SubmitResourceComponent#0" expanded="true" />
@@ -101,21 +109,20 @@
                     <element signature="n#!!block;n#uploadIconButtonClicked#0;n#SubmitResourceComponent#0" expanded="true" />
                     <element signature="n#!!block;n#onSubmit#0;n#SubmitResourceComponent#0" expanded="true" />
                     <element signature="n#!!block;n#submitResource#0;n#SubmitResourceComponent#0" expanded="true" />
-                    <element signature="e#5026#6235#0" expanded="true" />
-                    <element signature="e#5121#6203#0" expanded="true" />
-                    <element signature="n#!!block;n#getS3ImageUrls#0;n#SubmitResourceComponent#0" expanded="true" />
+                    <element signature="e#4888#5979#0" expanded="true" />
+                    <element signature="e#5680#5868#0" expanded="true" />
                     <element signature="n#!!block;n#shakeForm#0;n#SubmitResourceComponent#0" expanded="true" />
-                    <element signature="e#7099#7144#0" expanded="true" />
+                    <element signature="e#7616#7661#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="submit-resource.component.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.html">
+          <file leaf-file-name="version-control.service.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/services/version-control.service.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="680">
-                  <caret line="40" column="78" selection-start-line="40" selection-start-column="78" selection-end-line="40" selection-end-column="78" />
+                <state relative-caret-position="102">
+                  <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -176,13 +183,13 @@
         <option value="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision-history.component.ts" />
         <option value="$PROJECT_DIR$/app/ts/services/services.ts" />
         <option value="$PROJECT_DIR$/app/ts/services/version-control.service.ts" />
-        <option value="$PROJECT_DIR$/app/ts/models.ts" />
         <option value="$PROJECT_DIR$/app/ts/app.component.ts" />
         <option value="$PROJECT_DIR$/app/ts/components/appdetails/appdetails.component.ts" />
-        <option value="$PROJECT_DIR$/app/ts/services/apps.service.ts" />
-        <option value="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts" />
         <option value="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.html" />
         <option value="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.scss" />
+        <option value="$PROJECT_DIR$/app/ts/services/apps.service.ts" />
+        <option value="$PROJECT_DIR$/app/ts/models.ts" />
+        <option value="$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts" />
       </list>
     </option>
   </component>
@@ -730,12 +737,14 @@
       <workItem from="1463416780607" duration="7805000" />
       <workItem from="1463471823329" duration="595000" />
       <workItem from="1463473163958" duration="7524000" />
-      <workItem from="1463493524451" duration="3277000" />
+      <workItem from="1463493524451" duration="5004000" />
+      <workItem from="1463501581357" duration="824000" />
+      <workItem from="1463577625248" duration="238000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109694000" />
+    <option name="totallyTimeSpent" value="112483000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -746,18 +755,18 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2562814" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25412777" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39985642" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25412777" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1046,13 +1055,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/services/version-control.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/ts/thirdparty/file-upload/file-uploader.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1909">
@@ -1091,7 +1093,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1106,9 +1107,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
-          <folding>
-            <element signature="e#1721#2007#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1116,7 +1114,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="114" column="44" selection-start-line="114" selection-start-column="44" selection-end-line="114" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1126,36 +1123,6 @@
           <caret line="37" column="47" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="47" />
           <folding>
             <element signature="n#!!block;n#save#0;n#AppEditComponent#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/services/apps.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="213" column="48" selection-start-line="213" selection-start-column="48" selection-end-line="213" selection-end-column="48" />
-          <folding>
-            <element signature="n#!!block;n#constructor#0;n#AppsService#0" expanded="true" />
-            <element signature="n#!!block;n#getByTag#0;n#AppsService#0" expanded="true" />
-            <element signature="n#!!block;n#submitReview#0;n#AppsService#0" expanded="true" />
-            <element signature="n#!!block;n#uploadFileToS3#0;n#AppsService#0" expanded="true" />
-            <element signature="e#6081#7006#0" expanded="true" />
-            <element signature="e#6494#6756#0" expanded="true" />
-            <element signature="n#!!block;n#submitResource#0;n#AppsService#0" expanded="true" />
-            <element signature="n#!!block;n#handleError#0;n#AppsService#0" expanded="true" />
-            <marker date="1463492169000" expanded="true" signature="7583:7637" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/models.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-505">
-          <caret line="60" column="13" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
-          <folding>
-            <element signature="n#!!block;n#constructor#0;n#TagCloud#0" expanded="true" />
-            <element signature="n#!!block;n#constructor#0;n#ShadowApp#0" expanded="true" />
-            <element signature="n#!!block;n#constructor#0;n#Review#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1181,10 +1148,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1462">
+          <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+          <folding>
+            <element signature="e#1039#1078#0" expanded="false" />
+            <element signature="e#1092#1162#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="81" selection-start-line="44" selection-start-column="81" selection-end-line="44" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/services/version-control.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/services/apps.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1076">
+          <caret line="207" column="25" selection-start-line="207" selection-start-column="25" selection-end-line="207" selection-end-column="25" />
+          <folding>
+            <element signature="n#!!block;n#constructor#0;n#AppsService#0" expanded="true" />
+            <element signature="n#!!block;n#getByTag#0;n#AppsService#0" expanded="true" />
+            <element signature="n#!!block;n#submitReview#0;n#AppsService#0" expanded="true" />
+            <element signature="n#!!block;n#uploadFileToS3#0;n#AppsService#0" expanded="true" />
+            <element signature="e#6141#7121#0" expanded="true" />
+            <element signature="e#6554#6879#0" expanded="true" />
+            <element signature="n#!!block;n#handleError#0;n#AppsService#0" expanded="true" />
+            <marker date="1463577778000" expanded="true" signature="7701:7755" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/models.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+          <folding>
+            <element signature="n#!!block;n#constructor#0;n#TagCloud#0" expanded="true" />
+            <element signature="n#!!block;n#constructor#0;n#ShadowApp#0" expanded="true" />
+            <element signature="n#!!block;n#constructor#0;n#Review#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="59" column="23" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="23" />
+        <state relative-caret-position="804">
+          <caret line="198" column="23" selection-start-line="198" selection-start-column="23" selection-end-line="198" selection-end-column="23" />
           <folding>
             <element signature="e#0#53#0" expanded="true" />
             <element signature="n#!!block;n#fileOverBase#0;n#SubmitResourceComponent#0" expanded="true" />
@@ -1197,30 +1220,10 @@
             <element signature="n#!!block;n#uploadIconButtonClicked#0;n#SubmitResourceComponent#0" expanded="true" />
             <element signature="n#!!block;n#onSubmit#0;n#SubmitResourceComponent#0" expanded="true" />
             <element signature="n#!!block;n#submitResource#0;n#SubmitResourceComponent#0" expanded="true" />
-            <element signature="e#5026#6235#0" expanded="true" />
-            <element signature="e#5121#6203#0" expanded="true" />
-            <element signature="n#!!block;n#getS3ImageUrls#0;n#SubmitResourceComponent#0" expanded="true" />
+            <element signature="e#4888#5979#0" expanded="true" />
+            <element signature="e#5680#5868#0" expanded="true" />
             <element signature="n#!!block;n#shakeForm#0;n#SubmitResourceComponent#0" expanded="true" />
-            <element signature="e#7099#7144#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="40" column="78" selection-start-line="40" selection-start-column="78" selection-end-line="40" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
-          <folding>
-            <element signature="e#1039#1078#0" expanded="false" />
-            <element signature="e#1092#1162#0" expanded="false" />
+            <element signature="e#7616#7661#0" expanded="true" />
           </folding>
         </state>
       </provider>
