@@ -1,0 +1,11 @@
+<div class="revision-container span-12">
+    <div [ngClass]="{'historical': revision.status==0, 'active': revision.status==1, 'awaiting-approval': revision.status==2}">
+        <img class="contributor-image" src="{{revision.contributorImageUrl}}"/>
+        <div class="revision-comment">{{ revision.comment }}</div>
+        <div class="right-content">
+            <span class="view-and-approve"><a href="#">view and approve</a></span>
+            <span>{{ revisionStatusText }}</span>
+            <span>{{ revision.date | ago }}</span>
+        </div>
+    </div>
+</div>

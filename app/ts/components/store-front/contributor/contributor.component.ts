@@ -4,7 +4,7 @@ import {ContributorService} from 'services/services';
 import {AppComponent} from 'app.component';
 import {AppWidgetComponent} from 'appwidget/appwidget.component';
 import {Contributor} from 'models';
-import {AgoPipe} from 'ago.pipe.ts';
+import {AgoPipe} from '../../shared/ago.pipe.ts';
 import {Router} from '@angular/router-deprecated';
 import {AuthenticationService, SigninRegisterService} from "../../../services/services";
 
