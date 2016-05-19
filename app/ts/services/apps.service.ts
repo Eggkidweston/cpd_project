@@ -142,31 +142,31 @@ export class AppsService
     public getResourceCuration( resourceId:number )
     {
         let c = JSON.parse(`
+{
+    "revisions": [
         {
-            "revisions": [
-                {
-                    "contributorId": "1",
-                    "contributorImageUrl": "http://a5.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTE5NTU2MzE2NjUyOTk2MTA3.jpg",
-                    "comment": "Fixed issue #12: Broken links in wiring section",
-                    "status": "2",
-                    "date": "2016-02-10T07:24:31.613Z"
-                },
-                {
-                    "contributorId": "2",
-                    "contributorImageUrl": "http://a1.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTE4MDAzNDEwNzQzMTY2NDc4.jpg",
-                    "comment": "Added accessibility information",
-                    "status": "1",
-                    "date": "2016-05-10T07:24:31.613Z"
-                },
-                {
-                    "contributorId": "3",
-                    "contributorImageUrl": "http://www.cbc.ca/strombo/content/images/Richard-Dawkins-220x220.jpg",
-                    "comment": "Initial submission",
-                    "status": "0",
-                    "date": "2016-01-10T07:24:31.613Z"
-                }
-            ]
-        }                
+            "contributorId": "1",
+            "contributorImageUrl": "http://a5.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTE5NTU2MzE2NjUyOTk2MTA3.jpg",
+            "comment": "Fixed issue #12: Broken links in wiring section",
+            "status": "2",
+            "date": "2016-02-10T07:24:31.613Z"
+        },
+        {
+            "contributorId": "2",
+            "contributorImageUrl": "http://a1.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTE4MDAzNDEwNzQzMTY2NDc4.jpg",
+            "comment": "Added accessibility information",
+            "status": "1",
+            "date": "2016-05-10T07:24:31.613Z"
+        },
+        {
+            "contributorId": "3",
+            "contributorImageUrl": "http://www.cbc.ca/strombo/content/images/Richard-Dawkins-220x220.jpg",
+            "comment": "Initial submission",
+            "status": "0",
+            "date": "2016-01-10T07:24:31.613Z"
+        }
+    ]
+}                
         `);
 
         return Observable.of(c) 

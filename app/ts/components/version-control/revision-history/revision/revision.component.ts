@@ -15,13 +15,12 @@ export class RevisionComponent {
     @Input() revision;
 
     protected get revisionStatusText():string {
-        switch (this.revision.status) {
-            case RevisionStatus.Historical:
-                return "";
-            case RevisionStatus.Active:
-                return "active";
-            case RevisionStatus.AwaitingApproval:
-                return "awaiting approval";
+        if( this.revision.status == RevisionStatus.Active)
+            return "active";
+        if( this.revision.status == RevisionStatus.AwaitingApproval)
+            return "awaiting approval";
+        if( this.revision.status == RevisionStatus.Historical)
+            return "";
         }
     }
 }

@@ -25,6 +25,8 @@
     <hr/>
     <div class="row">
         <h3>Revision history</h3>
-        <revision *ngFor="let revision of curation" [revision]="revision"></revision>
+        <div class="revisions">
+            <revision *ngFor="let revision of curation" [revision]="revision"></revision>
+        </div>
     </div>
 </div>
