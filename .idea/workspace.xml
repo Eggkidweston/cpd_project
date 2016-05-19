@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64bc0554-1a20-47a7-a017-b3bd65fab68a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision-history.component.html" afterPath="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision-history.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision-history.component.scss" afterPath="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision-history.component.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.html" afterPath="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.scss" afterPath="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.ts" afterPath="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/services/apps.service.ts" afterPath="$PROJECT_DIR$/app/ts/services/apps.service.ts" />
     </list>
     <ignored path="store-front.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,11 +62,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="revision.component.ts" pinned="false" current-in-tab="false">
+          <file leaf-file-name="revision.component.ts" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="357">
-                  <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+                <state relative-caret-position="391">
+                  <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#49#0" expanded="true" />
                   </folding>
@@ -94,7 +88,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="revision.component.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="revision.component.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="119">
@@ -176,8 +170,8 @@
         <option value="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision-history.component.html" />
         <option value="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision-history.component.scss" />
         <option value="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.scss" />
-        <option value="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.ts" />
         <option value="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.html" />
+        <option value="$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.ts" />
       </list>
     </option>
   </component>
@@ -733,12 +727,12 @@
       <workItem from="1463493524451" duration="5004000" />
       <workItem from="1463501581357" duration="824000" />
       <workItem from="1463577625248" duration="541000" />
-      <workItem from="1463649007748" duration="13646000" />
+      <workItem from="1463649007748" duration="13837000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126432000" />
+    <option name="totallyTimeSpent" value="126623000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1215,16 +1209,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/ts/components/administration/submit-resource/submit-resource.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="906">
@@ -1238,6 +1222,16 @@
         <state relative-caret-position="119">
           <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/components/version-control/revision-history/revision/revision.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

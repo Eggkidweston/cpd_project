@@ -19,8 +19,7 @@ export class RevisionComponent {
             return "active";
         if( this.revision.status == RevisionStatus.AwaitingApproval)
             return "awaiting approval";
-        if( this.revision.status == RevisionStatus.Historical)
-            return "";
-        }
+
+        return "";
     }
 }
