@@ -2,7 +2,7 @@ import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { StoreApp, TagCloud, SignedUrl, Resource } from '../models';
-import { appSettings } from './services';
+import { appSettings, appInfo } from './services';
 import { AuthenticationService } from './authentication.service';
 import { Review, ResourceMetrics, ResourceMetric } from 'models';
 
@@ -211,7 +211,7 @@ export class AppsService
                     {
                         if( s3xhr.status === 200 ) {
                             console.log( `File upload: ${filename}` );
-                            next( null, filename );
+                            next( null, `${appSettings.s3Root}${filename}` );
                         } else {
                             next( "Could not upload file", null );
                         }
@@ -231,6 +231,8 @@ export class AppsService
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
         headers.append( 'x-access-token', this.authenticationService.apiKey );
+
+        console.log(`Resource JSON: ${ JSON.stringify(newResource)}`);
 
         return this.http.post( `${appSettings.apiRoot}resources/create`, JSON.stringify( newResource ), { headers } )
             .map( res => <StoreApp>res.json() );

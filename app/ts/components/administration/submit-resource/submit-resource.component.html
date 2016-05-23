@@ -38,7 +38,8 @@
             <div class="formfield-container span-6 pull-left">
                 <div class="icon-drop-area" ng2-file-drop [uploader]="iconUploader">
                     <div *ngIf="iconUploader.queue.length===0" class="drop-area-empty">
-                        <span>drag and drop an icon here or&nbsp;<a (click)="uploadIconButtonClicked()">click to upload</a></span>
+                        <span>drag and drop an icon here or&nbsp;<a
+                                (click)="uploadIconButtonClicked()">click to upload</a></span>
                         <input type="file" ng2-file-select [uploader]="iconUploader" class="file-upload-btn"
                                #iconUploadButton/>
                     </div>
@@ -52,6 +53,17 @@
             </div>
             <div class="annotation-container span-5 pull-left">
                 an icon for your resource
+            </div>
+        </div>
+        <div class="row">
+            <div class="formfield-container span-6 pull-left drop-down-fix">
+                <select>
+                    <option value="-1">Please select a resource type</option>
+                    <option *ngFor="let resourceType of resourceTypes; let i = index" value="{{i}}">{{resourceType}}</option>
+                </select>
+            </div>
+            <div class="annotation-container span-5 pull-left">
+                the media type of your resource
             </div>
         </div>
         <div class="row">

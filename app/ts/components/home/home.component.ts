@@ -17,7 +17,6 @@ export class HomeComponent {
 
     constructor(private _appsService:AppsService) {
         this.getSomeApps();
-        //this.recentSelected();
     }
 
     getSomeApps() {

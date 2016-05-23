@@ -42,6 +42,10 @@ $input-height: 2em;
       background-color: $form-background-color;
     }
 
+    select {
+      margin-top: 12px;
+    }
+
     .formfield-container {
       padding: 4px 18px 0 18px;
       background-color: $form-background-color;
@@ -50,7 +54,7 @@ $input-height: 2em;
         @extend %input-style;
       }
 
-      input {
+      input, select {
         @extend %input-style;
         height: $input-height;
       }

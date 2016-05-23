@@ -10,6 +10,7 @@ import { FileDrop } from '../../../thirdparty/file-upload/file-drop';
 import { FileSelect } from '../../../thirdparty/file-upload/file-select';
 import { AppsService } from '../../../services/services';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { ResourceTypes } from '../../../models';
 
 let _ = require( 'underscore' );
 
@@ -49,6 +50,8 @@ export class SubmitResourceComponent
 
     protected shaking:boolean = false;
     protected submitted:boolean = false;
+    
+    protected resourceTypes = ResourceTypes;
 
     public hasBaseDropZoneOver:boolean = false;
     public hasAnotherDropZoneOver:boolean = false;

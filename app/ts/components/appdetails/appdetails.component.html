@@ -5,7 +5,7 @@
         </div>
         <div class="button-container">
             <button class="btn" role="button" (click)="getApp()">Get it</button>
-            <button *ngIf="shadowApp?.runURL" class="btn" role="button" (click)="goTry()">Try It</button>
+            <button *ngIf="app?.runURL" class="btn" role="button" (click)="goTry()">Try It</button>
         </div>
     </div>
     <div class="col span-6">
@@ -41,18 +41,18 @@
 
 <div class="row">
     <div class="col span-6 media-container">
-        <media-carousel [resource]="shadowApp"></media-carousel>
+        <media-carousel [resource]="app"></media-carousel>
     </div>
 
     <div class="col span-3 push-1">
-        <h4>Cost</h4> {{ shadowApp?.costs }}
+        <h4>Cost</h4> {{ app?.costs }}
         <h4>License</h4>
-        <button type="button" class="btn btn-primary btn-xs" (click)="goLicense()">{{ shadowApp?.license }}</button>
+        <button type="button" class="btn btn-primary btn-xs" (click)="goLicense()">{{ app?.license }}</button>
         <h4>Curated?</h4>
-        <p> {{ shadowApp?.curated }}</p>
+        <p> {{ app?.curated }}</p>
         <button type="button" class="btn btn-primary btn-xs" (click)="goCuration()">Go to Curation</button>
         <h4>Remixable</h4>
-        <p> {{ shadowApp?.remixable }}</p>
+        <p> {{ app?.remixable }}</p>
         <button type="button" class="btn btn-primary btn-xs" (click)="goDownloadSource()">Download Source</button>
     </div>
 </div>

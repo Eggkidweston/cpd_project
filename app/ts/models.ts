@@ -126,7 +126,7 @@ export class Contributor
 
 }
 
-export interface Activity         
+export interface Activity
 {
     type:string;
     comment:string;
@@ -144,24 +144,28 @@ export interface ResourceMetric
     total:number;
 }
 
-export interface SignedUrl {
-    signed_request: string;
-    url: string;
+export interface SignedUrl
+{
+    signed_request:string;
+    url:string;
 }
 
 // TODO Refactor: this is synonymous with StoreApp
-export interface Resource {
-    type_id: number;
-    licensetype_id: number;
-    title: string;
-    description: string;
-    url: string;
-    image: string;
-    active: boolean;
-    isfree: boolean;
-    overview: string;
-    recommended: boolean;
-    relatedIds: Array<number>;
-    tags: Array<string>;
-    mediaUrls: Array<string>;
+export interface Resource
+{
+    type_id:number;
+    licensetype_id:number;
+    title:string;
+    description:string;
+    url:string;
+    image:string;
+    active:boolean;
+    isfree:boolean;
+    overview:string;
+    recommended:boolean;
+    relatedIds:Array<number>;
+    tags:Array<string>;
+    mediaUrls:Array<string>;
 }
+
+export var ResourceTypes = ["Image", "Video", "Audio", "Archive", "Word", "PDF"];
