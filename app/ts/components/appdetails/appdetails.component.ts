@@ -8,7 +8,7 @@ import { StoreApp } from '../../models';
 import { ShadowApp } from '../../models';
 import { AppComponent } from '../../app.component';
 import { Review } from '../../models';
-import { LicenseType } from '../../models';
+import { LicenseTypes } from '../../models';
 import { AppWidgetComponent } from '../appwidget/appwidget.component';
 import { MediaCarouselComponent } from '../store-front/media-carousel/media-carousel.component';
 
@@ -166,7 +166,7 @@ export class AppDetailsComponent implements AfterViewInit
     get licenseType():string
     {
         // for some reason, this does not work as a method on StoreApp. Grrr. TypeScript quirk.
-        if( this.app ) return LicenseType[this.app.licensetype_id];
+        if( this.app ) return LicenseTypes[this.app.licensetype_id];
         else return "";
     }
 

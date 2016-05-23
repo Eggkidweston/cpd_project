@@ -68,6 +68,18 @@
             </div>
         </div>
         <div class="row">
+            <div class="formfield-container span-6 pull-left drop-down-fix">
+                <select required="true" [ngFormControl]="licenseType"
+                        [class.input-error]="submitted&&!licenseType.valid">
+                    <option value="-1">Please select a license type</option>
+                    <option *ngFor="let licenseType of licenseTypes; let i = index" value="{{i}}">{{licenseType}}</option>
+                </select>
+            </div>
+            <div class="annotation-container span-5 pull-left">
+                the license type of your resource
+            </div>
+        </div>
+        <div class="row">
             <div class="header-container span-6">
                 <h3>Preview</h3>
             </div>

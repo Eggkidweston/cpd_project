@@ -21,7 +21,7 @@ export class StoreApp
     downloadCount:number;
     isFree:boolean;
     lastUpdatedDate:string;
-    licensetype_id:LicenseType;
+    licensetype_id:number;
     likes:number;
     media:Array<Medium>;
     metrics:CollatedMetrics;
@@ -86,10 +86,6 @@ export class ShadowMedium
     url:string;
     type_id:string;
     previewUrl:string;
-}
-
-export enum LicenseType {
-    GPL, Paid
 }
 
 export class Review
@@ -169,3 +165,5 @@ export interface Resource
 }
 
 export var ResourceTypes = ["Image", "Video", "Audio", "Archive", "Word", "PDF"];
+export var LicenseTypes = ["GPL", "Paid"];
+

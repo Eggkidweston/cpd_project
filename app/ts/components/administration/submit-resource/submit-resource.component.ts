@@ -10,7 +10,7 @@ import { FileDrop } from '../../../thirdparty/file-upload/file-drop';
 import { FileSelect } from '../../../thirdparty/file-upload/file-select';
 import { AppsService } from '../../../services/services';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { ResourceTypes } from '../../../models';
+import { ResourceTypes, LicenseTypes } from '../../../models';
 
 let _ = require( 'underscore' );
 
@@ -45,6 +45,7 @@ export class SubmitResourceComponent
     private resourceType:AbstractControl;
     private trialUrl:AbstractControl;
     private videoUrl:AbstractControl;
+    private licenseType:AbstractControl;
 
     protected uploader:FileUploader;
     protected iconUploader:FileUploader;
@@ -53,6 +54,7 @@ export class SubmitResourceComponent
     protected submitted:boolean = false;
 
     protected resourceTypes = ResourceTypes;
+    protected licenseTypes = LicenseTypes;
 
     public hasBaseDropZoneOver:boolean = false;
     public hasAnotherDropZoneOver:boolean = false;
@@ -96,18 +98,20 @@ export class SubmitResourceComponent
 
     protected buildForm( fb:FormBuilder )
     {
+        let selectValidator = ( selectControl ) =>
+        {
+            if( selectControl.value != -1 ) return null;
+            return { "invalidResourceType": true };
+        };
+
         this.submitResourceForm = fb.group( {
             "basicDetailsText": ["", Validators.required],
             "overviewText": ["", Validators.required],
             "descriptionText": ["", Validators.required],
             "trialUrl": ["", Validators.required],
             "videoUrl": ["", Validators.required],
-            "resourceType": ["", Validators.compose( [( resourceType ) =>
-            {
-                if( resourceType.value != -1 ) return null;
-                return { "invalidResourceType": true };
-            }
-            ] )]
+            "resourceType": ["", Validators.compose( [selectValidator] )],
+            "licenseType": ["", Validators.compose( [selectValidator] )]
         } )
 
         this.basicDetailsText = this.submitResourceForm.controls['basicDetailsText'];
@@ -116,8 +120,10 @@ export class SubmitResourceComponent
         this.trialUrl = this.submitResourceForm.controls['trialUrl'];
         this.videoUrl = this.submitResourceForm.controls['videoUrl'];
         this.resourceType = this.submitResourceForm.controls['resourceType'];
+        this.licenseType = this.submitResourceForm.controls['licenseType'];
 
         (<Control>this.resourceType).updateValue("-1");
+        (<Control>this.licenseType).updateValue("-1");
     }
 
     protected addTagToResource( tag:Tag ):void
@@ -158,7 +164,7 @@ export class SubmitResourceComponent
             {
                 let createdResource = {
                     type_id: formValues.resourceType,
-                    licensetype_id: 1,
+                    licensetype_id: formValues.licenseType,
                     title: formValues.basicDetailsText,
                     description: formValues.descriptionText,
                     url: formValues.trialUrl,
