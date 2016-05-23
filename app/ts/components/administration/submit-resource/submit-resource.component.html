@@ -57,7 +57,8 @@
         </div>
         <div class="row">
             <div class="formfield-container span-6 pull-left drop-down-fix">
-                <select>
+                <select required="true" [ngFormControl]="resourceType"
+                            [class.input-error]="submitted&&!resourceType.valid">
                     <option value="-1">Please select a resource type</option>
                     <option *ngFor="let resourceType of resourceTypes; let i = index" value="{{i}}">{{resourceType}}</option>
                 </select>

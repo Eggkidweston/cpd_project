@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular/common';
+import { Control, ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular/common';
 import { Router } from '@angular/router-deprecated';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -42,6 +42,7 @@ export class SubmitResourceComponent
     private basicDetailsText:AbstractControl;
     private overviewText:AbstractControl;
     private descriptionText:AbstractControl;
+    private resourceType:AbstractControl;
     private trialUrl:AbstractControl;
     private videoUrl:AbstractControl;
 
@@ -50,7 +51,7 @@ export class SubmitResourceComponent
 
     protected shaking:boolean = false;
     protected submitted:boolean = false;
-    
+
     protected resourceTypes = ResourceTypes;
 
     public hasBaseDropZoneOver:boolean = false;
@@ -100,7 +101,13 @@ export class SubmitResourceComponent
             "overviewText": ["", Validators.required],
             "descriptionText": ["", Validators.required],
             "trialUrl": ["", Validators.required],
-            "videoUrl": ["", Validators.required]
+            "videoUrl": ["", Validators.required],
+            "resourceType": ["", Validators.compose( [( resourceType ) =>
+            {
+                if( resourceType.value != -1 ) return null;
+                return { "invalidResourceType": true };
+            }
+            ] )]
         } )
 
         this.basicDetailsText = this.submitResourceForm.controls['basicDetailsText'];
@@ -108,6 +115,9 @@ export class SubmitResourceComponent
         this.descriptionText = this.submitResourceForm.controls['descriptionText'];
         this.trialUrl = this.submitResourceForm.controls['trialUrl'];
         this.videoUrl = this.submitResourceForm.controls['videoUrl'];
+        this.resourceType = this.submitResourceForm.controls['resourceType'];
+
+        (<Control>this.resourceType).updateValue("-1");
     }
 
     protected addTagToResource( tag:Tag ):void
@@ -147,7 +157,7 @@ export class SubmitResourceComponent
         this.getS3MediaUrls( mediaUrls => this.getS3IconUrl( iconUrl => this.resourceTags.subscribe( tags =>
             {
                 let createdResource = {
-                    type_id: 1,
+                    type_id: formValues.resourceType,
                     licensetype_id: 1,
                     title: formValues.basicDetailsText,
                     description: formValues.descriptionText,
