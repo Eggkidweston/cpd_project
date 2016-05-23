@@ -5,7 +5,7 @@ import { SubmitReviewComponent } from '../submitreview/submitreview.component';
 import { AuthenticationService } from '../../services/services';
 import { AppsService } from '../../services/services';
 import { StoreApp } from '../../models';
-import { ShadowApp } from '../../models';
+// import { ShadowApp } from '../../models';
 import { AppComponent } from '../../app.component';
 import { Review } from '../../models';
 import { LicenseTypes } from '../../models';
@@ -25,8 +25,8 @@ require( "../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.j
 export class AppDetailsComponent implements AfterViewInit
 {
     public app:StoreApp;
-    public shadowApps:ShadowApp[] = [];
-    public shadowApp:ShadowApp;
+    // public shadowApps:ShadowApp[] = [];
+    // public shadowApp:ShadowApp;
     public resourceId:number;
     public alsoBy:Array<StoreApp>;
     public reviews:Array<Review> = new Array<Review>();
@@ -56,22 +56,21 @@ export class AppDetailsComponent implements AfterViewInit
                 storeApp =>
                 {
                     this.app = storeApp;
-                    console.log(`App JSON: ${JSON.stringify(this.app.media)}`);
                     this.loadAlsoBy();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
     }
 
-    goTry()
-    {
-
-        var url = this.shadowApp.runURL
-
-
-        // window.location.href=url;
-
-    }
+    // goTry()
+    // {
+    //
+    //     var url = this.shadowApp.runURL
+    //
+    //
+    //     // window.location.href=url;
+    //
+    // }
 
     goCuration()
     {
@@ -87,25 +86,25 @@ export class AppDetailsComponent implements AfterViewInit
 
     goLicenseType() { }
 
-    getShadow()
-    {
-
-        this.shadowApp = this.shadowApps[0];
-
-        for( var medium of this.shadowApp.media ) {
-            if( medium.type_id == '2' ) {
-                var index = medium.url.lastIndexOf( "/" );
-                var youTubeId = medium.url.substr( index + 1 );
-                medium.previewUrl = `http://img.youtube.com/vi/${ youTubeId }/0.jpg`;
-            } else {
-                medium.previewUrl = medium.url;
-            }
-        }
-
-        this.shadowApp.media[1] = this.shadowApp.media[0];
-        this.shadowApp.media[2] = this.shadowApp.media[0];
-        this.shadowApp.media[3] = this.shadowApp.media[0];
-    }
+    // getShadow()
+    // {
+    //
+    //     this.shadowApp = this.shadowApps[0];
+    //
+    //     for( var medium of this.shadowApp.media ) {
+    //         if( medium.type_id == '2' ) {
+    //             var index = medium.url.lastIndexOf( "/" );
+    //             var youTubeId = medium.url.substr( index + 1 );
+    //             medium.previewUrl = `http://img.youtube.com/vi/${ youTubeId }/0.jpg`;
+    //         } else {
+    //             medium.previewUrl = medium.url;
+    //         }
+    //     }
+    //
+    //     this.shadowApp.media[1] = this.shadowApp.media[0];
+    //     this.shadowApp.media[2] = this.shadowApp.media[0];
+    //     this.shadowApp.media[3] = this.shadowApp.media[0];
+    // }
 
     loadReviews()
     {
