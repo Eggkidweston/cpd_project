@@ -98,6 +98,10 @@ $input-height: 2em;
         }
       }
 
+      .resource-type-dropdown {
+        margin-top: 4px;
+      }
+
       .tag-area {
         @extend %input-style;
         min-height: $input-height;
