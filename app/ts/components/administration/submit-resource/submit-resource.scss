@@ -88,7 +88,7 @@ $input-height: 2em;
         }
       }
 
-      .icon-drop-area {
+      .icon-drop-area, .resource-drop-area {
         @extend .media-drop-area;
         height: 32px;
         margin-top: 8px;

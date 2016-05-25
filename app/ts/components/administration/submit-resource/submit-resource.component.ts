@@ -31,6 +31,7 @@ export class SubmitResourceComponent
 {
     @ViewChild( 'fileUploadButton' ) fileUploadButton;
     @ViewChild( 'iconUploadButton' ) iconUploadButton;
+    @ViewChild( 'resourceUploadButton' ) resourceUploadButton;
 
     private newResourceTags:Subject<Tag> = new Subject<Tag>();
     private resourceTags:Observable<Tag[]>;
@@ -49,6 +50,7 @@ export class SubmitResourceComponent
 
     protected uploader:FileUploader;
     protected iconUploader:FileUploader;
+    protected resourceUploader:FileUploader;
 
     protected shaking:boolean = false;
     protected submitted:boolean = false;
@@ -76,6 +78,7 @@ export class SubmitResourceComponent
     {
         this.uploader = new FileUploader( {} );
         this.iconUploader = new FileUploader( {} );
+        this.resourceUploader = new FileUploader( {} );
 
         this.resourceTags = this.tagUpdates
             .scan( ( tags:Tag[], operation:ITagsOperation ) => operation( tags ), initialTags )
@@ -141,9 +144,9 @@ export class SubmitResourceComponent
         this.fileUploadButton.nativeElement.click();
     }
 
-    protected uploadIconButtonClicked()
+    protected uploadResourceButtonClicked()
     {
-        this.iconUploadButton.nativeElement.click();
+        this.resourceUploadButton.nativeElement.click();
     }
 
     protected onSubmit( formValues:any )
@@ -179,11 +182,7 @@ export class SubmitResourceComponent
                 } as Resource;
 
                 this.appsService.submitResource( createdResource ).subscribe(
-                    newResource =>
-                    {
-                        console.log( `New resource ID: ${newResource.id}` );
-                        this.router.navigate( ['AppDetails', { id: newResource.id }] );
-                    },
+                    newResource => this.router.navigate( ['AppDetails', { id: newResource.id }] ),
                     err => console.log( `Error submitting resource: ${err}` )
                 )
             }

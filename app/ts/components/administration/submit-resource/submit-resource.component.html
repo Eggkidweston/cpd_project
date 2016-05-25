@@ -56,30 +56,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="formfield-container span-6 pull-left drop-down-fix">
-                <select required="true" [ngFormControl]="resourceType"
-                            [class.input-error]="submitted&&!resourceType.valid">
-                    <option value="-1">Please select a resource type</option>
-                    <option *ngFor="let resourceType of resourceTypes; let i = index" value="{{i}}">{{resourceType}}</option>
-                </select>
-            </div>
-            <div class="annotation-container span-5 pull-left">
-                the media type of your resource
-            </div>
-        </div>
-        <div class="row">
-            <div class="formfield-container span-6 pull-left drop-down-fix">
-                <select required="true" [ngFormControl]="licenseType"
-                        [class.input-error]="submitted&&!licenseType.valid">
-                    <option value="-1">Please select a license type</option>
-                    <option *ngFor="let licenseType of licenseTypes; let i = index" value="{{i}}">{{licenseType}}</option>
-                </select>
-            </div>
-            <div class="annotation-container span-5 pull-left">
-                the license type of your resource
-            </div>
-        </div>
-        <div class="row">
             <div class="header-container span-6">
                 <h3>Preview</h3>
             </div>
@@ -124,6 +100,56 @@
                     <li>640x480 jpeg</li>
                     <li>maximum size 300kb</li>
                 </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="header-container span-6">
+                <h3>Your resource</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="formfield-container span-6 pull-left drop-down-fix">
+                <select required="true" [ngFormControl]="resourceType"
+                        [class.input-error]="submitted&&!resourceType.valid">
+                    <option value="-1">Please select a resource type</option>
+                    <option *ngFor="let resourceType of resourceTypes; let i = index" value="{{i}}">{{resourceType}}</option>
+                </select>
+            </div>
+            <div class="annotation-container span-5 pull-left">
+                the media type of your resource
+            </div>
+        </div>
+        <div class="row">
+            <div class="formfield-container span-6 pull-left drop-down-fix">
+                <select required="true" [ngFormControl]="licenseType"
+                        [class.input-error]="submitted&&!licenseType.valid">
+                    <option value="-1">Please select a license type</option>
+                    <option *ngFor="let licenseType of licenseTypes; let i = index" value="{{i}}">{{licenseType}}</option>
+                </select>
+            </div>
+            <div class="annotation-container span-5 pull-left">
+                the license type of your resource
+            </div>
+        </div>
+        <div class="row">
+            <div class="formfield-container span-6 pull-left">
+                <div class="resource-drop-area" ng2-file-drop [uploader]="resourceUploader">
+                    <div *ngIf="resourceUploader.queue.length===0" class="drop-area-empty">
+                        <span>drag and drop your resource here or&nbsp;<a
+                                (click)="uploadResourceButtonClicked()">click to upload</a></span>
+                        <input type="file" ng2-file-select [uploader]="resourceUploader" class="file-upload-btn"
+                               #resourceUploadButton/>
+                    </div>
+                    <div *ngIf="resourceUploader.queue.length!==0" class="drop-area-with-files">
+                        <div *ngFor="let file of resourceUploader.queue" (click)="file.remove()"><span
+                                class="remove-btn glyphicon glyphicon-remove-sign" aria-hidden="true"></span> {{
+                            file.file.name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="annotation-container span-5 pull-left">
+                the actual resource file
             </div>
         </div>
         <div class="row">
