@@ -232,10 +232,8 @@ export class AppsService
         headers.append( 'Content-Type', 'application/json' );
         headers.append( 'x-access-token', this.authenticationService.apiKey );
 
-        console.log(`Resource JSON: ${ JSON.stringify(newResource)}`);
-
         return this.http.post( `${appSettings.apiRoot}resources/create`, JSON.stringify( newResource ), { headers } )
-            .map( res => <StoreApp>res.json() );
+            .map( res => <StoreApp>res.json().resource );
     }
 
     private handleError( error:Response )

@@ -2,17 +2,17 @@
     <div class="media-container">
         <div>
             <template ngFor let-medium [ngForOf]="resource?.media" let-i="index">
-                <img *ngIf="medium.type_id==1 || medium.type_id==2" src="{{medium.previewUrl}}" [ngClass]="{'medium-selected': i===selectedMedium, 'medium-unselected': i!==selectedMedium}"
-                    (click)="mediumSelected(i)" style="display: inline;" class="img-responsive medium-thumbnail" />
+                <img src="{{medium.url}}" [ngClass]="{' medium-selected': i===selectedMedium, 'medium-unselected': i!==selectedMedium}"
+                    (click)="mediumSelected(i)" style="display: inline; width: 20%;" class="img-responsive medium-thumbnail" />
             </template>
         </div>
 
         <div style="width:100%">
-            <div *ngIf="resource?.media && resource?.media[selectedMedium]?.type_id=='2'" class="yt-container">
-                <iframe *ngIf="resource?.media" id="ytplayer" type="text/html" class="yt-full-size" src="{{resource?.media[selectedMedium]?.url}}?autoplay=0&controls=1"
-                    frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div *ngIf="resource?.media && resource?.media[selectedMedium]?.type_id=='1'">
+            <!--<div *ngIf="resource?.media && resource?.media[selectedMedium]?.type_id=='2'" class="yt-container">-->
+                <!--<iframe *ngIf="resource?.media" id="ytplayer" type="text/html" class="yt-full-size" src="{{resource?.media[selectedMedium]?.url}}?autoplay=0&controls=1"-->
+                    <!--frameborder="0" allowfullscreen></iframe>-->
+            <!--</div>-->
+            <div>
                 <img *ngIf="resource?.media" src="{{ resource?.media[selectedMedium].url }}" class="img-responsive medium-full-size" />
             </div>
         </div>

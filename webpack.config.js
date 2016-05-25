@@ -30,7 +30,7 @@ if (isDevServer) {
     entry.unshift("webpack-dev-server/client?http://" + reloadHost + ":8080");
 }
 
-function makeConfig(options) {
+function makeConfig(options)    {
     return {
         cache: true,
         debug: true,

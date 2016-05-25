@@ -16,7 +16,7 @@ require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
 @Component({
     selector: 'app-details',
     template: require('./download.component.html'),
-    styles: [require('../../../sass/appdetails.scss').toString()],
+    styles: [require('../appdetails/appdetails.scss').toString()],
 
     directives: [ RouterOutlet, RouterLink, RatingComponent]
 })

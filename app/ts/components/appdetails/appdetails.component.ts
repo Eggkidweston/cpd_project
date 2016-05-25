@@ -18,7 +18,7 @@ require( "../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.j
 @Component( {
     selector: 'app-details',
     template: require( './appdetails.component.html' ),
-    styles: [require( '../../../sass/appdetails.scss' ).toString(),
+    styles: [require( './appdetails.scss' ).toString(),
         require( '../store-front/media-carousel/media-carousel.scss' ).toString()],
     directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
 } )
