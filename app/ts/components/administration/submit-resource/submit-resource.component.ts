@@ -32,6 +32,8 @@ export class SubmitResourceComponent
     @ViewChild( 'fileUploadButton' ) fileUploadButton;
     @ViewChild( 'iconUploadButton' ) iconUploadButton;
     @ViewChild( 'resourceUploadButton' ) resourceUploadButton;
+    @ViewChild( 'fileRadioButton' ) fileRadioButton;
+    @ViewChild( 'urlRadioButton' ) urlRadioButton;
 
     private newResourceTags:Subject<Tag> = new Subject<Tag>();
     private resourceTags:Observable<Tag[]>;
@@ -46,6 +48,7 @@ export class SubmitResourceComponent
     private resourceType:AbstractControl;
     private trialUrl:AbstractControl;
     private videoUrl:AbstractControl;
+    private resourceUrl:AbstractControl;
     private licenseType:AbstractControl;
 
     protected uploader:FileUploader;
@@ -113,6 +116,7 @@ export class SubmitResourceComponent
             "descriptionText": ["", Validators.required],
             "trialUrl": ["", Validators.required],
             "videoUrl": ["", Validators.required],
+            "resourceUrl": ["", Validators.required],
             "resourceType": ["", Validators.compose( [selectValidator] )],
             "licenseType": ["", Validators.compose( [selectValidator] )]
         } )
@@ -122,11 +126,28 @@ export class SubmitResourceComponent
         this.descriptionText = this.submitResourceForm.controls['descriptionText'];
         this.trialUrl = this.submitResourceForm.controls['trialUrl'];
         this.videoUrl = this.submitResourceForm.controls['videoUrl'];
+        this.resourceUrl = this.submitResourceForm.controls['resourceUrl'];
         this.resourceType = this.submitResourceForm.controls['resourceType'];
         this.licenseType = this.submitResourceForm.controls['licenseType'];
 
         (<Control>this.resourceType).updateValue("-1");
         (<Control>this.licenseType).updateValue("-1");
+    }
+
+    protected get resourceIsFile(): boolean {
+        return this.fileRadioButton.nativeElement.checked;
+    }
+
+    protected set resourceIsFile(value:boolean)    {
+        this.fileRadioButton.nativeElement.checked = value;
+    }
+
+    protected get resourceIsUrl(): boolean {
+        return this.urlRadioButton.nativeElement.checked;
+    }
+
+    protected set resourceIsUrl(value:boolean)    {
+        this.urlRadioButton.nativeElement.checked = value;
     }
 
     protected addTagToResource( tag:Tag ):void

@@ -36,6 +36,19 @@ $input-height: 2em;
     align-items: center;
   }
 
+  .input-margin-adjust {
+    margin-bottom: -16px;
+    margin-top: -6px;
+  }
+
+  .resource-url {
+    margin-top: 10px;
+  }
+
+  input[type='radio'] {
+    margin-right: 6px;
+  }
+
   .form-container {
     .header-container, .resource-nature {
       padding: 4px 18px 1px 18px;
@@ -43,13 +56,17 @@ $input-height: 2em;
     }
 
     .resource-nature {
-      padding: 4px 18px 1px 18px;
+      padding: 24px 18px 1px 18px;
       background-color: $form-background-color;
     }
 
     select {
       margin-top: 12px;
       padding-left: 4px;
+    }
+
+    label {
+      font-weight: normal;
     }
 
     .formfield-container {

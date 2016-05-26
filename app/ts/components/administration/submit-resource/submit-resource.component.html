@@ -134,8 +134,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="span-6 resource-nature">
-                <label> <input type="radio" name="resource"><em>either</em>, upload a resource file</label>
+            <div class="span-6 resource-nature input-margin-adjust">
+                <label> <input type="radio" name="resource" #fileRadioButton><em><strong>either</strong></em>, upload a resource file</label>
             </div>
             <div class="formfield-container span-6 pull-left">
                 <div class="resource-drop-area" ng2-file-drop [uploader]="resourceUploader">
@@ -158,8 +158,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="resource-nature span-6">
-                <label> <input type="radio" name="resource"><em>or</em>, provide the location of your resource</label>
+            <div class="resource-nature span-6 input-margin-adjust">
+                <label> <input type="radio" name="resource" #urlRadioButton><em><strong>or</strong></em>, provide the location of your resource</label>
+            </div>
+            <div class="formfield-container span-6 pull-left">
+                <input class="resource-url" type="text" placeholder="resource URL" [ngFormControl]="resourceUrl" required="true"
+                       [class.input-error]="submitted&&!resourceUrl.valid">
+            </div>
+            <div class="annotation-container span-5 pull-left">
+                the URL of your resource
             </div>
         </div>
         <div class="row">
