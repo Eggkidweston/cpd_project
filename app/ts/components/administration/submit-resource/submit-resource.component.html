@@ -1,3 +1,5 @@
+Nature = {{ resourceNature }}
+
 <div class="submit-resource-container">
     <h2>Submit a new resource</h2>
     <form [class.shake]="shaking" [class.animated]="shaking" class="form-container" [ngFormModel]="submitResourceForm"
@@ -135,20 +137,32 @@
         </div>
         <div class="row">
             <div class="span-6 resource-nature input-margin-adjust">
-                <label> <input type="radio" name="resource" #fileRadioButton><em><strong>either</strong></em>, upload a resource file</label>
+                <label> <input [(ngModel)]="resourceNature" type="radio" name="resource"
+                               value="file"><em><strong>either</strong></em>, upload a resource file</label>
             </div>
             <div class="formfield-container span-6 pull-left">
                 <div class="resource-drop-area" ng2-file-drop [uploader]="resourceUploader">
-                    <div *ngIf="resourceUploader.queue.length===0" class="drop-area-empty">
-                        <span>drag and drop your resource here or&nbsp;<a
+                    <div [class.light-text]=" resourceNature=='url'" *ngIf="resourceUploader.queue.length===0"
+                         class="drop-area-empty">
+                        <span *ngIf="resourceNature!='url'">drag and drop your resource here or&nbsp;<a
                                 (click)="uploadResourceButtonClicked()">click to upload</a></span>
+                        <span *ngIf="resourceNature=='url'" class="light-text">drag and drop your resource here or&nbsp;click to upload</span>
                         <input type="file" ng2-file-select [uploader]="resourceUploader" class="file-upload-btn"
                                #resourceUploadButton/>
                     </div>
                     <div *ngIf="resourceUploader.queue.length!==0" class="drop-area-with-files">
-                        <div *ngFor="let file of resourceUploader.queue" (click)="file.remove()"><span
-                                class="remove-btn glyphicon glyphicon-remove-sign" aria-hidden="true"></span> {{
-                            file.file.name }}
+                        <div *ngIf="resourceNature=='file'">
+                            <div *ngFor="let file of resourceUploader.queue"
+                                 (click)="file.remove()">
+                                <span class="remove-btn glyphicon glyphicon-remove-sign" aria-hidden="true"></span> {{
+                                file.file.name }}
+                            </div>
+                        </div>
+                        <div *ngIf="resourceNature!='file'">
+                            <div *ngFor="let file of resourceUploader.queue" class="light-text">
+                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> {{
+                                file.file.name }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -159,11 +173,14 @@
         </div>
         <div class="row">
             <div class="resource-nature span-6 input-margin-adjust">
-                <label> <input type="radio" name="resource" #urlRadioButton><em><strong>or</strong></em>, provide the location of your resource</label>
+                <label> <input [(ngModel)]="resourceNature" type="radio" name="resource"
+                               value="url"><em><strong>or</strong></em>, provide the location of your resource</label>
             </div>
             <div class="formfield-container span-6 pull-left">
-                <input class="resource-url" type="text" placeholder="resource URL" [ngFormControl]="resourceUrl" required="true"
-                       [class.input-error]="submitted&&!resourceUrl.valid">
+                <input (ngModelChange)="resourceNature='url'" (focus)="resourceNature='url'" class="resource-url"
+                       type="text" placeholder="resource URL" [ngFormControl]="resourceUrl" required="true"
+                       [class.light-text]="resourceNature=='file'" [class.input-error]="submitted&&!resourceUrl.valid"
+                       checked="false">
             </div>
             <div class="annotation-container span-5 pull-left">
                 the URL of your resource

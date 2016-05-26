@@ -25,6 +25,7 @@ export class FileUploader {
   private _failFilterIndex:number;
   public app: StoreApp;
   private method: string = "POST";
+  private onFileAdded: () => void;
 
   constructor(public options:any) {
     // Object.assign(this, options);
@@ -33,6 +34,7 @@ export class FileUploader {
     this.filters.unshift({name: 'queueLimit', fn: this._queueLimitFilter});
     this.filters.unshift({name: 'folder', fn: this._folderFilter});
     this.app = options.app;
+    this.onFileAdded = options.onFileAdded;
   }
 
   public addToQueue(files:any[], options:any, filters:any) {
@@ -172,6 +174,7 @@ export class FileUploader {
   }
 
   public onAfterAddingAll(fileItems:any) {
+      if( this.onFileAdded ) this.onFileAdded();
   }
 
   public onAfterAddingFile(fileItem:any) {

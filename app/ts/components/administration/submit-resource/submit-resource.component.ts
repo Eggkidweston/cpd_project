@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Control, ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular/common';
 import { Router } from '@angular/router-deprecated';
 import { Subject } from 'rxjs/Subject';
@@ -11,6 +11,7 @@ import { FileSelect } from '../../../thirdparty/file-upload/file-select';
 import { AppsService } from '../../../services/services';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ResourceTypes, LicenseTypes } from '../../../models';
+import { RadioControlValueAccessor } from './radio-value-accessor';
 
 let _ = require( 'underscore' );
 
@@ -25,15 +26,13 @@ interface ITagsOperation extends Function
     selector: 'submit-resource',
     template: require( './submit-resource.component.html' ),
     styles: [require( './submit-resource.scss' ).toString()],
-    directives: [TagCloudComponent, FileDrop, FileSelect]
+    directives: [TagCloudComponent, FileDrop, FileSelect, RadioControlValueAccessor]
 } )
 export class SubmitResourceComponent
 {
     @ViewChild( 'fileUploadButton' ) fileUploadButton;
     @ViewChild( 'iconUploadButton' ) iconUploadButton;
     @ViewChild( 'resourceUploadButton' ) resourceUploadButton;
-    @ViewChild( 'fileRadioButton' ) fileRadioButton;
-    @ViewChild( 'urlRadioButton' ) urlRadioButton;
 
     private newResourceTags:Subject<Tag> = new Subject<Tag>();
     private resourceTags:Observable<Tag[]>;
@@ -51,6 +50,8 @@ export class SubmitResourceComponent
     private resourceUrl:AbstractControl;
     private licenseType:AbstractControl;
 
+    public resourceNature:string = "file";
+
     protected uploader:FileUploader;
     protected iconUploader:FileUploader;
     protected resourceUploader:FileUploader;
@@ -63,6 +64,7 @@ export class SubmitResourceComponent
 
     public hasBaseDropZoneOver:boolean = false;
     public hasAnotherDropZoneOver:boolean = false;
+
 
     public fileOverBase( e:any ):void
     {
@@ -79,9 +81,12 @@ export class SubmitResourceComponent
                  protected router:Router,
                  fb:FormBuilder )
     {
+        var that = this;
+
         this.uploader = new FileUploader( {} );
         this.iconUploader = new FileUploader( {} );
-        this.resourceUploader = new FileUploader( {} );
+        // bloody closures in TypeScript are a nightmare
+        this.resourceUploader = new FileUploader( { onFileAdded: () => { that.resourceNature = "file"; } } );
 
         this.resourceTags = this.tagUpdates
             .scan( ( tags:Tag[], operation:ITagsOperation ) => operation( tags ), initialTags )
@@ -130,24 +135,8 @@ export class SubmitResourceComponent
         this.resourceType = this.submitResourceForm.controls['resourceType'];
         this.licenseType = this.submitResourceForm.controls['licenseType'];
 
-        (<Control>this.resourceType).updateValue("-1");
-        (<Control>this.licenseType).updateValue("-1");
-    }
-
-    protected get resourceIsFile(): boolean {
-        return this.fileRadioButton.nativeElement.checked;
-    }
-
-    protected set resourceIsFile(value:boolean)    {
-        this.fileRadioButton.nativeElement.checked = value;
-    }
-
-    protected get resourceIsUrl(): boolean {
-        return this.urlRadioButton.nativeElement.checked;
-    }
-
-    protected set resourceIsUrl(value:boolean)    {
-        this.urlRadioButton.nativeElement.checked = value;
+        (<Control>this.resourceType).updateValue( "-1" );
+        (<Control>this.licenseType).updateValue( "-1" );
     }
 
     protected addTagToResource( tag:Tag ):void

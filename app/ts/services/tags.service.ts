@@ -21,7 +21,7 @@ export class TagsService {
     }
 
     private loadAllTags() {
-        this._allTags = this.http.get(`${appSettings.apiRoot}tags`)
+        this._allTags = this.http.get(`${appSettings.apiRoot}tags?limit=100`)
             .map(res => <Observable<Tag[]>>res.json().data)
             .catch(this.handleError);
         }

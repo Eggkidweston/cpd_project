@@ -13,7 +13,7 @@
                     <!--frameborder="0" allowfullscreen></iframe>-->
             <!--</div>-->
             <div>
-                <img *ngIf="resource?.media" src="{{ resource?.media[selectedMedium].url }}" class="img-responsive medium-full-size" />
+                <img *ngIf="resource?.media" src="{{ resource?.media[selectedMedium]?x  .url }}" class="img-responsive medium-full-size" />
             </div>
         </div>
     </div>
