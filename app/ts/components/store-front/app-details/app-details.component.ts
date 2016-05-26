@@ -1,25 +1,23 @@
 import { Component, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { RatingComponent } from '../rating/rating.component';
+import { RatingComponent } from '../../shared/rating/rating.component';
 import { RouterOutlet, RouterLink, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-import { SubmitReviewComponent } from '../submitreview/submitreview.component';
-import { AuthenticationService } from '../../services/services';
-import { AppsService } from '../../services/services';
-import { StoreApp } from '../../models';
-// import { ShadowApp } from '../../models';
-import { AppComponent } from '../../app.component';
-import { Review } from '../../models';
-import { LicenseTypes } from '../../models';
-import { AppWidgetComponent } from '../appwidget/appwidget.component';
-import { MediaCarouselComponent } from '../store-front/media-carousel/media-carousel.component';
+import { SubmitReviewComponent } from './submit-review/submit-review.component';
+import { AuthenticationService } from '../../../services/services';
+import { AppsService } from '../../../services/services';
+import { StoreApp, Review } from '../../../models';
+import { AppComponent } from '../../../app.component';
+import { LicenseTypes } from '../../../models';
+import { AppWidgetComponent } from '../../appwidget/appwidget.component';
+import { MediaCarouselComponent } from './media-carousel/media-carousel.component';
 
 
-require( "../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js" );
+require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js" );
 
 @Component( {
     selector: 'app-details',
-    template: require( './appdetails.component.html' ),
-    styles: [require( './appdetails.scss' ).toString(),
-        require( '../store-front/media-carousel/media-carousel.scss' ).toString()],
+    template: require( './app-details.component.html' ),
+    styles: [require( './app-details.scss' ).toString(),
+        require( './media-carousel/media-carousel.scss' ).toString()],
     directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
 } )
 export class AppDetailsComponent implements AfterViewInit
@@ -42,6 +40,7 @@ export class AppDetailsComponent implements AfterViewInit
     {
         this.resourceId = +params.get( 'id' );
     }
+
 
     ngAfterViewInit()
     {

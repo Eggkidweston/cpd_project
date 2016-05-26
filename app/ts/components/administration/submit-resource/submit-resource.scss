@@ -37,7 +37,12 @@ $input-height: 2em;
   }
 
   .form-container {
-    .header-container {
+    .header-container, .resource-nature {
+      padding: 4px 18px 1px 18px;
+      background-color: $form-background-color;
+    }
+
+    .resource-nature {
       padding: 4px 18px 1px 18px;
       background-color: $form-background-color;
     }

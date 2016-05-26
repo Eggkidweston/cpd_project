@@ -5,7 +5,7 @@ import { NgClass } from '@angular/common';
 @Component({
     selector: 'rating',
     template: require('./rating.component.html'),
-    styles: [require('../../../sass/rating.scss').toString()],
+    styles: [require('./rating.scss').toString()],
     directives: [RouterOutlet, RouterLink, NgClass]
 })
 export class RatingComponent {

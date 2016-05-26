@@ -1,12 +1,12 @@
 import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular/common';
-import { RatingComponent } from '../rating/rating.component';
-import { AppsService } from '../../services/services';
-import { Review } from '../../models';
+import { RatingComponent } from '../../../shared/rating/rating.component';
+import { AppsService } from '../../../../services/services';
+import { Review } from '../../../../models';
 
 @Component({
     selector: 'submit-review',
-    template: require('./submitreview.component.html'),
+    template: require('./submit-review.component.html'),
     directives: [RatingComponent]
 })
 export class SubmitReviewComponent {

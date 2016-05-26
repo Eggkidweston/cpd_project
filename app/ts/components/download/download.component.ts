@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { RatingComponent } from '../rating/rating.component';
+import { RatingComponent } from '../shared/rating/rating.component';
 import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AuthenticationService } from '../../services/services';
 import { AppsService } from '../../services/services';
@@ -16,7 +16,7 @@ require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
 @Component({
     selector: 'app-details',
     template: require('./download.component.html'),
-    styles: [require('../appdetails/appdetails.scss').toString()],
+    styles: [require('../appdetails/app-details.scss').toString()],
 
     directives: [ RouterOutlet, RouterLink, RatingComponent]
 })

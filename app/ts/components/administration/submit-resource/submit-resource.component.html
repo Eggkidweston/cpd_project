@@ -112,7 +112,8 @@
                 <select required="true" [ngFormControl]="resourceType"
                         [class.input-error]="submitted&&!resourceType.valid" class="resource-type-dropdown">
                     <option value="-1">Please select a resource type</option>
-                    <option *ngFor="let resourceType of resourceTypes; let i = index" value="{{i}}">{{resourceType}}</option>
+                    <option *ngFor="let resourceType of resourceTypes; let i = index" value="{{i}}">{{resourceType}}
+                    </option>
                 </select>
             </div>
             <div class="annotation-container span-5 pull-left">
@@ -124,7 +125,8 @@
                 <select required="true" [ngFormControl]="licenseType"
                         [class.input-error]="submitted&&!licenseType.valid">
                     <option value="-1">Please select a license type</option>
-                    <option *ngFor="let licenseType of licenseTypes; let i = index" value="{{i}}">{{licenseType}}</option>
+                    <option *ngFor="let licenseType of licenseTypes; let i = index" value="{{i}}">{{licenseType}}
+                    </option>
                 </select>
             </div>
             <div class="annotation-container span-5 pull-left">
@@ -132,6 +134,9 @@
             </div>
         </div>
         <div class="row">
+            <div class="span-6 resource-nature">
+                <label> <input type="radio" name="resource"><em>either</em>, upload a resource file</label>
+            </div>
             <div class="formfield-container span-6 pull-left">
                 <div class="resource-drop-area" ng2-file-drop [uploader]="resourceUploader">
                     <div *ngIf="resourceUploader.queue.length===0" class="drop-area-empty">
@@ -150,6 +155,11 @@
             </div>
             <div class="annotation-container span-5 pull-left">
                 the actual resource file
+            </div>
+        </div>
+        <div class="row">
+            <div class="resource-nature span-6">
+                <label> <input type="radio" name="resource"><em>or</em>, provide the location of your resource</label>
             </div>
         </div>
         <div class="row">

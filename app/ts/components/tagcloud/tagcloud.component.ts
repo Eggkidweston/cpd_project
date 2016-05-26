@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { RatingComponent } from '../rating/rating.component';
+import { RatingComponent } from '../shared/rating/rating.component';
 
 import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 

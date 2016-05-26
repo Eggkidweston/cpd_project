@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { NgFor } from '@angular/common';
-import { StoreApp } from '../../../models';
+import { StoreApp } from '../../../../models';
 
-require("../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js");
+require("../../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js");
 
 @Component({
     selector: 'media-carousel',

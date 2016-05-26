@@ -11,7 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { WhoComponent } from './components/whocanregister/who.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
-import { AppDetailsComponent } from './components/appdetails/appdetails.component';
+import { AppDetailsComponent } from 'components/store-front/app-details/app-details.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
 import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
