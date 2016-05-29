@@ -1,6 +1,10 @@
 .carousel-container {
+    
+
+
     .media-container 
     {
+        padding-left:16px;
         display: -webkit-flex;
         display: flex;
         width: 100%;
@@ -30,13 +34,15 @@
             cursor: -moz-pointer;
             cursor: -webkit-pointer;   
             width: calc(25% - 18px);
-            margin: 12px 0px 12px 12px;
+            margin: 16px 3px 16px 0px;
         }
+
     }
+
     
     .medium-full-size {
         width: calc(100% - 16px);
-        padding: 0 0 16px 16px;
+        padding: 0 0 16px 0px;
     }
     
     .yt-full-size {

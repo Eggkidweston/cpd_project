@@ -79,7 +79,11 @@
     .resource-image {
         width:128px; 
         height:128px;
+        img {
+        height:100%;
+        }
     }
+
     .created-by {
          padding-left: 8px;
     }
