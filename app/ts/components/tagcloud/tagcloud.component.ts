@@ -27,8 +27,9 @@ export class TagCloudComponent implements AfterViewInit {
     private storeApps: Array<StoreApp>;
     public errorMessage:string;
 
-
     public tagcloud: TagCloud;
+    public chosenTag: string;
+
 
     constructor(public authenticationService: AuthenticationService,
                 public router: Router,
@@ -43,6 +44,7 @@ export class TagCloudComponent implements AfterViewInit {
     }
 
     getTaggedApps(tag){
+        this.chosenTag = tag.name;
         this.appsService.getByTag(tag)
             .subscribe(
                 storeApps => {this.storeApps = storeApps;
