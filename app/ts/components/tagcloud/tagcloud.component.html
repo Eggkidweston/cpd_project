@@ -1,6 +1,6 @@
 
 <div *ngIf = "tagcloud" class="tagcloud">
-	<button class="btn" [class.selected]="chosenTag===tag.name" *ngFor="let tag of tagcloud" (click)="getTaggedApps(tag)">{{tag.name}}</button>
+	<button class="btn" [class.selected]="chosenTag===tag.name" *ngFor="let tag of tagcloud" (click)="getTaggedApps(tag.name)">{{tag.name}}</button>
 </div>
 <div class="row">
     <div class="col span-12">

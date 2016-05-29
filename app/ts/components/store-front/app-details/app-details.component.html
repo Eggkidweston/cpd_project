@@ -36,7 +36,7 @@
 </div>
 
 <div class="row tagcloud" *ngIf="app?.tags?.length > 0">
-    <button class="btn " *ngFor="let tag of app.tags"> {{tag.name}}</button>
+    <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['TagCloud', { tag: tag.name }]">{{tag.name}}</button>
 </div>
 
 <div class="row">

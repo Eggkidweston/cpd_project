@@ -37,6 +37,7 @@ export class TagCloudComponent implements AfterViewInit {
                 public cdr: ChangeDetectorRef,
                 params: RouteParams) {
         this.resourceId = +params.get('id');
+        this.chosenTag = params.get('tag');
     }
 
     ngAfterViewInit() {
@@ -44,7 +45,7 @@ export class TagCloudComponent implements AfterViewInit {
     }
 
     getTaggedApps(tag){
-        this.chosenTag = tag.name;
+        this.chosenTag = tag;
         this.appsService.getByTag(tag)
             .subscribe(
                 storeApps => {this.storeApps = storeApps;
@@ -71,8 +72,11 @@ export class TagCloudComponent implements AfterViewInit {
             .subscribe(
                 tagcloud => {
                     this.tagcloud = tagcloud;
-                    this.getSomeApps()
-
+                    if(this.chosenTag) {
+                        this.getTaggedApps(this.chosenTag);
+                    }else{
+                        this.getSomeApps();
+                    }
                 },
                 (error: any) => AppComponent.generalError(error.status)
             );
@@ -80,6 +84,5 @@ export class TagCloudComponent implements AfterViewInit {
         error =>  this.errorMessage = <any>error;
 
     }
-
 
 }

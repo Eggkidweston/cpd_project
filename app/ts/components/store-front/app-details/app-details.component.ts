@@ -168,5 +168,4 @@ export class AppDetailsComponent implements AfterViewInit
         else return "";
     }
 
-
 }

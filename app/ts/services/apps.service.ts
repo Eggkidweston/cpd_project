@@ -45,7 +45,7 @@ export class AppsService
 
         console.log( this.authenticationService.apiKey );
 
-        return this.http.get( `${appSettings.apiRoot}tags/${tag.name}?limit=100`, { headers } )
+        return this.http.get( `${appSettings.apiRoot}tags/${tag}?limit=100`, { headers } )
             .map( res => <StoreApp[]>res.json().resources )
             .catch( this.handleError );
 
