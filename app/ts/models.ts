@@ -149,11 +149,14 @@ export interface SignedUrl
 // TODO Refactor: this is synonymous with StoreApp
 export interface Resource
 {
+    file:any;
     type_id:number;
     licensetype_id:number;
     title:string;
     description:string;
+    trialurl:string;
     url:string;
+    youtubeurl: string;
     image:string;
     active:boolean;
     isfree:boolean;

@@ -46,7 +46,7 @@ export class SubmitResourceComponent
     private descriptionText:AbstractControl;
     private resourceType:AbstractControl;
     private trialUrl:AbstractControl;
-    private videoUrl:AbstractControl;
+    private youTubeUrl:AbstractControl;
     private resourceUrl:AbstractControl;
     private licenseType:AbstractControl;
 
@@ -112,7 +112,7 @@ export class SubmitResourceComponent
         let selectValidator = ( selectControl ) =>
         {
             if( selectControl.value != -1 ) return null;
-            return { "invalidResourceType": true };
+            return { "invalidSelection": true };
         };
 
         this.submitResourceForm = fb.group( {
@@ -120,7 +120,7 @@ export class SubmitResourceComponent
             "overviewText": ["", Validators.required],
             "descriptionText": ["", Validators.required],
             "trialUrl": ["", Validators.required],
-            "videoUrl": ["", Validators.required],
+            "youTubeUrl": ["", Validators.required],
             "resourceUrl": ["", Validators.required],
             "resourceType": ["", Validators.compose( [selectValidator] )],
             "licenseType": ["", Validators.compose( [selectValidator] )]
@@ -130,7 +130,7 @@ export class SubmitResourceComponent
         this.overviewText = this.submitResourceForm.controls['overviewText'];
         this.descriptionText = this.submitResourceForm.controls['descriptionText'];
         this.trialUrl = this.submitResourceForm.controls['trialUrl'];
-        this.videoUrl = this.submitResourceForm.controls['videoUrl'];
+        this.youTubeUrl = this.submitResourceForm.controls['youTubeUrl'];
         this.resourceUrl = this.submitResourceForm.controls['resourceUrl'];
         this.resourceType = this.submitResourceForm.controls['resourceType'];
         this.licenseType = this.submitResourceForm.controls['licenseType'];
@@ -159,11 +159,23 @@ export class SubmitResourceComponent
         this.resourceUploadButton.nativeElement.click();
     }
 
+    protected get resourceFileValid(): boolean {
+        return !(this.resourceNature=='file' && this.resourceUploader.queue.length!=1);
+    }
+
+    protected get resourceUrlValid(): boolean {
+        return !(this.resourceNature=='url' && !this.resourceUrl.value);
+    }
+
     protected onSubmit( formValues:any )
     {
         this.submitted = true;
 
-        if( this.submitResourceForm.valid ) {
+        // this is baaaad...radio buttons not really supported in Angular 2 yet
+        // big missing piece from RC 1!
+        // rather than spend time writing a component that will do this,
+        // let's just fudge it for the moment
+        if( this.submitResourceForm.valid && this.resourceFileValid && this.resourceUrlValid ) {
             this.submitResource( formValues );
         } else {
             this.shakeForm();
@@ -180,7 +192,8 @@ export class SubmitResourceComponent
                     licensetype_id: formValues.licenseType,
                     title: formValues.basicDetailsText,
                     description: formValues.descriptionText,
-                    url: formValues.trialUrl,
+                    trialurl: formValues.trialUrl,
+                    youtubeurl: formValues.youTubeUrl,
                     image: iconUrl,
                     active: true,
                     isfree: true,
@@ -190,6 +203,12 @@ export class SubmitResourceComponent
                     tags: _.map( tags, ( tag ) => tag.name ),
                     mediaUrls: mediaUrls
                 } as Resource;
+
+                if( this.resourceNature == 'file' ) {
+                    createdResource.file = this.resourceUploader.queue[0];
+                } else {
+                    createdResource.url = this.resourceUrl.value;
+                }
 
                 this.appsService.submitResource( createdResource ).subscribe(
                     newResource => this.router.navigate( ['AppDetails', { id: newResource.id }] ),

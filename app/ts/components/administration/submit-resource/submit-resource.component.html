@@ -73,8 +73,8 @@ Nature = {{ resourceNature }}
         </div>
         <div class="row">
             <div class="formfield-container span-6 pull-left">
-                <input type="text" placeholder="video URL" [ngFormControl]="videoUrl" required="true"
-                       [class.input-error]="submitted&&!videoUrl.valid">
+                <input type="text" placeholder="video URL" [ngFormControl]="youTubeUrl" required="true"
+                       [class.input-error]="submitted&&!youTubeUrl.valid">
             </div>
             <div class="annotation-container span-5 pull-left">
                 the URL of a youtube video about your resource
@@ -141,8 +141,9 @@ Nature = {{ resourceNature }}
                                value="file"><em><strong>either</strong></em>, upload a resource file</label>
             </div>
             <div class="formfield-container span-6 pull-left">
-                <div class="resource-drop-area" ng2-file-drop [uploader]="resourceUploader">
-                    <div [class.light-text]=" resourceNature=='url'" *ngIf="resourceUploader.queue.length===0"
+                <div [class.input-error]="submitted&&!resourceFileValid" class="resource-drop-area" ng2-file-drop
+                     [uploader]="resourceUploader">
+                    <div [class.light-text]="resourceNature=='url'" *ngIf="resourceUploader.queue.length===0"
                          class="drop-area-empty">
                         <span *ngIf="resourceNature!='url'">drag and drop your resource here or&nbsp;<a
                                 (click)="uploadResourceButtonClicked()">click to upload</a></span>
@@ -179,7 +180,7 @@ Nature = {{ resourceNature }}
             <div class="formfield-container span-6 pull-left">
                 <input (ngModelChange)="resourceNature='url'" (focus)="resourceNature='url'" class="resource-url"
                        type="text" placeholder="resource URL" [ngFormControl]="resourceUrl" required="true"
-                       [class.light-text]="resourceNature=='file'" [class.input-error]="submitted&&!resourceUrl.valid"
+                       [class.light-text]="resourceNature=='file'" [class.input-error]="submitted&&!resourceUrlValid"
                        checked="false">
             </div>
             <div class="annotation-container span-5 pull-left">
