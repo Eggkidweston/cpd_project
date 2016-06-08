@@ -84,9 +84,20 @@ export class SubmitResourceComponent
         var that = this;
 
         this.uploader = new FileUploader( {} );
-        this.iconUploader = new FileUploader( {} );
+        this.iconUploader = new FileUploader( {
+            onFileAdded: () =>
+            {
+                that.iconUploader.queue = [_.first( that.iconUploader.queue )];
+            }
+        } );
         // bloody closures in TypeScript are a nightmare
-        this.resourceUploader = new FileUploader( { onFileAdded: () => { that.resourceNature = "file"; } } );
+        this.resourceUploader = new FileUploader( {
+            onFileAdded: () =>
+            {
+                that.resourceUploader.queue = [_.first( that.resourceUploader.queue )];
+                that.resourceNature = "file";
+            }
+        } );
 
         this.resourceTags = this.tagUpdates
             .scan( ( tags:Tag[], operation:ITagsOperation ) => operation( tags ), initialTags )
@@ -149,6 +160,11 @@ export class SubmitResourceComponent
         this.remove.next( tag );
     }
 
+    protected uploadIconButtonClicked()
+    {
+        this.iconUploadButton.nativeElement.click();
+    }
+
     protected uploadFileButtonClicked()
     {
         this.fileUploadButton.nativeElement.click();
@@ -159,12 +175,14 @@ export class SubmitResourceComponent
         this.resourceUploadButton.nativeElement.click();
     }
 
-    protected get resourceFileValid(): boolean {
-        return !(this.resourceNature=='file' && this.resourceUploader.queue.length!=1);
+    protected get resourceFileValid():boolean
+    {
+        return !(this.resourceNature == 'file' && this.resourceUploader.queue.length != 1);
     }
 
-    protected get resourceUrlValid(): boolean {
-        return !(this.resourceNature=='url' && !this.resourceUrl.value);
+    protected get resourceUrlValid():boolean
+    {
+        return !(this.resourceNature == 'url' && !this.resourceUrl.value);
     }
 
     protected onSubmit( formValues:any )
