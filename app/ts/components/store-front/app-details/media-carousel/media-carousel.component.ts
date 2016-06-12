@@ -12,8 +12,21 @@ require("../../../../../../node_modules/bootstrap-sass/assets/javascripts/bootst
 export class MediaCarouselComponent {
     @Input() resource: StoreApp;
     private selectedMedium: number = 0;
+    private youtubeSelected: boolean = false;
 
-    mediumSelected(i: number) {
+    onMediumClicked(i: number) {
         this.selectedMedium = i;
+        this.youtubeSelected = false;
+    }
+
+    onYoutubeClicked() {
+        this.youtubeSelected = true;
+    }
+
+    extractYoutubeId(fullUrl) {
+        if( !fullUrl ) return '';
+        var idSeparator = fullUrl.lastIndexOf('=');
+        if( idSeparator==-1 ) idSeparator = fullUrl.lastIndexOf('/');
+        return fullUrl.substr(idSeparator + 1);
     }
 }

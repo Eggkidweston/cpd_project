@@ -90,7 +90,6 @@ export class SubmitResourceComponent
                 that.iconUploader.queue = [_.first( that.iconUploader.queue )];
             }
         } );
-        // bloody closures in TypeScript are a nightmare
         this.resourceUploader = new FileUploader( {
             onFileAdded: () =>
             {
@@ -132,7 +131,7 @@ export class SubmitResourceComponent
             "descriptionText": ["", Validators.required],
             "trialUrl": ["", Validators.required],
             "youTubeUrl": ["", Validators.required],
-            "resourceUrl": ["", Validators.required],
+            "resourceUrl": [""],
             "resourceType": ["", Validators.compose( [selectValidator] )],
             "licenseType": ["", Validators.compose( [selectValidator] )]
         } )

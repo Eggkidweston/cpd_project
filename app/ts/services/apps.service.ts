@@ -246,13 +246,16 @@ export class AppsService
             let formData = new FormData();
             xhr.open('POST', `${appSettings.apiRoot}resources/create`, true);
             xhr.setRequestHeader('x-access-token', this.authenticationService.apiKey);
-            _.mapObject(newResource, (value, key) => formData.append(key, value));
-
-            // _.mapObject(_.omit(newResource, (value, key, object) => _.isArray(value)),
-            //     (value, key) => formData.append(key, value));
-            // _.mapObject(_.pick(newResource, (value, key, object) => _.isArray(value)),
-            //     (value, key) => formData.append(key, value));
-
+            _.mapObject(_.omit(newResource, (value, key, object) => _.isArray(value)),
+                (value, key) => formData.append(key, value));
+            _.mapObject(_.pick(newResource, (value, key, object) => _.isArray(value)),
+                (array, key) =>
+                {
+                    for (var item in array) {
+                        formData.append(`${key}[${item}]`, array[item]);
+                        console.log(`${key}[${item}] =  ${array[item]}`);
+                    }
+                });
             xhr.send(formData);
         });
     }

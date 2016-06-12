@@ -2,18 +2,26 @@
     <div class="media-container">
         <div>
             <template ngFor let-medium [ngForOf]="resource?.media" let-i="index">
-                <img src="{{medium.url}}" [ngClass]="{' medium-selected': i===selectedMedium, 'medium-unselected': i!==selectedMedium}"
-                    (click)="mediumSelected(i)" style="display: inline; width: 20%;" class="img-responsive medium-thumbnail" />
+                <img src="{{medium.url}}"
+                     [ngClass]="{'medium-selected': i===selectedMedium&&!youtubeSeleceted, 'medium-unselected': i!==selectedMedium||youtubeSelected}"
+                     (click)="onMediumClicked(i)" style="display: inline; width: 23%;"
+                     class="img-responsive medium-thumbnail"/>
             </template>
+            <img src="http://img.youtube.com/vi/{{extractYoutubeId(resource?.youtubeurl)}}/0.jpg" (click)="onYoutubeClicked(i)"
+                 [ngClass]="{'medium-selected': youtubeSelected, 'medium-unselected': !youtubeSelected}"
+                 style="display: inline; width: 23%;"
+                 class="img-responsive medium-thumbnail"/>
         </div>
 
         <div style="width:100%">
-            <!--<div *ngIf="resource?.media && resource?.media[selectedMedium]?.type_id=='2'" class="yt-container">-->
-                <!--<iframe *ngIf="resource?.media" id="ytplayer" type="text/html" class="yt-full-size" src="{{resource?.media[selectedMedium]?.url}}?autoplay=0&controls=1"-->
-                    <!--frameborder="0" allowfullscreen></iframe>-->
-            <!--</div>-->
             <div>
-                <img *ngIf="resource?.media" src="{{ resource?.media[selectedMedium]?.url }}" class="img-responsive medium-full-size" />
+                <div *ngIf="youtubeSelected" class="yt-container">
+                    <iframe id="ytplayer" type="text/html" class="yt-full-size"
+                            src="https://www.youtube.com/embed/{{extractYoutubeId(resource?.youtubeurl)}}?autoplay=1&origin=http://example.com"
+                            frameborder="0" allowfullscreen></iframe>
+                </div>
+                <img *ngIf="resource?.media&&!youtubeSelected" src="{{ resource?.media[selectedMedium]?.url }}"
+                     class="img-responsive medium-full-size"/>
             </div>
         </div>
     </div>

@@ -1,5 +1,3 @@
-Nature = {{ resourceNature }}
-
 <div class="submit-resource-container">
     <h2>Submit a new resource</h2>
     <form [class.shake]="shaking" [class.animated]="shaking" class="form-container" [ngFormModel]="submitResourceForm"
@@ -179,7 +177,7 @@ Nature = {{ resourceNature }}
             </div>
             <div class="formfield-container span-6 pull-left">
                 <input (ngModelChange)="resourceNature='url'" (focus)="resourceNature='url'" class="resource-url"
-                       type="text" placeholder="resource URL" [ngFormControl]="resourceUrl" required="true"
+                       type="text" placeholder="resource URL" [ngFormControl]="resourceUrl"
                        [class.light-text]="resourceNature=='file'" [class.input-error]="submitted&&!resourceUrlValid"
                        checked="false">
             </div>
