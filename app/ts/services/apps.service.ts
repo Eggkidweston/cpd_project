@@ -1,7 +1,7 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { StoreApp, TagCloud, SignedUrl, Resource } from '../models';
+import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults } from '../models';
 import { appSettings, appInfo } from './services';
 import { AuthenticationService } from './authentication.service';
 import { Review, ResourceMetrics, ResourceMetric } from 'models';
@@ -14,13 +14,12 @@ export class AppsService
     constructor( private http:Http,
                  private authenticationService:AuthenticationService )
     {
-        this.getAllApps();
     }
 
-    public getAllApps()
+    public getResources(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources?$top=100` )
-            .map( res => <StoreApp[]>res.json().data )
+        return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}` )
+            .map( res => <GetResourceResults>res.json() )
             .catch( this.handleError );
     }
 

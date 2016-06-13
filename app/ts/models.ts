@@ -37,6 +37,11 @@ export class StoreApp
     tags:Array<string>;
 }
 
+export interface GetResourceResults {
+    data: Array<StoreApp>;
+    availableRows: number;
+}
+
 export class CollatedMetrics
 {
     downloads:DownloadMetrics;

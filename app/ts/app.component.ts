@@ -7,7 +7,7 @@
 
 import { Component } from '@angular/core'
 import { RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from 'components/store-front/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { WhoComponent } from './components/whocanregister/who.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
