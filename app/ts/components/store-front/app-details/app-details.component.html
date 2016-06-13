@@ -74,6 +74,7 @@
         <div class="col span-7 reviews-list">
             <hr>
             <h3>Reviews<span *ngIf="!authenticationService?.userSignedIn"> - <a [routerLink]="['SignIn']" >Sign In</a> to submit a review</span></h3>
+            <div class="no-reviews" *ngIf="reviews.length==0"><p>No-one has reviewed this resource yet. Be the first!</p></div>
             <div *ngFor="let review of reviews">
                 <hr>
                 <div class="detail-review"><b>{{ review?.title }}</b>

@@ -9,7 +9,7 @@
             <div [hidden]="!reviewing" class="">
                 <label for="reviewTitle">Title</label>
                 <input [ngFormControl]="reviewTitle" id="reviewTitle" class="form-control" style="padding: 4px;">
-                <label for="reviewDescription">Your review</label>
+                <label>Your review</label>
                 <textarea [ngFormControl]="reviewDescription" id="reviewText" class="form-control" style="padding: 8px;"></textarea>
                 <div class="review-rating-stars">
                     <label>Rate this resource</label><rating (ratingChanged)="ratingChanged($event)" editable="true" rating="1"></rating>
