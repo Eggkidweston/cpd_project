@@ -7,13 +7,19 @@
         border: 9px solid #fff;
         border-radius: 15px;
         box-shadow: 0 1px 5px 1px rgba(0,0,0,0.19);
-        width:148px;
-        
+        width:108px;
+        //width:148px;
+        text-align: center;
+
         img {
             border-radius: 10px;
         }
     }
-    
+
+    h2 {
+        margin-top: 0;
+    }
+
     .activity hr {
         margin-top: 42px;
     }
@@ -44,5 +50,9 @@
     .ago-container {
         display: inline-block;
         text-align: right;
+    }
+
+    .temp-icon {
+        color: #d0d0d0;
     }
 }
