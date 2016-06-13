@@ -229,7 +229,7 @@ export class SubmitResourceComponent
 
                 this.appsService.submitResource( createdResource ).subscribe(
                     newResource => this.router.navigate( ['AppDetails', { id: newResource.id }] ),
-                    err => console.log( `Error submitting resource: ${err}` )
+                    err => Observable.throw( `Error submitting resource: ${err}` )
                 )
             }
         ) ) );
@@ -250,7 +250,7 @@ export class SubmitResourceComponent
                 .flatMap( e => uploadFile( e, this.authenticationService.apiKey ) )
                 .subscribe(
                     url => urls.push( url ),
-                    e => console.log( `Could not upload file: ${e}` ),
+                    e => Observable.throw( `Could not upload file: ${e}` ),
                     () => next( urls )
                 );
         }
@@ -270,7 +270,7 @@ export class SubmitResourceComponent
                 .flatMap( e => uploadFile( e, this.authenticationService.apiKey ) )
                 .subscribe(
                     u => url = u,
-                    e => console.log( `Could not upload file: ${e}` ),
+                    e => Observable.throw( `Could not upload file: ${e}` ),
                     () => next( url )
                 );
         }

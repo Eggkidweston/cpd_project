@@ -49,8 +49,6 @@ export class TagCloudComponent implements AfterViewInit {
         this.appsService.getByTag(tag)
             .subscribe(
                 storeApps => {this.storeApps = storeApps;
-
-                    console.log("GOTTT  by Tagg" +  JSON.stringify(storeApps));
                 },
                 (error: any) => AppComponent.generalError(error.status)
             );
@@ -60,8 +58,6 @@ export class TagCloudComponent implements AfterViewInit {
         this.appsService.getAllApps()
             .subscribe(
                 storeApps => {this.storeApps = storeApps;
-
-                console.log("GOTTT")
                 },
                 (error: any) => AppComponent.generalError(error.status)
             );

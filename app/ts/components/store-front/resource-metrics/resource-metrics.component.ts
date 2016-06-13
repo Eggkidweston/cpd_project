@@ -5,6 +5,7 @@ import { AppsService } from 'services/apps.service';
 import { StoreApp } from 'models';
 import { AppComponent } from '../../../app.component';
 import { PeriodIndicator } from './period-indicator/period-indicator.component';
+import { Observable } from 'rxjs/Observable';
 
 let Chart = require( "chart.js" );
 let _ = require( "underscore" );
@@ -85,6 +86,6 @@ export class ResourceMetricsComponent implements AfterViewInit {
                     }
                 } );
             },
-            ( err ) => console.log( `Error: ${JSON.stringify( err )}` ) );
+            ( err ) => Observable.throw( `Error: ${JSON.stringify( err )}` ) );
     }
 }

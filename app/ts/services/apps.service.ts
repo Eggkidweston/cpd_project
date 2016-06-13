@@ -45,8 +45,6 @@ export class AppsService
         headers.append( 'Content-Type', 'application/json' );
         headers.append( 'x-access-token', this.authenticationService.apiKey );
 
-        console.log( this.authenticationService.apiKey );
-
         return this.http.get( `${appSettings.apiRoot}tags/${tag}?limit=100`, { headers } )
             .map( res => <StoreApp[]>res.json().resources )
             .catch( this.handleError );
@@ -196,7 +194,6 @@ export class AppsService
 
         var now = new Date().getTime();
         var filename = now + "-" + file.file.name;
-        console.log( `Attempting to upload file ${filename}` );
         var url = `${appSettings.apiRoot}resources/signed_url?fileName=${filename}&fileType=${file.file.type}`;
 
         xhr.open( "GET", url );

@@ -45,7 +45,6 @@ export class AuthenticationService {
             .subscribe(
                 data => {
                     AuthenticationService._user = data.user;
-                    console.log(data.user);
                     next();
                 },
                 err => error(err),

@@ -21,11 +21,8 @@ export class Apps2Service {
 
         var url =this._shadowAppURL + '?storeID='+id
 
-        console.log (url);
-
         return this.http.get(url, options)
             .map(res => <ShadowApp[]> res.json())
-            .do(res => console.log("Results is " + JSON.stringify(res)))
             .catch(this.handleError);
     }
 

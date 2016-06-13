@@ -68,7 +68,6 @@ export class DownloadSourceComponent implements AfterViewInit {
     {
 
         this.shadowApp=this.shadowApps[0];
-        console.log(this.shadowApps);
 
     }
 

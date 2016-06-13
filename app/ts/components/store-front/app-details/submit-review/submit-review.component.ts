@@ -49,7 +49,6 @@ export class SubmitReviewComponent {
                     this.reviewAdded.emit(review);
                 },
                 (err) => {
-                    console.log(err);
                     this.busy = false;
                     this.reviewing = false;
                 }
