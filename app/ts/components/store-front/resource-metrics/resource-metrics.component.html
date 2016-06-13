@@ -29,9 +29,11 @@
         <h2>Downloads</h2>
     </div>
 
-    <canvas id="chartCanvas" #chartCanvas class="col span-12" height="80px"></canvas>
+    <div class="span-11 row">
+        <canvas id="chartCanvas" #chartCanvas class="col" height="80px"></canvas>
+    </div>
 
-    <div *ngIf="resource" class="download-collation span-12">
+    <div *ngIf="resource" class="download-collation span-12 row">
         <div class="today-downloads">
             <div class="download-period">Today</div>
             <div class="digits">{{resource.metrics.downloads.today }}
