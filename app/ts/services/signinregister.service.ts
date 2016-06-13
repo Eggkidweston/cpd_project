@@ -23,7 +23,7 @@ export class SigninRegisterService {
     }
 
     redirectToProfileAfterSignin() {
-        this.lastRoute = 'Profile';
+        this.lastRoute = 'Profile'; 
     }
 }
 

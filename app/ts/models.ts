@@ -112,14 +112,17 @@ export class UpdateHistory
 
 export class Contributor
 {
-    activity:Array<Activity>;
-    content:Array<StoreApp>;
-    imageUrl:string;
-    name:string;
-    registeredDate:string;
-    reputation:number;
-    username:string;
-
+    id: number;
+    imageUrl: string;
+    name: string;
+    username: string;
+    email: string;
+    active: boolean;
+    reputation: any;
+    createdat: string;
+    updatedat: string;
+    activities:Array<Activity>;
+    resources:Array<StoreApp>;
 }
 
 export interface Activity

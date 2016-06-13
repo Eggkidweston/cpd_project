@@ -7,7 +7,7 @@
     </div>
     <div class="col span-6">
         <h2>{{ contributor?.username }}</h2>
-        <p><strong>Registered</strong> {{ contributor?.registeredDate }}</p>
+        <p><strong>Registered</strong> {{ contributor?.createdat }}</p>
         <p><strong>Reputation</strong> {{ contributor?.reputation }}</p>
     </div>
     <div class="row span-12 activity">
@@ -28,7 +28,7 @@
         <hr/>
         <h2>Content by {{ contributor?.username }}</h2>
         <div class="app-widgets">
-            <app-widget class="small" *ngFor="let alsoBy of contributor?.content" [app]="alsoBy"></app-widget>
+            <app-widget class="small" *ngFor="let alsoBy of contributor?.resources" [app]="alsoBy"></app-widget>
         </div>
     </div>
 </div>

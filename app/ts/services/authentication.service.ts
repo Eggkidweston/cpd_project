@@ -21,7 +21,7 @@ export class AuthenticationService {
     get userSignedIn(): boolean {
         return AuthenticationService._user != null;
     }
-    
+
     get apiKey(): string {
         return AuthenticationService.API_KEY;
     }
@@ -85,10 +85,10 @@ export class AuthenticationService {
         AuthenticationService._user = null;
     }
 
-    isEmailOrUsernameInUse(emailOrUsername: string, 
-        exists: (exists: boolean) => void, 
+    isEmailOrUsernameInUse(emailOrUsername: string,
+        exists: (exists: boolean) => void,
         err: (res: Response) => void,
-        complete: () => void) 
+        complete: () => void)
     {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');

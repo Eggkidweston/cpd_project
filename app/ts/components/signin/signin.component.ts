@@ -7,7 +7,7 @@ import { AppComponent } from '../../app.component';
 @Component({
     selector: 'signin',
     directives: [RouterOutlet, RouterLink],
-    styles: [require('../../../sass/signin.scss').toString()],
+    styles: [require('./signin.scss').toString()],
     template: require('./signin.component.html'),
 })
 export class SignInComponent {
