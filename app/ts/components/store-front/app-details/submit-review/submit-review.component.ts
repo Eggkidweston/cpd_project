@@ -7,6 +7,7 @@ import { Review } from '../../../../models';
 @Component({
     selector: 'submit-review',
     template: require('./submit-review.component.html'),
+    styles: [require('./submit-review.scss').toString()]
     directives: [RatingComponent]
 })
 export class SubmitReviewComponent {

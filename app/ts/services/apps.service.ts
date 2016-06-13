@@ -6,7 +6,7 @@ import { appSettings, appInfo } from './services';
 import { AuthenticationService } from './authentication.service';
 import { Review, ResourceMetrics, ResourceMetric } from 'models';
 
-let _ = require('underscore');
+let _ = require( 'underscore' );
 
 @Injectable()
 export class AppsService
@@ -143,7 +143,7 @@ export class AppsService
 
     public getResourceCuration( resourceId:number )
     {
-        let c = JSON.parse(`
+        let c = JSON.parse( `
 {
     "revisions": [
         {
@@ -169,9 +169,9 @@ export class AppsService
         }
     ]
 }                
-        `);
+        ` );
 
-        return Observable.of(c)
+        return Observable.of( c )
 
         // let headers = new Headers();
         // headers.append( 'Content-Type', 'application/json' );
@@ -229,35 +229,32 @@ export class AppsService
 
     public submitResource( newResource:Resource )
     {
-        return Observable.create( observer => {
+        return Observable.create( observer =>
+        {
             let xhr:XMLHttpRequest = new XMLHttpRequest();
-            
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        observer.next(<StoreApp>JSON.parse(xhr.responseText).resource);
+
+            xhr.onreadystatechange = () =>
+            {
+                if( xhr.readyState === 4 ) {
+                    if( xhr.status === 200 ) {
+                        observer.next( <StoreApp>JSON.parse( xhr.responseText ).resource );
                         observer.complete();
                     } else {
-                        Observable.throw("Cannot upload resource");
+                        Observable.throw( "Cannot upload resource" );
                     }
                 }
             };
 
             let formData = new FormData();
-            xhr.open('POST', `${appSettings.apiRoot}resources/create`, true);
-            xhr.setRequestHeader('x-access-token', this.authenticationService.apiKey);
-            _.mapObject(_.omit(newResource, (value, key, object) => _.isArray(value)),
-                (value, key) => formData.append(key, value));
-            _.mapObject(_.pick(newResource, (value, key, object) => _.isArray(value)),
-                (array, key) =>
-                {
-                    for (var item in array) {
-                        formData.append(`${key}[${item}]`, array[item]);
-                        console.log(`${key}[${item}] =  ${array[item]}`);
-                    }
-                });
-            xhr.send(formData);
-        });
+            xhr.open( 'POST', `${appSettings.apiRoot}resources/create`, true );
+            xhr.setRequestHeader( 'x-access-token', this.authenticationService.apiKey );
+            _.mapObject( _.omit( newResource, ( value, key, object ) => _.isArray( value ) ),
+                ( value, key ) => formData.append( key, value ) );
+            _.mapObject( _.pick( newResource, ( value, key, object ) => _.isArray( value ) ),
+                ( array, key ) => { for( var item in array ) formData.append( `${key}[${item}]`, array[item] ); }
+            );
+            xhr.send( formData );
+        } );
     }
 
     private handleError( error:Response )

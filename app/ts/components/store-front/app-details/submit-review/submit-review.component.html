@@ -1,7 +1,8 @@
-<div class="row">
+<div class="row submit-review-container">
     <fieldset class="form__fieldset">
+        <h3>Reviews</h3>
         <div [hidden]="reviewing">
-            <button [disabled]="busy" class="btn submit-review" (click)="submitReview()">Submit review</button>
+            <button [disabled]="busy" class="btn submit-review" (click)="submitReview()">Rate and review</button>
         </div>
    
         <form [ngFormModel]="reviewForm" (submit)="onSubmit(reviewForm.value)" novalidate>
@@ -14,7 +15,7 @@
                     <label>Rate this resource</label><rating (ratingChanged)="ratingChanged($event)" editable="true" rating="1"></rating>
                 </div>
                 <div style="padding-top: 12px;">
-                    <button [disabled]="busy" class="btn submit-review-half" type="submit">Submit review</button>
+                    <button [disabled]="busy" class="btn submit-review-half" type="submit">Rate and review</button>
                     <button [disabled]="busy" class="btn submit-review-half" (click)="cancelClicked()">Cancel</button>
                 </div>
             </div>
