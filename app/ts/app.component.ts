@@ -25,16 +25,16 @@ import { AuthenticationService, appInfo } from './services/services';
 import { Apps2Service, SigninRegisterService } from "./services/services";
 import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
 
-@Component({
+@Component( {
     selector: 'appstore-app',
     directives: [...ROUTER_DIRECTIVES],
-    styles: [require('../sass/appstore.scss').toString()],
-    template: require('./app.component.html'),
+    styles: [require( '../sass/appstore.scss' ).toString()],
+    template: require( './app.component.html' ),
     providers: [
         Apps2Service
     ]
-})
-@RouteConfig([
+} )
+@RouteConfig( [
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
     { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
     { path: '/profile', name: 'Profile', component: ContributorComponent },
@@ -51,35 +51,38 @@ import { RevisionHistoryComponent } from './components/version-control/revision-
     { path: '/tagcloud', name: 'TagCloud', component: TagCloudComponent },
     { path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent }
-])
+] )
 
-export class AppComponent {
-    static router: Router;
-    public appInfoname: String;
-    private appVersion: String;
+export class AppComponent
+{
+    static router:Router;
+    public appInfoname:String;
+    private appVersion:String;
 
-    constructor(
-        public authenticationService: AuthenticationService,
-        protected signinRegisterService:SigninRegisterService,
-        router: Router)
+    constructor( public authenticationService:AuthenticationService,
+                 protected signinRegisterService:SigninRegisterService,
+                 router:Router )
     {
         this.appInfoname = appInfo.name;
         this.appVersion = appInfo.version;
         AppComponent.router = router;
     }
 
-    signOut() {
+    signOut()
+    {
         this.authenticationService.signOut();
     }
 
-    isRouteActive(instruction: any[]): boolean {
-        return AppComponent.router.isRouteActive(AppComponent.router.generate(instruction));
+    isRouteActive( instruction:any[] ):boolean
+    {
+        return AppComponent.router.isRouteActive( AppComponent.router.generate( instruction ) );
     }
 
     // ok, I confess, this needs refactoring. This is not a good
     // approach to intercomponent communication. And it creates 
     // a necessity for a static router, which is smelly
-    static generalError(status: any) {
-        AppComponent.router.navigate(['Error', { status: status }]);
+    static generalError( status:any )
+    {
+        AppComponent.router.navigate( ['Error', { status: status }] );
     }
 }
