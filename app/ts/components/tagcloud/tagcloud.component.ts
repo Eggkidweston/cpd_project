@@ -48,18 +48,20 @@ export class TagCloudComponent implements AfterViewInit {
         this.chosenTag = tag;
         this.appsService.getByTag(tag)
             .subscribe(
-                storeApps => {this.storeApps = storeApps;
+                storeApps => {
+                    this.storeApps = storeApps;
                 },
                 (error: any) => AppComponent.generalError(error.status)
             );
     }
 
     getSomeApps(){
-        this.appsService.getResources(100,1)
+        this.appsService.getResources( 100, 1 )
             .subscribe(
-                storeApps => {this.storeApps = storeApps;
+                storeApps => {
+                    this.storeApps = storeApps.data;
                 },
-                (error: any) => AppComponent.generalError(error.status)
+                ( error:any ) => AppComponent.generalError( error.status )
             );
     }
 
@@ -68,11 +70,11 @@ export class TagCloudComponent implements AfterViewInit {
             .subscribe(
                 tagcloud => {
                     this.tagcloud = tagcloud;
-                    if(this.chosenTag) {
-                        this.getTaggedApps(this.chosenTag);
-                    }else{
+                    // if(this.chosenTag) {
+                        // this.getTaggedApps(this.chosenTag);
+                    // } else {
                         this.getSomeApps();
-                    }
+                    // }
                 },
                 (error: any) => AppComponent.generalError(error.status)
             );
