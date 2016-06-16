@@ -83,6 +83,11 @@ export class AppComponent
     // a necessity for a static router, which is smelly
     static generalError( status:any )
     {
-        AppComponent.router.navigate( ['Error', { status: status }] );
+        if( status == 401 ) {
+            AuthenticationService.signOut();
+            AppComponent.router.navigate( ['Profile'] );
+        } else {
+            AppComponent.router.navigate( ['Error', { status: status }] );
+        }
     }
 }

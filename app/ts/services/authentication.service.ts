@@ -103,7 +103,7 @@ export class AuthenticationService {
             );
     }
 
-    signOut() {
+    static signOut() {
         AuthenticationService.apiKey = null;
         AuthenticationService.user = null;
     }
