@@ -70,7 +70,8 @@ export class AppComponent
 
     signOut()
     {
-        this.authenticationService.signOut();
+        AuthenticationService.signOut();
+        AppComponent.router.navigate( ['Home'] );
     }
 
     isRouteActive( instruction:any[] ):boolean
@@ -79,7 +80,7 @@ export class AppComponent
     }
     
     // ok, I confess, this needs refactoring. This is not a good
-    // approach to intercomponent communication. And it creates 
+    // approach to intercomponent communication. And it creates
     // a necessity for a static router, which is smelly
     static generalError( status:any )
     {

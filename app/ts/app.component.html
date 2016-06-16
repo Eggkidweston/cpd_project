@@ -36,10 +36,24 @@
               <li [class.active]="isRouteActive(['SignIn']) || isRouteActive(['Register'])" class="nav__item" *ngIf="!authenticationService?.userSignedIn()">
                 <a [routerLink]="['Profile']">Sign in</a>
               </li>
-              <li [class.active]="isRouteActive(['Profile'])" class="nav__item" *ngIf="authenticationService?.userSignedIn()">
-                <a [routerLink]="['Profile']">My profile</a>
-              </li>
-              <li [class.active]="isRouteActive(['About']) || isRouteActive(['Who']) || isRouteActive(['Feedback'])" class="nav__item has-popup "
+                <!--<li [class.active]="isRouteActive(['Profile'])" class="nav__item has-popup "-->
+                    <!--data-dropdown-item>-->
+                    <!--<a href="javascript:void(0);">Profile</a>-->
+                    <!--<div class="submenu">-->
+                        <!--<ul>-->
+                            <!--<li><a [routerLink]="['About']">Sign out</a></li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <li class="nav__item has-popup" data-dropdown-item="" *ngIf="authenticationService?.userSignedIn()">
+                    <a [routerLink]="['Profile']">My profile</a>
+                    <div class="submenu">
+                        <ul>
+                            <li><a (click)="signOut()">Sign out</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li [class.active]="isRouteActive(['About']) || isRouteActive(['Who']) || isRouteActive(['Feedback'])" class="nav__item has-popup "
                 data-dropdown-item>
                 <a href="javascript:void(0);">Help</a>
                 <div class="submenu">
