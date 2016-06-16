@@ -131,7 +131,7 @@ export class AppDetailsComponent implements AfterViewInit
 
     getApp()
     {
-        if( !this.authenticationService.userSignedIn ) {
+        if( !this.authenticationService.userSignedIn() ) {
             this.openSignIn();
         } else {
             this.appsService.getApp( this.resourceId )

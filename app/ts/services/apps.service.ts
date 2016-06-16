@@ -42,7 +42,7 @@ export class AppsService
 
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
-        headers.append( 'x-access-token', this.authenticationService.apiKey );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
 
         return this.http.get( `${appSettings.apiRoot}tags/${tag}?limit=100`, { headers } )
             .map( res => <StoreApp[]>res.json().resources )
@@ -79,7 +79,7 @@ export class AppsService
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
-        headers.append( 'x-access-token', this.authenticationService.apiKey );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
 
         return this.http.get( `${appSettings.apiRoot}resources/${resourceId}/reviews`, { headers } )
             .map( res => <Review[]>res.json().data )
@@ -92,7 +92,7 @@ export class AppsService
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
-        headers.append( 'x-access-token', this.authenticationService.apiKey );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
 
         this.http.post( `${appSettings.apiRoot}reviews/create`,
             JSON.stringify( {
@@ -122,7 +122,7 @@ export class AppsService
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
-        headers.append( 'x-access-token', this.authenticationService.apiKey );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
 
         this.http.post( `${appSettings.apiRoot}resources/metrics`,
             JSON.stringify( {
@@ -243,7 +243,7 @@ export class AppsService
 
             let formData = new FormData();
             xhr.open( 'POST', `${appSettings.apiRoot}resources/create`, true );
-            xhr.setRequestHeader( 'x-access-token', this.authenticationService.apiKey );
+            xhr.setRequestHeader( 'x-access-token', AuthenticationService.apiKey );
             _.mapObject( _.omit( newResource, ( value, key, object ) => _.isArray( value ) ),
                 ( value, key ) => formData.append( key, value ) );
             _.mapObject( _.pick( newResource, ( value, key, object ) => _.isArray( value ) ),

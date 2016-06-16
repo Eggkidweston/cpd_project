@@ -77,7 +77,7 @@ export class AppComponent
     {
         return AppComponent.router.isRouteActive( AppComponent.router.generate( instruction ) );
     }
-
+    
     // ok, I confess, this needs refactoring. This is not a good
     // approach to intercomponent communication. And it creates 
     // a necessity for a static router, which is smelly

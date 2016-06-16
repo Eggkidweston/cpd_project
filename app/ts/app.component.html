@@ -23,7 +23,7 @@
               <li [class.active]="isRouteActive(['TagCloud'])" class="nav__item">
                 <a [routerLink]="['TagCloud']">TagCloud</a>
               </li>
-              <!--<li *ngIf="authenticationService?.userSignedIn" [class.active]="isRouteActive(['Submissions'])" class="nav__item">
+              <!--<li *ngIf="authenticationService?.  userSignedIn()" [class.active]="isRouteActive(['Submissions'])" class="nav__item">
                 <a [routerLink]="['Submissions']">Submissions</a>
               </li>-->
               <!--<li class="nav__item  ">
@@ -33,10 +33,10 @@
           </nav>
           <nav class="masthead__nav masthead__nav--secondary" role="navigation" data-dropdown>
             <ul>
-              <li [class.active]="isRouteActive(['SignIn']) || isRouteActive(['Register'])" class="nav__item" *ngIf="!authenticationService?.userSignedIn">
+              <li [class.active]="isRouteActive(['SignIn']) || isRouteActive(['Register'])" class="nav__item" *ngIf="!authenticationService?.userSignedIn()">
                 <a [routerLink]="['Profile']">Sign in</a>
               </li>
-              <li [class.active]="isRouteActive(['Profile'])" class="nav__item" *ngIf="authenticationService?.userSignedIn">
+              <li [class.active]="isRouteActive(['Profile'])" class="nav__item" *ngIf="authenticationService?.userSignedIn()">
                 <a [routerLink]="['Profile']">My profile</a>
               </li>
               <li [class.active]="isRouteActive(['About']) || isRouteActive(['Who']) || isRouteActive(['Feedback'])" class="nav__item has-popup "

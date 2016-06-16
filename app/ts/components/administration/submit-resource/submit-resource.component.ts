@@ -247,7 +247,7 @@ export class SubmitResourceComponent
 
             //noinspection TypeScriptUnresolvedFunction
             Observable.from( this.uploader.queue )
-                .flatMap( e => uploadFile( e, this.authenticationService.apiKey ) )
+                .flatMap( e => uploadFile( e, AuthenticationService.apiKey ) )
                 .subscribe(
                     url => urls.push( url ),
                     e => Observable.throw( `Could not upload file: ${e}` ),
@@ -267,7 +267,7 @@ export class SubmitResourceComponent
 
             //noinspection TypeScriptUnresolvedFunction
             Observable.from( this.iconUploader.queue )
-                .flatMap( e => uploadFile( e, this.authenticationService.apiKey ) )
+                .flatMap( e => uploadFile( e, AuthenticationService.apiKey ) )
                 .subscribe(
                     u => url = u,
                     e => Observable.throw( `Could not upload file: ${e}` ),

@@ -35,7 +35,7 @@ export class AppEditComponent implements AfterViewInit {
         this.uploader = new FileUploader({
             url: `${appSettings.apiRoot}resources/${this.resourceId}/edit`,
             resourceId: this.resourceId,
-            accessToken: authenticationService.apiKey,
+            accessToken: AuthenticationService.apiKey,
         });
     }
 

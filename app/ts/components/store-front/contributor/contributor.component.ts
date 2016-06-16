@@ -29,12 +29,12 @@ export class ContributorComponent
                  params:RouteParams )
     {
         if( this.isProfile() ) {
-            if( !this.authenticationService.userSignedIn ) {
+            if( !this.authenticationService.userSignedIn() ) {
                 this.router.navigate( ['SignIn'] )
                 signinRegisterService.redirectToProfileAfterSignin();
             }
             else {
-                this._contributorId = this.authenticationService.user.id;
+                this._contributorId = AuthenticationService.user.id;
                 this.loadContributor();
             }
         }

@@ -16,7 +16,7 @@ export class ContributorService
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
-        headers.append( 'x-access-token', this.authenticationService.apiKey );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
 
         return this.http.get( `${appSettings.apiRoot}contributors/${contributorId}`, { headers } )
             .map( res => res.json().contributor )
