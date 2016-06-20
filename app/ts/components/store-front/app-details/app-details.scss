@@ -18,9 +18,11 @@
     border: 9px solid #fff;
     border-radius: 15px;
     box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.19);
-    width: 148px;
+    width: 128px;
+    height: 128px;
     img {
       border-radius: 10px;
+      height: 100%;
     }
   }
 
@@ -75,13 +77,6 @@
   }
   .reviews-list {
     margin-right: 57px;
-  }
-  .resource-image {
-    width: 128px;
-    height: 128px;
-    img {
-      height: 100%;
-    }
   }
 
   .created-by {
