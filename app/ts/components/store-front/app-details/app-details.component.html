@@ -26,7 +26,7 @@
             {{ reviews.length }} rating<span *ngIf="reviews.length!=1">s</span>
         </div>
         <div>
-            {{ app?.downloadcount || 0 }} download<span *ngIf="app?.downloadcount!=1">s</span>
+            {{ app?.metrics?.downloads?.total || 0 }} download<span *ngIf="app?.metrics?.downloads?.total!=1">s</span>
         </div>
         <div class="about-this-resource">
             <span *ngIf="authenticationService?.userSignedIn()"><a [routerLink]="['AppInfo', { id: app?.id }]">about this resource</a></span>

@@ -23,8 +23,6 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
 export class AppDetailsComponent implements AfterViewInit
 {
     public app:StoreApp;
-    // public shadowApps:ShadowApp[] = [];
-    // public shadowApp:ShadowApp;
     public resourceId:number;
     public alsoBy:Array<StoreApp>;
     public reviews:Array<Review> = new Array<Review>();
