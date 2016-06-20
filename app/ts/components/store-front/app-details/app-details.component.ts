@@ -16,8 +16,7 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
 @Component( {
     selector: 'app-details',
     template: require( './app-details.component.html' ),
-    styles: [require( './app-details.scss' ).toString(),
-        require( './media-carousel/media-carousel.scss' ).toString()],
+    styles: [require( './app-details.scss' ).toString()],
     directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
 } )
 export class AppDetailsComponent implements AfterViewInit
