@@ -5,7 +5,7 @@
             <button [disabled]="busy" class="btn submit-review" (click)="submitReview()">Rate and review</button>
         </div>
    
-        <form [ngFormModel]="reviewForm" (submit)="onSubmit(reviewForm.value)" novalidate>
+        <form [ngFormModel]="usernameForm" (submit)="onSubmit(usernameForm.value)" novalidate>
             <div [hidden]="!reviewing" class="">
                 <label for="reviewTitle">Title</label>
                 <input [ngFormControl]="reviewTitle" id="reviewTitle" class="form-control" style="padding: 4px;">

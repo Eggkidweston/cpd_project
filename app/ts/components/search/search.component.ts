@@ -6,7 +6,7 @@ import { AppComponent } from '../../app.component';
 @Component({
     selector: 'search',
     directives: [RouterOutlet, RouterLink],
-    styles: [require('../../../sass/search.scss').toString()],
+    styles: [require('./search.scss').toString()],
     template: require('./search.component.html')
 })
 export class SearchComponent {

@@ -1,6 +1,6 @@
 <div class="home-container">
     <div class="col span-12">
-        <search (updateSimple)="term = $event"></search>
+        <search (updateSimple)="searchTermChanged($event)"></search>
     </div>
 
     <div class="col span-12">
@@ -8,5 +8,5 @@
     </div>
 
     <pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageClicked)="onPageClicked($event)">
-    </pagination>
+     </pagination>
 </div>

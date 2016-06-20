@@ -7,6 +7,7 @@ import { Contributor } from 'models';
 import { AgoPipe } from '../../shared/ago.pipe.ts';
 import { Router } from '@angular/router-deprecated';
 import { AuthenticationService, SigninRegisterService } from "../../../services/services";
+import { ControlGroup, AbstractControl, FormBuilder, Validators, Control } from '@angular/common';
 
 let moment = require( "moment" );
 
@@ -19,13 +20,19 @@ let moment = require( "moment" );
 } )
 export class ContributorComponent
 {
+    usernameForm: ControlGroup;
+    username: AbstractControl;
+
     private _contributorId:number;
     private _contributor:Contributor;
+    private isEditingUsername: boolean = false;
+    private test: string;
 
     constructor( protected authenticationService:AuthenticationService,
                  protected router:Router,
                  protected contributorService:ContributorService,
                  protected signinRegisterService:SigninRegisterService,
+                 fb: FormBuilder,
                  params:RouteParams )
     {
         if( this.isProfile() ) {
@@ -42,6 +49,12 @@ export class ContributorComponent
             this._contributorId = +params.get( 'id' );
             this.loadContributor();
         }
+
+        this.usernameForm = fb.group({
+            "username": ["", Validators.required]
+        });
+
+        this.username = this.usernameForm.controls['username'];
     }
 
     get contributor():Contributor
@@ -52,6 +65,13 @@ export class ContributorComponent
     isProfile():boolean
     {
         return AppComponent.router.isRouteActive( AppComponent.router.generate( ['Profile'] ) );
+    }
+
+    protected onUsernameClicked() {
+        if( this.isProfile() ) {
+            (<Control>this.username).updateValue( this.contributor.username );
+            this.isEditingUsername = true;
+        }
     }
 
     protected loadContributor():void
@@ -66,5 +86,11 @@ export class ContributorComponent
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
+    }
+
+    protected usernameChanged(newUsername):void {
+        console.log(`Call the API to change username to '${newUsername}'`);
+        this.contributor.username = newUsername;
+        this.isEditingUsername = false;
     }
 }

@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { NgFor } from '@angular/common';
 import { AppWidgetComponent } from '../appwidget/appwidget.component';
 import { StoreApp } from '../../models';
 import { SearchPipe} from '../search/search-pipe';
+import { NgForm } from '@angular/common';
 
 @Component({
     selector: 'app-widgets',
     template: require('./appwidgets.component.html'),
-    styles: [require('../../../sass/appwidgets.scss').toString()],
+    styles: [require('./appwidgets.scss').toString()],
     pipes: [SearchPipe],
     directives: [AppWidgetComponent]
 })

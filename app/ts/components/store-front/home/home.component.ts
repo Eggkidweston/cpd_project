@@ -40,4 +40,8 @@ export class HomeComponent
         this.currentPage = page;
         this.getResources();
     }
+
+    searchTermChanged(newSearchTerm) {
+        console.log(newSearchTerm);
+    }
 }   
