@@ -14,7 +14,7 @@ export class SubmitReviewComponent {
     @Input() resourceId: number;
     @Output() reviewAdded: EventEmitter<Review> = new EventEmitter<Review>();
     
-    reviewForm: ControlGroup;
+    usernameForm: ControlGroup;
     reviewTitle: AbstractControl;
     reviewDescription: AbstractControl;
     reviewRating: number;
@@ -23,13 +23,13 @@ export class SubmitReviewComponent {
     reviewing: boolean = false;
     
     constructor(private appsService: AppsService, fb: FormBuilder) {
-        this.reviewForm = fb.group({
+        this.usernameForm = fb.group({
             "reviewTitle": ["", Validators.required],
             "reviewDescription": ["", Validators.required]
         });
         
-        this.reviewTitle = this.reviewForm.controls['reviewTitle'];
-        this.reviewDescription = this.reviewForm.controls['reviewDescription'];
+        this.reviewTitle = this.usernameForm.controls['reviewTitle'];
+        this.reviewDescription = this.usernameForm.controls['reviewDescription'];
     }
      
     submitReview() {
@@ -37,7 +37,7 @@ export class SubmitReviewComponent {
     }
     
     onSubmit(formVaules: any) {
-        if( this.reviewForm.valid ) {
+        if( this.usernameForm.valid ) {
             this.busy = true;
             
             let review = new Review(this.resourceId, this.reviewTitle.value, this.reviewDescription.value, this.reviewRating);
