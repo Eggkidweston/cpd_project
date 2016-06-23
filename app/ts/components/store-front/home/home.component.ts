@@ -15,9 +15,9 @@ import { PaginationComponent } from './pagination/pagination.component';
 export class HomeComponent
 {
     private storeApps:Array<StoreApp>;
-    private appsPerPage:number = 21;
+    private appsPerPage:number = 20;
     private currentPage:number = 1;
-    private totalPages:number = 10;
+    private totalPages:number = 0;
 
     constructor( private _appsService:AppsService )
     {

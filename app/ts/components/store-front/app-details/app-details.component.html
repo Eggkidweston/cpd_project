@@ -1,24 +1,34 @@
 <div class="app-details-container">
     <div class="app-details">
-        <div class="col span-2 row">
+        <div class="col span-2">
             <div class="resource-image">
                 <img src="{{ app?.image }}">
+                <div class="button-container">
+                    <button class="btn" role="button" (click)="getApp()">Get it</button>
+                    <button *ngIf="app?.runURL" class="btn" role="button" (click)="goTry()">Try It</button>
+                </div>
             </div>
-            <div class="button-container">
-                <button class="btn" role="button" (click)="getApp()">Get it</button>
-                <button *ngIf="app?.runURL" class="btn" role="button" (click)="goTry()">Try It</button>
+            
+            <div class="cost-licence-container">
+                <h4>Cost: {{ !app?.isFree ? "FREE" : "YES" }}</h4>
+                <h4>License: {{ app?.license }}</h4>
+                <!--<button type="button" class="btn btn-primary btn-xs" (click)="goLicense()">{{ app?.license }}</button>-->
             </div>
         </div>
         <div class="col span-6">
             <h2>{{ app?.title }}</h2>
             <h4>{{ app?.overview }}</h4>
             <p>{{ app?.description }}</p>
-            <p><i class="fa fa-android fa-2x" aria-hidden="true"></i><span class="created-by">Created by</span> <span
+            <p><span class="created-by">Created by</span> <span
                     class="creator-name">{{ app?.creator?.username }}</span>
                 <span class="about-this-contributor"><a [routerLink]="['Contributor', { id: app?.creator?.id }]">about this contributor</a></span>
             </p>
+            <div class="tagcloud condensed" *ngIf="app?.tags?.length > 0">
+                <h4>Tags</h4>
+                <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['TagCloud', { tag: tag.name }]">{{tag.name}}</button>
+            </div>
         </div>
-        <div class="col span-2 push-1 rating-group">
+        <div class="col span-3 push-1 rating-group">
             <div>
                 <span class="rating-text">{{ averageRating }}</span>
             </div>
@@ -37,35 +47,30 @@
                 <span *ngIf="!authenticationService?.userSignedIn()"><a
                         [routerLink]="['SignIn']">about this resource</a></span>
             </div>
+            <div *ngIf="app?.curated||app?.remixed" class="curation-remix">
+                <h4>Remix and Curation</h4>
+                <div>
+                    <div><p>This resource is open for curation and remixing.</p><p>Click the button below for more information:</p></div>
+                    <button type="button" class="btn btn-primary btn-xs" (click)="goCuration()">Resource Curation</button>
+                </div>
+            </div>
         </div>
+
     </div>
 
-    <div class="row tagcloud" *ngIf="app?.tags?.length > 0">
-        <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['TagCloud', { tag: tag.name }]">{{tag.name}}
-        </button>
-    </div>
+    <div class="row"><div class="col span-11"><hr></div></div>
 
     <div class="row">
-        <div class="col span-6 media-container">
+    <h4>Preview</h4>
+        <div class="col span-8 media-container">
             <media-carousel [resource]="app"></media-carousel>
         </div>
-
-        <div class="col span-3 push-1">
-            <h4>Cost</h4> {{ app?.costs }}
-            <h4>License</h4>
-            <button type="button" class="btn btn-primary btn-xs" (click)="goLicense()">{{ app?.license }}</button>
-            <h4>Curated?</h4>
-            <p> {{ app?.curated }}</p>
-            <button type="button" class="btn btn-primary btn-xs" (click)="goCuration()">Go to Curation</button>
-            <!--<h4>Remixable</h4>-->
-            <!--<p> {{ app?.remixable }}</p>-->
-            <!--<button type="button" class="btn btn-primary btn-xs" (click)="goDownloadSource()">Download Source</button>-->
-        </div>
     </div>
+
 
     <div class="col span-11 meta-section">
         <div *ngIf="app?.related?.length > 0">
-            <hr>
+            
             <h3>Related content</h3>
             <div class="app-widgets">
                 <app-widget class="small" *ngFor="let relatedContent of app.related"
@@ -73,7 +78,7 @@
             </div>
         </div>
         <div *ngIf="alsoBy?.length > 0">
-            <hr>
+            
             <h3>Also by {{ app?.creator?.username }}</h3>
             <div class="app-widgets">
                 <app-widget class="small" *ngFor="let alsoBy of alsoBy" [app]="alsoBy"></app-widget>

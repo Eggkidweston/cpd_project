@@ -4,16 +4,15 @@
             <template ngFor let-medium [ngForOf]="resource?.media" let-i="index">
                 <img src="{{medium.url}}"
                      [ngClass]="{'medium-selected': i===selectedMedium&&!youtubeSeleceted, 'medium-unselected': i!==selectedMedium||youtubeSelected}"
-                     (click)="onMediumClicked(i)" style="display: inline; width: 23%;"
+                     (click)="onMediumClicked(i)" 
                      class="img-responsive medium-thumbnail"/>
             </template>
             <img src="http://img.youtube.com/vi/{{extractYoutubeId(resource?.youtubeurl)}}/0.jpg" (click)="onYoutubeClicked(i)"
                  [ngClass]="{'medium-selected': youtubeSelected, 'medium-unselected': !youtubeSelected}"
-                 style="display: inline; width: 23%;"
                  class="img-responsive medium-thumbnail"/>
         </div>
 
-        <div style="width:100%">
+        <div class="video-container">
             <div>
                 <div *ngIf="youtubeSelected" class="yt-container">
                     <iframe id="ytplayer" type="text/html" class="yt-full-size"

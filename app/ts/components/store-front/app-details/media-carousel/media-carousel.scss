@@ -1,13 +1,11 @@
 .carousel-container {
-    
-
 
     .media-container 
     {
-        padding-left:16px;
+        padding:16px;
         display: -webkit-flex;
         display: flex;
-        width: 100%;
+        width: 672px;
         -webkit-flex-wrap: wrap;
         flex-wrap: wrap; 
         flex: auto;
@@ -34,21 +32,22 @@
             cursor: -moz-pointer;
             cursor: -webkit-pointer;   
             width: calc(25% - 18px);
-            margin: 16px 3px 16px 0px;
+            margin: 0px 3px 16px 0px;
+            display: inline; width: 24%;
         }
 
     }
 
-    
+    .video-container {
+        width:100%;
+    }
+        
     .medium-full-size {
-        width: calc(100% - 16px);
-        padding: 0 0 16px 0px;
     }
     
     .yt-full-size {
-        padding-bottom: 16px;
-        width: 426px;
-        height: 240px;
+        width: 640px;
+        height: 480px;
     }
     
     .yt-container {

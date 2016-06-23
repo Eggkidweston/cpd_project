@@ -1,6 +1,7 @@
 .tagcloud {
         padding-top:10px;
-        padding-bottom:10px;
+        padding-bottom:25px;
+        margin-right:50px;
 
         button {
 
@@ -19,13 +20,18 @@
         .selected{
                 background:#35B07A;    
         }
+   
+            
 
     }
 
 
-
-.row {
-	padding-top:10px;
+.condensed {
+    margin-right:0;
+    button {
+        margin-top:3px;
+        background:#b3b3b3;
+        }
 }
 
     // "webpack": "^1.12.9",

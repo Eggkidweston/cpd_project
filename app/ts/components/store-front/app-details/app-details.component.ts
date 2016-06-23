@@ -52,51 +52,18 @@ export class AppDetailsComponent implements AfterViewInit
                 storeApp =>
                 {
                     this.app = storeApp;
+                    console.log(this.app);
                     this.loadAlsoBy();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
     }
 
-    // goTry()
-    // {
-    //
-    //     var url = this.shadowApp.runURL
-    //
-    //
-    //     // window.location.href=url;
-    //
-    // }
-
     goCuration()
     {
         var url = `${appSettings.curationRoot}/#/resources/${this.app.id}/history`;
         window.location.href = url;
     }
-
-    goDownloadSource() { }
-
-    goLicenseType() { }
-
-    // getShadow()
-    // {
-    //
-    //     this.shadowApp = this.shadowApps[0];
-    //
-    //     for( var medium of this.shadowApp.media ) {
-    //         if( medium.type_id == '2' ) {
-    //             var index = medium.url.lastIndexOf( "/" );
-    //             var youTubeId = medium.url.substr( index + 1 );
-    //             medium.previewUrl = `http://img.youtube.com/vi/${ youTubeId }/0.jpg`;
-    //         } else {
-    //             medium.previewUrl = medium.url;
-    //         }
-    //     }
-    //
-    //     this.shadowApp.media[1] = this.shadowApp.media[0];
-    //     this.shadowApp.media[2] = this.shadowApp.media[0];
-    //     this.shadowApp.media[3] = this.shadowApp.media[0];
-    // }
 
     loadReviews()
     {
@@ -160,5 +127,6 @@ export class AppDetailsComponent implements AfterViewInit
         if( this.app ) return LicenseTypes[this.app.licensetype_id];
         else return "";
     }
+
 
 }

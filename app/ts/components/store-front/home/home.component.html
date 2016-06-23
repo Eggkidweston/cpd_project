@@ -1,3 +1,4 @@
+
 <div class="home-container">
     <div class="col span-12">
         <search (updateSimple)="searchTermChanged($event)"></search>
@@ -7,6 +8,7 @@
         <app-widgets [apps]="storeApps" [term]="term"></app-widgets>
     </div>
 
-    <pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageClicked)="onPageClicked($event)">
-     </pagination>
+    <div class="col span-12" *ngIf="totalPages>0">
+    	<pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageClicked)="onPageClicked($event)"></pagination>
+    </div>
 </div>

@@ -1,7 +1,12 @@
 .pagination-container-container {
+	
+	text-align:center;
+	padding-right:87px;
+
   .pagination {
-    display: flex;
-    justify-content: center;
+  	margin:0;
+  	padding:0;
+  	border-radius:0px;
   }
 
   a {
