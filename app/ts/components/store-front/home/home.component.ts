@@ -41,7 +41,4 @@ export class HomeComponent
         this.getResources();
     }
 
-    searchTermChanged(newSearchTerm) {
-        console.log(newSearchTerm);
-    }
 }   

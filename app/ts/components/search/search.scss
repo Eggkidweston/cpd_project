@@ -1,10 +1,39 @@
 .input--search {
 	font-size:1.3em;
-	width:95%;
+	width:450px;
+
 }
 
+.suggestions {
+	position: absolute;
+	
+	ul {
+		border: 1px solid #dbdbdb;
+    	padding: 3px;
+    	margin-bottom:-1px;
+    	background:#fff;
+    	width:450px;
+    	padding-right:10px;
+    	min-height:34px;
+	}
+
+	li {
+
+	}
+
+	img {
+		width:24px;
+		height:24px;
+		
+
+		margin-right:5px;
+		border-radius: 3px;
+		float:left;
+	}
+}
 
 search{
 	padding-bottom: 3em;
     display: block;
 }
+

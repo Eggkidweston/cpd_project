@@ -3,7 +3,6 @@ import { RatingComponent } from '../shared/rating/rating.component';
 import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AuthenticationService } from '../../services/services';
 import { AppsService } from '../../services/services';
-import { Apps2Service } from '../../services/apps2.service.ts';
 import {StoreApp, TagCloud} from '../../models';
 import { AppComponent } from '../../app.component';
 
@@ -33,7 +32,7 @@ export class TagCloudComponent implements AfterViewInit {
 
     constructor(public authenticationService: AuthenticationService,
                 public router: Router,
-                public appsService: AppsService, public apps2Service: Apps2Service,
+                public appsService: AppsService,
                 public cdr: ChangeDetectorRef,
                 params: RouteParams) {
         this.resourceId = +params.get('id');

@@ -50,6 +50,18 @@ export class AppsService
 
     }
 
+    public getBySearchTerm( searchTerm )
+    {
+
+       let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+        return this.http.get( `${appSettings.apiRoot}resources/?$filter=title%20eq%20'${ searchTerm }'`, { headers } )
+            .map( res => <StoreApp[]>res.json().data )
+            .catch( this.handleError );
+    }
+
     public getRecommendedApps()
     {
         return this.http.get( `${appSettings.apiRoot}resources/recommended` )

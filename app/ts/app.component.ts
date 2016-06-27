@@ -22,17 +22,14 @@ import { ContributorComponent } from 'components/store-front/contributor/contrib
 import { SubmitResourceComponent } from 'components/administration/submit-resource/submit-resource.component';
 import { ResourceMetricsComponent } from './components/store-front/resource-metrics/resource-metrics.component';
 import { AuthenticationService, appInfo } from './services/services';
-import { Apps2Service, SigninRegisterService } from "./services/services";
+import { SigninRegisterService } from "./services/services";
 import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
 
 @Component( {
     selector: 'appstore-app',
     directives: [...ROUTER_DIRECTIVES],
     styles: [require( '../sass/appstore.scss' ).toString()],
-    template: require( './app.component.html' ),
-    providers: [
-        Apps2Service
-    ]
+    template: require( './app.component.html' )
 } )
 @RouteConfig( [
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
