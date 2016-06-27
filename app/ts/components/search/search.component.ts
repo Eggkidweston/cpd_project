@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AppComponent } from '../../app.component';
 import { AppsService } from '../../services/services';
@@ -15,10 +15,8 @@ export class SearchComponent {
 
     public filteredList = [];
 	public query = '';
-	public elementRef;
  
-    constructor(myElement: ElementRef, private _appsService:AppsService) {
-        this.elementRef = myElement;
+    constructor( private _appsService:AppsService) {
     }
 	
 	select(item){
@@ -33,7 +31,7 @@ export class SearchComponent {
             this._appsService.getBySearchTerm( searchTerm)
                 .subscribe(
                     filteredList => {
-                        this.filteredList = filteredList;
+                        this.filteredList = filteredList.data;
                         
                     },
                     (error:any) => AppComponent.generalError( error.status )

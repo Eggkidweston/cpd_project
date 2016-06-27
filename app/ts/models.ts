@@ -42,6 +42,11 @@ export interface GetResourceResults {
     availableRows: number;
 }
 
+export interface GetSearchResults {
+    data: Array<StoreApp>;
+    availableRows: number;
+}
+
 export class CollatedMetrics
 {
     downloads:DownloadMetrics;

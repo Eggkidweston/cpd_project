@@ -1,7 +1,7 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults } from '../models';
+import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults } from '../models';
 import { appSettings, appInfo } from './services';
 import { AuthenticationService } from './authentication.service';
 import { Review, ResourceMetrics, ResourceMetric } from 'models';
@@ -53,12 +53,8 @@ export class AppsService
     public getBySearchTerm( searchTerm )
     {
 
-       let headers = new Headers();
-        headers.append( 'Content-Type', 'application/json' );
-        headers.append( 'x-access-token', AuthenticationService.apiKey );
-
-        return this.http.get( `${appSettings.apiRoot}resources/?$filter=title%20eq%20'${ searchTerm }'`, { headers } )
-            .map( res => <StoreApp[]>res.json().data )
+        return this.http.get( `${appSettings.apiRoot}resources?$filter=title%20eq%20'${ searchTerm }'`)
+            .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }
 
