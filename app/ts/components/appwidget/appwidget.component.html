@@ -1,6 +1,6 @@
 <div class="app-widget">
     <a [routerLink]="['AppDetails', { id: app?.id }]">
-        <div class="app-widget-container">
+        <div class="app-widget-container {{ widgetBackground }}">
                     <div class="widget-image-inner" *ngIf="app?.image">
                         <img src="{{ app?.image }}" width="128" height="128">
                     </div>
