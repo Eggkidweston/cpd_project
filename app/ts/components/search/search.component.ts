@@ -40,4 +40,9 @@ export class SearchComponent {
         	this.filteredList = [];
         }
     }
+
+    itemimage(item):string {
+        if(!item.image) return "https://s3-eu-west-1.amazonaws.com/jisc-store-content/exjorum.png";
+        return item.image;
+    }
 }

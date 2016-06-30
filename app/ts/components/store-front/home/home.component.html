@@ -5,10 +5,16 @@
     </div>
 
     <div class="col span-12">
-        <app-widgets [apps]="storeApps" [term]="term"></app-widgets>
+    	<h3>Recently added resources</h3>
+        <app-widgets [apps]="recentApps" [term]="term"></app-widgets>
     </div>
 
-    <div class="col span-12" *ngIf="totalPages>0">
-    	<pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageClicked)="onPageClicked($event)"></pagination>
+    <div class="col span-12">
+   		<h3>Jisc Picks</h3>
+        <app-widgets [apps]="recommendedApps" [term]="term"></app-widgets>
     </div>
+
+    <!--<div class="col span-12" *ngIf="totalPages>0">
+    	<pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageClicked)="onPageClicked($event)"></pagination>
+    </div>-->
 </div>

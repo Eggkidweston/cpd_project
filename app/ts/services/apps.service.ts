@@ -23,10 +23,17 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    public getRecentApps()
+    public getRecentApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources/recent` )
-            .map( res => <StoreApp[]>res.json().data )
+        return this.http.get( `${appSettings.apiRoot}resources/recent?$top=10` )
+            .map( res => <GetResourceResults[]>res.json() )
+            .catch( this.handleError );
+    }
+
+    public getRecommendedApps(appsPerPage: number, pageNumber: number)
+    {
+        return this.http.get( `${appSettings.apiRoot}resources/recommended?$top=10` )
+            .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
 
@@ -58,12 +65,7 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    public getRecommendedApps()
-    {
-        return this.http.get( `${appSettings.apiRoot}resources/recommended` )
-            .map( res => <StoreApp[]>res.json().data )
-            .catch( this.handleError );
-    }
+    
 
     public getAppDetails( appId:number )
     {

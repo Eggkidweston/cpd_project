@@ -14,23 +14,38 @@ import { PaginationComponent } from './pagination/pagination.component';
 } )
 export class HomeComponent
 {
-    private storeApps:Array<StoreApp>;
+    private recentApps:Array<StoreApp>;
+    private recommendedApps:Array<StoreApp>;
     private appsPerPage:number = 20;
     private currentPage:number = 1;
     private totalPages:number = 0;
 
     constructor( private _appsService:AppsService )
     {
-        this.getResources();
+        this.getRecentApps();
+        this.getRecommendedApps();
     }
 
-    getResources()
+    getRecentApps()
     {
-        this._appsService.getResources( this.appsPerPage, this.currentPage )
+        this._appsService.getRecentApps( this.appsPerPage, this.currentPage )
             .subscribe(
-                storeApps => {
-                    this.storeApps = storeApps.data;
-                    this.totalPages = Math.ceil(storeApps.availableRows/this.appsPerPage);
+                recentApps => {
+                    this.recentApps = recentApps.data;
+                    this.totalPages = Math.ceil(recentApps.availableRows/this.appsPerPage);
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
+    }
+
+    getRecommendedApps()
+    {
+        this._appsService.getRecommendedApps( this.appsPerPage, this.currentPage )
+            .subscribe(
+                recommendedApps => {
+                console.log(recommendedApps.data);
+                    this.recommendedApps = recommendedApps.data;
+                    this.totalPages = Math.ceil(recommendedApps.availableRows/this.appsPerPage);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -38,7 +53,7 @@ export class HomeComponent
 
     onPageClicked(page) {
         this.currentPage = page;
-        this.getResources();
+        this.getRecentApps();
     }
 
 }   
