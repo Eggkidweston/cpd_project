@@ -6,6 +6,7 @@
 }
 
 .app-widget-container {
+width:146px;
 border-radius: 15px;
 box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.19);
     background:#fff;
@@ -92,4 +93,8 @@ box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.19);
 }
 .glyphicon {
     position:inherit !important; 
+}
+
+.no-image {
+    padding-top:10px;
 }

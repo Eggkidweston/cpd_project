@@ -2,7 +2,7 @@
     <div class="app-details">
         <div class="col span-2">
             <div class="resource-image">
-                <img src="{{ app?.image }}">
+                <img src="{{ app?.image }}" *ngIf="app?.image">
                 <div class="button-container">
                     <button class="btn" role="button" (click)="goDownload()">Get it</button>
                     <button *ngIf="app?.runURL" class="btn" role="button" (click)="goTry()">Try It</button>
@@ -10,15 +10,15 @@
             </div>
             
             <div class="cost-licence-container">
-                <h4>Cost: {{ !app?.isFree ? "FREE" : "YES" }}</h4>
-                <h4>License: {{ app?.license }}</h4>
+                <h4>Cost: {{ !app?.isFree ? "FREE" : "PAID" }}</h4>
+                <h4 *ngIf="app?.license">License: {{ app?.license }}</h4>
                 <!--<button type="button" class="btn btn-primary btn-xs" (click)="goLicense()">{{ app?.license }}</button>-->
             </div>
         </div>
         <div class="col span-6">
             <h2>{{ app?.title }}</h2>
-            <h4>{{ app?.overview }}</h4>
-            <p>{{ app?.description }}</p>
+            <h4 *ngIf="app?.overview">{{ app?.overview }}</h4>
+            <p *ngIf="app?.description">{{ app?.description }}</p>
             <p><span class="created-by">Created by</span> <span
                     class="creator-name">{{ app?.creator?.username }}</span>
                 <span class="about-this-contributor"><a [routerLink]="['Contributor', { id: app?.creator?.id }]">about this contributor</a></span>
@@ -43,9 +43,9 @@
                     *ngIf="app?.metrics?.downloads?.total!=1">s</span>
             </div>
             <div class="about-this-resource">
-                <span *ngIf="authenticationService?.userSignedIn()"><a [routerLink]="['AppInfo', { id: app?.id }]">about this resource</a></span>
+                <span *ngIf="authenticationService?.userSignedIn()"><a [routerLink]="['AppInfo', { id: app?.id }]">resource metrics</a></span>
                 <span *ngIf="!authenticationService?.userSignedIn()"><a
-                        [routerLink]="['SignIn']">about this resource</a></span>
+                        [routerLink]="['SignIn']">resource metrics</a></span>
             </div>
             <div *ngIf="app?.curated||app?.remixed" class="curation-remix">
                 <h4>Remix and Curation</h4>
@@ -60,7 +60,7 @@
 
     
 
-    <div class="row">
+    <div class="row" *ngIf="app?.media?.length > 0">
     <h4>Preview</h4>
         <div class="col span-8 media-container">
             <media-carousel [resource]="app"></media-carousel>

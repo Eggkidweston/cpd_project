@@ -16,7 +16,7 @@ h4 {
 
     
 
-    .resource-image {
+    .download-resource-image {
       border: 9px solid #fff;
       border-radius: 15px;
       box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.19);
@@ -26,15 +26,15 @@ h4 {
         height: 100%;
         width: 128px;
         height: auto;
+        margin-bottom:0px;
       }
     }
     
-    .button-container {
+    .download-button-container {
       
       button {
         width: 100%;
-        margin-top: 10px;
-        
+
         border-radius: 10px;
         background: #A1D490;
         font-weight: 700;

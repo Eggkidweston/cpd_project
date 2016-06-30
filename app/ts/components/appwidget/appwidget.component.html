@@ -1,12 +1,12 @@
 <div class="app-widget">
     <a [routerLink]="['AppDetails', { id: app?.id }]">
         <div class="app-widget-container">
-                    <div class="widget-image-inner">
+                    <div class="widget-image-inner" *ngIf="app?.image">
                         <img src="{{ app?.image }}" width="128" height="128">
                     </div>
             <div>
-            
-                <div class="title-text">{{ appTitleToFit(app?.title)}}</div>
+            <div *ngIf="!app?.image" class="no-image"></div>
+                <div class="title-text">{{ app?.title}}</div>
                 <div class="rating">
                     <rating [rating]="app?.average_rating"></rating>
                 </div>
