@@ -4,7 +4,7 @@
             <div class="resource-image">
                 <img src="{{ app?.image }}">
                 <div class="button-container">
-                    <button class="btn" role="button" (click)="getApp()">Get it</button>
+                    <button class="btn" role="button" (click)="goDownload()">Get it</button>
                     <button *ngIf="app?.runURL" class="btn" role="button" (click)="goTry()">Try It</button>
                 </div>
             </div>

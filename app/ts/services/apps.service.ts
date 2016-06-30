@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults } from '../models';
 import { appSettings, appInfo } from './services';
 import { AuthenticationService } from './authentication.service';
-import { Review, ResourceMetrics, ResourceMetric } from 'models';
+import { Review, ResourceMetrics, ResourceMetric, DownloadInstructions } from 'models';
 
 let _ = require( 'underscore' );
 
@@ -144,6 +144,22 @@ export class AppsService
                 metrics => next( metrics ),
                 err => error( err )
             )
+    }
+
+    public getDownloadInstructions( resourceId:Number ) 
+    {
+        //return this.http.get( `` )
+        //    .map( res => res.json() )
+        //   .catch( this.handleError );
+
+
+        let instructions = JSON.parse( `
+        {
+            "local": "Click the continue button below to start downloading this resource.",
+            "notlocal": "Click the continue button below to visit the download page for this resource."
+        }
+        ` );
+        return Observable.of( instructions ) 
     }
 
     public getResourceCuration( resourceId:number )

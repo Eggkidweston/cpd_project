@@ -42,6 +42,8 @@ export interface GetResourceResults {
     availableRows: number;
 }
 
+
+
 export interface GetSearchResults {
     data: Array<StoreApp>;
     availableRows: number;
@@ -180,6 +182,14 @@ export interface Resource
     mediaUrls:Array<string>;
 }
 
+export interface DownloadInstructions 
+{
+    local:string;
+    notlocal:string;
+}
+
 export var ResourceTypes = ["Image", "Video", "Audio", "Archive", "Word", "PDF"];
 export var LicenseTypes = ["GPL", "Paid"];
+
+
 

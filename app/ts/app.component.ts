@@ -12,6 +12,7 @@ import { AboutComponent } from './components/about/about.component';
 import { WhoComponent } from './components/whocanregister/who.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { AppDetailsComponent } from 'components/store-front/app-details/app-details.component';
+import { DownloadComponent } from 'components/store-front/download/download.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
 import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
@@ -35,6 +36,7 @@ import { RevisionHistoryComponent } from './components/version-control/revision-
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
     { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
     { path: '/profile', name: 'Profile', component: ContributorComponent },
+    { path: '/download/:id', name: 'Download', component: DownloadComponent },
     { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
     { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
     { path: '/resource/revision/:id', name: 'AppInfo', component: RevisionHistoryComponent },

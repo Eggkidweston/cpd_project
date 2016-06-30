@@ -19,6 +19,7 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
     styles: [require( './app-details.scss' ).toString()],
     directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
 } )
+
 export class AppDetailsComponent implements AfterViewInit
 {
     public app:StoreApp;
@@ -93,17 +94,10 @@ export class AppDetailsComponent implements AfterViewInit
         this.loadReviews();
     }
 
-    getApp()
+    goDownload() 
     {
-        if( !this.authenticationService.userSignedIn() ) {
-            this.openSignIn();
-        } else {
-            this.appsService.getApp( this.resourceId )
-                .subscribe(
-                    url => window.open( url ),
-                    ( error:any ) => AppComponent.generalError( error.status )
-                );
-        }
+        var url = `/#/download/${this.resourceId}`;
+        window.location.href = url;
     }
 
     submitReview()
