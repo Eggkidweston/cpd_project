@@ -66,6 +66,12 @@ export class AppDetailsComponent implements AfterViewInit
         window.location.href = url;
     }
 
+    goTry()
+    {
+        var url = this.app.trialurl;
+        window.open(url);
+    }
+
     loadReviews()
     {
         this.appsService.getReviews( this.resourceId )
@@ -121,6 +127,7 @@ export class AppDetailsComponent implements AfterViewInit
         if( this.app ) return LicenseTypes[this.app.licensetype_id];
         else return "";
     }
+
 
 
 }

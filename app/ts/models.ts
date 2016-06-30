@@ -35,6 +35,7 @@ export class StoreApp
     widgetImageSrc:string;
     average_rating:number;
     tags:Array<string>;
+    trialurl:string;
 }
 
 export interface GetResourceResults {
@@ -189,7 +190,6 @@ export interface DownloadInstructions
 }
 
 export var ResourceTypes = ["Image", "Video", "Audio", "Archive", "Word", "PDF"];
-export var LicenseTypes = ["GPL", "Paid"];
-
+export var LicenseTypes = ["Apache License 2.0", "Apereo License", "BSD 3-Clause New or Revised license", "BSD 2-Clause Simplified or FreeBSD license", "CC0", "CC-BY", "CC-BY-SA", "CC-NC", "CC-BY-ND", "CC-BY-NC-SA", "CC-BY-NC-ND", "Common Development and Distribution License", "Eclipse Public License", "GNU General Public License (GPL)", "GNU Library or Lesser General Public License (LGPL)", "MIT License", "Mozilla Public License 2.0", "Proprietary"];
 
 

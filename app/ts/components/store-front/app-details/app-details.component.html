@@ -5,14 +5,13 @@
                 <img src="{{ app?.image }}" *ngIf="app?.image">
                 <div class="button-container">
                     <button class="btn" role="button" (click)="goDownload()">Get it</button>
-                    <button *ngIf="app?.runURL" class="btn" role="button" (click)="goTry()">Try It</button>
+                    <button *ngIf="app?.trialurl" class="btn tryit" role="button" (click)="goTry()">Try It</button>
                 </div>
             </div>
             
             <div class="cost-licence-container">
                 <h4>Cost: {{ !app?.isFree ? "FREE" : "PAID" }}</h4>
-                <h4 *ngIf="app?.license">License: {{ app?.license }}</h4>
-                <!--<button type="button" class="btn btn-primary btn-xs" (click)="goLicense()">{{ app?.license }}</button>-->
+                <h4 *ngIf="app?.licensetype_id">License: {{ licenseType }}</h4>
             </div>
         </div>
         <div class="col span-6">
