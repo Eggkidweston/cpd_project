@@ -7,7 +7,7 @@
                      (click)="onMediumClicked(i)" 
                      class="img-responsive medium-thumbnail"/>
             </template>
-            <img src="http://img.youtube.com/vi/{{extractYoutubeId(resource?.youtubeurl)}}/0.jpg" (click)="onYoutubeClicked(i)"
+            <img *ngIf="resource?.youtubeurl" src="http://img.youtube.com/vi/{{extractYoutubeId(resource?.youtubeurl)}}/0.jpg" (click)="onYoutubeClicked(i)"
                  [ngClass]="{'medium-selected': youtubeSelected, 'medium-unselected': !youtubeSelected}"
                  class="img-responsive medium-thumbnail"/>
         </div>

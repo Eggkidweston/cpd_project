@@ -10,9 +10,9 @@
             <input [ngFormControl]="username" (blur)="usernameChanged(username.value)" class="form-control edit-username">
         </form>
         <p><strong>Registered</strong> {{ contributor?.createdat }}</p>
-        <p><strong>Reputation</strong> {{ contributor?.reputation }}</p>
+        <p *ngIf="contributor?.reputation"><strong>Reputation</strong> {{ contributor?.reputation }}</p>
     </div>
-    <div class="row span-12 activity">
+    <div *ngIf="contributor?.activity" class="row span-11 activity">
         <hr/>
         <h2>Activity</h2>
         <div class="activity-table span-12">
@@ -27,6 +27,8 @@
                 <hr/>
             </div>
         </div>
+    </div>
+    <div class="row col span-11">
         <hr/>
         <h2>Content by {{ contributor?.username }}</h2>
         <div class="app-widgets">
