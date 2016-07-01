@@ -1,3 +1,4 @@
+
 <div class="app-details-container">
     <div class="app-details">
         <div class="col span-2">
@@ -16,6 +17,8 @@
         </div>
         <div class="col span-6">
             <h2>{{ app?.title }}</h2>
+            <div class="jorum-note" *ngIf="app?.jorum_legacy_flag"><strong>Jorum</strong> - Created on {{app?.jorum_legacy_lastmodified}} by <strong>{{app?.jorum_legacy_name}}</strong> of <strong>{{app?.jorum_legacy_type}}</strong></div>
+
             <h4 *ngIf="app?.overview">{{ app?.overview }}</h4>
             <p *ngIf="app?.description">{{ app?.description }}</p>
             <p><span class="created-by">Created by</span> <span

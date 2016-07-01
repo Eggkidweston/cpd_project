@@ -10,6 +10,7 @@ import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
 import { MediaCarouselComponent } from './media-carousel/media-carousel.component';
 
+let moment = require( "moment" );
 
 require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js" );
 
@@ -54,6 +55,9 @@ export class AppDetailsComponent implements AfterViewInit
                 {
                     this.app = storeApp;
                     console.log(this.app);
+                    var jorum_legacy_lastmodified = moment(this.app.jorum_legacy_lastmodified);
+                    this.app.jorum_legacy_lastmodified = jorum_legacy_lastmodified.format("D MMM YYYY");
+
                     this.loadAlsoBy();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )

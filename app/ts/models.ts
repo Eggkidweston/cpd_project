@@ -36,6 +36,8 @@ export class StoreApp
     average_rating:number;
     tags:Array<string>;
     trialurl:string;
+    jorum_legacy_lastmodified:string;
+
 }
 
 export interface GetResourceResults {
