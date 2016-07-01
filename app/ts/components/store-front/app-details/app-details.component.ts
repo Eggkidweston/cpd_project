@@ -28,6 +28,7 @@ export class AppDetailsComponent implements AfterViewInit
     public alsoBy:Array<StoreApp>;
     public reviews:Array<Review> = new Array<Review>();
     public widgetBackground:string;
+    public files:Array<string>;
 
     public errorMessage:string;
 
@@ -55,7 +56,7 @@ export class AppDetailsComponent implements AfterViewInit
                 storeApp =>
                 {
                     this.app = storeApp;
-                    
+                   
                     var jorum_legacy_lastmodified = moment(this.app.jorum_legacy_lastmodified);
                     this.app.jorum_legacy_lastmodified = jorum_legacy_lastmodified.format("D MMM YYYY");
 
