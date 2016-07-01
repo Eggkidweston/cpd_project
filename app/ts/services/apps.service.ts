@@ -23,9 +23,23 @@ export class AppsService
             .catch( this.handleError );
     }
 
+    public getMostDownloadedApps(appsPerPage: number, pageNumber: number)
+    {
+        return this.http.get( `${appSettings.apiRoot}resources?$orderby=downloadcount%20desc&$top=10` )
+            .map( res => <GetResourceResults[]>res.json() )
+            .catch( this.handleError );
+    }
+
     public getRecentApps(appsPerPage: number, pageNumber: number)
     {
         return this.http.get( `${appSettings.apiRoot}resources/recent?$top=10` )
+            .map( res => <GetResourceResults[]>res.json() )
+            .catch( this.handleError );
+    }
+
+    public getLastUpdatedApps(appsPerPage: number, pageNumber: number)
+    {
+        return this.http.get( `${appSettings.apiRoot}resources?$orderby=updatedat%20desc&$top=10` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }

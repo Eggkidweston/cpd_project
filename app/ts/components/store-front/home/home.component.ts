@@ -14,16 +14,33 @@ import { PaginationComponent } from './pagination/pagination.component';
 } )
 export class HomeComponent
 {
+    private mostDownloadedApps:Array<StoreApp>;
     private recentApps:Array<StoreApp>;
+    private lastUpdatedApps:Array<StoreApp>;
     private recommendedApps:Array<StoreApp>;
+
     private appsPerPage:number = 20;
     private currentPage:number = 1;
     private totalPages:number = 0;
 
     constructor( private _appsService:AppsService )
     {
+        this.getMostDownloadedApps();
         this.getRecentApps();
+        this.getLastUpdatedApps();
         this.getRecommendedApps();
+    }
+
+    getMostDownloadedApps()
+    {
+        this._appsService.getMostDownloadedApps( this.appsPerPage, this.currentPage )
+            .subscribe(
+                mostDownloadedApps => {
+                    this.mostDownloadedApps = mostDownloadedApps.data;
+                    this.totalPages = Math.ceil(mostDownloadedApps.availableRows/this.appsPerPage);
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
     }
 
     getRecentApps()
@@ -33,6 +50,18 @@ export class HomeComponent
                 recentApps => {
                     this.recentApps = recentApps.data;
                     this.totalPages = Math.ceil(recentApps.availableRows/this.appsPerPage);
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
+    }
+
+    getLastUpdatedApps()
+    {
+        this._appsService.getLastUpdatedApps( this.appsPerPage, this.currentPage )
+            .subscribe(
+                lastUpdatedApps => {
+                    this.lastUpdatedApps = lastUpdatedApps.data;
+                    this.totalPages = Math.ceil(lastUpdatedApps.availableRows/this.appsPerPage);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -50,6 +79,8 @@ export class HomeComponent
                 ( error:any ) => AppComponent.generalError( error.status )
             );
     }
+
+
 
     onPageClicked(page) {
         this.currentPage = page;
