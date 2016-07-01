@@ -70,47 +70,22 @@
 <header class="masthead masthead--focussed" role="banner" data-mobilemenu-focussed="" *ngIf="narrowHeader">
       <div class="masthead__top">
         <div class="inner">
-          <a id="skiplinks" class="visuallyhidden focusable in-page" href="#main" tabindex="1">
-            <span>Skip to main content</span>
-          </a>
+          
           <a class="masthead__logo" href="//jisc.ac.uk">
             <img alt="Jisc logo" src="http://ux.jisc.ac.uk/ui/img/logo.png">
           </a>
+          <div class=" masthead__nav--primary masthead__nav--secondary">
+                {{ appVersion }}
+            </div>
           <div id="nav" class="title-nav" data-dropdown="">
             <div class="has-popup masthead__nav__item" data-dropdown-item="">
               <h1 class="masthead__title masthead__title--long">
-                <a href="">
-                  Journal Usage Statistics Portal
-                </a>
-              </h1>
-              <div class="submenu">
-                <ul>
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Events and Webinars</a></li>
-                  <li><a href="#">Participants</a></li>
-                  <li><a href="#">Join</a></li>
-                </ul>
-              </div>
+                  {{ appInfoname }}
+               </h1>
+              
             </div>
           </div>
-          <nav class="masthead__nav masthead__nav--primary" role="navigation" data-dropdown="">
-            <ul>
-              <li class="masthead__nav__item masthead__nav__item--button  ">
-                <a href="#">Portal</a>
-              </li>
-              <li class="masthead__nav__item  has-popup " data-dropdown-item="">
-                <a href="#">Support</a>
-                <div class="submenu">
-                  <ul>
-                    <li><a href="#">Guides to the reports</a></li>
-                    <li><a href="#">Use cases</a></li>
-                    <li><a href="#">Frequently asked questions</a></li>
-                    <li><a href="#">Glossary</a></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </nav>
+         
         </div>
       </div>
     </header>
