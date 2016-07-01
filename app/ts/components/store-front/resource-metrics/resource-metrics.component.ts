@@ -14,7 +14,7 @@ let moment = require( "moment" );
 @Component( {
     selector: 'resource-metrics',
     template: require( './resource-metrics.component.html' ),
-    styles: [require( './resource-metrics.component.scss' ).toString()],
+    styles: [require( './resource-metrics.component.scss' ).toString(), require('../../../../sass/typeimage.scss').toString()],
     directives: [PeriodIndicator]
 } )
 export class ResourceMetricsComponent implements AfterViewInit {
@@ -24,6 +24,7 @@ export class ResourceMetricsComponent implements AfterViewInit {
     private resourceMetrics:ResourceMetrics;
     private resource:StoreApp;
     private remixedFromResource:StoreApp;
+    public widgetBackground:string;
 
     constructor( protected appsService:AppsService,
                  params:RouteParams ) {
@@ -32,13 +33,17 @@ export class ResourceMetricsComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.loadResourceMetrics();
+        
     }
 
     protected loadResource() {
         this.appsService.getAppDetails( this._resourceId )
             .subscribe(
-                app => this.resource = app,
+                app => {    
+                    this.resource = app;
+                    this.setWidgetBackground();
+                    this.loadResourceMetrics();
+                },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
 
@@ -55,37 +60,46 @@ export class ResourceMetricsComponent implements AfterViewInit {
 
         this.appsService.getResourceMetrics( this._resourceId, moment().format( "YYYY-MM" ),
             ( metrics:ResourceMetrics ) => {
-                var ctx = this.chartCavnas.nativeElement;
-                var labels = new Array<string>();
-                var data = new Array<number>();
+                if(this.chartCavnas) {
+                    var ctx = this.chartCavnas.nativeElement;
+                    var labels = new Array<string>();
+                    var data = new Array<number>();
 
-                _.each( _.flatten( _.each( metrics, ( monthMetrics ) => monthMetrics.reverse() ) ), ( dayMetric ) => {
-                    data.unshift( dayMetric.total );
-                    labels.unshift( d.subtract( 1, 'd' ).format( "MMM D" ) );
-                } );
+                    _.each( _.flatten( _.each( metrics, ( monthMetrics ) => monthMetrics.reverse() ) ), ( dayMetric ) => {
+                        data.unshift( dayMetric.total );
+                        labels.unshift( d.subtract( 1, 'd' ).format( "MMM D" ) );
+                    } );
 
-                Chart.defaults.global.legend.display = false;
+                    Chart.defaults.global.legend.display = false;
 
-                var myChart = new Chart( ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            data: data,
-                            backgroundColor: "rgb(169, 33, 115)"
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
+                    var myChart = new Chart( ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                data: data,
+                                backgroundColor: "rgb(169, 33, 115)"
                             }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
                         }
-                    }
-                } );
+                    } );
+                }
             },
             ( err ) => Observable.throw( `Error: ${JSON.stringify( err )}` ) );
+    }
+
+    setWidgetBackground() 
+    {
+        if(!this.resource.image) {
+        this.widgetBackground = "backgroundimage" + this.resource.type_id + " nowidgetborder";
+        }
     }
 }

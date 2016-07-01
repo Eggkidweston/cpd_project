@@ -17,7 +17,7 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
 @Component( {
     selector: 'app-details',
     template: require( './app-details.component.html' ),
-    styles: [require( './app-details.scss' ).toString()],
+    styles: [require( './app-details.scss' ).toString(), require('../../../../sass/typeimage.scss').toString()],
     directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
 } )
 
@@ -27,6 +27,7 @@ export class AppDetailsComponent implements AfterViewInit
     public resourceId:number;
     public alsoBy:Array<StoreApp>;
     public reviews:Array<Review> = new Array<Review>();
+    public widgetBackground:string;
 
     public errorMessage:string;
 
@@ -54,9 +55,11 @@ export class AppDetailsComponent implements AfterViewInit
                 storeApp =>
                 {
                     this.app = storeApp;
-                    console.log(this.app);
+                    
                     var jorum_legacy_lastmodified = moment(this.app.jorum_legacy_lastmodified);
                     this.app.jorum_legacy_lastmodified = jorum_legacy_lastmodified.format("D MMM YYYY");
+
+                    this.setWidgetBackground();
 
                     this.loadAlsoBy();
                 },
@@ -132,6 +135,11 @@ export class AppDetailsComponent implements AfterViewInit
         else return "";
     }
 
-
+    setWidgetBackground() 
+    {
+        if(!this.app.image) {
+        this.widgetBackground = "backgroundimage" + this.app.type_id + " nowidgetborder";
+        }
+    }
 
 }

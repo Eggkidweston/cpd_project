@@ -6,7 +6,7 @@ import { Resource } from '../../models';
 @Component({
   selector: 'app-widget',
   template: require('./appwidget.component.html'),
-  styles: [require('../../../sass/appwidget.scss').toString()],
+  styles: [require('../../../sass/appwidget.scss').toString(), require('../../../sass/typeimage.scss').toString()],
   directives: [RouterOutlet, RouterLink, RatingComponent]
 })
 export class AppWidgetComponent {
@@ -20,7 +20,7 @@ export class AppWidgetComponent {
     get widgetBackground():string 
     {
     	if(!this.app.image) {
-    		return "backgroundimage";
+    		return "backgroundimage" + this.app.type_id;
     	}
     	return "";
     }

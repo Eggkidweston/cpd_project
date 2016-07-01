@@ -2,7 +2,7 @@
 <div class="app-details-container">
     <div class="app-details">
         <div class="col span-2">
-            <div class="resource-image">
+            <div class="resource-image {{ widgetBackground }}">
                 <img src="{{ app?.image }}" *ngIf="app?.image">
                 <div class="button-container">
                     <button class="btn" role="button" (click)="goDownload()">Get it</button>
@@ -12,7 +12,7 @@
             
             <div class="cost-licence-container">
                 <h4>Cost: {{ !app?.isFree ? "FREE" : "PAID" }}</h4>
-                <h4 *ngIf="app?.licensetype_id">License: {{ licenseType }}</h4>
+                <h4 *ngIf="app?.licensetype_id">License<br /> {{ licenseType }}</h4>
             </div>
         </div>
         <div class="col span-6">

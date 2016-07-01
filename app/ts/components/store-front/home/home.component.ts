@@ -72,7 +72,6 @@ export class HomeComponent
         this._appsService.getRecommendedApps( this.appsPerPage, this.currentPage )
             .subscribe(
                 recommendedApps => {
-                console.log(recommendedApps.data);
                     this.recommendedApps = recommendedApps.data;
                     this.totalPages = Math.ceil(recommendedApps.availableRows/this.appsPerPage);
                 },

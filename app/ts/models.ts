@@ -14,7 +14,7 @@ export class User
 export class StoreApp
 {
     id:string;
-
+    type_id:number;
     createdby:number;
     createdDate:string;
     description:string;
@@ -37,7 +37,7 @@ export class StoreApp
     tags:Array<string>;
     trialurl:string;
     jorum_legacy_lastmodified:string;
-
+    image:string;
 }
 
 export interface GetResourceResults {
