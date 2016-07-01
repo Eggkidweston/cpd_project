@@ -13,6 +13,7 @@ import { WhoComponent } from './components/whocanregister/who.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { AppDetailsComponent } from 'components/store-front/app-details/app-details.component';
 import { DownloadComponent } from 'components/store-front/download/download.component';
+import { TryComponent } from 'components/store-front/try/try.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
 import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
@@ -25,6 +26,7 @@ import { ResourceMetricsComponent } from './components/store-front/resource-metr
 import { AuthenticationService, appInfo } from './services/services';
 import { SigninRegisterService } from "./services/services";
 import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
+import myGlobals = require('./globals'); 
 
 @Component( {
     selector: 'appstore-app',
@@ -37,6 +39,7 @@ import { RevisionHistoryComponent } from './components/version-control/revision-
     { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
     { path: '/profile', name: 'Profile', component: ContributorComponent },
     { path: '/download/:id', name: 'Download', component: DownloadComponent },
+    { path: '/try/:id', name: 'Try', component: TryComponent },
     { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
     { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
     { path: '/resource/revision/:id', name: 'AppInfo', component: RevisionHistoryComponent },
@@ -57,6 +60,7 @@ export class AppComponent
     static router:Router;
     public appInfoname:String;
     private appVersion:String;
+    public narrowHeader:Boolean;
 
     constructor( public authenticationService:AuthenticationService,
                  protected signinRegisterService:SigninRegisterService,
@@ -65,6 +69,17 @@ export class AppComponent
         this.appInfoname = appInfo.name;
         this.appVersion = appInfo.version;
         AppComponent.router = router;
+        this.narrowHeader = myGlobals.narrowHeader;
+
+        router.subscribe((value: any) => {
+        
+            if( value.indexOf('try/')==0 ) {
+                this.narrowHeader = true;
+            }else{
+                this.narrowHeader = false;
+            }
+
+        })
     }
 
     signOut()

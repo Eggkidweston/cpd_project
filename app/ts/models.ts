@@ -193,5 +193,3 @@ export interface DownloadInstructions
 export var ResourceTypes = ["APPLEAPP", "ANDROIDAPP", "IMAGE", "VIDEO", "AUDIO", "ARCHIVE_WEB", "ARCHIVE_OTHER", "WORD", "PDF"];
 
 export var LicenseTypes = ["Apache License 2.0", "Apereo License", "BSD 3-Clause New or Revised license", "BSD 2-Clause Simplified or FreeBSD license", "CC0", "CC-BY", "CC-BY-SA", "CC-NC", "CC-BY-ND", "CC-BY-NC-SA", "CC-BY-NC-ND", "Common Development and Distribution License", "Eclipse Public License", "GNU General Public License (GPL)", "GNU Library or Lesser General Public License (LGPL)", "MIT License", "Mozilla Public License 2.0", "Proprietary"];
-
-

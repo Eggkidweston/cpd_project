@@ -66,11 +66,7 @@ export class AppDetailsComponent implements AfterViewInit
         window.location.href = url;
     }
 
-    goTry()
-    {
-        var url = this.app.trialurl;
-        window.open(url);
-    }
+    
 
     loadReviews()
     {
@@ -100,10 +96,14 @@ export class AppDetailsComponent implements AfterViewInit
         this.loadReviews();
     }
 
+    goTry()
+    {
+        this.router.navigate( ['Try', { id: this.resourceId }] );
+    }
+
     goDownload() 
     {
-        var url = `/#/download/${this.resourceId}`;
-        window.location.href = url;
+        this.router.navigate( ['Download', { id: this.resourceId }] );
     }
 
     submitReview()
