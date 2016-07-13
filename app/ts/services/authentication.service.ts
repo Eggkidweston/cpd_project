@@ -1,30 +1,52 @@
-import { Injectable, bind } from 'angular2/core';
-import { Http, Headers } from 'angular2/http';
-import { Response } from '../../../node_modules/angular2/src/http/static_response.d.ts';
+import { Injectable, bind } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 import { appSettings } from './services';
 import { User } from '../models';
 
 @Injectable()
 export class AuthenticationService {
-    // move to locale storage
     private static _user: User = null;
-    private static API_KEY: string;
+    private static _apiKey: string;
 
     constructor(private http: Http) {
     }
 
-    get user(): User {
-        return AuthenticationService._user;
+    static get user(): User {
+        if (typeof(Storage) !== "undefined") {
+            return <User>(JSON.parse(localStorage.getItem("_user")));
+        } else {
+            return AuthenticationService._user;
+        }
     }
 
-    get userSignedIn(): boolean {
-        return AuthenticationService._user != null;
+    static set user(user:User) {
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("_user", JSON.stringify(user));
+        }
+
+        AuthenticationService._user = user;
     }
-    
-    get apiKey(): string {
-        return AuthenticationService.API_KEY;
+
+    userSignedIn(): boolean {
+        var result = AuthenticationService.user != null;
+        return result;
+    }
+
+    static get apiKey(): string {
+        if (typeof(Storage) !== "undefined") {
+            return localStorage.getItem("_apiKey");
+        } else {
+            return AuthenticationService._apiKey;
+        }
+    }
+
+    static set apiKey(apiKey:string) {
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("_apiKey", apiKey);
+        }
+
+        AuthenticationService._apiKey = apiKey;
     }
 
     register(email: string, username:string, password: string,
@@ -45,8 +67,7 @@ export class AuthenticationService {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    AuthenticationService._user = data.user;
-                    console.log(data.user);
+                    AuthenticationService.user = data.user;
                     next();
                 },
                 err => error(err),
@@ -66,29 +87,31 @@ export class AuthenticationService {
                 emailOrUsername: emailOrUsername,
                 password: password
             }), { headers })
-            .map(res => res.json())
+            .map(res => <any>res.json())
             .subscribe(
                 data => {
-                    AuthenticationService.API_KEY = data.token;
-                    headers.append('x-access-token', AuthenticationService.API_KEY);
+                    AuthenticationService.apiKey = <any>data.token;
+                    headers.append('x-access-token', AuthenticationService.apiKey);
                     this.http.get(`${appSettings.apiRoot}users/me`, { headers })
                         .map(res => res.json())
-                        .subscribe(data => AuthenticationService._user = data.user)
-                    next();
+                        .subscribe(data => {
+                            AuthenticationService.user = data.user;
+                            next();
+                        });
                 },
                 err => error(err)
             );
     }
 
-    signOut() {
-        AuthenticationService.API_KEY = null;
-        AuthenticationService._user = null;
+    static signOut() {
+        AuthenticationService.apiKey = null;
+        AuthenticationService.user = null;
     }
 
-    isEmailOrUsernameInUse(emailOrUsername: string, 
-        exists: (exists: boolean) => void, 
+    isEmailOrUsernameInUse(emailOrUsername: string,
+        exists: (exists: boolean) => void,
         err: (res: Response) => void,
-        complete: () => void) 
+        complete: () => void)
     {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');

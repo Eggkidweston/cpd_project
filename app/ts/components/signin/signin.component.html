@@ -1,58 +1,22 @@
-<section id="signin_alt" class="signin-height-adjust authenty signin-alt">
-    <div class="section-content">
-        <div class="container">
-            <div class="row animated fadeInUp">
-                <div class="col-md-4 col-md-offset-1">
-                    <div class="normal-signin">
-                        <div class="title">
-                            <h3>Sign In</h3>
-                        </div>
-                        <form [class.shake]="shaking" [class.animated]="shaking" [ngFormModel]="signInForm" (submit)="onSubmit(signInForm.value)" novalidate>
-                            <div class="form-main">
-                                <div class="form-group">
-                                    <div class="un-wrap">
-                                        <i class="fa fa-user"></i>
-                                        <input style="padding-top:0; padding-bottom:0;" [disabled]="busy"type="text" class="form-control" placeholder="Email address or username" [ngFormControl]="emailOrUsername" required="required">
-                                    </div>
-                                    <div class="pw-wrap">
-                                        <i class="fa fa-lock"></i>
-                                        <input style="padding-top:0; padding-bottom:0;" [disabled]="busy" type="password" class="form-control" placeholder="Password" required="required" [ngFormControl]="password">
-                                    </div>
-                                    <!--<div class="row">
-                                        <div class="col-md-6">
-                                            <input [disabled]="busy" type="checkbox" class="form-control" checked id="rememberMe" [ngFormControl]="rememberMe" #rememberMeElement>
-                                            <label>Remember me</label>
-                                        </div>
-                                    </div>-->
-                                    <div class="row top-buffer">
-                                        <div class="col-md-4 col-md-offset-8">
-                                            <button [disabled]="busy" class="btn btn-block signin" type="submit">Sign In</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+<div class="col">
+    <form class="form" [ngFormModel]="signInForm" (submit)="onSubmit(signInForm.value)" novalidate>
+        <fieldset class="form__fieldset">
+            <legend>
+                <span class="legend-text"><h3>Sign in</h3></span>
+            </legend>
+            <div [class.shake]="shaking" [class.animated]="shaking" >
+                <div>
+                    <input [disabled]="busy" type="text" class="input--large" placeholder="Email address or username" [ngFormControl]="emailOrUsername" required="required">
                 </div>
-                <div class="col-md-2">
-                    <div class="horizontal-divider"></div>
-                </div>
-                <div class="col-md-4">
-                    <div class="sns-signin">
-                        <a href="#" class="facebook"><i class="fa fa-facebook"></i><span>Sign in with Facebook</span></a>
-                        <a href="#" class="google-plus"><i class="fa fa-google-plus"></i><span>Sign in with Google+</span></a>
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
-            <div class="row top-buffer bottom-wrap">
-                <div class="col-xs-6 col-md-2 col-md-offset-1">
-                    <a href="#" id="forgot_from_2">Fogotten your password?</a>
-                </div>
-                <div class="col-xs-6 col-md-2">
-                    <a [routerLink]="['Register']" id="signup_from_2">Create an account</a>
+                <div>
+                    <input [disabled]="busy" type="password" class="input--large" placeholder="Password" required="required" [ngFormControl]="password">
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+            
+            <div class="pull-right">
+                <button [disabled]="busy" class="btn--3d btn--primary btn--large" type="submit">Sign In</button>
+            </div>
+            <div><a [routerLink]="['Register']" id="signup_from_2">Create an account</a></div>
+        </fieldset>
+    </form>
+</div>

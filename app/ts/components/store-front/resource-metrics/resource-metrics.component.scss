@@ -1,0 +1,99 @@
+%download-metrics-box {
+  border: 9px solid #fff;
+  border-radius: 15px;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.19);
+  width: 112px;
+  height: 112px;
+  margin-right: 24px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+
+  .download-period {
+    text-transform: uppercase;
+    font-size: 2em;
+    color: #ababab;
+  }
+
+  .digits {
+    font-size: 2em;
+    color: #333333;
+    font-weight: bold;
+  }
+}
+
+.download-collation {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding-top: 48px;
+}
+
+.resource-metrics-container {
+  .resource-image {
+    border: 9px solid #fff;
+    border-radius: 15px;
+    box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.19);
+    width: 128px;
+    margin-right: 24px;
+
+    img {
+      border-radius: 10px;
+    }
+  }
+
+  .resource-details {
+    h2 {
+      margin-top: 0;
+    }
+  }
+
+  .remixed-from-resource-image {
+    border: 9px solid #fff;
+    border-radius: 15px;
+    box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.19);
+    width: 82px;
+    margin-right: 12px;
+
+    img {
+      border-radius: 10px;
+    }
+  }
+
+  .remixed-resource-details {
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .updated {
+    color: #cf1b1a;
+  }
+
+  .downloads {
+    margin-top: 24px;
+  }
+
+  .today-downloads {
+    @extend %download-metrics-box;
+  }
+
+  .week-downloads {
+    @extend %download-metrics-box;
+  }
+
+  .month-downloads {
+    @extend %download-metrics-box;
+  }
+}

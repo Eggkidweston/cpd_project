@@ -5,49 +5,104 @@
  * </license>
  */
 
-/// <reference path="../../typings/tsd.d.ts" />
-import { Directive, Component, ElementRef, Renderer } from 'angular2/core'
-import { RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
-import { Http, Headers } from 'angular2/http';
-import { HomeComponent } from './components/home/home.component';
-import { AppDetailsComponent } from './components/appdetails/appdetails.component';
+import { Component } from '@angular/core'
+import { RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { HomeComponent } from 'components/store-front/home/home.component';
+import { AboutComponent } from './components/about/about.component';
+import { WhoComponent } from './components/whocanregister/who.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
+import { AppDetailsComponent } from 'components/store-front/app-details/app-details.component';
+import { DownloadComponent } from 'components/store-front/download/download.component';
+import { TryComponent } from 'components/store-front/try/try.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
+import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AuthenticationService } from './services/services';
+import { AppEditComponent } from './components/appedit/appedit.component';
+import { AppInfoComponent } from './components/app-info/app-info.component';
+import { ContributorComponent } from 'components/store-front/contributor/contributor.component';
+import { SubmitResourceComponent } from 'components/administration/submit-resource/submit-resource.component';
+import { ResourceMetricsComponent } from './components/store-front/resource-metrics/resource-metrics.component';
+import { AuthenticationService, appInfo } from './services/services';
+import { SigninRegisterService } from "./services/services";
+import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
+import myGlobals = require('./globals'); 
 
-
-@Component({
+@Component( {
     selector: 'appstore-app',
-    directives: [ ...ROUTER_DIRECTIVES ],
-    styles: [require('../sass/appstore.scss').toString()],
-    template: require('./app.component.html')
-})
-@RouteConfig([
+    directives: [...ROUTER_DIRECTIVES],
+    styles: [require( '../sass/appstore.scss' ).toString()],
+    template: require( './app.component.html' )
+} )
+@RouteConfig( [
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
-    { path: '/appdetails/:id', name: 'AppDetails', component: AppDetailsComponent },
+    { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
+    { path: '/profile', name: 'Profile', component: ContributorComponent },
+    { path: '/download/:id', name: 'Download', component: DownloadComponent },
+    { path: '/try/:id', name: 'Try', component: TryComponent },
+    { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
+    { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
+    { path: '/resource/revision/:id', name: 'AppInfo', component: RevisionHistoryComponent },
+    { path: '/resource/metrics/:id', name: 'AppInfo', component: ResourceMetricsComponent },
+    { path: '/contributor/:id', name: 'Contributor', component: ContributorComponent },
     { path: '/error', name: 'Error', component: ErrorComponent },
     { path: '/signin', name: 'SignIn', component: SignInComponent },
-    { path: '/register', name: 'Register', component: RegisterComponent }
-])
-export class AppComponent {
-    static router: Router;
-    private currentRoute: string;
-    public atSignIn: boolean = false;
-    
-    constructor(public authenticationService: AuthenticationService, router: Router) {
+    { path: '/register', name: 'Register', component: RegisterComponent },
+    { path: '/about', name: 'About', component: AboutComponent },
+    { path: '/whocanregister', name: 'Who', component: WhoComponent },
+    { path: '/tagcloud', name: 'TagCloud', component: TagCloudComponent },
+    { path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
+    { path: '/feedback', name: 'Feedback', component: FeedbackComponent }
+] )
+
+export class AppComponent
+{
+    static router:Router;
+    public appInfoname:String;
+    private appVersion:String;
+    public narrowHeader:Boolean;
+
+    constructor( public authenticationService:AuthenticationService,
+                 protected signinRegisterService:SigninRegisterService,
+                 router:Router )
+    {
+        this.appInfoname = appInfo.name;
+        this.appVersion = appInfo.version;
         AppComponent.router = router;
+        this.narrowHeader = myGlobals.narrowHeader;
+
         router.subscribe((value: any) => {
-            this.currentRoute = value;
-            this.atSignIn = this.currentRoute === "signin";
+        
+            if( value.indexOf('try/')==0 ) {
+                this.narrowHeader = true;
+            }else{
+                this.narrowHeader = false;
+            }
+
         })
     }
-    
-    signOut() {
-        this.authenticationService.signOut();
+
+    signOut()
+    {
+        AuthenticationService.signOut();
+        AppComponent.router.navigate( ['Home'] );
+    }
+
+    isRouteActive( instruction:any[] ):boolean
+    {
+        return AppComponent.router.isRouteActive( AppComponent.router.generate( instruction ) );
     }
     
-    static generalError(status: any) {
-        AppComponent.router.navigate(['Error', {status: status}]);
+    // ok, I confess, this needs refactoring. This is not a good
+    // approach to intercomponent communication. And it creates
+    // a necessity for a static router, which is smelly
+    static generalError( status:any )
+    {
+        if( status == 401 ) {
+            AuthenticationService.signOut();
+            AppComponent.router.navigate( ['Profile'] );
+        } else {
+            AppComponent.router.navigate( ['Error', { status: status }] );
+        }
     }
 }

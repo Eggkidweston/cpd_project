@@ -1,0 +1,34 @@
+.revision-history-container {
+  button {
+    text-transform: none;
+  }
+
+  hr {
+    margin-top: 32px;
+    margin-bottom: 0;
+  }
+
+  .resource-image {
+    border: 9px solid #fff;
+    border-radius: 15px;
+    box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.19);
+    width: 128px;
+    margin-right: 24px;
+
+    img {
+      border-radius: 10px;
+    }
+  }
+
+  .resource-details {
+    h2 {
+      margin-top: 0;
+    }
+  }
+
+  .revisions {
+    width: 100%;
+    background-color: #eeeeee;
+    padding: 4px;
+  }
+}

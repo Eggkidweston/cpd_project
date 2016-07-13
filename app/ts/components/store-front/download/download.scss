@@ -1,0 +1,81 @@
+.app-details-container {
+h4 {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  .app-details {
+    h2 {
+      margin-top: 0px;
+    }
+
+    h3 {
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    
+
+    .download-resource-image {
+      border: 9px solid #fff;
+      border-radius: 15px;
+      box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.19);
+      width: 128px;
+      img {
+        border-radius: 10px;
+        height: 100%;
+        width: 128px;
+        height: auto;
+        margin-bottom:0px;
+      }
+    }
+    
+    .download-button-container {
+      
+      button {
+        width: 100%;
+
+        border-radius: 10px;
+        background: #A1D490;
+        font-weight: 700;
+      }
+    }
+    .cost-licence-container {
+    margin-top: 23px;
+    }
+
+    .creator-name {
+      font-weight: 700;
+    }
+
+    .rating-group {
+      text-align: center;
+    }
+
+    .related {
+      background: #efefef;
+    }
+
+    .app-widgets {
+      padding-bottom: 0px;
+    }
+.back-link {
+  
+  button {
+        width: 128px;
+        margin-top: 10px;
+        
+        border-radius: 10px;
+        background: #cfcfcf;
+        font-weight: 700;
+      }
+
+}
+
+
+}
+
+
+
+}
+

@@ -1,0 +1,60 @@
+.carousel-container {
+
+    .media-container 
+    {
+        margin-bottom:20px;
+        padding:16px;
+        display: -webkit-flex;
+        display: flex;
+        width: 672px;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap; 
+        flex: auto;
+        border-radius: 15px;
+        box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.19);
+        background:#fff;
+        overflow:hidden;
+        -webkit-align-items: stretch;
+        align-items: stretch;
+        
+        .medium {
+        }
+        
+        .medium-selected {
+            border: 2px ridge #337ab7;
+        }
+        
+        .medium-unselected {
+            border: 2px solid transparent;
+        }
+        
+        .medium-thumbnail {
+            cursor: pointer;
+            cursor: -moz-pointer;
+            cursor: -webkit-pointer;   
+            width: calc(25% - 18px);
+            margin: 0px 3px 16px 0px;
+            display: inline; width: 24%;
+        }
+
+    }
+
+    .video-container {
+        width:100%;
+    }
+        
+    .medium-full-size {
+    }
+    
+    .yt-full-size {
+        width: 640px;
+        height: 480px;
+    }
+    
+    .yt-container {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        -webkit-justify-content: center;
+    }
+}

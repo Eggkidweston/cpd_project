@@ -1,0 +1,40 @@
+.tagcloud {
+        padding-top:10px;
+        padding-bottom:25px;
+        margin-right:50px;
+
+        button {
+
+            color:#fff;
+        	font-size:0.85em;
+            margin-top: 10px;
+            border-radius: 10px;
+            background:#a92173;
+            font-weight:700;
+            margin-right:3px;
+             
+        }
+        button:hover {
+            color:#000;
+        }
+        .selected{
+                background:#35B07A;    
+        }
+   
+            
+
+    }
+
+
+.condensed {
+    margin-right:0;
+    button {
+        margin-top:3px;
+        background:#b3b3b3;
+        }
+}
+
+    // "webpack": "^1.12.9",
+    // "webpack-dev-server": "1.12.1",
+    // "webpack-notifier": "1.2.1",
+    // "webpack-reload-plugin": "0.1.2"
