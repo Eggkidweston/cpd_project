@@ -1,0 +1,16 @@
+@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+
+.app-widgets {
+
+    display: -webkit-flex;
+    display: flex;
+    width:100vw;
+    max-width: 100%;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap; 
+    -webkit-align-items: stretch;
+    align-items: stretch;
+
+    margin-top:20px;
+
+}

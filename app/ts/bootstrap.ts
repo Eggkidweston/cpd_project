@@ -1,10 +1,14 @@
-import { provide } from 'angular2/core';
-import { bootstrap } from 'angular2/platform/browser';
-import { ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy } from 'angular2/router';
+/// <reference path="../../typings/browser.d.ts" />
+
+import { provide } from '@angular/core';
+import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common/index';
+import { bootstrap }from '@angular/platform-browser-dynamic';
 import { AppComponent } from './app.component';
-import { HTTP_BINDINGS } from 'angular2/http';
+import { HTTP_BINDINGS } from '@angular/http';
+import { servicesInjectables } from './services/services';
 
 bootstrap(AppComponent, [
-    ROUTER_PROVIDERS, HTTP_BINDINGS,
+    ROUTER_PROVIDERS, HTTP_BINDINGS, servicesInjectables,
     provide(LocationStrategy, {useClass: HashLocationStrategy})
 ]);

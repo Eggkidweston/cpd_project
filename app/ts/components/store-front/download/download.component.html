@@ -1,0 +1,19 @@
+
+<div class="app-details-container">
+	<div class="app-details">
+    	<div class="col span-2">
+            <div *ngIf="app?.image" class="download-resource-image">
+                <img src="{{ app?.image }}">
+            </div>
+            <div class="back-link"><button class="btn back" role="button" (click)="goBack()">Back</button>
+            </div>
+        </div>
+        <div class="col span-6">
+            <h2>{{ app?.title }}</h2>
+            <h4>Instructions</h4>
+            <p *ngIf="!authenticationService.userSignedIn()">You must be logged in before you can download a resource. Click the sign-in button and register for a free account.</p>
+            <p>{{ instructions }}</p>
+            <div class="button-container"><button class="btn download" role="button" (click)="getApp()">Continue</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="error-container">
+    <div class="middle-box text-center animated fadeInDown">
+        <div *ngIf="status==404">
+            <h1>404</h1>
+            <h3 class="font-bold">Not Found</h3>
+
+            <div class="error-desc">
+                Profoundest apologies, but the resource you are looking for has not been found. Try checking the URL for errors, <a [routerLink]="['\Home']">return to the homepage</a>, or search the site in the top left corner.
+            </div>
+        </div>
+        <div *ngIf="status==500">
+            <h1>500</h1>
+            <h3 class="font-bold">Internal Server Error</h3>
+
+            <div class="error-desc">
+                Something has gone horribly wrong. You really shouldn't ever see this page, but that's programmers for you. Try going to the <a [routerLink]="['\Home']">homepage</a> or go back to the previous page and attempt your action again.
+            </div>
+        </div>
+    </div>
+</div>

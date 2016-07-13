@@ -1,0 +1,6 @@
+<div class="tag-component">
+    <span class="badge tag" (click)="onClick()" [ngClass]="{ 'source-tag': isSourceTag, 'destination-tag': !isSourceTag }">{{ tagName }}&nbsp;
+        <i *ngIf="isSourceTag" class="glyphicon glyphicon-plus-sign" style="font-size:12px"></i>
+        <i *ngIf="!isSourceTag" class="glyphicon glyphicon-minus-sign" style="font-size:12px"></i>
+    </span>
+</div>

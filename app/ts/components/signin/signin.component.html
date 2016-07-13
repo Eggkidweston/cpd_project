@@ -1,0 +1,22 @@
+<div class="col">
+    <form class="form" [ngFormModel]="signInForm" (submit)="onSubmit(signInForm.value)" novalidate>
+        <fieldset class="form__fieldset">
+            <legend>
+                <span class="legend-text"><h3>Sign in</h3></span>
+            </legend>
+            <div [class.shake]="shaking" [class.animated]="shaking" >
+                <div>
+                    <input [disabled]="busy" type="text" class="input--large" placeholder="Email address or username" [ngFormControl]="emailOrUsername" required="required">
+                </div>
+                <div>
+                    <input [disabled]="busy" type="password" class="input--large" placeholder="Password" required="required" [ngFormControl]="password">
+                </div>
+            </div>
+            
+            <div class="pull-right">
+                <button [disabled]="busy" class="btn--3d btn--primary btn--large" type="submit">Sign In</button>
+            </div>
+            <div><a [routerLink]="['Register']" id="signup_from_2">Create an account</a></div>
+        </fieldset>
+    </form>
+</div>
