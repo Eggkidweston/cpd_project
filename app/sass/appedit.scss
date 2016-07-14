@@ -1,0 +1,32 @@
+.app-edit {
+    .header {
+        padding-top: 48px;
+    }
+    
+    .media {
+        padding-top: 16px;
+    }
+    
+    .tag-source-wrapper {
+        padding-top: 54px;
+    }
+
+    .tag-source {
+        background-color: #eeeeee;
+        border: 1px solid #e0e0e0;
+        padding: 8px;
+        margin-top: 12px;
+    }
+
+    .tag-destination {
+        background-color: #ffffff;
+        border: 1px solid #d0d0d0;
+        padding: 8px;
+        min-height: 34px;
+        margin-top: 12px;
+    }
+    
+    .form-control {
+        height: 19px;
+    }
+}

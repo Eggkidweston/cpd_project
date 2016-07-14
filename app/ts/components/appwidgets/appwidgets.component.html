@@ -1,0 +1,5 @@
+<div class="app-widgets">
+    <app-widget *ngFor="let app of apps" [app]="app"></app-widget>
+</div>
+
+<div *ngIf="(apps)==0">Sorry, no content found.</div>

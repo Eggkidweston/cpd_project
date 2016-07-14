@@ -1,0 +1,23 @@
+.tag-component {
+    display: inline;
+    
+    .tag {
+        padding: 6px 8px 6px 8px;
+        margin: 4px;
+        cursor: pointer;
+        color: white;
+        text-shadow: 1px 1px 0 #444;
+        cursor: pointer;
+        cursor: -moz-pointer;
+        cursor: -webkit-pointer;
+        font-size: 14px;
+    }
+    
+    .source-tag {
+        background-color: #666633;
+    }
+    
+    .destination-tag {
+        background-color: #992600;
+    }
+}

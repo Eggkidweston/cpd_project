@@ -1,0 +1,18 @@
+%indicator {
+  font-size: 1.2em;
+}
+
+.indicator-right {
+  @extend %indicator;
+  color: #9b9b9b;
+}
+
+.indicator-up {
+  @extend %indicator;
+  color: #749c56;
+}
+
+.indicator-down {
+  @extend %indicator;
+  color: #EC574B;
+}

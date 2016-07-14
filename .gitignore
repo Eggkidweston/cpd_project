@@ -1,4 +1,4 @@
 node_modules
-build
 .webpack.json
 .DS_Store
+build
