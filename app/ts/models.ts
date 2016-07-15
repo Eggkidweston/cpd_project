@@ -37,6 +37,7 @@ export class StoreApp
     tags:Array<string>;
     trialurl:string;
     jorum_legacy_lastmodified:string;
+    jorum_legacy_flag:boolean;
     jorum_legacy_metadata:Array<string>;
     image:string;
 }

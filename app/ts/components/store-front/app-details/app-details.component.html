@@ -3,7 +3,7 @@
     <div class="app-details">
         <div class="col span-2">
             <div class="resource-image {{ widgetBackground }}">
-                <img src="{{ app?.image }}" *ngIf="app?.image">
+                <img class="img" src="{{ widgetIcon }}" *ngIf="widgetIcon">
                 <div class="button-container">
                     <button class="btn" role="button" (click)="goDownload()">Get it</button>
                     <button *ngIf="app?.trialurl" class="btn tryit" role="button" (click)="goTry()">Try It</button>
