@@ -81,7 +81,6 @@ export class ContributorComponent
                 contributor =>
                 {
                     this._contributor = contributor;
-                    console.log(contributor);
                     var createdAt = moment(this._contributor.createdat);
                     this.contributor.createdat = createdAt.format("D MMM YYYY");
                 },

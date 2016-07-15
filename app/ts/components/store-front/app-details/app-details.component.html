@@ -15,6 +15,7 @@
                 <h4 *ngIf="app?.licensetype_id">License<br /> {{ licenseType }}</h4>
                 
             </div>
+
         </div>
         <div class="col span-6">
             <h2>{{ app?.title }}</h2>
@@ -26,6 +27,14 @@
                     class="creator-name">{{ app?.creator?.username }}</span>
                 <span class="about-this-contributor"><a [routerLink]="['Contributor', { id: app?.creator?.id }]">about this contributor</a></span>
             </p>
+            
+            <div class="filelist-container" *ngIf="app?.jorum_legacy_metadata">
+                <h4>Included in this resource:</h4>
+                <ul>
+                <li *ngFor="let file of fileList">{{file}}</li>
+                </ul>
+            </div>
+
             <div class="tagcloud condensed" *ngIf="app?.tags?.length > 0">
                 <h4>Tags</h4>
                 <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['TagCloud', { tag: tag.name }]">{{tag.name}}</button>
