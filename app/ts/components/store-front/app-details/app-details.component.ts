@@ -28,10 +28,8 @@ export class AppDetailsComponent implements AfterViewInit
     public alsoBy:Array<StoreApp>;
     public reviews:Array<Review> = new Array<Review>();
     public widgetBackground:string;
-    public files:Array<string>;
-
     public errorMessage:string;
-
+    public fileList:Array<string>;
     addingReview:boolean = false;
 
     constructor( public authenticationService:AuthenticationService,
@@ -56,10 +54,12 @@ export class AppDetailsComponent implements AfterViewInit
                 storeApp =>
                 {
                     this.app = storeApp;
-                   
-                    var jorum_legacy_lastmodified = moment(this.app.jorum_legacy_lastmodified);
-                    this.app.jorum_legacy_lastmodified = jorum_legacy_lastmodified.format("D MMM YYYY");
+                    console.log(this.app);
 
+                    let jorum_legacy_lastmodified = moment(this.app.jorum_legacy_lastmodified);
+                    this.app.jorum_legacy_lastmodified = jorum_legacy_lastmodified.format("D MMM YYYY");
+                    if(this.app.jorum_legacy_metadata) this.fileList = this.getFileList(this.app.jorum_legacy_metadata.toString());
+                    
                     this.setWidgetBackground();
 
                     this.loadAlsoBy();
@@ -143,4 +143,14 @@ export class AppDetailsComponent implements AfterViewInit
         }
     }
 
+    getFileList(json:string):Array<string>
+    {
+        let fullFileList = JSON.parse(this.app.jorum_legacy_metadata.toString()) as Array<string>;
+        let partialList = fullFileList.slice(0,10);
+        if(fullFileList.length>10) {
+            let additionalFileNumber = fullFileList.length - 10;
+            partialList.push('+ ' + additionalFileNumber.toString() + ' other files');
+        }
+        return partialList;
+    }
 }
