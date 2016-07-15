@@ -36,7 +36,7 @@ export class AppsService
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
-
+    
     public getLastUpdatedApps(appsPerPage: number, pageNumber: number)
     {
         return this.http.get( `${appSettings.apiRoot}resources?$orderby=updatedat%20desc&$top=10` )
