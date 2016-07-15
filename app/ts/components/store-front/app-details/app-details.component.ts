@@ -28,6 +28,7 @@ export class AppDetailsComponent implements AfterViewInit
     public alsoBy:Array<StoreApp>;
     public reviews:Array<Review> = new Array<Review>();
     public widgetBackground:string;
+    public widgetIcon:string;
     public errorMessage:string;
     public fileList:Array<string>;
     addingReview:boolean = false;
@@ -61,6 +62,7 @@ export class AppDetailsComponent implements AfterViewInit
                     if(this.app.jorum_legacy_metadata) this.fileList = this.getFileList(this.app.jorum_legacy_metadata.toString());
                     
                     this.setWidgetBackground();
+                    this.setWidgetIcon();
 
                     this.loadAlsoBy();
                 },
@@ -139,7 +141,16 @@ export class AppDetailsComponent implements AfterViewInit
     setWidgetBackground() 
     {
         if(!this.app.image) {
-        this.widgetBackground = "backgroundimage" + this.app.type_id + " nowidgetborder";
+            this.widgetBackground = "backgroundimage" + this.app.type_id + " nowidgetborder";
+        }
+    }
+
+    setWidgetIcon() 
+    {
+        if(!this.app.image&&this.app.jorum_legacy_flag) {
+            this.widgetIcon = "https://s3-eu-west-1.amazonaws.com/jisc-store-content/jorumicon.png";
+        } else {
+            this.widgetIcon = this.app.image;
         }
     }
 
