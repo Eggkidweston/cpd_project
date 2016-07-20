@@ -10,8 +10,8 @@
                 </div>
             </div>
             
-            <div class="cost-licence-container">{{app?.isFree}}
-                <h4>Cost: {{ !app?.isFree=='true' ? "FREE" : "PAID" }}</h4>
+            <div class="cost-licence-container">
+                <h4>{{ !app?.isfree ? "Price: £ -" : "FREE RESOURCE" }}</h4>
                 <h4 *ngIf="app?.licensetype_id">License<br /> {{ licenseType }}</h4>
                 
             </div>

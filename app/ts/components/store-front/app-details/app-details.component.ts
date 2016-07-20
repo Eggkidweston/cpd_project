@@ -147,7 +147,7 @@ export class AppDetailsComponent implements AfterViewInit
 
     setWidgetIcon() 
     {
-    console.log(this.app.isFree);
+    console.log('is free=' + this.app.isfree);
         if(!this.app.image&&this.app.jorum_legacy_flag) {
             this.widgetIcon = "https://s3-eu-west-1.amazonaws.com/jisc-store-content/jorumicon.png";
         } else {
