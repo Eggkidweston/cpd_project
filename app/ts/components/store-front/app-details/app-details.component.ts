@@ -55,11 +55,11 @@ export class AppDetailsComponent implements AfterViewInit
                 storeApp =>
                 {
                     this.app = storeApp;
-                    console.log(this.app);
 
                     let jorum_legacy_lastmodified = moment(this.app.jorum_legacy_lastmodified);
                     this.app.jorum_legacy_lastmodified = jorum_legacy_lastmodified.format("D MMM YYYY");
-                    if(this.app.jorum_legacy_metadata) this.fileList = this.getFileList(this.app.jorum_legacy_metadata.toString());
+
+                    this.fileList = this.getFileListFromMetadata(this.app.jorum_legacy_metadata);
                     
                     this.setWidgetBackground();
                     this.setWidgetIcon();
@@ -154,14 +154,19 @@ export class AppDetailsComponent implements AfterViewInit
         }
     }
 
-    getFileList(json:string):Array<string>
+    getFileListFromMetadata(metadata):Array<string>
     {
-        let fullFileList = JSON.parse(this.app.jorum_legacy_metadata.toString()) as Array<string>;
-        let partialList = fullFileList.slice(0,10);
-        if(fullFileList.length>10) {
-            let additionalFileNumber = fullFileList.length - 10;
-            partialList.push('+ ' + additionalFileNumber.toString() + ' other files');
+        if(metadata === null||typeof metadata === 'object') {
+            this.app.jorum_legacy_metadata = null;
+            return new Array();
+        } else {
+            let fullFileList = JSON.parse(metadata) as Array<string>;
+            let partialList = fullFileList.slice(0,10);
+            if(fullFileList.length>10) {
+                let additionalFileNumber = fullFileList.length - 10;
+                partialList.push('+ ' + additionalFileNumber.toString() + ' other files');
+            }
+            return partialList;
         }
-        return partialList;
     }
 }

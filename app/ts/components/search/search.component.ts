@@ -42,7 +42,7 @@ export class SearchComponent {
     }
 
     itemimage(item):string {
-        if(!item.image) return "https://s3-eu-west-1.amazonaws.com/jisc-store-content/exjorum.png";
+        if(!item.image) return 'https://s3-eu-west-1.amazonaws.com/jisc-store-content/icontype' + item.type_id + '.png';
         return item.image;
     }
 }

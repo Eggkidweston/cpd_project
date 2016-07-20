@@ -19,7 +19,7 @@ export class StoreApp
     createdDate:string;
     description:string;
     downloadCount:number;
-    isFree:boolean;
+    isfree:boolean;
     lastUpdatedDate:string;
     licensetype_id:number;
     likes:number;
