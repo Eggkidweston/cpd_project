@@ -23,7 +23,12 @@
 
             <h4 *ngIf="app?.overview">{{ app?.overview }}</h4>
             <p *ngIf="app?.description">{{ app?.description }}</p>
-            <p><span class="created-by">Created by</span> <span
+
+            <p *ngIf="app?.jorum_legacy_flag"><span class="created-by">Imported by</span> <span
+                    class="creator-name">Jorum</span>
+                <span class="about-this-contributor"><a [routerLink]="['AboutJorum', { id: app?.id }]">about Jorum</a></span>
+            </p>
+            <p *ngIf="!app?.jorum_legacy_flag"><span class="created-by">Created by</span> <span
                     class="creator-name">{{ app?.creator?.username }}</span>
                 <span class="about-this-contributor"><a [routerLink]="['Contributor', { id: app?.creator?.id }]">about this contributor</a></span>
             </p>
