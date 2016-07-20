@@ -53,7 +53,7 @@ export class AppsService
 
     public getTagCloud()
     {
-        return this.http.get( `${appSettings.apiRoot}tags?limit=100` )
+        return this.http.get( `${appSettings.apiRoot}tags?limit=200` )
             .map( res => <TagCloud>res.json().data )
             .catch( this.handleError );
     }
