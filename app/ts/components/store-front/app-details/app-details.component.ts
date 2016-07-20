@@ -147,6 +147,7 @@ export class AppDetailsComponent implements AfterViewInit
 
     setWidgetIcon() 
     {
+    console.log(this.app.isFree);
         if(!this.app.image&&this.app.jorum_legacy_flag) {
             this.widgetIcon = "https://s3-eu-west-1.amazonaws.com/jisc-store-content/jorumicon.png";
         } else {
@@ -156,12 +157,18 @@ export class AppDetailsComponent implements AfterViewInit
 
     getFileList(json:string):Array<string>
     {
-        let fullFileList = JSON.parse(this.app.jorum_legacy_metadata.toString()) as Array<string>;
-        let partialList = fullFileList.slice(0,10);
-        if(fullFileList.length>10) {
-            let additionalFileNumber = fullFileList.length - 10;
-            partialList.push('+ ' + additionalFileNumber.toString() + ' other files');
+
+        if(json=='[object Object]') { //an object?
+            return new Array();
+        }else{
+            let fullFileList = JSON.parse(json) as Array<string>;
+            let partialList = fullFileList.slice(0,10);
+            if(fullFileList.length>10) {
+                let additionalFileNumber = fullFileList.length - 10;
+                partialList.push('+ ' + additionalFileNumber.toString() + ' other files');
+            }
+            return partialList;
         }
-        return partialList;
+
     }
 }
