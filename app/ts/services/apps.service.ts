@@ -74,7 +74,7 @@ export class AppsService
     public getBySearchTerm( searchTerm )
     {
 
-        return this.http.get( `${appSettings.apiRoot}resources?$filter=title%20eq%20'${ searchTerm }'`)
+        return this.http.get( `${appSettings.apiRoot}resources?$top=20&$filter=title%20eq%20'${ searchTerm }'`)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }

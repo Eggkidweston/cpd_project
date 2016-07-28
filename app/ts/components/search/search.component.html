@@ -1,5 +1,5 @@
 <div class="row">
-   	<input #input (input)="searchTermChanged(input.value)" [(ngModel)]=query class="input--search" placeholder="Search by TITLE" type="text">
+   	<input #input (input)="searchTermChanged(input.value)" (blur)="hideOptions()" [(ngModel)]=query class="input--search" placeholder="Search by TITLE" type="text">
  	
  	<div class="suggestions" *ngIf="filteredList.length > 0">
         <ul *ngFor="let item of filteredList" >
