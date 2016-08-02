@@ -1,6 +1,20 @@
-<div class="row">
-   	<input #input (input)="searchTermChanged(input.value)" (blur)="hideOptions()" [(ngModel)]=query class="input--search" placeholder="Search by TITLE" type="text">
- 	
+<div class="row col-11"><h3>Search the store</h3>
+	<form [ngFormModel]="searchForm">
+	<div class="advanced-search-link" [hidden] = "advancedSearchActive"><a href="javascript:void(0);" (click)="toggleAdvancedSearch()">Refined search</a></div>
+	<div class="advanced-search-link" [hidden] = "!advancedSearchActive"><a href="javascript:void(0);" (click)="toggleAdvancedSearch()">Hide refined search</a></div>
+	<div class="advancedSearch" [hidden] = "!advancedSearchActive"><h4>Only include:</h4>
+		<div class="col-3">
+			<li><input id="freestuff" name="freestuff" type="checkbox" [ngFormControl]="freestuff"><label for="freestuff">Open Education resources</label></li>
+			<!--<li><input id="ratings" name="ratings" type="checkbox" [ngFormControl]="ratings"><label for="ratings">Resources with 4 stars or more</label></li>
+			<li><input id="videos" name="videos" type="checkbox" [ngFormControl]="videos"><label for="videos">Resources with a video</label></li>
+			<li><input id="contenttype" name="contenttype" type="checkbox"><label for="contenttype">Specific content type</label></li>
+			<li><input id="licencetype" name="licencetype" type="checkbox"><label for="licencetype">Specific license</label></li>-->
+
+		</div>
+	</div>
+
+   	<input #input (input)="searchTermChanged(input.value)" (blur)="hideOptions()" [(ngModel)]=query class="input--search" placeholder="" type="text">
+ 	</form>
  	<div class="suggestions" *ngIf="filteredList.length > 0">
         <ul *ngFor="let item of filteredList" >
             <a (click)="select(item)"><li>
@@ -8,5 +22,4 @@
             </li></a>
         </ul>
     </div>
-
 </div>
