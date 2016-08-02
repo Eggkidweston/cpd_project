@@ -71,10 +71,15 @@ export class AppsService
 
     }
 
-    public getBySearchTerm( searchTerm )
+    public getBySearch( searchTerm, opened)
     {
+        
 
-        return this.http.get( `${appSettings.apiRoot}resources?$top=20&$filter=title%20eq%20'${ searchTerm }'`)
+        let searchQuery = `${appSettings.apiRoot}resources?$inlinecount=allpages&$top=20&$filter=title%20eq%20%27${ searchTerm }%27`;
+        if(opened) searchQuery += "%20and%20isfree%20eq%20true";
+        console.log(searchQuery);
+
+        return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }
