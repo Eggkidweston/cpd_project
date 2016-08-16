@@ -18,6 +18,7 @@ import { TryComponent } from 'components/store-front/try/try.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
 import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
+import { ExploreComponent } from './components/explore/explore.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppEditComponent } from './components/appedit/appedit.component';
 import { AppInfoComponent } from './components/app-info/app-info.component';
@@ -53,6 +54,7 @@ import myGlobals = require('./globals');
     { path: '/about', name: 'About', component: AboutComponent },
     { path: '/whocanregister', name: 'Who', component: WhoComponent },
     { path: '/tagcloud', name: 'TagCloud', component: TagCloudComponent },
+    { path: '/explore', name: 'Explore', component: ExploreComponent },
     { path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent }
 ] )

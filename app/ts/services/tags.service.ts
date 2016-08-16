@@ -16,12 +16,12 @@ export class TagsService {
     get allTags(): Observable<Tag[]> {
         // it would be nice to use something like socket.io to
         // keep these current, but that's a consideration for later
-        this.loadAllTags();
+        this.loadAllTags(false);
         return this._allTags;
     }
 
-    private loadAllTags() {
-        this._allTags = this.http.get(`${appSettings.apiRoot}tags?limit=100`)
+    private loadAllTags(resourcedOnly) {
+        this._allTags = this.http.get(`${appSettings.apiRoot}tags?limit=100&resourcedonly=`+resourcedOnly.toString())
             .map(res => <Observable<Tag[]>>res.json().data)
             .catch(this.handleError);
         }

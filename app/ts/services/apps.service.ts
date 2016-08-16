@@ -53,8 +53,22 @@ export class AppsService
 
     public getTagCloud(resourcedOnly)
     {
-        return this.http.get( `${appSettings.apiRoot}tags?limit=200` )
-            .map( res => <TagCloud>res.json().data.filter(function (obj) {return (parseInt(obj.resource_count) > 0);}) )
+        return this.http.get( `${appSettings.apiRoot}tags?limit=200&resourcedonly=`+resourcedOnly.toString() )
+            .map( res => <TagCloud>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getTags(tagIds)
+    {
+        return this.http.get( `${appSettings.apiRoot}tags?limit=200&ids=`+tagIds )
+            .map( res => <TagCloud>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getRelatedTags(tagIds)
+    {
+        return this.http.get( `${appSettings.apiRoot}tags/relations/`+tagIds )
+            .map( res => <TagCloud>res.json().data )
             .catch( this.handleError );
     }
 
