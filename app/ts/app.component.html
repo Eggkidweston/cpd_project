@@ -23,6 +23,9 @@
                             <li [class.active]="isRouteActive(['TagCloud'])" class="nav__item">
                                 <a [routerLink]="['TagCloud']">TagCloud</a>
                             </li>
+                            <li [class.active]="isRouteActive(['Explore'])" class="nav__item">
+                                <a [routerLink]="['Explore']">Explore</a>
+                            </li>
                             <li *ngIf="authenticationService?.userSignedIn()" [class.active]="isRouteActive(['Submissions'])" class="nav__item">
                               <a [routerLink]="['Submissions']">Submissions</a>
                             </li>

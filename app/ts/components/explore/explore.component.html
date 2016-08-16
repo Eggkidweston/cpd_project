@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-4">
+        <div *ngIf="tagcloud" class="tagexplore">
+            <button class="btn" *ngFor="let tag of tagcloud"
+                    (click)="selectTag(tag.id)"> {{tag.name}}
+                <!--<span class="badge white"> {{tag.resourcecount}} </span>-->
+            </button>
+        </div>
+        <!--  <div *ngIf="tagcloud" class="tagcloud">
+              <button class="btn" [class.selected]="chosenTag===tag.name" *ngFor="let tag of tagcloud"
+                      (click)="getTaggedApps(tag.name)"> {{tag.name}}
+              </button>
+          </div>-->
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngIf="selectedTagcloud" class="tagexplore selected">
+                    <button class="btn" *ngFor="let tag of selectedTagcloud"> <span title="remove" (click)="removeTag(tag.id)" class="glyphicon glyphicon-remove-circle"></span>{{tag.name}}
+
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col span-12">
+                <app-widgets [apps]="storeApps"></app-widgets>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

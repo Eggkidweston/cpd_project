@@ -58,6 +58,20 @@ export class AppsService
             .catch( this.handleError );
     }
 
+    public getTags(tagIds)
+    {
+        return this.http.get( `${appSettings.apiRoot}tags?limit=200&ids=`+tagIds )
+            .map( res => <TagCloud>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getRelatedTags(tagIds)
+    {
+        return this.http.get( `${appSettings.apiRoot}tags/relations/`+tagIds )
+            .map( res => <TagCloud>res.json().data )
+            .catch( this.handleError );
+    }
+
     public getByTag( tag )
     {
 
