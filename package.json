@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "go": "env UV_THREADPOOL_SIZE=128 ./node_modules/.bin/webpack-dev-server --display-reasons --display-chunks --watch --loglevel verbose",
-    "test": "karma start"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",

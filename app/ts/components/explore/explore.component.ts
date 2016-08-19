@@ -36,8 +36,10 @@ export class ExploreComponent implements AfterViewInit {
     public tagcloud: TagCloud;
     public selectedTagcloud: TagCloud;
     public chosenTag: string;
+    public chosenOrder: string;
     private chosenTags: string;
     private tagArray: number[];
+    private gettingTags: boolean;
 
 
     constructor(public authenticationService: AuthenticationService,
@@ -48,6 +50,7 @@ export class ExploreComponent implements AfterViewInit {
         this.resourceId = +params.get('id');
         this.chosenTag = params.get('tag');
         this.chosenTags = params.get('tags');
+        this.chosenOrder = "pop";
     }
 
     private getIntArrayFromChosen() {
@@ -92,6 +95,10 @@ export class ExploreComponent implements AfterViewInit {
         this.processChosenTags();
     }
 
+    order(order){
+        this.chosenOrder = order;
+    }
+
     getSomeApps() {
         this.appsService.getResources(100, 1)
             .subscribe(
@@ -103,10 +110,12 @@ export class ExploreComponent implements AfterViewInit {
     }
 
     loadCloud() {
+        this.gettingTags = true;
         if (this.tagArray.length > 0) {
             this.appsService.getRelatedTags(this.tagArray)
                 .subscribe(
                     tagcloud => {
+                        this.gettingTags = false;
                         this.tagcloud = tagcloud;
                         //  this.getSomeApps();
                     },
@@ -114,9 +123,10 @@ export class ExploreComponent implements AfterViewInit {
                 );
         }
         else {
-            this.appsService.getTagCloud(true)
+            this.appsService.getTagCloud(true, 50)
                 .subscribe(
                     tagcloud => {
+                        this.gettingTags = false;
                         this.tagcloud = tagcloud;
                         this.getSomeApps();
                     },
