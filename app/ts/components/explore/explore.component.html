@@ -1,10 +1,31 @@
 <div class="row">
     <div class="col-md-4">
-        <div *ngIf="tagcloud" class="tagexplore">
+
+        <div class="ordertags">Order By <span (click)="order('az')" [class.selected]="chosenOrder==='az'">A..Z</span>,
+            <span [class.selected]="chosenOrder==='pop'" (click)="order('pop')">Popularity</span>, <span  [class.selected]="chosenOrder==='latest'" (click)="order('latest')">Latest</span></div>
+        <div *ngIf="tagcloud" class="tagexplore" [hidden]="gettingTags===true">
             <button class="btn" *ngFor="let tag of tagcloud"
                     (click)="selectTag(tag.id)"> {{tag.name}}
                 <!--<span class="badge white"> {{tag.resourcecount}} </span>-->
             </button>
+        </div>
+        <div class="loader" [hidden]="gettingTags===false">
+            <span class="block-1"></span>
+            <span class="block-2"></span>
+            <span class="block-3"></span>
+            <span class="block-4"></span>
+            <span class="block-5"></span>
+            <span class="block-6"></span>
+            <span class="block-7"></span>
+            <span class="block-8"></span>
+            <span class="block-9"></span>
+            <span class="block-10"></span>
+            <span class="block-11"></span>
+            <span class="block-12"></span>
+            <span class="block-13"></span>
+            <span class="block-14"></span>
+            <span class="block-15"></span>
+            <span class="block-16"></span>
         </div>
         <!--  <div *ngIf="tagcloud" class="tagcloud">
               <button class="btn" [class.selected]="chosenTag===tag.name" *ngFor="let tag of tagcloud"
