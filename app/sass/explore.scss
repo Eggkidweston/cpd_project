@@ -12,20 +12,17 @@
         color: red;
       }
     }
-    button:hover {
-      color: #fff;
-    }
+
   }
 
-  button {
-    color: #fff ;
-    font-size: 0.85em;
-    margin-top: 10px;
-    border-radius: 10px;
+  li{
     background: #a92173;
-    font-weight: 700;
-    margin-right: 3px;
   }
+  li:hover {
+    cursor :pointer;
+
+  }
+
 
 
 }
