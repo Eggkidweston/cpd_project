@@ -2,13 +2,18 @@
     <div class="col-md-4">
 
         <div class="ordertags">Order By <span (click)="order('az')" [class.selected]="chosenOrder==='az'">A..Z</span>,
-            <span [class.selected]="chosenOrder==='pop'" (click)="order('pop')">Popularity</span>, <span  [class.selected]="chosenOrder==='latest'" (click)="order('latest')">Latest</span></div>
-        <div *ngIf="tagcloud" class="tagexplore" [hidden]="gettingTags===true">
-            <button class="btn" *ngFor="let tag of tagcloud"
-                    (click)="selectTag(tag.id)"> {{tag.name}}
-                <!--<span class="badge white"> {{tag.resourcecount}} </span>-->
-            </button>
-        </div>
+            <span [class.selected]="chosenOrder==='pop'" (click)="order('pop')">Popularity</span>, <span
+                    [class.selected]="chosenOrder==='latest'" (click)="order('latest')">Latest</span></div>
+
+        <ul *ngIf="tagcloud" class="tags tagexplore"  [hidden]="gettingTags===true">
+            <li class="tags__item" *ngFor="let tag of tagcloud">
+                <a class="tags__link"  (click)="selectTag(tag.id)">
+                    {{tag.name}}
+                </a>
+            </li>
+
+        </ul>
+
         <div class="loader" [hidden]="gettingTags===false">
             <span class="block-1"></span>
             <span class="block-2"></span>
@@ -37,7 +42,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div *ngIf="selectedTagcloud" class="tagexplore selected">
-                    <button class="btn" *ngFor="let tag of selectedTagcloud"> <span title="remove" (click)="removeTag(tag.id)" class="glyphicon glyphicon-remove-circle"></span>{{tag.name}}
+                    <button class="btn" *ngFor="let tag of selectedTagcloud"><span title="remove"
+                                                                                   (click)="removeTag(tag.id)"
+                                                                                   class="glyphicon glyphicon-remove-circle"></span>{{tag.name}}
 
                     </button>
                 </div>
