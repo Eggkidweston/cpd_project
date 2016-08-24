@@ -3,10 +3,10 @@
 
         <div class="ordertags">Order By <span (click)="order('az')" [class.selected]="chosenOrder==='az'">A..Z</span>,
             <span [class.selected]="chosenOrder==='pop'" (click)="order('pop')">Popularity</span>, <span
-                    [class.selected]="chosenOrder==='latest'" (click)="order('latest')">Latest</span></div>
+                    [class.selected]="chosenOrder==='updated'" (click)="order('updated')">Latest</span></div>
 
         <ul *ngIf="tagcloud" class="tags tagexplore"  [hidden]="gettingTags===true">
-            <li class="tags__item" *ngFor="let tag of tagcloud">
+            <li class="tags__item" *ngFor="let tag of tagcloud.Tags">
                 <a class="tags__link"  (click)="selectTag(tag.id)">
                     {{tag.name}}
                 </a>
@@ -41,8 +41,8 @@
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12">
-                <div *ngIf="selectedTagcloud" class="tagexplore selected">
-                    <button class="btn" *ngFor="let tag of selectedTagcloud"><span title="remove"
+                <div *ngIf="selectedTags" class="tagexplore selected">
+                    <button class="btn" *ngFor="let tag of selectedTags.Tags"><span title="remove"
                                                                                    (click)="removeTag(tag.id)"
                                                                                    class="glyphicon glyphicon-remove-circle"></span>{{tag.name}}
 

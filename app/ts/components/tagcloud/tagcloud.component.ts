@@ -65,7 +65,7 @@ export class TagCloudComponent implements AfterViewInit {
     }
 
     loadCloud() {
-        this.appsService.getTagCloud(true,100)
+        this.appsService.getTagCloud(true,100,"")
             .subscribe(
                 tagcloud => {
                     this.tagcloud = tagcloud;

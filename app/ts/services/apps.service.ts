@@ -51,10 +51,10 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    public getTagCloud(resourcedOnly, limit)
+    public getTagCloud(resourcedOnly, limit, order)
     {
         limit = limit || 200;
-        return this.http.get( `${appSettings.apiRoot}tags?limit=`+limit+`&resourcedonly=`+resourcedOnly.toString() )
+        return this.http.get( `${appSettings.apiRoot}tags?limit=`+limit+`&resourcedonly=`+resourcedOnly.toString()+'&order='+order )
             .map( res => <TagCloud>res.json().data )
             .catch( this.handleError );
     }
