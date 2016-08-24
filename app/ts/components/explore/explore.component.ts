@@ -50,7 +50,7 @@ export class ExploreComponent implements AfterViewInit {
         this.resourceId = +params.get('id');
         this.chosenTag = params.get('tag');
       //  this.chosenTags = params.get('tags');
-        this.chosenOrder = "rescount";
+        this.chosenOrder = "pop";
 
         this.selectedTags = new TagCloud([]);
     }
@@ -93,8 +93,18 @@ export class ExploreComponent implements AfterViewInit {
         this.loadCloud();
     }
 
-    getSomeApps() {
-        this.appsService.getResources(100, 1)
+    loadApps() {
+        this.appsService.getResources(100, 1, this.selectedTags.GetFilterSyntax())
+            .subscribe(
+                storeApps => {
+                    this.storeApps = storeApps.data;
+                },
+                (error: any) => AppComponent.generalError(error.status)
+            );
+    }
+
+    loadRecomendedApps() {
+        this.appsService.getRecommendedApps(100, 1)
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
@@ -112,7 +122,7 @@ export class ExploreComponent implements AfterViewInit {
                     tags => {
                         this.gettingTags = false;
                         this.tagcloud = new TagCloud(tags);
-                        //  this.getSomeApps();
+                          this.loadApps();
                     },
                     (error: any) => AppComponent.generalError(error.status)
                 );
@@ -123,7 +133,7 @@ export class ExploreComponent implements AfterViewInit {
                     tags => {
                         this.gettingTags = false;
                         this.tagcloud = new TagCloud(tags);
-                        this.getSomeApps();
+                        this.loadRecomendedApps();
                     },
                     (error: any) => AppComponent.generalError(error.status)
                 );
@@ -132,20 +142,6 @@ export class ExploreComponent implements AfterViewInit {
 
     }
 
-    loadTags() {
-        this.appsService.getTags(this.tagArray)
-            .subscribe(
-                tags => {
-                  //  this.selectedTags = tags;
-                //    this.loadCloud();
-                //    this.getSomeApps();
 
-                },
-                (error: any) => AppComponent.generalError(error.status)
-            );
-
-        error => this.errorMessage = <any>error;
-
-    }
 
 }

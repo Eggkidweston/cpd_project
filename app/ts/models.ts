@@ -95,6 +95,14 @@ export class TagCloud
            });
         return ids ;
     }
+    public GetFilterSyntax(){
+        var filter = "";
+       // for (let tag of this.Tags) {
+       //     filter =+ "tag eq '"+tag.name+"' and ";
+       // }
+        filter = "tag eq '"+this.Tags[0].name +"'";
+        return filter;
+    }
 }
 
 export class Tag
