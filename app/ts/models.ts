@@ -71,8 +71,37 @@ export class DownloadMetrics
 }
 export class TagCloud
 {
-    constructor( public tags:Tag[] )
+
+    constructor( public Tags:Tag[] )
     {
+
+    }
+    public GetTag(id:number) :Tag{
+        return this.Tags.filter(function(t){return t.id == id})[0];
+    }
+    public AddTag(tag: Tag){
+        this.Tags.push(tag);
+    }
+    public RemoveTag(id: number){
+        this.Tags = this.Tags.filter(function(el) {
+            return el.id !== id;
+        });
+    }
+    public GetIds() :any[]{
+           var ids = this.Tags.map(function(obj){
+               var rObj = [];
+               rObj.push(+obj.id);
+               return rObj;
+           });
+        return ids ;
+    }
+    public GetFilterSyntax(){
+        var filter = "";
+       // for (let tag of this.Tags) {
+       //     filter =+ "tag eq '"+tag.name+"' and ";
+       // }
+        filter = "tag eq '"+this.Tags[0].name +"'";
+        return filter;
     }
 }
 

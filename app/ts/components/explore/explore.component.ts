@@ -10,7 +10,7 @@ import {
 } from '@angular/router-deprecated';
 import {AuthenticationService} from '../../services/services';
 import {AppsService} from '../../services/services';
-import {StoreApp, TagCloud} from '../../models';
+import {StoreApp, TagCloud, Tag} from '../../models';
 import {AppComponent} from '../../app.component';
 
 
@@ -34,10 +34,10 @@ export class ExploreComponent implements AfterViewInit {
     public errorMessage: string;
 
     public tagcloud: TagCloud;
-    public selectedTagcloud: TagCloud;
+    public selectedTags: TagCloud;
     public chosenTag: string;
     public chosenOrder: string;
-    private chosenTags: string;
+   // private chosenTags: string;
     private tagArray: number[];
     private gettingTags: boolean;
 
@@ -49,26 +49,17 @@ export class ExploreComponent implements AfterViewInit {
                 params: RouteParams) {
         this.resourceId = +params.get('id');
         this.chosenTag = params.get('tag');
-        this.chosenTags = params.get('tags');
+      //  this.chosenTags = params.get('tags');
         this.chosenOrder = "pop";
+
+        this.selectedTags = new TagCloud([]);
     }
 
-    private getIntArrayFromChosen() {
-        this.tagArray = this.chosenTags == null ? [] : this.chosenTags.split(",").filter(Boolean).map(Number);
-    }
 
-    private processChosenTags() {
-        this.getIntArrayFromChosen();
-        if (this.tagArray.length == 0) {
-            this.selectedTagcloud = undefined;
-            this.loadCloud();
-        } else {
-            this.loadTags();
-        }
-    }
 
     ngAfterViewInit() {
-        this.processChosenTags();
+
+        this.loadCloud();
     }
 
 
@@ -84,23 +75,36 @@ export class ExploreComponent implements AfterViewInit {
     }
 
     selectTag(tagId) {
-        this.chosenTags = this.chosenTags == null ? tagId + "," : this.chosenTags += tagId + ",";
-        this.processChosenTags()
+        var selectedTag = this.tagcloud.GetTag(tagId);
+        this.selectedTags = this.selectedTags ||  new TagCloud([]);
+        this.selectedTags.AddTag(selectedTag);
+        this.loadCloud();
 
     }
 
     removeTag(tagId) {
-        this.tagArray.splice(this.tagArray.indexOf(tagId), 1);
-        this.chosenTags = this.tagArray.join();
-        this.processChosenTags();
+        this.selectedTags.RemoveTag(tagId);
+        this.loadCloud();
     }
 
     order(order){
         this.chosenOrder = order;
+        this.selectedTags =  new TagCloud([]);
+        this.loadCloud();
     }
 
-    getSomeApps() {
-        this.appsService.getResources(100, 1)
+    loadApps() {
+        this.appsService.getResources(100, 1, this.selectedTags.GetFilterSyntax())
+            .subscribe(
+                storeApps => {
+                    this.storeApps = storeApps.data;
+                },
+                (error: any) => AppComponent.generalError(error.status)
+            );
+    }
+
+    loadRecomendedApps() {
+        this.appsService.getRecommendedApps(100, 1)
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
@@ -111,24 +115,25 @@ export class ExploreComponent implements AfterViewInit {
 
     loadCloud() {
         this.gettingTags = true;
-        if (this.tagArray.length > 0) {
-            this.appsService.getRelatedTags(this.tagArray)
+        if (this.selectedTags.Tags.length > 0) {
+            var tagIds  = this.selectedTags.GetIds();
+            this.appsService.getRelatedTags(tagIds)
                 .subscribe(
-                    tagcloud => {
+                    tags => {
                         this.gettingTags = false;
-                        this.tagcloud = tagcloud;
-                        //  this.getSomeApps();
+                        this.tagcloud = new TagCloud(tags);
+                          this.loadApps();
                     },
                     (error: any) => AppComponent.generalError(error.status)
                 );
         }
         else {
-            this.appsService.getTagCloud(true, 50)
+            this.appsService.getTagCloud(true, 50, this.chosenOrder)
                 .subscribe(
-                    tagcloud => {
+                    tags => {
                         this.gettingTags = false;
-                        this.tagcloud = tagcloud;
-                        this.getSomeApps();
+                        this.tagcloud = new TagCloud(tags);
+                        this.loadRecomendedApps();
                     },
                     (error: any) => AppComponent.generalError(error.status)
                 );
@@ -137,20 +142,6 @@ export class ExploreComponent implements AfterViewInit {
 
     }
 
-    loadTags() {
-        this.appsService.getTags(this.tagArray)
-            .subscribe(
-                tags => {
-                    this.selectedTagcloud = tags;
-                    this.loadCloud();
-                    this.getSomeApps();
 
-                },
-                (error: any) => AppComponent.generalError(error.status)
-            );
-
-        error => this.errorMessage = <any>error;
-
-    }
 
 }

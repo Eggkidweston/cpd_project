@@ -16,9 +16,9 @@ export class AppsService
     {
     }
 
-    public getResources(appsPerPage: number, pageNumber: number)
+    public getResources(appsPerPage: number, pageNumber: number, filterText :string)
     {
-        return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}` ) // &$filter=contains('title', 'Introduction')
+        return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
             .map( res => <GetResourceResults>res.json() )
             .catch( this.handleError );
     }
@@ -51,10 +51,10 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    public getTagCloud(resourcedOnly, limit)
+    public getTagCloud(resourcedOnly, limit, order)
     {
         limit = limit || 200;
-        return this.http.get( `${appSettings.apiRoot}tags?limit=`+limit+`&resourcedonly=`+resourcedOnly.toString() )
+        return this.http.get( `${appSettings.apiRoot}tags?limit=`+limit+`&resourcedonly=`+resourcedOnly.toString()+'&order='+order )
             .map( res => <TagCloud>res.json().data )
             .catch( this.handleError );
     }

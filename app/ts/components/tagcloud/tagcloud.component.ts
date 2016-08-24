@@ -55,7 +55,7 @@ export class TagCloudComponent implements AfterViewInit {
     }
 
     getSomeApps(){
-        this.appsService.getResources( 100, 1 )
+        this.appsService.getResources( 100, 1, "" )
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
@@ -65,7 +65,7 @@ export class TagCloudComponent implements AfterViewInit {
     }
 
     loadCloud() {
-        this.appsService.getTagCloud(true,100)
+        this.appsService.getTagCloud(true,100,"")
             .subscribe(
                 tagcloud => {
                     this.tagcloud = tagcloud;
