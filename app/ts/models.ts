@@ -97,10 +97,12 @@ export class TagCloud
     }
     public GetFilterSyntax(){
         var filter = "";
-       // for (let tag of this.Tags) {
-       //     filter =+ "tag eq '"+tag.name+"' and ";
-       // }
-        filter = "tag eq '"+this.Tags[0].name +"'";
+        for (let tag of this.Tags) {
+            filter += "(tag eq '"+tag.name+"')";
+            if (tag != this.Tags[this.Tags.length -1]){
+                filter += " and ";
+            }
+        }
         return filter;
     }
 }
