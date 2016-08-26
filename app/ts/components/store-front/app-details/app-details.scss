@@ -14,19 +14,25 @@ h4 {
       font-weight: 600;
     }
 
+    .filelist-container {
+      padding-top:5px;
+      li {
+        list-style: none;
+      }
+    }
     
-
+    //TODO: move to appwidget
     .resource-image {
       border: 9px solid #fff;
       border-radius: 15px;
       box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.19);
       width: 128px;
-      img {
+      .img {
         border-radius: 10px;
         height: 100%;
         width: 128px;
         height: auto;
-         margin-bottom:10px;
+        margin-bottom:10px;
       }
     }
 

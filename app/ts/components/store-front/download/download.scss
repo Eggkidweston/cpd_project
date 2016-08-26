@@ -28,16 +28,17 @@ h4 {
         height: auto;
         margin-bottom:0px;
       }
+      margin-bottom:10px;
     }
     
-    .download-button-container {
+    .button-container {
       
       button {
         width: 100%;
-
         border-radius: 10px;
         background: #A1D490;
         font-weight: 700;
+        
       }
     }
     .cost-licence-container {
@@ -63,11 +64,11 @@ h4 {
   
   button {
         width: 128px;
-        margin-top: 10px;
         
         border-radius: 10px;
         background: #cfcfcf;
         font-weight: 700;
+        margin-bottom:10px;
       }
 
 }

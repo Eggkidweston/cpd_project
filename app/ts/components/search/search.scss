@@ -1,12 +1,13 @@
 .input--search {
 	font-size:1.3em;
-	width:750px;
+	width:100%;
 
 }
 
 .suggestions {
 	position: absolute;
 	box-shadow: 0px 2px 5px 2px rgba(0,0,0,0.19);
+	cursor:pointer;
 	ul {
 		border: 1px solid #dbdbdb;
     	padding: 3px;
@@ -38,3 +39,36 @@ search{
     display: block;
 }
 
+.advanced-search-link {
+	float:right;
+}
+
+.advancedSearch {
+	li {
+		list-style:none;
+		display:inline;
+		padding-right:2px;
+		padding-bottom:2px;
+	}
+
+	input[type=checkbox] {
+		display:none;
+		}
+		 
+		input[type=checkbox] + label
+		{
+		background: #efefef;
+		border-radius: 5px;
+		display:inline-block;
+		border:1px solid #cccccc;
+		padding: 4px 10px 4px 10px;
+		color:#000
+		}
+		input[type=checkbox]:checked + label
+		{
+		background: #35B07A;
+		display:inline-block;
+		border:1px solid #cccccc;
+		color:#fff
+		}
+}

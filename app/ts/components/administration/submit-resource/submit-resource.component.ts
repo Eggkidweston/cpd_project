@@ -214,7 +214,7 @@ export class SubmitResourceComponent
                     image: iconUrl,
                     active: true,
                     isfree: true,
-                    overview: formValues.overview,
+                    overview: formValues.overviewText,
                     recommended: false,
                     relatedIds: new Array<number>(),
                     tags: _.map( tags, ( tag ) => tag.name ),
