@@ -16,9 +16,9 @@ export class AppsService
     {
     }
 
-    public getResources(appsPerPage: number, pageNumber: number)
+    public getResources(appsPerPage: number, pageNumber: number, filterText :string)
     {
-        return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}` ) // &$filter=contains('title', 'Introduction')
+        return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
             .map( res => <GetResourceResults>res.json() )
             .catch( this.handleError );
     }
@@ -51,9 +51,24 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    public getTagCloud()
+    public getTagCloud(resourcedOnly, limit, order)
     {
-        return this.http.get( `${appSettings.apiRoot}tags?limit=100` )
+        limit = limit || 200;
+        return this.http.get( `${appSettings.apiRoot}tags?limit=`+limit+`&resourcedonly=`+resourcedOnly.toString()+'&order='+order )
+            .map( res => <TagCloud>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getTags(tagIds)
+    {
+        return this.http.get( `${appSettings.apiRoot}tags?limit=200&ids=`+tagIds )
+            .map( res => <TagCloud>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getRelatedTags(tagIds)
+    {
+        return this.http.get( `${appSettings.apiRoot}tags/relations/`+tagIds )
             .map( res => <TagCloud>res.json().data )
             .catch( this.handleError );
     }
@@ -71,10 +86,15 @@ export class AppsService
 
     }
 
-    public getBySearchTerm( searchTerm )
+    public getBySearch( searchTerm, opened)
     {
+        
 
-        return this.http.get( `${appSettings.apiRoot}resources?$filter=title%20eq%20'${ searchTerm }'`)
+        let searchQuery = `${appSettings.apiRoot}resources?$inlinecount=allpages&$top=20&$filter=title%20eq%20%27${ searchTerm }%27`;
+        if(opened) searchQuery += "%20and%20isfree%20eq%20true";
+        console.log(searchQuery);
+
+        return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }

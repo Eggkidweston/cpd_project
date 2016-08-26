@@ -3,7 +3,7 @@
     <div class="app-details">
         <div class="col span-2">
             <div class="resource-image {{ widgetBackground }}">
-                <img src="{{ app?.image }}" *ngIf="app?.image">
+                <img class="img" src="{{ widgetIcon }}" *ngIf="widgetIcon">
                 <div class="button-container">
                     <button class="btn" role="button" (click)="goDownload()">Get it</button>
                     <button *ngIf="app?.trialurl" class="btn tryit" role="button" (click)="goTry()">Try It</button>
@@ -11,10 +11,11 @@
             </div>
             
             <div class="cost-licence-container">
-                <h4>Cost: {{ !app?.isFree ? "FREE" : "PAID" }}</h4>
+                <h4 *ngIf="!(app?.isfree === null)">{{ !app?.isfree ? "Price: £ -" : "FREE RESOURCE" }}</h4>
                 <h4 *ngIf="app?.licensetype_id">License<br /> {{ licenseType }}</h4>
                 
             </div>
+
         </div>
         <div class="col span-6">
             <h2>{{ app?.title }}</h2>
@@ -22,10 +23,23 @@
 
             <h4 *ngIf="app?.overview">{{ app?.overview }}</h4>
             <p *ngIf="app?.description">{{ app?.description }}</p>
-            <p><span class="created-by">Created by</span> <span
+
+            <p *ngIf="app?.jorum_legacy_flag"><span class="created-by">Imported by</span> <span
+                    class="creator-name">Jorum</span>
+                <span class="about-this-contributor"><a [routerLink]="['AboutJorum', { id: app?.id }]">about Jorum</a></span>
+            </p>
+            <p *ngIf="!app?.jorum_legacy_flag"><span class="created-by">Created by</span> <span
                     class="creator-name">{{ app?.creator?.username }}</span>
                 <span class="about-this-contributor"><a [routerLink]="['Contributor', { id: app?.creator?.id }]">about this contributor</a></span>
             </p>
+            
+            <div class="filelist-container" *ngIf="app?.jorum_legacy_metadata">
+                <h4>Included in this resource:</h4>
+                <ul>
+                <li *ngFor="let file of fileList">{{file}}</li>
+                </ul>
+            </div>
+
             <div class="tagcloud condensed" *ngIf="app?.tags?.length > 0">
                 <h4>Tags</h4>
                 <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['TagCloud', { tag: tag.name }]">{{tag.name}}</button>
@@ -71,25 +85,6 @@
     </div>
 <div class="row"><div class="col span-11"><hr></div></div>
 
-    <div class="col span-11 meta-section">
-        <div *ngIf="app?.related?.length > 0">
-            
-            <h3>Related content</h3>
-            <div class="app-widgets">
-                <app-widget class="small" *ngFor="let relatedContent of app.related"
-                            [app]="relatedContent"></app-widget>
-            </div>
-        </div>
-        <div *ngIf="alsoBy?.length > 0">
-            
-            <h3>Also by {{ app?.creator?.username }}</h3>
-            <div class="app-widgets">
-                <app-widget class="small" *ngFor="let alsoBy of alsoBy" [app]="alsoBy"></app-widget>
-            </div>
-        </div>
-    </div>
-
-    <div class="row"><div class="col span-11"><hr></div></div>
     <div class="col span-11">
         <div class="col span-7 reviews-list" style="">
                 
@@ -108,9 +103,31 @@
                     </div>
             </div>
         </div>
-        <div class="col span-4">
+        <div class="col span-3">
                 <submit-review *ngIf="authenticationService?.userSignedIn()" (reviewAdded)="reviewAdded(review)"
                                [resourceId]="resourceId"></submit-review>
         </div>
     </div>
+<div class="row"><div class="col span-11"><hr></div></div>
+
+    <div class="col span-11 meta-section">
+        <div *ngIf="app?.related?.length > 0">
+            
+            <h3>Related content</h3>
+            <div class="app-widgets">
+                <app-widget class="small" *ngFor="let relatedContent of app.related"
+                            [app]="relatedContent"></app-widget>
+            </div>
+        </div>
+        <div *ngIf="alsoBy?.length > 0">
+            
+            <h3>Also by {{ app?.creator?.username }}</h3>
+            <div class="app-widgets">
+                <app-widget class="small" *ngFor="let alsoBy of alsoBy" [app]="alsoBy"></app-widget>
+            </div>
+        </div>
+    </div>
+
+    
+
 </div>

@@ -28,10 +28,9 @@ export class AppDetailsComponent implements AfterViewInit
     public alsoBy:Array<StoreApp>;
     public reviews:Array<Review> = new Array<Review>();
     public widgetBackground:string;
-    public files:Array<string>;
-
+    public widgetIcon:string;
     public errorMessage:string;
-
+    public fileList:Array<string>;
     addingReview:boolean = false;
 
     constructor( public authenticationService:AuthenticationService,
@@ -56,11 +55,14 @@ export class AppDetailsComponent implements AfterViewInit
                 storeApp =>
                 {
                     this.app = storeApp;
-                   
-                    var jorum_legacy_lastmodified = moment(this.app.jorum_legacy_lastmodified);
+
+                    let jorum_legacy_lastmodified = moment(this.app.jorum_legacy_lastmodified);
                     this.app.jorum_legacy_lastmodified = jorum_legacy_lastmodified.format("D MMM YYYY");
 
+                    this.fileList = this.getFileListFromMetadata(this.app.jorum_legacy_metadata);
+                    
                     this.setWidgetBackground();
+                    this.setWidgetIcon();
 
                     this.loadAlsoBy();
                 },
@@ -139,8 +141,32 @@ export class AppDetailsComponent implements AfterViewInit
     setWidgetBackground() 
     {
         if(!this.app.image) {
-        this.widgetBackground = "backgroundimage" + this.app.type_id + " nowidgetborder";
+            this.widgetBackground = "backgroundimage" + this.app.type_id + " nowidgetborder";
         }
     }
 
+    setWidgetIcon() 
+    {
+        if(!this.app.image&&this.app.jorum_legacy_flag) {
+            this.widgetIcon = "https://s3-eu-west-1.amazonaws.com/jisc-store-content/jorumicon.png";
+        } else {
+            this.widgetIcon = this.app.image;
+        }
+    }
+
+    getFileListFromMetadata(metadata):Array<string>
+    {
+        if(metadata === null||typeof metadata === 'object') {
+            this.app.jorum_legacy_metadata = null;
+            return new Array();
+        } else {
+            let fullFileList = JSON.parse(metadata) as Array<string>;
+            let partialList = fullFileList.slice(0,10);
+            if(fullFileList.length>10) {
+                let additionalFileNumber = fullFileList.length - 10;
+                partialList.push('+ ' + additionalFileNumber.toString() + ' other files');
+            }
+            return partialList;
+        }
+    }
 }

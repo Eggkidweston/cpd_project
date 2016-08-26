@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { ControlGroup, Control, FormBuilder, AbstractControl } from '@angular/common';
 import { AppComponent } from '../../app.component';
 import { AppsService } from '../../services/services';
 import { StoreApp } from '../../models';
@@ -15,10 +16,21 @@ export class SearchComponent {
 
     public filteredList = [];
 	public query = '';
+    public advancedSearchActive: boolean = true;
+
+    searchForm: ControlGroup;
+    freestuff: AbstractControl;
  
-    constructor( private _appsService:AppsService) {
+    constructor( private _appsService:AppsService, fb: FormBuilder) {
+        this.searchForm = fb.group({
+                "freestuff": [""],
+                "ratings": [""]
+            });
+
+        this.freestuff = this.searchForm.controls['freestuff'];
+
     }
-	
+
 	select(item){
     	this.query = item.title;
     	this.filteredList = [];
@@ -28,7 +40,8 @@ export class SearchComponent {
 
 	searchTermChanged(searchTerm) {
         if(searchTerm.length>1) {
-            this._appsService.getBySearchTerm( searchTerm)
+
+            this._appsService.getBySearch(searchTerm, this.freestuff._value)
                 .subscribe(
                     filteredList => {
                         this.filteredList = filteredList.data;
@@ -41,8 +54,28 @@ export class SearchComponent {
         }
     }
 
+    hideOptions(){
+        setTimeout(() => {
+          this.filteredList = [];
+        }, 300);
+    }
+
     itemimage(item):string {
-        if(!item.image) return "https://s3-eu-west-1.amazonaws.com/jisc-store-content/exjorum.png";
+        if(!item.image) return 'https://s3-eu-west-1.amazonaws.com/jisc-store-content/icontype' + item.type_id + '.png';
         return item.image;
+    }
+
+    toggleAdvancedSearch() {
+        let isActive = this.advancedSearchActive;
+        this.advancedSearchActive = isActive ? false : true;
+
+        this.clearAdvancedOptions();
+    }
+
+    clearAdvancedOptions() {
+
+        (<Control>this.freestuff).updateValue(false);
+    
+
     }
 }
