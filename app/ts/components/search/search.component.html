@@ -17,9 +17,10 @@
  	</form>
  	<div class="suggestions" *ngIf="filteredList.length > 0">
         <ul *ngFor="let item of filteredList" >
-            <a (click)="select(item)"><li>
+            <span *ngIf="item"><a (click)="select(item)"><li>
                 <img src="{{itemimage(item)}}"><div class="suggestions-text">{{item.title}} <span *ngIf="item.overview"> - {{item.overview}}</span></div>
-            </li></a>
+            </li></a></span>
         </ul>
+        
     </div>
 </div>
