@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
+import { RouteParams, RouterOutlet, RouterLink, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { ResourceMetrics } from 'models';
 import { AppsService } from 'services/apps.service';
 import { StoreApp } from 'models';
@@ -25,8 +25,10 @@ export class ResourceMetricsComponent implements AfterViewInit {
     private resource:StoreApp;
     private remixedFromResource:StoreApp;
     public widgetBackground:string;
+    public widgetIcon:string;
 
     constructor( protected appsService:AppsService,
+                public router:Router,
                  params:RouteParams ) {
         this._resourceId = +params.get( 'id' );
         this.loadResource();
@@ -42,6 +44,8 @@ export class ResourceMetricsComponent implements AfterViewInit {
                 app => {    
                     this.resource = app;
                     this.setWidgetBackground();
+                    this.setWidgetIcon();
+
                     this.loadResourceMetrics();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
@@ -99,7 +103,22 @@ export class ResourceMetricsComponent implements AfterViewInit {
     setWidgetBackground() 
     {
         if(!this.resource.image) {
-        this.widgetBackground = "backgroundimage" + this.resource.type_id + " nowidgetborder";
+            this.widgetBackground = "backgroundimage" + this.resource.type_id + " nowidgetborder";
         }
     }
+
+    setWidgetIcon() 
+    {
+        if(!this.resource.image&&this.resource.jorum_legacy_flag) {
+            this.widgetIcon = "https://s3-eu-west-1.amazonaws.com/jisc-store-content/jorumicon.png";
+        } else {
+            this.widgetIcon = this.resource.image;
+        }
+    }
+
+    goBack()
+    {
+        this.router.navigate( ['AppDetails', { id: this.resource.id }] );
+    }
+
 }
