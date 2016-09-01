@@ -20,6 +20,7 @@ export class SearchComponent {
 
     searchForm: ControlGroup;
     freestuff: AbstractControl;
+
  
     constructor( private _appsService:AppsService, fb: FormBuilder) {
         this.searchForm = fb.group({
@@ -40,12 +41,10 @@ export class SearchComponent {
 
 	searchTermChanged(searchTerm) {
         if(searchTerm.length>1) {
-
             this._appsService.getBySearch(searchTerm, this.freestuff._value)
                 .subscribe(
                     filteredList => {
                         this.filteredList = filteredList.data;
-                        
                     },
                     (error:any) => AppComponent.generalError( error.status )
                 );
