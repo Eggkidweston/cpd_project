@@ -64,11 +64,14 @@
                 <span *ngIf="!authenticationService?.userSignedIn()"><a
                         [routerLink]="['SignIn']">resource metrics</a></span>
             </div>
-            <div *ngIf="app?.curated" class="curation-remix">
-                <h4>Curation</h4>
-                <div>
-                    <div><p>This resource is open for curation.</p><p>Click the button below for more information:</p></div>
+            <div *ngIf="app?.jorum_legacy_curation_flag" class="curation-remix">
+                <h4>This resource is open for curation</h4>
+                <div *ngIf="authenticationService?.userSignedIn()">
+                    <div><p>Click the button below for more information:</p></div>
                     <button type="button" class="btn btn-primary btn-xs" (click)="goCuration()">Resource Curation</button>
+                </div>
+                <div *ngIf="!authenticationService?.userSignedIn()">
+                <p>Sign in to visit resource curation.</p>
                 </div>
             </div>
         </div>
