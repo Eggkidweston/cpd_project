@@ -28,4 +28,4 @@ export var appSettings = {
     s3Root: 'https://s3-eu-west-1.amazonaws.com/jisc-store-resources/'
 };
 
-export var appInfo = { name: 'Application and resource store', version: 'ALPHA'}
+export var appInfo = { name: 'Application and resource store', version: 'JORUM PREVIEW RELEASE'}

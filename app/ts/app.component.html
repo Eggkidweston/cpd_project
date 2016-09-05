@@ -20,15 +20,10 @@
                             <li [class.active]="isRouteActive(['Home'])" class="nav__item">
                                 <a [routerLink]="['Home']">Search</a>
                             </li>
-                            <li [class.active]="isRouteActive(['TagCloud'])" class="nav__item">
-                                <a [routerLink]="['TagCloud']">TagCloud</a>
-                            </li>
                             <li [class.active]="isRouteActive(['Explore'])" class="nav__item">
                                 <a [routerLink]="['Explore']">Explore</a>
                             </li>
-                            <li *ngIf="authenticationService?.userSignedIn()" [class.active]="isRouteActive(['Submissions'])" class="nav__item">
-                              <a [routerLink]="['Submissions']">Submissions</a>
-                            </li>
+                            
                             <!--<li class="nav__item  ">
                                 <a href="#">Events &amp; Training</a>
                               </li>-->
@@ -56,8 +51,9 @@
                                 <div class="submenu">
                                     <ul>
                                         <li><a [routerLink]="['About']">About the Jisc Store</a></li>
-                                        <li><a [routerLink]="['Who']">Who can register?</a></li>
+                                        <!--<li><a [routerLink]="['Who']">Who can register?</a></li>-->
                                         <li><a [routerLink]="['Feedback']">Feedback</a></li>
+                                        <li><a [routerLink]="['Terms']">Terms of use</a></li>
                                     </ul>
                                 </div>
                             </li>

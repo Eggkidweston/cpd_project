@@ -7,23 +7,25 @@
 
 import { Component } from '@angular/core'
 import { RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-import { HomeComponent } from 'components/store-front/home/home.component';
+import { HomeComponent } from './components/store-front/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { WhoComponent } from './components/whocanregister/who.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
-import { AppDetailsComponent } from 'components/store-front/app-details/app-details.component';
-import { DownloadComponent } from 'components/store-front/download/download.component';
-import { AboutJorumComponent } from 'components/store-front/jorum/aboutjorum.component';
-import { TryComponent } from 'components/store-front/try/try.component';
+import { AppDetailsComponent } from './components/store-front/app-details/app-details.component';
+import { DownloadComponent } from './components/store-front/download/download.component';
+import { AboutJorumComponent } from './components/store-front/jorum/aboutjorum.component';
+import { TermsComponent } from './components/store-front/terms/terms.component';
+import { TryComponent } from './components/store-front/try/try.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
-import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
+import { ResultsComponent } from './components/store-front/results/results.component';
+//import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AppEditComponent } from './components/appedit/appedit.component';
+//import { AppEditComponent } from './components/appedit/appedit.component';
 import { AppInfoComponent } from './components/app-info/app-info.component';
-import { ContributorComponent } from 'components/store-front/contributor/contributor.component';
-import { SubmitResourceComponent } from 'components/administration/submit-resource/submit-resource.component';
+import { ContributorComponent } from './components/store-front/contributor/contributor.component';
+import { SubmitResourceComponent } from './components/administration/submit-resource/submit-resource.component';
 import { ResourceMetricsComponent } from './components/store-front/resource-metrics/resource-metrics.component';
 import { AuthenticationService, appInfo } from './services/services';
 import { SigninRegisterService } from "./services/services";
@@ -42,7 +44,6 @@ import myGlobals = require('./globals');
     { path: '/profile', name: 'Profile', component: ContributorComponent },
     { path: '/download/:id', name: 'Download', component: DownloadComponent },
     { path: '/try/:id', name: 'Try', component: TryComponent },
-    { path: '/resource/edit/:id', name: 'AppEdit', component: AppEditComponent },
     { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
     { path: '/resource/revision/:id', name: 'AppInfo', component: RevisionHistoryComponent },
     { path: '/resource/metrics/:id', name: 'AppInfo', component: ResourceMetricsComponent },
@@ -53,9 +54,10 @@ import myGlobals = require('./globals');
     { path: '/register', name: 'Register', component: RegisterComponent },
     { path: '/about', name: 'About', component: AboutComponent },
     { path: '/whocanregister', name: 'Who', component: WhoComponent },
-    { path: '/tagcloud', name: 'TagCloud', component: TagCloudComponent },
     { path: '/explore', name: 'Explore', component: ExploreComponent },
+    { path: '/terms', name: 'Terms', component: TermsComponent },
     { path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
+    { path: '/results/:searchterm', name: 'Results', component: ResultsComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent }
 ] )
 

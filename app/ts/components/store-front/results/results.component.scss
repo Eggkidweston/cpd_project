@@ -1,0 +1,23 @@
+
+.results-container {
+	app-widget {
+    	-webkit-animation-name: fadein; /* Chrome, Safari, Opera */
+        -webkit-animation-duration: 0.5s; /* Chrome, Safari, Opera */
+        animation-name: fadein;
+        animation-duration: 0.5s;
+        position:relative;
+ 	 }
+    
+
+        /* Chrome, Safari, Opera */
+        @-webkit-keyframes fadein {
+            0%   {left:20px;opacity: 0; }
+            100% {left:0px;opacity: 1.0;}
+        }
+
+        /* Standard syntax */
+        @keyframes fadein {
+            0%   {left:20px;opacity: 0.5; filter: alpha(opacity=0);}
+            100% {left:0px;opacity: 1.0; filter: alpha(opacity=100);}
+        }
+	}

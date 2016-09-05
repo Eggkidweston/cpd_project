@@ -42,7 +42,7 @@
 
             <div class="tagcloud condensed" *ngIf="app?.tags?.length > 0">
                 <h4>Tags</h4>
-                <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['TagCloud', { tag: tag.name }]">{{tag.name}}</button>
+                <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['Explore', { tags: tag.id }]">{{tag.name}}</button>
             </div>
         </div>
         <div class="col span-3 push-1 rating-group">
@@ -64,10 +64,10 @@
                 <span *ngIf="!authenticationService?.userSignedIn()"><a
                         [routerLink]="['SignIn']">resource metrics</a></span>
             </div>
-            <div *ngIf="app?.curated||app?.remixed" class="curation-remix">
-                <h4>Remix and Curation</h4>
+            <div *ngIf="app?.curated" class="curation-remix">
+                <h4>Curation</h4>
                 <div>
-                    <div><p>This resource is open for curation and remixing.</p><p>Click the button below for more information:</p></div>
+                    <div><p>This resource is open for curation.</p><p>Click the button below for more information:</p></div>
                     <button type="button" class="btn btn-primary btn-xs" (click)="goCuration()">Resource Curation</button>
                 </div>
             </div>
@@ -79,7 +79,7 @@
 
     <div class="row" *ngIf="app?.media?.length > 0">
     <h4>Preview</h4>
-        <div class="col span-8 media-container">
+        <div class="media-container">
             <media-carousel [resource]="app"></media-carousel>
         </div>
     </div>

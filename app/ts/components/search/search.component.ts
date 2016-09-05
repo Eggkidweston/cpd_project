@@ -4,6 +4,7 @@ import { ControlGroup, Control, FormBuilder, AbstractControl } from '@angular/co
 import { AppComponent } from '../../app.component';
 import { AppsService } from '../../services/services';
 import { StoreApp } from '../../models';
+import { AppWidgetsComponent } from '../appwidgets/appwidgets.component';
 
 @Component({
     selector: 'search',
@@ -13,19 +14,32 @@ import { StoreApp } from '../../models';
 })
 export class SearchComponent {
     @Output() updateSearch = new EventEmitter();
-
+    static router:Router;
     public filteredList = [];
 	public query = '';
-    public advancedSearchActive: boolean = true;
+    public advancedSearchActive: boolean = false;
+
+    private resultsApps:Array<StoreApp>;
 
     searchForm: ControlGroup;
     freestuff: AbstractControl;
+    searchterm: AbstractControl;
+
  
-    constructor( private _appsService:AppsService, fb: FormBuilder) {
+    constructor( private _appsService:AppsService,
+                 fb: FormBuilder,
+                 router:Router ) {
+
+
+         SearchComponent.router = router;
+
         this.searchForm = fb.group({
                 "freestuff": [""],
+                "searchterm": [""],
                 "ratings": [""]
             });
+
+        this.searchterm = this.searchForm.controls['searchterm'];
 
         this.freestuff = this.searchForm.controls['freestuff'];
 
@@ -40,18 +54,20 @@ export class SearchComponent {
 
 	searchTermChanged(searchTerm) {
         if(searchTerm.length>1) {
-
             this._appsService.getBySearch(searchTerm, this.freestuff._value)
                 .subscribe(
                     filteredList => {
                         this.filteredList = filteredList.data;
-                        
                     },
                     (error:any) => AppComponent.generalError( error.status )
                 );
         }else{
         	this.filteredList = [];
         }
+    }
+
+    onSubmitSearch(formValues: any) {
+        SearchComponent.router.navigate( ['Results', { searchterm: encodeURIComponent(this.searchterm._value) }] );
     }
 
     hideOptions(){
