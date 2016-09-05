@@ -3,7 +3,7 @@
     <div class="app-details">
         <div class="col span-2">
             <div class="resource-image {{ widgetBackground }}">
-                <img src="{{ app?.image }}" *ngIf="app?.image">
+                <img class="img" src="{{ widgetIcon }}" *ngIf="widgetIcon">
                 <div class="button-container">
                     <button class="btn" role="button" (click)="goDownload()">Get it</button>
                     <button *ngIf="app?.trialurl" class="btn tryit" role="button" (click)="goTry()">Try It</button>
@@ -11,10 +11,11 @@
             </div>
             
             <div class="cost-licence-container">
-                <h4>Cost: {{ !app?.isFree ? "FREE" : "PAID" }}</h4>
+                <h4 *ngIf="!(app?.isfree === null)">{{ !app?.isfree ? "Price: £ -" : "FREE RESOURCE" }}</h4>
                 <h4 *ngIf="app?.licensetype_id">License<br /> {{ licenseType }}</h4>
                 
             </div>
+
         </div>
         <div class="col span-6">
             <h2>{{ app?.title }}</h2>
@@ -22,13 +23,26 @@
 
             <h4 *ngIf="app?.overview">{{ app?.overview }}</h4>
             <p *ngIf="app?.description">{{ app?.description }}</p>
-            <p><span class="created-by">Created by</span> <span
+
+            <p *ngIf="app?.jorum_legacy_flag"><span class="created-by">Imported by</span> <span
+                    class="creator-name">Jorum</span>
+                <span class="about-this-contributor"><a [routerLink]="['AboutJorum', { id: app?.id }]">about Jorum</a></span>
+            </p>
+            <p *ngIf="!app?.jorum_legacy_flag"><span class="created-by">Created by</span> <span
                     class="creator-name">{{ app?.creator?.username }}</span>
                 <span class="about-this-contributor"><a [routerLink]="['Contributor', { id: app?.creator?.id }]">about this contributor</a></span>
             </p>
+            
+            <div class="filelist-container" *ngIf="app?.jorum_legacy_metadata">
+                <h4>Included in this resource:</h4>
+                <ul>
+                <li *ngFor="let file of fileList">{{file}}</li>
+                </ul>
+            </div>
+
             <div class="tagcloud condensed" *ngIf="app?.tags?.length > 0">
                 <h4>Tags</h4>
-                <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['TagCloud', { tag: tag.name }]">{{tag.name}}</button>
+                <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['Explore', { tags: tag.id }]">{{tag.name}}</button>
             </div>
         </div>
         <div class="col span-3 push-1 rating-group">
@@ -50,10 +64,10 @@
                 <span *ngIf="!authenticationService?.userSignedIn()"><a
                         [routerLink]="['SignIn']">resource metrics</a></span>
             </div>
-            <div *ngIf="app?.curated||app?.remixed" class="curation-remix">
-                <h4>Remix and Curation</h4>
+            <div *ngIf="app?.curated" class="curation-remix">
+                <h4>Curation</h4>
                 <div>
-                    <div><p>This resource is open for curation and remixing.</p><p>Click the button below for more information:</p></div>
+                    <div><p>This resource is open for curation.</p><p>Click the button below for more information:</p></div>
                     <button type="button" class="btn btn-primary btn-xs" (click)="goCuration()">Resource Curation</button>
                 </div>
             </div>
@@ -65,8 +79,33 @@
 
     <div class="row" *ngIf="app?.media?.length > 0">
     <h4>Preview</h4>
-        <div class="col span-8 media-container">
+        <div class="media-container">
             <media-carousel [resource]="app"></media-carousel>
+        </div>
+    </div>
+<div class="row"><div class="col span-11"><hr></div></div>
+
+    <div class="col span-11">
+        <div class="col span-7 reviews-list" style="">
+                
+            <h3>Reviews<span *ngIf="!authenticationService?.userSignedIn()"> - <a
+                    [routerLink]="['SignIn']">Sign In</a> to submit a review</span></h3>
+            <div class="no-reviews" *ngIf="reviews.length==0"><p>No-one has reviewed this resource yet. Be the
+                    first!</p></div>
+            <div *ngFor="let review of reviews">
+                    <hr>
+                <div class="detail-review"><b>{{ review?.title }}</b>
+                        <br>{{ review?.description }}
+                        <br>
+                </div>
+                <div>
+                        <rating rating="{{ review?.rating }}"></rating>
+                    </div>
+            </div>
+        </div>
+        <div class="col span-3">
+                <submit-review *ngIf="authenticationService?.userSignedIn()" (reviewAdded)="reviewAdded(review)"
+                               [resourceId]="resourceId"></submit-review>
         </div>
     </div>
 <div class="row"><div class="col span-11"><hr></div></div>
@@ -89,28 +128,6 @@
         </div>
     </div>
 
-    <div class="row"><div class="col span-11"><hr></div></div>
-    <div class="col span-11">
-        <div class="col span-7 reviews-list" style="">
-                
-            <h3>Reviews<span *ngIf="!authenticationService?.userSignedIn()"> - <a
-                    [routerLink]="['SignIn']">Sign In</a> to submit a review</span></h3>
-            <div class="no-reviews" *ngIf="reviews.length==0"><p>No-one has reviewed this resource yet. Be the
-                    first!</p></div>
-            <div *ngFor="let review of reviews">
-                    <hr>
-                <div class="detail-review"><b>{{ review?.title }}</b>
-                        <br>{{ review?.description }}
-                        <br>
-                </div>
-                <div>
-                        <rating rating="{{ review?.rating }}"></rating>
-                    </div>
-            </div>
-        </div>
-        <div class="col span-4">
-                <submit-review *ngIf="authenticationService?.userSignedIn()" (reviewAdded)="reviewAdded(review)"
-                               [resourceId]="resourceId"></submit-review>
-        </div>
-    </div>
+    
+
 </div>

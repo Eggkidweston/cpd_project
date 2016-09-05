@@ -22,9 +22,10 @@ export var servicesInjectables: Array<any> = [
 ];
 
 export var appSettings = {
+    //apiRoot: 'http://localhost:8888/',
     apiRoot: 'http://store-staging.data.alpha.jisc.ac.uk:8080/',
     curationRoot: 'http://curation-staging.data.alpha.jisc.ac.uk/',
     s3Root: 'https://s3-eu-west-1.amazonaws.com/jisc-store-resources/'
 };
 
-export var appInfo = { name: 'Application and resource store', version: 'ALPHA'}
+export var appInfo = { name: 'Application and resource store', version: 'JORUM PREVIEW RELEASE'}

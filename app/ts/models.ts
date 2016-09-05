@@ -19,7 +19,7 @@ export class StoreApp
     createdDate:string;
     description:string;
     downloadCount:number;
-    isFree:boolean;
+    isfree:boolean;
     lastUpdatedDate:string;
     licensetype_id:number;
     likes:number;
@@ -37,6 +37,7 @@ export class StoreApp
     tags:Array<string>;
     trialurl:string;
     jorum_legacy_lastmodified:string;
+    jorum_legacy_flag:boolean;
     jorum_legacy_metadata:Array<string>;
     image:string;
 }
@@ -70,8 +71,39 @@ export class DownloadMetrics
 }
 export class TagCloud
 {
-    constructor( public tags:Tag[] )
+
+    constructor( public Tags:Tag[] )
     {
+
+    }
+    public GetTag(id:number) :Tag{
+        return this.Tags.filter(function(t){return t.id == id})[0];
+    }
+    public AddTag(tag: Tag){
+        this.Tags.push(tag);
+    }
+    public RemoveTag(id: number){
+        this.Tags = this.Tags.filter(function(el) {
+            return el.id !== id;
+        });
+    }
+    public GetIds() :any[]{
+           var ids = this.Tags.map(function(obj){
+               var rObj = [];
+               rObj.push(+obj.id);
+               return rObj;
+           });
+        return ids ;
+    }
+    public GetFilterSyntax(){
+        var filter = "";
+        for (let tag of this.Tags) {
+            filter += "(tag eq '"+tag.name+"')";
+            if (tag != this.Tags[this.Tags.length -1]){
+                filter += " and ";
+            }
+        }
+        return filter;
     }
 }
 

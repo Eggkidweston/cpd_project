@@ -4,18 +4,11 @@
     {
         margin-bottom:20px;
         padding:16px;
-        display: -webkit-flex;
-        display: flex;
-        width: 672px;
-        -webkit-flex-wrap: wrap;
-        flex-wrap: wrap; 
-        flex: auto;
         border-radius: 15px;
         box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.19);
         background:#fff;
         overflow:hidden;
-        -webkit-align-items: stretch;
-        align-items: stretch;
+        max-width:640px;
         
         .medium {
         }

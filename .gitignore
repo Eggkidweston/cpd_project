@@ -1,5 +1,5 @@
 node_modules
 .webpack.json
 .DS_Store
-build
 npm-debug.log
+.idea/workspace.xml
