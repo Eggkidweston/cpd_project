@@ -1,0 +1,20 @@
+
+<div class="results-container">
+    
+    <div class="col span-12">
+    <div class="back-link"><button class="btn back" role="button" (click)="goBack()">Back</button>
+            </div>
+        <h3>You searched for: {{searchTerm}}</h3>
+        <div *ngIf="resultsApps&&resultsApps.length>0">
+        <app-widgets [apps]="resultsApps"></app-widgets>
+        </div>
+        <div *ngIf="!(resultsApps&&resultsApps.length>0)">
+            <span *ngIf="!searching">Sorry, no resources found.</span>
+            <span *ngIf="searching">Searching..</span>
+        </div>
+    </div>
+
+    <!--<div class="col span-12" *ngIf="totalPages>0">
+    	<pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageClicked)="onPageClicked($event)"></pagination>
+    </div>-->
+</div>

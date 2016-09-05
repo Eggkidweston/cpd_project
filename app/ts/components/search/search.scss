@@ -1,7 +1,10 @@
 .input--search {
-	font-size:1.3em;
-	width:100%;
-
+	font-size:1.4em;
+   width:100%;
+}
+.searchbox-container{
+	display:inline-flex;
+	margin-bottom: 0px;
 }
 
 .suggestions {
@@ -38,16 +41,32 @@
 	}
 }
 
+.search-box{
+	padding-bottom:4px;
+}
+
 search{
 	padding-bottom: 3em;
-    display: block;
 }
+
+.searchbutton  {
+          border-radius: 0 10px 10px 0 !important;
+          background: #0092cb !important;
+          font-weight: 700 !important;
+          color:#ffffff !important;
+          height:43px !important;
+          font-size: 24px !important;
+          display: in-line;
+        }
 
 .advanced-search-link {
 	float:right;
 }
 
+
+
 .advancedSearch {
+	margin-top:10px;
 	li {
 		list-style:none;
 		display:inline;
