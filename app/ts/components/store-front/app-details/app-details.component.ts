@@ -65,6 +65,8 @@ export class AppDetailsComponent implements AfterViewInit
                     this.setWidgetIcon();
 
                     this.loadAlsoBy();
+
+                    console.log(this.app);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -72,7 +74,7 @@ export class AppDetailsComponent implements AfterViewInit
 
     goCuration()
     {
-        var url = `${appSettings.curationRoot}/#/resources/${this.app.id}/history`;
+        var url = `${appSettings.curationRoot}/#/resource/${this.app.id}`;
         window.location.href = url;
     }
 

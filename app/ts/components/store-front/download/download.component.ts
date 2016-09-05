@@ -77,7 +77,6 @@ export class DownloadComponent
     }
 
     assignValbyType(instructions:DownloadInstructions, val:string){
-    console.log(instructions);
         if(val=="local") {
             return instructions.local;
         } else {
