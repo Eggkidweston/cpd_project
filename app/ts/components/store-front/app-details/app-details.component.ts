@@ -66,7 +66,7 @@ export class AppDetailsComponent implements AfterViewInit
 
                     this.loadAlsoBy();
 
-                    console.log(this.app);
+                    //console.log(this.app);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -74,7 +74,7 @@ export class AppDetailsComponent implements AfterViewInit
 
     goCuration()
     {
-        var url = `${appSettings.curationRoot}/#/resource/${this.app.id}`;
+        var url = `${appSettings.curationRoot}#/resource/${this.app.id}?token=${AuthenticationService.apiKey}`;
         window.location.href = url;
     }
 

@@ -56,9 +56,9 @@ import myGlobals = require('./globals');
     { path: '/whocanregister', name: 'Who', component: WhoComponent },
     { path: '/explore', name: 'Explore', component: ExploreComponent },
     { path: '/terms', name: 'Terms', component: TermsComponent },
-    { path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
     { path: '/results/:searchterm', name: 'Results', component: ResultsComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent }
+    //{ path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
 ] )
 
 export class AppComponent
