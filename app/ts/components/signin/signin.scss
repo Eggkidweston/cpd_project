@@ -9,7 +9,17 @@
     justify-content: center;
     display: -webkit-flex;
 }
-
+.signin-form{
+	margin-bottom:10px;
+	input {
+		width:100%;
+	}
+}
+.sign-in-container{
+	button {
+		width:100%;
+	}
+}
 .authenty {
 	font-family: 'Open Sans', sans-serif;
 	[data-animation] {

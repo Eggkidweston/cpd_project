@@ -75,6 +75,45 @@ export class AuthenticationService {
             );
     }
 
+    registerWithLocalPid( username:string,
+        next: () => void,
+        error: (res: Response) => void,
+        complete: () => void)
+    {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        let localpid:string = localStorage.getItem("pid");
+      
+        var json = JSON.stringify({
+                name: username,
+                username: username,
+                email: localpid ,
+                password: 'idp'
+            })
+           
+        this.http.post(`${appSettings.apiRoot}users/register`,
+            json, { headers })
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    AuthenticationService.user = data.user;
+                    next();
+                },
+                err => error(err),
+                () => complete()
+            );
+    }
+
+    signInWithPid(
+        next: ()=> void,
+        error: (res: Response) => void,
+        complete: () => void)
+    {
+        let localpid:string = localStorage.getItem("pid");
+        this.signIn(localpid,'idp', next, error);
+    }
+
     signIn(emailOrUsername: string, password: string,
         next: () => void,
         error: (res: Response) => void)

@@ -47,7 +47,17 @@ export interface GetResourceResults {
     availableRows: number;
 }
 
+export class IdpMembers {
+    entityID:string;
+    name:string;
+    createdAt:string;
+    updatedAt:string;
+    id:string
+}
 
+export interface IdpMemberResults {
+    data: Array<IdpMembers>;
+}
 
 export interface GetSearchResults {
     data: Array<StoreApp>;

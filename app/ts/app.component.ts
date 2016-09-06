@@ -11,6 +11,7 @@ import { HomeComponent } from './components/store-front/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { WhoComponent } from './components/whocanregister/who.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
+import { RegisterIDPComponent } from './components/registeridp/registeridp.component';
 import { AppDetailsComponent } from './components/store-front/app-details/app-details.component';
 import { DownloadComponent } from './components/store-front/download/download.component';
 import { AboutJorumComponent } from './components/store-front/jorum/aboutjorum.component';
@@ -39,7 +40,7 @@ import myGlobals = require('./globals');
     template: require( './app.component.html' )
 } )
 @RouteConfig( [
-    { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
+    { path: '/home', name: 'Home', component: HomeComponent, useAsDefault:true },
     { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
     { path: '/profile', name: 'Profile', component: ContributorComponent },
     { path: '/download/:id', name: 'Download', component: DownloadComponent },
@@ -52,6 +53,7 @@ import myGlobals = require('./globals');
     { path: '/error', name: 'Error', component: ErrorComponent },
     { path: '/signin', name: 'SignIn', component: SignInComponent },
     { path: '/register', name: 'Register', component: RegisterComponent },
+    { path: '/registeridp', name: 'RegisterIDP', component: RegisterIDPComponent },
     { path: '/about', name: 'About', component: AboutComponent },
     { path: '/whocanregister', name: 'Who', component: WhoComponent },
     { path: '/explore', name: 'Explore', component: ExploreComponent },
@@ -67,25 +69,61 @@ export class AppComponent
     public appInfoname:String;
     private appVersion:String;
     public narrowHeader:Boolean;
+    private idpJWT
 
     constructor( public authenticationService:AuthenticationService,
                  protected signinRegisterService:SigninRegisterService,
-                 router:Router )
+                 public router:Router )
     {
+        
         this.appInfoname = appInfo.name;
         this.appVersion = appInfo.version;
         AppComponent.router = router;
-        this.narrowHeader = myGlobals.narrowHeader;
-
-        router.subscribe((value: any) => {
         
+        this.narrowHeader = myGlobals.narrowHeader;
+        
+        router.subscribe((value: any) => {
             if( value.indexOf('try/')==0 ) {
                 this.narrowHeader = true;
             }else{
                 this.narrowHeader = false;
             }
+        });
 
-        })
+        if(window.location.href.indexOf('token')>-1&&window.location.href.indexOf('jwt')>-1){
+            this.idpJWT = JSON.parse(this.getParameterByName('token', window.location.href));
+            var jwtArr = this.idpJWT.jwt.split('.');
+            var payload = JSON.parse(this.base64Decode(jwtArr[1]));
+            if (typeof(Storage) !== "undefined") {
+                let pidarr = payload.data.pid.split('!');
+                var pidmail = pidarr[pidarr.length-1] + '@sdfgdghfdfdhfdgfgshgdwhdf5tb.uk';
+
+                localStorage.setItem("pid", pidmail);
+                console.log('localstorage set');
+            }
+            AppComponent.router.navigate( ['RegisterIDP'] );
+        }
+    }
+
+    base64Decode(s) {
+        var e={},i,b=0,c,x,l=0,a,r='',w=String.fromCharCode,L=s.length;
+        var A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        for(i=0;i<64;i++){e[A.charAt(i)]=i;}
+        for(x=0;x<L;x++){
+            c=e[s.charAt(x)];b=(b<<6)+c;l+=6;
+            while(l>=8){((a=(b>>>(l-=8))&0xff)||(x<(L-2)))&&(r+=w(a));}
+        }
+        return r;
+    }
+
+    getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
     signOut()
@@ -106,7 +144,7 @@ export class AppComponent
     {
         if( status == 401 ) {
             AuthenticationService.signOut();
-            AppComponent.router.navigate( ['Profile'] );
+            AppComponent.router.navigate( ['SignIn'] );
         } else {
             AppComponent.router.navigate( ['Error', { status: status }] );
         }
