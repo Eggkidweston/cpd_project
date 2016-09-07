@@ -69,12 +69,16 @@ export class AppComponent
     public appInfoname:String;
     private appVersion:String;
     public narrowHeader:Boolean;
-    private idpJWT
+    public showCookiebar:boolean;
+    private idpJWT;
+
 
     constructor( public authenticationService:AuthenticationService,
                  protected signinRegisterService:SigninRegisterService,
                  public router:Router )
     {
+        this.checkCookieBar();
+        
         
         this.appInfoname = appInfo.name;
         this.appVersion = appInfo.version;
@@ -101,6 +105,22 @@ export class AppComponent
             }
             AppComponent.router.navigate( ['RegisterIDP'] );
         }
+    }
+
+    checkCookieBar() {
+        if (typeof(Storage) !== "undefined") {
+            let cookieBarLS = localStorage.getItem("cookiebarshown");
+            if(cookieBarLS=="yes"){
+                this.showCookiebar = false;
+            }else{
+                this.showCookiebar =true;
+            }
+        }
+    }
+
+    clickCookieBar(){
+        localStorage.setItem('cookiebarshown', 'yes');
+        this.checkCookieBar();
     }
 
     base64Decode(s) {
@@ -134,6 +154,8 @@ export class AppComponent
     {
         return AppComponent.router.isRouteActive( AppComponent.router.generate( instruction ) );
     }
+
+
     
     // ok, I confess, this needs refactoring. This is not a good
     // approach to intercomponent communication. And it creates
