@@ -168,7 +168,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 		}
 
 		public launchIDP() {
-			var url = `https://sp.data.alpha.jisc.ac.uk/Shibboleth.sso/Login?entityID=${this.selectedIdp.entityID}&target=https://sp.data.alpha.jisc.ac.uk/secure/auth-web.php?returl=` + encodeURIComponent('http://localhost:8080/#/register');
+			var url = `https://sp.data.alpha.jisc.ac.uk/Shibboleth.sso/Login?entityID=${this.selectedIdp.entityID}&target=https://sp.data.alpha.jisc.ac.uk/secure/auth-web.php?returl=` + encodeURIComponent(window.location.href);
 			
         	window.location.href = url;
 		}
