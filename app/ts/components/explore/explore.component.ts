@@ -110,7 +110,7 @@ export class ExploreComponent implements AfterViewInit {
 
     loadApps() {
         //console.log('loading apps');
-        this.appsService.getResources(5000, 1, this.selectedTags.GetFilterSyntax())
+        this.appsService.getResources(100, 1, this.selectedTags.GetFilterSyntax())
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
