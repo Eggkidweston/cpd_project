@@ -108,7 +108,7 @@ export class TagCloud
     public GetFilterSyntax(){
         var filter = "";
         for (let tag of this.Tags) {
-            filter += "(tag eq '"+tag.name.toUpperCase()+"')";
+            filter += "(tag eq '"+tag.name+"')";
             if (tag != this.Tags[this.Tags.length -1]){
                 filter += " and ";
             }
