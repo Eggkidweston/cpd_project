@@ -91,7 +91,7 @@ export class AppsService
         
 
         let searchQuery = `${appSettings.apiRoot}resources?$top=30&$filter=title%20eq%20%27${ searchTerm }%27`;
-        if(opened) searchQuery += "%20and%20isfree%20eq%20true";
+        //if(opened) searchQuery += "%20and%20isfree%20eq%20true";
         
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )

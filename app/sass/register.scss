@@ -1,8 +1,5 @@
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
 
-.register-window {
-   
-}
 
 .authenty {
 	[data-animation] {
@@ -55,6 +52,10 @@
 }
 
 .register-window {
+
+	.register-form{
+		margin-bottom:10px;
+	}
 	
 	.title, .prompt {
 		text-align: left;
@@ -83,14 +84,7 @@
 	input[type="text"], 
 	input[type="password"], 
 	input[type="email"] {
-		background: none;
-		border: none;
-		border-bottom: 1px solid #505050;
-		box-shadow: none;
-		padding: 10px 0 10px 10px;
-		border-radius: 0;
-		margin-bottom: 20px;
-		color: #ccc;
+		width:100%;
 	}
 	.checkbox label {
 		color: #505050;
