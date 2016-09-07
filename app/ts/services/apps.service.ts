@@ -18,6 +18,7 @@ export class AppsService
 
     public getResources(appsPerPage: number, pageNumber: number, filterText :string)
     {
+        //console.log(`${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` );
         return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
             .map( res => <GetResourceResults>res.json() )
             .catch( this.handleError );
