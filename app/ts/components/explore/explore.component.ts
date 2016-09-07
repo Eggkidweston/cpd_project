@@ -92,8 +92,8 @@ export class ExploreComponent implements AfterViewInit {
         this.loadCloud();
     }
 
-    loadApps() {
-        this.appsService.getResources(100, 1, this.selectedTags.GetFilterSyntax())
+    loadApps() { //TODO: fix the API availablerows number that's being returned!
+        this.appsService.getResources(1500, 1, this.selectedTags.GetFilterSyntax())
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
