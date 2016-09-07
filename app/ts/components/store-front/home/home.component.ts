@@ -22,9 +22,11 @@ export class HomeComponent
     private appsPerPage:number = 20;
     private currentPage:number = 1;
     private totalPages:number = 0;
+    idpToken:string;
 
-    constructor( private _appsService:AppsService )
+    constructor( private _appsService:AppsService) 
     {
+        
         this.getMostDownloadedApps();
         this.getRecentApps();
         this.getLastUpdatedApps();
