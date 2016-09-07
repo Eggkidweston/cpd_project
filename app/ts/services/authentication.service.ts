@@ -119,8 +119,7 @@ export class AuthenticationService {
         next: () => void,
         error: (res: Response) => void)
     {
-        console.log(emailOrUsername);
-        console.log(password);
+        
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
