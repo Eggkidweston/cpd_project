@@ -82,7 +82,7 @@ export class SearchComponent {
             if(type==99){
                 type = 'other';
             }
-            return 'https://s3-eu-west-1.amazonaws.com/jisc-store-assets/type' + type + '.png';
+            return 'https://s3-eu-west-1.amazonaws.com/jisc-store-assets/icontype' + type + '.png';
         } 
         return item.image;
     }

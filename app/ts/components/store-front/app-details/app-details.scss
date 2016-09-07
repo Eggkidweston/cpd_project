@@ -32,10 +32,16 @@ h4 {
         height: 100%;
         width: 128px;
         height: auto;
-        margin-top:33px;
+        margin-bottom:10px;
       }
     }
 
+    .nowidgetborder {
+      .img {
+      margin-top:33px;
+      margin-bottom:0px;
+      }
+    }
     .button-container {
       
       button {
