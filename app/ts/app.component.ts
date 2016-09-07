@@ -96,10 +96,8 @@ export class AppComponent
             var payload = JSON.parse(this.base64Decode(jwtArr[1]));
             if (typeof(Storage) !== "undefined") {
                 let pidarr = payload.data.pid.split('!');
-                var pidmail = pidarr[pidarr.length-1] + '@sdfgdghfdfdhfdgfgshgdwhdf5tb.uk';
-
+                var pidmail = pidarr[pidarr.length-1] + '@jiscpidmail.co.uk';
                 localStorage.setItem("pid", pidmail);
-                console.log('localstorage set');
             }
             AppComponent.router.navigate( ['RegisterIDP'] );
         }

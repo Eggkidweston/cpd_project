@@ -56,7 +56,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 
 		    this.username = this.idpUserForm.controls['username'];
 
-	    	if(localStorage.getItem("pid")!='undefined'){
+	    	if(localStorage.getItem("pid")!='undefined'&&localStorage.getItem("pid")!=''){
 
 	    		//attempt to log in with the pidmail and password
 	    		this.signIn()
