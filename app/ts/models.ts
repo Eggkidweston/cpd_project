@@ -91,6 +91,7 @@ export class TagCloud
     }
     public AddTag(tag: Tag){
         this.Tags.push(tag);
+        //console.log('tagged');
     }
     public RemoveTag(id: number){
         this.Tags = this.Tags.filter(function(el) {
