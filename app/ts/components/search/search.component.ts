@@ -71,13 +71,19 @@ export class SearchComponent {
     }
 
     hideOptions(){
-        setTimeout(() => {
-          this.filteredList = [];
-        }, 300);
+        //setTimeout(() => {
+        //  this.filteredList = [];
+        //}, 300);
     }
 
     itemimage(item):string {
-        if(!item.image) return 'https://s3-eu-west-1.amazonaws.com/jisc-store-content/icontype' + item.type_id + '.png';
+        if(!item.image) {
+            var type = item.type_id;
+            if(type==99){
+                type = 'other';
+            }
+            return 'https://s3-eu-west-1.amazonaws.com/jisc-store-assets/icontype' + type + '.png';
+        } 
         return item.image;
     }
 
