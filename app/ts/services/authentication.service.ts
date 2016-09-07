@@ -119,6 +119,8 @@ export class AuthenticationService {
         next: () => void,
         error: (res: Response) => void)
     {
+        console.log(emailOrUsername);
+        console.log(password);
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -146,6 +148,7 @@ export class AuthenticationService {
     static signOut() {
         AuthenticationService.apiKey = null;
         AuthenticationService.user = null;
+        localStorage.setItem("pid",'');
     }
 
     isEmailOrUsernameInUse(emailOrUsername: string,
