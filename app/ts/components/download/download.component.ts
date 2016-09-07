@@ -22,8 +22,6 @@ require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
 })
 export class DownloadSourceComponent implements AfterViewInit {
     public app: StoreApp;
-    public shadowApps: ShadowApp[] = [];
-    public shadowApp: ShadowApp;
     public resourceId: number;
 
 
@@ -53,30 +51,7 @@ export class DownloadSourceComponent implements AfterViewInit {
                 (error: any) => AppComponent.generalError(error.status)
             );
 
-        this.apps2Service.getApp(this.resourceId)
-            .subscribe(
-                shadowApps => {
-                    this.shadowApps = shadowApps,
-                        this.getShadow()
-                },
-                (error: any)  =>  this.errorMessage = <any>error
-            );
-
-    }
-
-    getShadow()
-    {
-
-        this.shadowApp=this.shadowApps[0];
-
-    }
-
-    goCuration(){
-
-        var url = 'http://localhost:3000/#/curation/'+this.app.id
-
-
-        window.location.href=url;
+        
 
     }
 
