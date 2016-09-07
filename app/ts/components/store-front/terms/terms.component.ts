@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
 } )
 export class TermsComponent
 {
-    private resourceId:number;
 
     constructor( )
     {
       
     }
+
 
 }   
