@@ -10,8 +10,10 @@
             <li *ngFor="let page of range" class="pagination__item"
                 [class.pagination__item--current]="page==currentPage"
                 [class.pagination__item--first]="page==1"
-                [class.pagination__item--last]="page==totalPages">
-                <a (click)="onPageClicked(page)" title=" {{page}}">{{page}}</a>
+                [class.pagination__item--last]="page==totalPages"
+                [class.pagination__item--hidden]="page>3&&page<totalPages-2&&page!=currentPage&&page!=currentPage-1&&page!=currentPage+1"
+                >
+                <a (click)="onPageClicked(page)" title="{{page}}">{{page}}</a>
             </li>
             <li class="pagination__item pagination__item--next">
                 <a (click)="onNextClicked()" title="Next">
