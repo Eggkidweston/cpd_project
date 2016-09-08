@@ -14,13 +14,13 @@ export class PaginationComponent
 
     private range: Array<number>;
     private _totalPages: number;
-
+    
     set totalPages(value:number) {
         this._totalPages = value;
         this.range = new Array<number>();
-        for( var i = 1; i<=value; i++ ) this.range.push(i);
-        //limit array to 5
-        //this.range = this.range.slice(0,6);
+        for( var i = 1; i<=value; i++ ) {
+            this.range.push(i);
+        }
     }
 
     get totalPages() {
@@ -38,4 +38,5 @@ export class PaginationComponent
     onNextClicked() {
         this.pageClicked.emit(Math.min(this.totalPages, this.currentPage+1));
     }
+
 }
