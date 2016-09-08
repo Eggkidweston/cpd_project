@@ -16,6 +16,7 @@ import { AppDetailsComponent } from './components/store-front/app-details/app-de
 import { DownloadComponent } from './components/store-front/download/download.component';
 import { AboutJorumComponent } from './components/store-front/jorum/aboutjorum.component';
 import { TermsComponent } from './components/store-front/terms/terms.component';
+import { SupportComponent } from './components/store-front/support/support.component';
 import { TryComponent } from './components/store-front/try/try.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
@@ -58,6 +59,7 @@ import myGlobals = require('./globals');
     { path: '/whocanregister', name: 'Who', component: WhoComponent },
     { path: '/explore', name: 'Explore', component: ExploreComponent },
     { path: '/terms', name: 'Terms', component: TermsComponent },
+    { path: '/support', name: 'Support', component: SupportComponent },
     { path: '/results/:searchterm', name: 'Results', component: ResultsComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent }
     //{ path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
