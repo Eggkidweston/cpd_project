@@ -8,22 +8,33 @@ export class SigninRegisterService {
 
     constructor(public router: Router) {
         router.subscribe((value: any) => {
-            if( value !== 'signin' && value !== 'register' ) {
+            if( value !== 'signin' && value !== 'register' && value !== 'registeridp' ) {
                 this.lastRoute = value;
             }
         })
     };
     
     resumeAfterSigninOrRegister() {
+        console.log('resumeAfterRegister');
         if( this.lastRoute ) {
-            this.router.navigateByUrl(this.lastRoute);
+            this.router.navigateByUrl('' + this.lastRoute);
+            console.log('navigate to ' + this.lastRoute);
         } else {
             this.router.navigate(['Home']);
+            console.log('home');
         }
     }
 
+    goIDP() {
+        this.router.navigate(['RegisterIDP']);
+    }
+
     redirectToProfileAfterSignin() {
-        this.lastRoute = 'Profile'; 
+        this.lastRoute = 'profile'; 
+    }
+
+    redirectToProfile() {
+        this.router.navigate(['Profile']);
     }
 }
 

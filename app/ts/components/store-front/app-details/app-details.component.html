@@ -42,7 +42,7 @@
 
             <div class="tagcloud condensed" *ngIf="app?.tags?.length > 0">
                 <h4>Tags</h4>
-                <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['Explore', { tags: tag.id }]">{{tag.name}}</button>
+                <button class="btn " *ngFor="let tag of app.tags" >{{tag.name}}</button>
             </div>
         </div>
         <div class="col span-3 push-1 rating-group">
@@ -74,6 +74,7 @@
                 <p>Sign in to visit resource curation.</p>
                 </div>
             </div>
+            <div class="resource-problem">Problems with this resource?<br />Email <a href="mailto:support.store@jisc.ac.uk">support.store@jisc.ac.uk</a></div>
         </div>
 
     </div>
