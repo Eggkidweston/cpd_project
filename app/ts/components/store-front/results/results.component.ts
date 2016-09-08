@@ -43,8 +43,11 @@ export class ResultsComponent
                 .subscribe(
                     results => {
                         this.resultsApps = results.data;
+                        if(this.resultsApps.length==1) {
+                            this.goSingleResult();
+                        }
                         this.resultsCount = results.availableRows;
-                        //this.totalPages = Math.ceil(results.availableRows/this.appsPerPage);
+                        this.totalPages = Math.ceil(results.availableRows/this.appsPerPage);
                         this.searching = false;
                     },
                     (error:any) => AppComponent.generalError( error.status )
@@ -54,6 +57,10 @@ export class ResultsComponent
     onPageClicked(page) {
         this.currentPage = page;
         this.getResultsApps();
+    }
+
+    goSingleResult(){
+        this.router.navigate( ['AppDetails', , { id: this.resultsApps[0].id }] );
     }
 
     goBack()
