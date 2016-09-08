@@ -1,4 +1,4 @@
-<div class="row col-11">
+<div>
 	<div class="search-box col-11">
 		<form [ngFormModel]="searchForm" (submit)="onSubmitSearch(searchForm.value)">
 			<input id="searchterm" name="searchterm" [ngFormControl]="searchterm" #input (input)="searchTermChanged(input.value)" (blur)="hideOptions()" [(ngModel)]="query" class="input--search" placeholder="Start typing to search" type="text">
