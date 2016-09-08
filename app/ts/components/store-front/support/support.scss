@@ -16,6 +16,33 @@
       font-size: 16px;
       font-weight: 600;
     }
+  ul {
+  margin-bottom:10px;
+  font-weight:700;
+  }
+  li{
+      list-style-type:decimal;
+      margin-bottom:10px;
+      font-weight:300;
+
+  }
+  ul.alpha {
+    margin-top:10px;
+    margin-bottom:20px;
+    margin-left:20px;
+    li{
+      list-style-type:lower-alpha;
+      
+    }
+
+  }
+  ul.normal {
+    margin-top:10px;
+    margin-left:20px;
+    li{
+      list-style-type:circle; 
+    }
+  }
   
   .back-link {
     
