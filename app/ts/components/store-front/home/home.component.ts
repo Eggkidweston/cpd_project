@@ -10,6 +10,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 @Component( {
     selector: 'home',
     template: require( './home.component.html' ),
+    styles: [require('./home.scss').toString()],
     directives: [AppWidgetsComponent, SearchComponent, RecommendedRecentComponent, PaginationComponent]
 } )
 export class HomeComponent
@@ -22,15 +23,29 @@ export class HomeComponent
     private appsPerPage:number = 20;
     private currentPage:number = 1;
     private totalPages:number = 0;
+
+    private totalResourceCount:number = 0;
+
     idpToken:string;
 
     constructor( private _appsService:AppsService) 
     {
-        
+        this.getResourceCount();
         this.getMostDownloadedApps();
         this.getRecentApps();
         this.getLastUpdatedApps();
         this.getRecommendedApps();
+    }
+
+    getResourceCount()
+    {
+        this._appsService.getResources( 1, 1, '' )
+            .subscribe(
+                resources => {
+                    this.totalResourceCount = resources.availableRows;
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
     }
 
     getMostDownloadedApps()
