@@ -53,18 +53,17 @@ export class ExploreComponent implements AfterViewInit {
 
 
     ngAfterViewInit() {
-        /*if (this.queryTags) {
+        if (this.queryTags) {
             //console.log('loadCloud ngAfterViewInitA');
             this.loadCloud(this.queryTags);
         }
         else {
             //console.log('loadCloud ngAfterViewInitB');
             this.loadCloud();
-        }*/
+        }
     }
 
     getTaggedApps(tag) {
-        /*
         this.appsService.getByTag(tag)
             .subscribe(
                 storeApps => {
@@ -72,20 +71,17 @@ export class ExploreComponent implements AfterViewInit {
                 },
                 (error: any) => AppComponent.generalError(error.status)
             );
-            */
     }
 
     selectTag(tagId) {
-        /*
         var selectedTag = this.tagcloud.GetTag(tagId);
         this.selectedTags = this.selectedTags || new TagCloud([]);
         this.selectedTags.AddTag(selectedTag);
        // console.log('loadCloud selectTag');
-        this.loadCloud();*/
+        this.loadCloud();
     }
 
     selectTagFromDB(tagId) {
-        /*
         this.appsService.getTags(tagId)
             .subscribe(
                 tags => {
@@ -96,51 +92,45 @@ export class ExploreComponent implements AfterViewInit {
 
                     },
                 (error: any) => AppComponent.generalError(error.status)
-            );*/
+            );
     }
 
     removeTag(tagId) {
-        /*
         this.selectedTags.RemoveTag(tagId);
         
         this.loadCloud();
-        */
     }
 
     order(order) {
-        /*
         this.chosenOrder = order;
         this.selectedTags = new TagCloud([]);
         
         this.loadCloud();
-        */
     }
 
     loadApps() {
         console.log('loading apps');
-        /*this.appsService.getResources(100, 1, this.selectedTags.GetFilterSyntax())
+        this.appsService.getResources(100, 1, this.selectedTags.GetFilterSyntax())
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
                     //console.log(this.storeApps);
                 },
                 (error: any) => AppComponent.generalError(error.status)
-            );*/
+            );
     }
 
     loadRecomendedApps() {
-        /*
         this.appsService.getRecommendedApps(100, 1)
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
                 },
                 (error: any) => AppComponent.generalError(error.status)
-            );*/
+            );
     }
 
     loadCloud(initialSelectedId = null) {
-        /*
         //console.log(initialSelectedId);
         //console.log(this.selectedTags);
         this.gettingTags = true;
@@ -184,7 +174,6 @@ export class ExploreComponent implements AfterViewInit {
             }
         }
         error => this.errorMessage = <any>error;
-        */
 
     }
 
