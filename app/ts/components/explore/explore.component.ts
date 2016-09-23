@@ -38,6 +38,7 @@ export class ExploreComponent implements AfterViewInit {
     private queryTags: string;
     private tagArray: number[];
     private gettingTags: boolean;
+    private gettingResources: boolean;
     private appsPerPage:number = 100;
     private currentPage:number = 1;
     private totalPages:number = 0;
@@ -114,12 +115,14 @@ export class ExploreComponent implements AfterViewInit {
 
     loadApps() {
         console.log('loading apps');
+        this.gettingResources = true;
         this.appsService.getResources(this.appsPerPage, this.currentPage, this.selectedTags.GetFilterSyntax())
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
                     this.resultsCount = storeApps.availableRows;
                     this.totalPages = Math.ceil(storeApps.availableRows/this.appsPerPage);
+                    this.gettingResources = false;
                 },
                 (error: any) => AppComponent.generalError(error.status)
             );

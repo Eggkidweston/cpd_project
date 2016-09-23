@@ -52,7 +52,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="col span-12">
+            <div class="loader" [hidden]="gettingResources===false">
+                <span class="block-1"></span>
+                <span class="block-2"></span>
+                <span class="block-3"></span>
+                <span class="block-4"></span>
+                <span class="block-5"></span>
+                <span class="block-6"></span>
+                <span class="block-7"></span>
+                <span class="block-8"></span>
+                <span class="block-9"></span>
+                <span class="block-10"></span>
+                <span class="block-11"></span>
+                <span class="block-12"></span>
+                <span class="block-13"></span>
+                <span class="block-14"></span>
+                <span class="block-15"></span>
+                <span class="block-16"></span>
+            </div>
+
+            <div class="col span-12" [hidden]="gettingResources===true">
                 <div *ngIf="selectedTags.Tags.length > 0">
                     <h3 *ngIf="resultsCount==1">{{resultsCount}} result found</h3>
                     <h3 *ngIf="resultsCount!=1">{{resultsCount}} results found</h3>
@@ -60,7 +79,7 @@
                 </div>
                 <app-widgets [apps]="storeApps"></app-widgets>
             </div>
-            <div class="col span-12" *ngIf="totalPages>1">
+            <div class="col span-12" *ngIf="totalPages>1" [hidden]="gettingResources===true">
                 <pagination [totalPages]="totalPages" [currentPage]="currentPage"
                             (pageClicked)="onPageClicked($event)"></pagination>
             </div>
