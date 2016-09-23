@@ -12,6 +12,7 @@ import {AuthenticationService} from '../../services/services';
 import {AppsService} from '../../services/services';
 import {StoreApp, TagCloud, Tag} from '../../models';
 import {AppComponent} from '../../app.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 import {AppWidgetsComponent} from '../appwidgets/appwidgets.component';
@@ -24,7 +25,7 @@ require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
     template: require('explore.component.html'),
     styles: [require('../../../sass/explore.scss').toString()],
 
-    directives: [AppWidgetsComponent, RouterOutlet, RouterLink, RatingComponent]
+    directives: [AppWidgetsComponent, RouterOutlet, RouterLink, RatingComponent,PaginationComponent]
 })
 export class ExploreComponent implements AfterViewInit {
 
@@ -37,7 +38,10 @@ export class ExploreComponent implements AfterViewInit {
     private queryTags: string;
     private tagArray: number[];
     private gettingTags: boolean;
-
+    private appsPerPage:number = 100;
+    private currentPage:number = 1;
+    private totalPages:number = 0;
+    public resultsCount:number = 0;
 
     constructor(public authenticationService: AuthenticationService,
                 public router: Router,
@@ -110,14 +114,20 @@ export class ExploreComponent implements AfterViewInit {
 
     loadApps() {
         console.log('loading apps');
-        this.appsService.getResources(100, 1, this.selectedTags.GetFilterSyntax())
+        this.appsService.getResources(this.appsPerPage, this.currentPage, this.selectedTags.GetFilterSyntax())
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
-                    //console.log(this.storeApps);
+                    this.resultsCount = storeApps.availableRows;
+                    this.totalPages = Math.ceil(storeApps.availableRows/this.appsPerPage);
                 },
                 (error: any) => AppComponent.generalError(error.status)
             );
+    }
+
+    onPageClicked(page) {
+        this.currentPage = page;
+        this.loadApps();
     }
 
     loadRecomendedApps() {
