@@ -36,7 +36,6 @@ export class ExploreComponent implements AfterViewInit {
     public selectedTags: TagCloud;
     public chosenOrder: string;
     private queryTags: string;
-    private tagArray: number[];
     private gettingTags: boolean;
     private gettingResources: boolean;
     private appsPerPage:number = 100;
@@ -59,11 +58,9 @@ export class ExploreComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         if (this.queryTags) {
-            //console.log('loadCloud ngAfterViewInitA');
             this.loadCloud(this.queryTags);
         }
         else {
-            //console.log('loadCloud ngAfterViewInitB');
             this.loadCloud();
         }
     }
@@ -82,7 +79,6 @@ export class ExploreComponent implements AfterViewInit {
         var selectedTag = this.tagcloud.GetTag(tagId);
         this.selectedTags = this.selectedTags || new TagCloud([]);
         this.selectedTags.AddTag(selectedTag);
-       // console.log('loadCloud selectTag');
         this.loadCloud();
     }
 
@@ -102,7 +98,6 @@ export class ExploreComponent implements AfterViewInit {
 
     removeTag(tagId) {
         this.selectedTags.RemoveTag(tagId);
-        
         this.loadCloud();
     }
 
@@ -134,21 +129,21 @@ export class ExploreComponent implements AfterViewInit {
     }
 
     loadRecomendedApps() {
+        this.gettingResources = true;
         this.appsService.getRecommendedApps(100, 1)
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
+                    this.gettingResources = false;
                 },
                 (error: any) => AppComponent.generalError(error.status)
             );
     }
 
     loadCloud(initialSelectedId = null) {
-        //console.log(initialSelectedId);
-        //console.log(this.selectedTags);
         this.gettingTags = true;
+        this.gettingResources = true;
         if (this.selectedTags.Tags.length > 0) {
-            //console.log('use selectedTags');
             var tagIds = this.selectedTags.GetIds();
             this.appsService.getRelatedTags(tagIds)
                 .subscribe(
@@ -166,11 +161,6 @@ export class ExploreComponent implements AfterViewInit {
                 //console.log('use initialSelectedId');
                 this.selectTagFromDB(initialSelectedId);
             } else {
-
-            
-            
-
-
             this.appsService.getTagCloud(true, 50, this.chosenOrder)
                 .subscribe(
                     tags => {

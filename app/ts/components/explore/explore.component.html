@@ -1,6 +1,5 @@
 <div class="row">
     <div class="col span-3">
-
         <div class="ordertags">Order By <span (click)="order('az')" [class.selected]="chosenOrder==='az'">A..Z</span>,
             <span [class.selected]="chosenOrder==='pop'" (click)="order('pop')">Popularity</span>, <span
                     [class.selected]="chosenOrder==='updated'" (click)="order('updated')">Latest</span></div>
@@ -71,7 +70,7 @@
                 <span class="block-16"></span>
             </div>
 
-            <div class="col span-12" [hidden]="gettingResources===true">
+            <div class="col span-12" [hidden]="gettingResources!==false">
                 <div *ngIf="selectedTags.Tags.length > 0">
                     <h3 *ngIf="resultsCount==1">{{resultsCount}} result found</h3>
                     <h3 *ngIf="resultsCount!=1">{{resultsCount}} results found</h3>
@@ -79,7 +78,7 @@
                 </div>
                 <app-widgets [apps]="storeApps"></app-widgets>
             </div>
-            <div class="col span-12" *ngIf="totalPages>1" [hidden]="gettingResources===true">
+            <div class="col span-12" *ngIf="totalPages>1" [hidden]="gettingResources!==false">
                 <pagination [totalPages]="totalPages" [currentPage]="currentPage"
                             (pageClicked)="onPageClicked($event)"></pagination>
             </div>
