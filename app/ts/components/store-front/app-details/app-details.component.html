@@ -11,7 +11,7 @@
             </div>
             
             <div class="cost-licence-container">
-                <h4 *ngIf="!(app?.isfree === null)">{{ !app?.isfree ? "Price: £ -" : "FREE RESOURCE" }}</h4>
+                <h4>{{ !app?.isfree  ? "Price: £ "+app?.price  : "FREE RESOURCE" }}</h4>
                 <h4 *ngIf="app?.licensetype_id">License<br /> {{ licenseType }}</h4>
                 
             </div>
