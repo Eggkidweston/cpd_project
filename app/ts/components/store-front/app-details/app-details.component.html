@@ -11,7 +11,7 @@
             </div>
             
             <div class="cost-licence-container">
-                <h4 *ngIf="!(app?.isfree === null)">{{ !app?.isfree ? "Price: £ -" : "FREE RESOURCE" }}</h4>
+                <h4>{{ !app?.isfree  ? "Price: £ "+app?.price  : "FREE RESOURCE" }}</h4>
                 <h4 *ngIf="app?.licensetype_id">License<br /> {{ licenseType }}</h4>
                 
             </div>
@@ -42,7 +42,7 @@
 
             <div class="tagcloud condensed" *ngIf="app?.tags?.length > 0">
                 <h4>Tags</h4>
-                <button class="btn " *ngFor="let tag of app.tags" >{{tag.name}}</button>
+                <button class="btn " *ngFor="let tag of app.tags" [routerLink]="['Explore', { tags: tag.id }]" >{{tag.name}}</button>
             </div>
         </div>
         <div class="col span-3 push-1 rating-group">
