@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular/common';
-import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { RouterOutlet, RouteParams, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AuthenticationService, SigninRegisterService } from '../../services/services';
 import { AppComponent } from '../../app.component';
 import 'rxjs/add/operator/debounceTime';
@@ -49,11 +49,20 @@ export class RegisterComponent {
     password: AbstractControl;
     repeatPassword: AbstractControl;
 
+    private idpToken:string = '';
+
     constructor(
         public authenticationService: AuthenticationService, 
         public signinRegisterService: SigninRegisterService,
         private router: Router, 
-        fb: FormBuilder) 
+        fb: FormBuilder,
+        params:RouteParams) 
+    {
+        this.buildRegisterForm(fb, authenticationService);
+    }
+
+
+    buildRegisterForm(fb: FormBuilder, authenticationService: AuthenticationService)
     {
         this.registerForm = fb.group({
                 "email": ["", emailValidator],
@@ -102,8 +111,8 @@ export class RegisterComponent {
                         () => this.checkingForDuplicateUsername = false
                     )
                 }
-            );      
-        }
+            );  
+    }
 
     onSubmit(formValues: any) {
         // these properties really ought to be part of an async validator,

@@ -18,6 +18,7 @@ export class AppsService
 
     public getResources(appsPerPage: number, pageNumber: number, filterText :string)
     {
+        //console.log(`${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` );
         return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
             .map( res => <GetResourceResults>res.json() )
             .catch( this.handleError );
@@ -90,8 +91,8 @@ export class AppsService
     {
         
 
-        let searchQuery = `${appSettings.apiRoot}resources?$top=30&$filter=title%20eq%20%27${ searchTerm }%27`;
-        if(opened) searchQuery += "%20and%20isfree%20eq%20true";
+        let searchQuery = `${appSettings.apiRoot}resources?$top=100&$filter=title%20eq%20%27${ searchTerm }%27`;
+        //if(opened) searchQuery += "%20and%20isfree%20eq%20true";
         
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
@@ -101,7 +102,7 @@ export class AppsService
     public getBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number)
     {
         
-        let searchQuery = `${appSettings.apiRoot}resources?$top=300&$filter=title%20eq%20%27${searchTerm}%27`;
+        let searchQuery = `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=title%20eq%20%27${searchTerm}%27`;
         if(openEd) searchQuery += "%20and%20isfree%20eq%20true";
         
         return this.http.get(searchQuery)

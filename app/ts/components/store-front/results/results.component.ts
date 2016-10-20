@@ -23,12 +23,15 @@ export class ResultsComponent
     private currentPage:number = 1;
     private totalPages:number = 0;
 
+    public resultsCount:number = 0;
+
     public searching:boolean = false;
 
     constructor( private _appsService:AppsService,
                  public router:Router,
                  params:RouteParams )
     {
+        this.searching = true;
         this.searchTerm = decodeURIComponent(params.get( 'searchterm' ));
         this.getResultsApps();
     }
@@ -40,7 +43,11 @@ export class ResultsComponent
                 .subscribe(
                     results => {
                         this.resultsApps = results.data;
-                        //this.totalPages = Math.ceil(results.availableRows/this.appsPerPage);
+                        if(this.resultsApps.length==1) {
+                            this.goSingleResult();
+                        }
+                        this.resultsCount = results.availableRows;
+                        this.totalPages = Math.ceil(results.availableRows/this.appsPerPage);
                         this.searching = false;
                     },
                     (error:any) => AppComponent.generalError( error.status )
@@ -50,6 +57,10 @@ export class ResultsComponent
     onPageClicked(page) {
         this.currentPage = page;
         this.getResultsApps();
+    }
+
+    goSingleResult(){
+        this.router.navigate( ['AppDetails', , { id: this.resultsApps[0].id }] );
     }
 
     goBack()
