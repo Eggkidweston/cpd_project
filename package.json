@@ -28,6 +28,7 @@
     "base64id": "0.1.0",
     "bootstrap-sass": "^3.3.5",
     "chart.js": "^2.1.2",
+    "dotenv": "^2.0.0",
     "es6-shim": "^0.35.0",
     "es7-reflect-metadata": "^1.6.0",
     "font-awesome": "^4.6.3",
