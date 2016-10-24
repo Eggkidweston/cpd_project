@@ -1,7 +1,7 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { appSettings } from './services';
+import { appSettings } from '../../../settings';
 import { User } from '../models';
 
 @Injectable()

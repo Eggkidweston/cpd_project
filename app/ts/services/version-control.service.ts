@@ -1,6 +1,6 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { appSettings } from './services';
+import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
 import { SignedUrl } from '../models';
 
