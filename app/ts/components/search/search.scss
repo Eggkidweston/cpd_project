@@ -1,18 +1,26 @@
 .input--search {
-	font-size:1.3em;
-	width:750px;
-
+	font-size:1.4em;
+   width:100%;
+}
+.searchbox-container{
+	display:inline-flex;
+	margin-bottom: 0px;
 }
 
 .suggestions {
-	position: absolute;
+	
 	box-shadow: 0px 2px 5px 2px rgba(0,0,0,0.19);
+	cursor:pointer;
+	max-height:200px;
+	overflow:auto;
+	background:#fff;
 	ul {
+
 		border: 1px solid #dbdbdb;
     	padding: 3px;
     	margin-bottom:-1px;
     	background:#fff;
-    	width:750px;
+    	
     	padding-right:10px;
 	}
 
@@ -21,11 +29,12 @@
 	}
 
 	img {
-		width:24px;
-		height:24px;
+		
 		margin-right:5px;
 		border-radius: 3px;
 		float:left;
+
+		
 	}
 
 	.suggestions-text {
@@ -33,8 +42,54 @@
 	}
 }
 
-search{
-	padding-bottom: 3em;
-    display: block;
+.search-box{
+	padding-bottom:4px;
 }
 
+
+.searchbutton  {
+          border-radius: 0 10px 10px 0 !important;
+          background: #0092cb !important;
+          font-weight: 700 !important;
+          color:#ffffff !important;
+          height:43px !important;
+          font-size: 24px !important;
+          display: in-line;
+        }
+
+.advanced-search-link {
+	float:right;
+}
+
+
+
+.advancedSearch {
+	margin-top:10px;
+	li {
+		list-style:none;
+		display:inline;
+		padding-right:2px;
+		padding-bottom:2px;
+	}
+
+	input[type=checkbox] {
+		display:none;
+		}
+		 
+		input[type=checkbox] + label
+		{
+		background: #efefef;
+		border-radius: 5px;
+		display:inline-block;
+		border:1px solid #cccccc;
+		padding: 4px 10px 4px 10px;
+		color:#000
+		}
+		input[type=checkbox]:checked + label
+		{
+		background: #35B07A;
+		display:inline-block;
+		border:1px solid #cccccc;
+		color:#fff
+		}
+}

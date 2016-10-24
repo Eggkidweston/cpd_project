@@ -1,3 +1,12 @@
+<div *ngIf="showCookiebar" id="cookie-bar" class="cookie-bar">
+    <div class="inner">
+        <p class="cookie-bar__notification">We use cookies to give you the best experience and to help improve our website.</p>
+        <a class="cookie-bar__link" href="https://www.jisc.ac.uk/website/cookies" target="_blank">Find out more about how we use cookies</a>
+        <div class="cookie-bar__confirm">
+            <button class="btn " (click)="clickCookieBar()">Thanks for letting me know</button>
+        </div>
+    </div>
+</div>
 <div class="masthead" role="banner" data-mobilemenu *ngIf="!narrowHeader">
     <div class="masthead__top">
         <div class="inner">
@@ -5,7 +14,7 @@
                 <span>Skip to main content</span>
             </a>
             <a class="masthead__logo" href="//jisc.ac.uk">
-                <img alt="Jisc logo" src="http://ux.jisc.ac.uk/ui/img/logo.png">
+                <img alt="Jisc logo" src="https://ux.jisc.ac.uk/ui/img/logo.png">
             </a>
             <div class=" masthead__nav--primary masthead__nav--secondary">
                 {{ appVersion }}
@@ -20,20 +29,15 @@
                             <li [class.active]="isRouteActive(['Home'])" class="nav__item">
                                 <a [routerLink]="['Home']">Search</a>
                             </li>
-                            <li [class.active]="isRouteActive(['TagCloud'])" class="nav__item">
-                                <a [routerLink]="['TagCloud']">TagCloud</a>
+                            <li [class.active]="isRouteActive(['Explore'])" class="nav__item">
+                                <a [routerLink]="['Explore']">Explore</a>
                             </li>
-                            <li *ngIf="authenticationService?.userSignedIn()" [class.active]="isRouteActive(['Submissions'])" class="nav__item">
-                              <a [routerLink]="['Submissions']">Submissions</a>
-                            </li>
-                            <!--<li class="nav__item  ">
-                                <a href="#">Events &amp; Training</a>
-                              </li>-->
+                            
                         </ul>
                     </nav>
                     <nav class="masthead__nav masthead__nav--secondary" role="navigation" data-dropdown>
                         <ul>
-                            <li [class.active]="isRouteActive(['SignIn']) || isRouteActive(['Register'])"
+                            <li [class.active]="isRouteActive(['SignIn']) || isRouteActive(['Register']) || isRouteActive(['RegisterIDP'])"
                                 class="nav__item" *ngIf="!authenticationService?.userSignedIn()">
                                 <a [routerLink]="['Profile']">Sign in</a>
                             </li>
@@ -52,9 +56,11 @@
                                 <a href="javascript:void(0);">Help</a>
                                 <div class="submenu">
                                     <ul>
-                                        <li><a [routerLink]="['About']">About the Jisc Store</a></li>
-                                        <li><a [routerLink]="['Who']">Who can register?</a></li>
-                                        <li><a [routerLink]="['Feedback']">Feedback</a></li>
+                                        <li><a [routerLink]="['About']">About this release</a></li>
+                                        <li><a [routerLink]="['Support']">Support</a></li>
+                                        <!--<li><a [routerLink]="['Who']">Who can register?</a></li>-->
+                                        <!--<li><a [routerLink]="['Feedback']">Feedback</a></li>-->
+                                        <li><a [routerLink]="['Terms']">Terms of use</a></li>
                                     </ul>
                                 </div>
                             </li>

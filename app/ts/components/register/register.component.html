@@ -1,24 +1,24 @@
-<div class="col">
+<div class="col span-4 register-window">
      <form [ngFormModel]="registerForm" (submit)="onSubmit(registerForm.value)" novalidate>
         <fieldset class="form__fieldset">
             <legend>
                 <span class="legend-text"><h3>Create an account</h3></span>
             </legend>
-            <div [class.shake]="shaking" [class.animated]="shaking" >
+            <div [class.shake]="shaking" [class.animated]="shaking" class="register-form">
                 <div [class.has-error]="(!email.valid && email.touched) || emailInUse"> 
                     <label class="control-label" for="email" *ngIf="!email.valid && email.touched">Please enter a valid email address</label>
                     <label class="control-label" for="email" *ngIf="emailInUse">This email address is already in use</label>
-                    <input [disabled]="busy" class="input--large" placeholder="Your email address" type="email" [ngFormControl]="email" id="email" required>
+                    <input [disabled]="busy" placeholder="Your email address" type="email" [ngFormControl]="email" id="email" required>
                 </div>
                 <div [class.has-error]="(!username.valid && username.touched) || usernameInUse"> 
                     <label class="control-label" for="username" *ngIf="!username.valid && username.touched">Please choose a username</label>
                     <label class="control-label" for="username" *ngIf="usernameInUse">This username is already in use</label>
-                    <input [disabled]="busy" class="input--large" placeholder="Desired username" type="text" [ngFormControl]="username" id="username" required>
+                    <input [disabled]="busy" placeholder="Desired username" type="text" [ngFormControl]="username" id="username" required>
                 </div>
                 <div [class.has-error]="password.value!=repeatPassword.value && password.touched && repeatPassword.touched">
                     <label class="control-label" for="password" *ngIf="password.value!=repeatPassword.value && password.touched && repeatPassword.touched">Your passwords do not match, please re-enter</label>
-                    <div><input [disabled]="busy" class="input--large" placeholder="Password" type="password" [ngFormControl]="password" required></div>
-                    <div><input [disabled]="busy" class="input--large" placeholder="Repeat password" type="password" [ngFormControl]="repeatPassword" required></div>
+                    <div><input [disabled]="busy" placeholder="Password" type="password" [ngFormControl]="password" required></div>
+                    <div><input [disabled]="busy" placeholder="Repeat password" type="password" [ngFormControl]="repeatPassword" required></div>
                 </div>
             </div>
             
@@ -29,56 +29,3 @@
         </fieldset>
     </form>
 </div>
-
-<!--
-
-<section id="register_window" class="register-height-adjust authenty register-window">
-    <div class="section-content">
-        <div claFss="container">
-            <div class="row form-wrap animated bounceIn">
-                <div class="title">
-                    <h3>Create an account</h3>
-                </div>
-                <div class="col-xs-12 col-sm-5 col-md-4 prompt">
-                    <p>Please enter your email address, choose a username, and choose a password for your account. Please do not choose the same
-                        password that you use to sign into your email.</p>
-                    <a [routerLink]="['SignIn']"><i class="fa fa-caret-left"></i> Or go back to the sign in page</a>
-                </div>
-                <div class="col-xs-12 col-md-2 col-sm-1">
-                    <div class="horizontal-divider"></div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="normal-register">
-                        <form [class.shake]="shaking" [class.animated]="shaking" [ngFormModel]="registerForm" (submit)="onSubmit(registerForm.value)" novalidate>
-                            <div class="form-group">
-                                <div [class.has-error]="(!email.valid && email.touched) || emailInUse"> 
-                                    <label class="control-label" for="email" *ngIf="!email.valid && email.touched">Please enter a valid email address</label>
-                                    <label class="control-label" for="email" *ngIf="emailInUse">This email address is already in use</label>
-                                    <input [disabled]="busy" class="form-control" placeholder="Your email address" type="email" [ngFormControl]="email" id="email" required>
-                                </div>
-                                <div [class.has-error]="(!username.valid && username.touched) || usernameInUse"> 
-                                    <label class="control-label" for="username" *ngIf="!username.valid && username.touched">Please choose a username</label>
-                                    <label class="control-label" for="username" *ngIf="usernameInUse">This username is already in use</label>
-                                    <input [disabled]="busy" class="form-control" placeholder="Desired username" type="text" [ngFormControl]="username" id="username" required>
-                                </div>
-                                <div [class.has-error]="password.value!=repeatPassword.value && password.touched && repeatPassword.touched">
-                                    <label class="control-label" for="password" *ngIf="password.value!=repeatPassword.value && password.touched && repeatPassword.touched">Your passwords do not match, please re-enter</label>
-                                    <input [disabled]="busy" class="form-control" placeholder="Desired password" type="password" [ngFormControl]="password" required>
-                                    <input [disabled]="busy" class="form-control" placeholder="Repeat password" type="password" [ngFormControl]="repeatPassword" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <a href="#password_recovery" id="forgot_from_3">need help?</a>
-                                </div>
-                                <div class="col-md-5 col-md-offset-7">
-                                    <button [disabled]="busy || emailInUse || usernameInUse" type="submit" class="btn btn-block register">Sign Up</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->

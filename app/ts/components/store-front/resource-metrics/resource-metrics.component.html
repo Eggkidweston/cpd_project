@@ -1,13 +1,18 @@
 <div class="resource-metrics-container">
     <div class="row">
+    <!--
         <div class="resource-image col {{ widgetBackground }}">
-            <img src="{{ resource?.image }}">
+            <img class="img" src="{{ widgetIcon }}" *ngIf="widgetIcon">
+            <div class="button-container">
+                    <button class="btn back" role="button" (click)="goBack()">Back</button>
+                </div>
         </div>
         <div class="col span-4 resource-details">
             <h2>{{ resource?.title }}</h2>
             <h4>{{ resource?.overview }}</h4>
             <p>{{ resource?.description }}</p>
         </div>
+        -->
         <!--<div class="col span-3 push-2">-->
         <!--<h4>Remixed from</h4>-->
         <!--<div class="remixed-from-resource-image col">-->
@@ -23,16 +28,19 @@
         <!--</div>-->
     </div>
 
-    <hr/>
-
-    <div class="row downloads">
-        <h2>Downloads</h2>
+    <div class="button-container col span-2">
+        <button class="btn back" role="button" (click)="goBack()">Back</button>
     </div>
 
-    <div *ngIf="resource?.metrics?.downloads?.total>0" class="span-11 row">
+    <div class="row downloads">
+        <h2>Resource metrics</h2>
+        <h4>{{ resource?.title }}</h4>
+    </div>
+
+    <div *ngIf="resource?.metrics?.downloads?.total>0" class="span-11 row charts">
         <canvas id="chartCanvas" #chartCanvas class="col" height="80px"></canvas>
 
-        <div *ngIf="resource" class="download-collation span-12 row">
+        <div *ngIf="resource" class="download-collation span-11 row">
             <div class="today-downloads">
                 <div class="download-period">Today</div>
                 <div class="digits">{{resource.metrics.downloads.today }}

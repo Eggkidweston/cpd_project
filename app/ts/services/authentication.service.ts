@@ -8,6 +8,7 @@ import { User } from '../models';
 export class AuthenticationService {
     private static _user: User = null;
     private static _apiKey: string;
+    private static _pidpass: string = 'idp628345093456';
 
     constructor(private http: Http) {
     }
@@ -75,10 +76,50 @@ export class AuthenticationService {
             );
     }
 
+    registerWithLocalPid( username:string,
+        next: () => void,
+        error: (res: Response) => void,
+        complete: () => void)
+    {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        let localpid:string = localStorage.getItem("pid");
+      
+        var json = JSON.stringify({
+                name: username,
+                username: username,
+                email: localpid ,
+                password: AuthenticationService._pidpass
+            })
+           
+        this.http.post(`${appSettings.apiRoot}users/register`,
+            json, { headers })
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    AuthenticationService.user = data.user;
+                    next();
+                },
+                err => error(err),
+                () => complete()
+            );
+    }
+
+    signInWithPid(
+        next: ()=> void,
+        error: (res: Response) => void,
+        complete: () => void)
+    {
+        let localpid:string = localStorage.getItem("pid");
+        this.signIn(localpid, AuthenticationService._pidpass, next, error);
+    }
+
     signIn(emailOrUsername: string, password: string,
         next: () => void,
         error: (res: Response) => void)
     {
+        
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -106,6 +147,7 @@ export class AuthenticationService {
     static signOut() {
         AuthenticationService.apiKey = null;
         AuthenticationService.user = null;
+        localStorage.setItem("pid",'');
     }
 
     isEmailOrUsernameInUse(emailOrUsername: string,
