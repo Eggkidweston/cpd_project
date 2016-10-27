@@ -1,6 +1,6 @@
 import { Injectable, bind } from '@angular/core';
 import { RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-import { appSettings } from './services';
+import { appSettings } from '../../../settings';
 import { IdpMemberResults } from '../models';
 import { Observable } from 'rxjs/Observable';
 import { Http, Response, Headers } from '@angular/http';
