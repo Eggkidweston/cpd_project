@@ -1,4 +1,5 @@
 .env
+.log
 .idea/
 .vscode/
 ._DS_Store
