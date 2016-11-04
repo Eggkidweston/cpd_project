@@ -2,7 +2,8 @@ import { Component, Input, AfterViewInit, ChangeDetectorRef } from '@angular/cor
 import { RatingComponent } from '../../shared/rating/rating.component';
 import { RouterOutlet, RouterLink, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { SubmitReviewComponent } from './submit-review/submit-review.component';
-import { AuthenticationService, appSettings } from '../../../services/services';
+import { AuthenticationService } from '../../../services/services';
+import { appSettings } from '../../../../../settings';
 import { AppsService } from '../../../services/services';
 import { StoreApp, Review } from '../../../models';
 import { AppComponent } from '../../../app.component';
