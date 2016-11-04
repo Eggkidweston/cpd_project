@@ -15,7 +15,7 @@ export class AuthenticationService {
 
     static get user(): User {
         if (typeof(Storage) !== "undefined") {
-            return <User>(JSON.parse(localStorage.getItem("_user")));
+            return <User>(JSON.parse(sessionStorage.getItem("_user")));
         } else {
             return AuthenticationService._user;
         }
@@ -23,7 +23,7 @@ export class AuthenticationService {
 
     static set user(user:User) {
         if (typeof(Storage) !== "undefined") {
-            localStorage.setItem("_user", JSON.stringify(user));
+            sessionStorage.setItem("_user", JSON.stringify(user));
         }
 
         AuthenticationService._user = user;
@@ -36,7 +36,7 @@ export class AuthenticationService {
 
     static get apiKey(): string {
         if (typeof(Storage) !== "undefined") {
-            return localStorage.getItem("_apiKey");
+            return sessionStorage.getItem("_apiKey");
         } else {
             return AuthenticationService._apiKey;
         }
@@ -44,7 +44,7 @@ export class AuthenticationService {
 
     static set apiKey(apiKey:string) {
         if (typeof(Storage) !== "undefined") {
-            localStorage.setItem("_apiKey", apiKey);
+            sessionStorage.setItem("_apiKey", apiKey);
         }
 
         AuthenticationService._apiKey = apiKey;
@@ -84,7 +84,7 @@ export class AuthenticationService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let localpid:string = localStorage.getItem("pid");
+        let localpid:string = sessionStorage.getItem("pid");
       
         var json = JSON.stringify({
                 name: username,
@@ -111,7 +111,7 @@ export class AuthenticationService {
         error: (res: Response) => void,
         complete: () => void)
     {
-        let localpid:string = localStorage.getItem("pid");
+        let localpid:string = sessionStorage.getItem("pid");
         this.signIn(localpid, AuthenticationService._pidpass, next, error);
     }
 
@@ -147,7 +147,7 @@ export class AuthenticationService {
     static signOut() {
         AuthenticationService.apiKey = null;
         AuthenticationService.user = null;
-        localStorage.setItem("pid",'');
+        sessionStorage.setItem("pid",'');
     }
 
     isEmailOrUsernameInUse(emailOrUsername: string,
