@@ -2,7 +2,8 @@ import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults } from '../models';
-import { appSettings, appInfo } from './services';
+import { appInfo } from './services';
+import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
 import { Review, ResourceMetrics, ResourceMetric, DownloadInstructions } from 'models';
 

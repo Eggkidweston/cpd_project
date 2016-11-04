@@ -8,7 +8,7 @@ import { AppComponent } from '../../app.component';
 import { TagComponent } from '../tag/tag.component';
 import { AppsService } from '../../services/services';
 import { AuthenticationService, TagsService } from '../../services/services';
-import { appSettings } from '../../services/services';
+import { appSettings } from '../../../../settings';
 
 @Component({
     selector: 'app-edit',
