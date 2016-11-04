@@ -258,3 +258,7 @@ main, app-store {
 .flex-fill {
     flex: 1 1 auto;
 }
+
+.submenu{
+  li, a {cursor: pointer;}
+}
