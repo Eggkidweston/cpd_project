@@ -84,7 +84,7 @@ export class AuthenticationService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let localpid:string = sessionStorage.getItem("pid");
+        let localpid:string = localStorage.getItem("pid");
       
         var json = JSON.stringify({
                 name: username,
@@ -111,7 +111,7 @@ export class AuthenticationService {
         error: (res: Response) => void,
         complete: () => void)
     {
-        let localpid:string = sessionStorage.getItem("pid");
+        let localpid:string = localStorage.getItem("pid");
         this.signIn(localpid, AuthenticationService._pidpass, next, error);
     }
 
@@ -147,7 +147,7 @@ export class AuthenticationService {
     static signOut() {
         AuthenticationService.apiKey = null;
         AuthenticationService.user = null;
-        sessionStorage.setItem("pid",'');
+        localStorage.setItem("pid",'');
     }
 
     isEmailOrUsernameInUse(emailOrUsername: string,
