@@ -23,4 +23,4 @@ export var servicesInjectables: Array<any> = [
     idpRegisterServiceInjectables
 ];
 
-export var appInfo = { name: 'App and resource store', version: 'JORUM PREVIEW RELEASE'}
+export var appInfo = { name: 'Store', strap: 'Open and commercial educational apps and resources', version: 'JORUM PREVIEW RELEASE'}

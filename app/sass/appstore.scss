@@ -24,7 +24,17 @@ body {
 .flex-nav {
     flex: 0 0 52px;
 }
-
+.appstoretitle{
+    h1{
+    font-weight:700;
+    margin-bottom:0px;
+    }
+    h2{
+    font-size:1.5em;
+    margin-top:0px;
+    margin-bottom:25px;
+    }
+}
 
 .btn {
     text-transform: uppercase;
