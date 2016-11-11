@@ -87,6 +87,12 @@
             <media-carousel [resource]="app"></media-carousel>
         </div>
     </div>
+    <div class="row" *ngIf="app?.media?.length == 0">
+    <h4>Preview</h4>
+        <div class="media-container">
+            Preview coming soon..
+        </div>
+    </div>
 <div class="row"><div class="col span-11"><hr></div></div>
 
     <div class="col span-11">
