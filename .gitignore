@@ -5,3 +5,7 @@
 ._DS_Store
 node_modules
 uploads/*
+.webpack.json
+.DS_Store
+npm-debug.log
+.idea/workspace.xml

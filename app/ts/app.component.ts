@@ -16,6 +16,7 @@ import { AppDetailsComponent } from './components/store-front/app-details/app-de
 import { DownloadComponent } from './components/store-front/download/download.component';
 import { AboutJorumComponent } from './components/store-front/jorum/aboutjorum.component';
 import { TermsComponent } from './components/store-front/terms/terms.component';
+import { ComingSoonComponent } from './components/store-front/comingsoon/comingsoon.component';
 import { SupportComponent } from './components/store-front/support/support.component';
 import { TryComponent } from './components/store-front/try/try.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -59,6 +60,7 @@ import myGlobals = require('./globals');
     { path: '/whocanregister', name: 'Who', component: WhoComponent },
     { path: '/explore', name: 'Explore', component: ExploreComponent },
     { path: '/terms', name: 'Terms', component: TermsComponent },
+    { path: '/comingsoon', name: 'ComingSoon', component: ComingSoonComponent },
     { path: '/support', name: 'Support', component: SupportComponent },
     { path: '/results/:searchterm', name: 'Results', component: ResultsComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent }
@@ -69,6 +71,7 @@ export class AppComponent
 {
     static router:Router;
     public appInfoname:String;
+    public appInfoStrap:String;
     private appVersion:String;
     public narrowHeader:Boolean;
     public showCookiebar:boolean;
@@ -83,6 +86,7 @@ export class AppComponent
         
         
         this.appInfoname = appInfo.name;
+        this.appInfoStrap = appInfo.strap;
         this.appVersion = appInfo.version;
         AppComponent.router = router;
         

@@ -1,7 +1,7 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { appSettings } from './services';
+import { appSettings } from '../../../settings';
 import { Contributor } from '../models';
 import { AuthenticationService } from './authentication.service';
 
