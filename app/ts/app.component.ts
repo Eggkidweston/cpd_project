@@ -35,6 +35,8 @@ import { SigninRegisterService } from "./services/services";
 import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
 import myGlobals = require('./globals'); 
 
+declare let ga:Function; //google analytics object
+
 @Component( {
     selector: 'appstore-app',
     directives: [...ROUTER_DIRECTIVES],
@@ -98,6 +100,8 @@ export class AppComponent
             }else{
                 this.narrowHeader = false;
             }
+
+            ga('send', 'pageview', value);
         });
 
         if(window.location.href.indexOf('token')>-1&&window.location.href.indexOf('jwt')>-1){
