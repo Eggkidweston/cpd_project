@@ -13,7 +13,9 @@
             <h4>Instructions</h4>
             <p *ngIf="!authenticationService.userSignedIn()">You must be logged in before you can download a resource. Click the sign-in button and register for a free account.</p>
             <p>{{ instructions }}</p>
+
             <div class="button-container"><button class="btn download" role="button" (click)="getApp()">Continue</button>
+            <p class="remindrating teaser">Remember, you can share your experiences using this resource and help the community out by returning to the previous page and adding a review and rating!</p>
         </div>
     </div>
 </div>
