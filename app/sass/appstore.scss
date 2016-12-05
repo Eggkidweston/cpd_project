@@ -1,6 +1,21 @@
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
+@font-face{
+    font-family:"Stag Sans Web Light";
+    src: url("/css/StagSansWeb-Light.woff") format('woff');
+    font-weight:400;font-style:normal;font-stretch:normal
+}
+
+@font-face{
+font-family:"Stag Sans Web Book";
+src: url("/css/StagSansWeb-Book.woff") format('woff');
+font-weight:400;
+font-style:normal;
+font-stretch:normal
+}
+
+
 html {
   position: relative;
   min-height: 100%;
@@ -41,8 +56,7 @@ body {
 }
 
 html {
- 	font-family: 'Droid Sans';
- 	font-family: sans-serif;
+ 	font-family: "Stag Sans Web Book",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,sans-serif;
  	-ms-text-size-adjust: 100%;
  	-webkit-text-size-adjust: 100%;
  	-webkit-font-feature-settings: "kern", "liga", "pnum";
@@ -55,8 +69,9 @@ html {
 }
 
 body,button,h1,h2,h3,h4,h5,h6,input,textarea, a {
-  font-family: 'Droid Sans';
+    font-family: "Stag Sans Web Book",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,sans-serif;
 }
+
 footer {
     position:absolute;
     bottom:0px;
@@ -118,7 +133,6 @@ footer {
 
 body {
     height: 100%;
-    font-family: "Droid Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,sans-serif
 }
     
 .navbar {
