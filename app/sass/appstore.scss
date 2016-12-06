@@ -1,6 +1,26 @@
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
+@font-face{
+    font-family:"Stag Sans Web Light";
+    src: url("/css/StagSansWeb-Light.woff") format('woff');
+    font-weight:400;font-style:normal;font-stretch:normal
+}
+
+
+
+@font-face{
+font-family:"Stag Sans Web Book";
+src: url("/css/StagSansWeb-Book.woff") format('woff');
+font-weight:400;
+font-style:normal;
+font-stretch:normal
+}
+
+.icon {
+    font-family: Icomoon
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -17,7 +37,23 @@ body {
     margin: 0;
     width: 100%;
     margin: 0px;
+    font-size: 18px;
+    font-size: 1.8rem;
+    line-height: 27px;
+    line-height: 2.7rem;
+}
 
+.menu-button {
+bottom:auto !important;
+}
+
+.mobile-menu.showing {
+    display:block;
+    position: relative;
+    top: 26px;
+    left: -10px;
+    margin-right: -10px;
+    padding-bottom:100%;
 }
 
 
@@ -33,6 +69,7 @@ body {
     font-size:1.5em;
     margin-top:0px;
     margin-bottom:25px;
+    margin-right:10px;
     }
 }
 
@@ -41,8 +78,7 @@ body {
 }
 
 html {
- 	font-family: 'Droid Sans';
- 	font-family: sans-serif;
+ 	font-family: "Stag Sans Web Book",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,sans-serif;
  	-ms-text-size-adjust: 100%;
  	-webkit-text-size-adjust: 100%;
  	-webkit-font-feature-settings: "kern", "liga", "pnum";
@@ -55,8 +91,9 @@ html {
 }
 
 body,button,h1,h2,h3,h4,h5,h6,input,textarea, a {
-  font-family: 'Droid Sans';
+    font-family: "Stag Sans Web Book",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,sans-serif;
 }
+
 footer {
     position:absolute;
     bottom:0px;
@@ -69,6 +106,11 @@ footer {
 
 .row{
     margin-left:0px;
+    margin-right:0px;
+    padding-right:10px;
+}
+.inner {
+    margin-right:0px;
 }
 
 .nav-image {
@@ -118,7 +160,6 @@ footer {
 
 body {
     height: 100%;
-    font-family: "Droid Sans",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,sans-serif
 }
     
 .navbar {
@@ -144,110 +185,7 @@ a:active, a:focus {
 	outline: 0
 }
 
-.footer2 {
-    font-size: 16px;
-	bottom: 0;
-	left: 0;
-	background: #c3d1d6;
-    padding: 1.5em 0 1.5em 0;
-	width: 100%;
-	height: 86px;
-	border-bottom: 20px solid #0c2931
-}
 
-.footer2 ul {
-	line-height: 1.5em;
-	margin: 0 0 1em;
-	padding: 0
-}
-
-@media screen and (min-width:53.75em) {
-    .footer2 ul {
-        float: left;
-        line-height: 1.8em;
-        margin-left: 1em;
-        margin-bottom: 0
-    }
-}
-
-.footer2 ul li {
-	font-weight: 800;
-	list-style: none;
-	// padding-right: 1em
-}
-
-@media screen and (min-width:53.75em) {
-    .footer2 ul li {
-        display: inline;
-        text-align: left
-    }
-}
-
-.footer2 ul li a {
-	color: hsla(0,0%,100%,.4);
-	text-decoration: none
-}
-
-.footer2 ul li a:focus, .footer2 ul li a:hover {
-	color: #fff
-} 
-
-.inner-footer {
-    float: left;
-    margin-bottom: 0
-}
-
-.terms-privacy {
-    float: right
-}
-
-.terms-privacy li {
-	font-size: .8em;
-	font-weight: 400
-}
-
-.inner-footer img {
-	height: 5em
-}
-
-.inner-footer {
-	margin-left: 1.5em;
-}
-
-.footer2 ul {
-	line-height: 1.5em;
-	margin: 0 0 1em;
-	padding: 0
-}
-
-.footer2 ul {
-    float: left;
-    line-height: 1.8em;
-    margin-left: 1em;
-    margin-bottom: 0
-}
-
-.footer2 ul li {
-	font-weight: 800;
-	list-style: none;
-	padding-right: 1em
-}
-
-@media screen and (min-width:$screen-sm-min) {
-    .footer2 ul li {
-        display: inline;
-        text-align: left
-    }
-}
-
-.footer2 ul li a {
-	color: hsla(0,0%,100%,.4);
-	text-decoration: none
-}
-
-.footer2 ul li a:focus, .footer2 ul li a:hover {
-	color: #fff
-}
 
 main, app-store {
     width: 100%;
@@ -270,4 +208,9 @@ main, app-store {
 
 .submenu{
   li, a {cursor: pointer;}
+  
+}
+
+.masthead__nav .submenu {
+    width:193px !important;
 }
