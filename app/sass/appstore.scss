@@ -24,6 +24,15 @@ body {
     line-height: 2.2rem;
 }
 
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 17px;
+        font-size: 1.7rem;
+        line-height: 25px;
+        line-height: 2.5rem;
+    }
+}
+
 .menu-button {
 bottom:auto !important;
 }
