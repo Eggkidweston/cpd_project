@@ -1,25 +1,6 @@
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
-@font-face{
-    font-family:"Stag Sans Web Light";
-    src: url("/css/StagSansWeb-Light.woff") format('woff');
-    font-weight:400;font-style:normal;font-stretch:normal
-}
-
-
-
-@font-face{
-font-family:"Stag Sans Web Book";
-src: url("/css/StagSansWeb-Book.woff") format('woff');
-font-weight:400;
-font-style:normal;
-font-stretch:normal
-}
-
-.icon {
-    font-family: Icomoon
-}
 
 html {
   position: relative;
@@ -37,10 +18,10 @@ body {
     margin: 0;
     width: 100%;
     margin: 0px;
-    font-size: 18px;
-    font-size: 1.8rem;
-    line-height: 27px;
-    line-height: 2.7rem;
+    font-size: 15px;
+    font-size: 1.5rem;
+    line-height: 22px;
+    line-height: 2.2rem;
 }
 
 .menu-button {
