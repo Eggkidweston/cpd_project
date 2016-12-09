@@ -7,24 +7,48 @@
         </div>
     </div>
 </div>
-<div class="masthead" role="banner" data-mobilemenu *ngIf="!narrowHeader">
+
+
+
+
+<header class="masthead masthead--focussed uxd" role="banner" data-mobilemenu-focussed="">
+  <div class="masthead__top">
+    <div class="inner">
+      <a id="skiplinks" class="visuallyhidden focusable in-page" href="#main" tabindex="1">
+        <span>Skip to main content</span>
+      </a>
+      <a class="masthead__logo" href="//jisc.ac.uk">
+        <img alt="Jisc logo" src="//ux.jisc.ac.uk/2.0.0/ui/img/logo.png">
+      </a>
+      <div id="nav" class="title-nav">
+        
+      <span class="menu-button" [class.is-open]="showMobileMenu" tabindex="0" (click)="clickMenu()">Menu <span class="icon icon-arrow-down"></span></span><div [class.showing]="showMobileMenu" class="mobile-menu mobile-tablet-only" ><ul>
+          <li class="nav__item"><a [routerLink]="['Home']">Search</a>
+          <li class="nav__item"><a [routerLink]="['Explore']">Explore</a></li>
+          <li class="nav__item"><a [routerLink]="['About']">About this release</a></li>
+          <li class="nav__item"><a [routerLink]="['Support']">Support</a></li>
+          <li class="nav__item"><a [routerLink]="['Terms']">Terms of use</a></li>
+          <li class="nav__item"><a [routerLink]="['SignIn']">Sign in</a></li>
+          <li class="nav__item"><a [routerLink]="['Profile']">My profile</a></li>
+        </ul></div></div>
+      
+      <nav class="masthead__nav masthead__nav--primary masthead__nav--secondary" role="banner" data-dropdown="">
+        {{ appVersion }}
+      </nav>
+    </div>
+  </div>
+</header>
+
+<header class="masthead" role="banner" data-mobilemenu *ngIf="!narrowHeader">
     <div class="masthead__top">
-        <div class="inner">
-            <a id="skiplinks" class="visuallyhidden focusable in-page" href="#main" tabindex="1">
-                <span>Skip to main content</span>
-            </a>
-            <a class="masthead__logo" href="//jisc.ac.uk">
-                <img alt="Jisc logo" src="https://ux.jisc.ac.uk/ui/img/logo.png">
-            </a>
-            <div class=" masthead__nav--primary masthead__nav--secondary">
-                {{ appVersion }}
-            </div>
-        </div>
+        
+    
+        
         <div class="masthead__main masthead__main--with-content">
             <div class="inner">
                 <div class="appstoretitle">
-                    <h1 class="masthead__title masthead__title--long">{{ appInfoname }}</h1>
-                    <h2>{{appInfoStrap}}</h2>
+                    <h1 ><a [routerLink]="['Home']">{{ appInfoname }}</a></h1>
+                    <h2 >{{appInfoStrap}}</h2>
                 </div>
                 <div class="nav-wrapper">
                     <nav class="masthead__nav header__nav--primary" role="navigation" data-dropdown>
@@ -57,7 +81,7 @@
                                 class="nav__item has-popup "
                                 data-dropdown-item>
                                 <a href="javascript:void(0);">Help</a>
-                                <div class="submenu">
+                                <div class="submenu submenu--right">
                                     <ul>
                                         <li><a [routerLink]="['About']">About this release</a></li>
                                         <li><a [routerLink]="['Support']">Support</a></li>
@@ -73,31 +97,10 @@
             </div>
         </div>
     </div>
-</div>
+</header>
 
 
-<header class="masthead masthead--focussed" role="banner" data-mobilemenu-focussed="" *ngIf="narrowHeader">
-      <div class="masthead__top">
-        <div class="inner">
-          
-          <a class="masthead__logo" href="//jisc.ac.uk">
-            <img alt="Jisc logo" src="http://ux.jisc.ac.uk/ui/img/logo.png">
-          </a>
-          <div class=" masthead__nav--primary masthead__nav--secondary">
-                {{ appVersion }}
-            </div>
-          <div id="nav" class="title-nav" data-dropdown="">
-            <div class="has-popup masthead__nav__item" data-dropdown-item="">
-              <h1 class="masthead__title masthead__title--long">
-                  {{ appInfoname }}
-               </h1>
-              
-            </div>
-          </div>
-         
-        </div>
-      </div>
-    </header>
+
 <main id="main" role="main" class="main">
     <div class="inner l-pull-left featured">
         <div class="l-centre-offset">
@@ -108,3 +111,9 @@
         </div>
     </div>
 </main>
+
+<footer>
+    <div class="row">
+        Copyright Jisc &copy; 2016
+    </div>
+</footer>

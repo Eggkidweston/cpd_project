@@ -4,7 +4,7 @@ import { RouterOutlet, RouterLink, RouteParams, Router, ROUTER_DIRECTIVES } from
 import { AuthenticationService } from '../../../services/services';
 import { appSettings } from '../../../../../settings';
 import { AppsService } from '../../../services/services';
-import { StoreApp, DownloadInstructions } from '../../../models';
+import { StoreApp, ResourceInstructions } from '../../../models';
 import { AppComponent } from '../../../app.component';
 
 @Component( {
@@ -18,6 +18,7 @@ export class DownloadComponent
     public app:StoreApp;
     public instructions:String;
     public resourceId:number;
+    protected resourceInstructions = ResourceInstructions;
 
     constructor( public authenticationService:AuthenticationService,
                  public router:Router,
@@ -48,15 +49,13 @@ export class DownloadComponent
 
     loadInstructions()
     {
-        this.appsService.getDownloadInstructions( this.resourceId )
-            .subscribe(
-                downloadInstructions =>
-                {
-                    this.instructions = this.assignValbyType(downloadInstructions, "local");
-                },
-                ( error:any ) => AppComponent.generalError( error.status )
-
-            );
+        if(this.app.type_id==99) //other
+        {
+            this.instructions = "We are not sure what type of resource this is! Please let us know either in the reviews or by contacting support."
+        } else {
+            this.instructions = this.resourceInstructions[this.app.type_id - 1];
+        }
+        
     }
 
     goBack()
@@ -77,13 +76,6 @@ export class DownloadComponent
         }
     }
 
-    assignValbyType(instructions:DownloadInstructions, val:string){
-        if(val=="local") {
-            return instructions.local;
-        } else {
-            return "instructions.notlocal"
-        }
-    }
 
     openSignIn()
     {

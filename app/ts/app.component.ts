@@ -35,6 +35,8 @@ import { SigninRegisterService } from "./services/services";
 import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
 import myGlobals = require('./globals'); 
 
+declare let ga:Function; //google analytics object
+
 @Component( {
     selector: 'appstore-app',
     directives: [...ROUTER_DIRECTIVES],
@@ -75,6 +77,7 @@ export class AppComponent
     private appVersion:String;
     public narrowHeader:Boolean;
     public showCookiebar:boolean;
+    public showMobileMenu:boolean = false;
     private idpJWT;
 
 
@@ -98,6 +101,8 @@ export class AppComponent
             }else{
                 this.narrowHeader = false;
             }
+            this.showMobileMenu = false;
+            ga('send', 'pageview', value);
         });
 
         if(window.location.href.indexOf('token')>-1&&window.location.href.indexOf('jwt')>-1){
@@ -127,6 +132,10 @@ export class AppComponent
     clickCookieBar(){
         localStorage.setItem('cookiebarshown', 'yes');
         this.checkCookieBar();
+    }
+
+    clickMenu() {
+        this.showMobileMenu = !this.showMobileMenu;
     }
 
     base64Decode(s) {
