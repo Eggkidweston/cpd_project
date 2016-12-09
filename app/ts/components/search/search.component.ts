@@ -5,6 +5,11 @@ import { AppComponent } from '../../app.component';
 import { AppsService } from '../../services/services';
 import { StoreApp } from '../../models';
 import { AppWidgetsComponent } from '../appwidgets/appwidgets.component';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/do';
+
 
 @Component({
     selector: 'search',
@@ -18,6 +23,7 @@ export class SearchComponent {
     public filteredList = [];
 	public query = '';
     public advancedSearchActive: boolean = false;
+    private searchingForSuggestions: boolean = false;
 
     private resultsApps:Array<StoreApp>;
 
@@ -43,6 +49,17 @@ export class SearchComponent {
 
         this.freestuff = this.searchForm.controls['freestuff'];
 
+        this.searchterm.valueChanges
+            .do((_) => {
+                this.searchingForSuggestions = true;
+            })
+            .debounceTime(500)
+            .distinctUntilChanged()
+            .subscribe(
+                (res: any) => {
+                       this.searchTermChanged(this.searchterm.value);
+                }
+            );
     }
 
 	select(item){
@@ -57,7 +74,10 @@ export class SearchComponent {
             this._appsService.getBySearch(searchTerm, this.freestuff._value)
                 .subscribe(
                     filteredList => {
-                        this.filteredList = filteredList.data;
+                        if(this.searchingForSuggestions) { // don't allow slow responses to overwrite
+                            this.filteredList = filteredList.data;
+                            this.searchingForSuggestions = false;
+                        }
                     },
                     (error:any) => AppComponent.generalError( error.status )
                 );

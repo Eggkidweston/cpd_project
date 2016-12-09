@@ -77,6 +77,7 @@ export class AppComponent
     private appVersion:String;
     public narrowHeader:Boolean;
     public showCookiebar:boolean;
+    public showMobileMenu:boolean = false;
     private idpJWT;
 
 
@@ -100,7 +101,7 @@ export class AppComponent
             }else{
                 this.narrowHeader = false;
             }
-
+            this.showMobileMenu = false;
             ga('send', 'pageview', value);
         });
 
@@ -131,6 +132,10 @@ export class AppComponent
     clickCookieBar(){
         localStorage.setItem('cookiebarshown', 'yes');
         this.checkCookieBar();
+    }
+
+    clickMenu() {
+        this.showMobileMenu = !this.showMobileMenu;
     }
 
     base64Decode(s) {

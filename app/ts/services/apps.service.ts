@@ -1,7 +1,7 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults } from '../models';
+import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions } from '../models';
 import { appInfo } from './services';
 import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
@@ -192,22 +192,6 @@ export class AppsService
                 metrics => next( metrics ),
                 err => error( err )
             )
-    }
-
-    public getDownloadInstructions( resourceId:Number ) 
-    {
-        //return this.http.get( `` )
-        //    .map( res => res.json() )
-        //   .catch( this.handleError );
-
-
-        let instructions = JSON.parse( `
-        {
-            "local": "Click the continue button below to start downloading this resource.",
-            "notlocal": "Click the continue button below to visit the download page for this resource."
-        }
-        ` );
-        return Observable.of( instructions ) 
     }
 
     public getResourceCuration( resourceId:number )

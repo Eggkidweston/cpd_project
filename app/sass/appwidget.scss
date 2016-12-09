@@ -1,8 +1,8 @@
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
 
 .app-widget {
-    margin-right:41px;
-    margin-bottom:41px;
+    margin-right:30px;
+    margin-bottom:30px;
 }
 
 .app-widget-container {
@@ -48,10 +48,10 @@ box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.19);
     color: #0c2931;
 	-webkit-transition: all .2s ease-in-out;
 	transition: all .2s ease-in-out;
-	font-weight: 700;
+	
 	line-height: 1.5em;
 	text-align:center;
-    padding: 0 .5em;
+    
     a{
         text-decoration:none !important;
     }
@@ -88,6 +88,7 @@ box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.19);
         margin-bottom:14px;
     }
     padding-bottom: 0px;
+    font-size:100% !important;
 }
 .glyphicon {
     position:inherit !important; 
