@@ -115,6 +115,24 @@ export class AuthenticationService {
         this.signIn(localpid, AuthenticationService._pidpass, next, error);
     }
 
+    signInWithToken(token:string, next: () => void, error: (res: Response) => void)
+    {
+        
+        AuthenticationService.apiKey = <any>token;
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('x-access-token', token);
+        this.http.get(`${appSettings.apiRoot}users/me`, { headers })
+                 .map(res => res.json())
+                 .subscribe(data => {
+                     AuthenticationService.user = data.user;
+                     next();
+        },
+                err => error(err)
+        );
+    }
+
     signIn(emailOrUsername: string, password: string,
         next: () => void,
         error: (res: Response) => void)
