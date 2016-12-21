@@ -1,8 +1,8 @@
 .app-details-container {
-h4 {
-      font-size: 16px;
-      font-weight: bold;
-    }
+  h4 {
+    font-size: 16px;
+    font-weight: bold;
+  }
   .app-details {
     h2 {
       margin-top: 0px;
@@ -14,8 +14,6 @@ h4 {
       font-weight: 600;
     }
 
-    
-
     .download-resource-image {
       border: 9px solid #fff;
       border-radius: 15px;
@@ -26,23 +24,36 @@ h4 {
         height: 100%;
         width: 128px;
         height: auto;
-        margin-bottom:0px;
+        margin-bottom: 0px;
       }
-      margin-bottom:10px;
+      margin-bottom: 10px;
     }
-    
+
     .button-container {
-      
+
       button {
         width: 100%;
         border-radius: 10px;
         background: #A1D490;
         font-weight: 700;
-        height:40px;
+        height: 40px;
       }
+      .download-resource {
+        display: block;
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
+        border-radius: 10px;
+        background: #A1D490;
+        font-weight: 700;
+        font-size:1.4em;
+        height: 40px;
+        padding-top: 8px;
+      }
+
     }
     .cost-licence-container {
-    margin-top: 23px;
+      margin-top: 23px;
     }
 
     .creator-name {
@@ -61,32 +72,28 @@ h4 {
       padding-bottom: 0px;
     }
 
-.remindrating{
-  margin-top:30px;
-  margin-bottom:30px;
-  padding-top:10px;
-  padding-bottom:10px;
-  text-align:center;
-}
+    .remindrating {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      text-align: center;
+    }
 
+    .back-link {
 
-.back-link {
-  
-  button {
+      button {
         width: 128px;
-        
+
         border-radius: 10px;
         background: #cfcfcf;
         font-weight: 700;
-        margin-bottom:10px;
+        margin-bottom: 10px;
       }
 
-}
+    }
 
-
-}
-
-
+  }
 
 }
 

@@ -5,7 +5,7 @@ import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchR
 import { appInfo } from './services';
 import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
-import { Review, ResourceMetrics, ResourceMetric, DownloadInstructions } from 'models';
+import { Review, ResourceMetrics, ResourceMetric, DownloadInstructions } from '../models';
 
 let _ = require( 'underscore' );
 
@@ -19,7 +19,6 @@ export class AppsService
 
     public getResources(appsPerPage: number, pageNumber: number, filterText :string)
     {
-        //console.log(`${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` );
         return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
             .map( res => <GetResourceResults>res.json() )
             .catch( this.handleError );
