@@ -74,7 +74,7 @@ export class DownloadComponent
             this.getting = true;
             this.appsService.getApp( this.resourceId )
                 .subscribe(
-                    url => { this.getting = false; this.resUrl = url;},
+                    url => { this.getting = false; console.log("url:"+ url); this.resUrl = url;},
                     ( error:any ) => AppComponent.generalError( error.status )
                 );
         }
