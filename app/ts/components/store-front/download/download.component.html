@@ -16,9 +16,13 @@
             <p>{{ instructions }}</p>
 
             <div class="button-container">
-                <button  *ngIf="resUrl == null" class="btn download" role="button" (click)="getApp()">Continue</button>
+                <button  *ngIf="resUrl == null && urlError == false" class="btn download" role="button" (click)="getApp()">Continue</button>
                 <a *ngIf="resUrl != null" href="{{resUrl}}" download class="download-resource"><i class="fa fa-cloud-download"></i> Download Now</a>
                 <p *ngIf="getting" class="getting">Accessing Resource Details</p>
+                <div *ngIf="urlError" class="alert alert-danger">
+                    <strong>Error!</strong> Could not access resource details.
+                </div>
+
                 <p class="remindrating teaser">Remember, you can share your experiences using this resource and help the
                     community out by returning to the previous page and adding a review and rating!</p>
             </div>

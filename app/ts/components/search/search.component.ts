@@ -24,6 +24,7 @@ export class SearchComponent {
 	public query = '';
     public advancedSearchActive: boolean = false;
     private searchingForSuggestions: boolean = false;
+    private activeOnly: boolean = true;
 
     private resultsApps:Array<StoreApp>;
 
@@ -57,7 +58,7 @@ export class SearchComponent {
             .distinctUntilChanged()
             .subscribe(
                 (res: any) => {
-                       this.searchTermChanged(this.searchterm.value);
+                       this.searchTermChanged(this.searchterm.value, this.activeOnly);
                 }
             );
     }
@@ -69,9 +70,9 @@ export class SearchComponent {
         window.location.href = url;
 	}
 
-	searchTermChanged(searchTerm) {
+	searchTermChanged(searchTerm, activeOnly) {
         if(searchTerm.length>1) {
-            this._appsService.getBySearch(searchTerm, this.freestuff._value)
+            this._appsService.getBySearch(searchTerm, this.freestuff._value, activeOnly)
                 .subscribe(
                     filteredList => {
                         if(this.searchingForSuggestions) { // don't allow slow responses to overwrite

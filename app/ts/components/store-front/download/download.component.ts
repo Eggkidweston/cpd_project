@@ -20,6 +20,7 @@ export class DownloadComponent
     public resourceId:number;
     private resUrl : String = null;
     private getting :boolean = false;
+    private urlError :boolean = false;
 
     protected resourceInstructions = ResourceInstructions;
 
@@ -74,7 +75,16 @@ export class DownloadComponent
             this.getting = true;
             this.appsService.getApp( this.resourceId )
                 .subscribe(
-                    url => { this.getting = false; console.log("url:"+ url); this.resUrl = url;},
+                    url => {
+                        this.getting = false;
+                        if (url == null){
+                            this.urlError = true;
+                        }
+                        else{
+                            this.resUrl = url;
+                        }
+
+                    },
                     ( error:any ) => AppComponent.generalError( error.status )
                 );
         }

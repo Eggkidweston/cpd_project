@@ -19,7 +19,7 @@ export class HomeComponent
     private recentApps:Array<StoreApp>;
     private lastUpdatedApps:Array<StoreApp>;
     private recommendedApps:Array<StoreApp>;
-
+    private activeOnly: boolean = true;
     private appsPerPage:number = 20;
     private currentPage:number = 1;
     private totalPages:number = 0;
@@ -39,7 +39,7 @@ export class HomeComponent
 
     getResourceCount()
     {
-        this._appsService.getResources( 1, 1, '' )
+        this._appsService.getResourceCount(this.activeOnly)
             .subscribe(
                 resources => {
                     this.totalResourceCount = resources.availableRows;
