@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppWidgetsComponent } from '../../appwidgets/appwidgets.component';
 import { RouterOutlet, RouterLink, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AuthenticationService } from '../../../services/services';
@@ -23,6 +23,8 @@ export class DownloadComponent
     private urlError :boolean = false;
 
     protected resourceInstructions = ResourceInstructions;
+
+    @ViewChild( 'filedownloadButton' ) filedownloadButton;
 
     constructor( public authenticationService:AuthenticationService,
                  public router:Router,
@@ -72,6 +74,7 @@ export class DownloadComponent
         if( !this.authenticationService.userSignedIn() ) {
             this.openSignIn();
         } else {
+            
             this.getting = true;
             this.appsService.getApp( this.resourceId )
                 .subscribe(
@@ -82,6 +85,11 @@ export class DownloadComponent
                         }
                         else{
                             this.resUrl = url;
+
+                            this.filedownloadButton.nativeElement.setAttribute("href", url);
+                            this.filedownloadButton.nativeElement.setAttribute("download", url);
+
+                            this.filedownloadButton.nativeElement.click();
                         }
 
                     },
