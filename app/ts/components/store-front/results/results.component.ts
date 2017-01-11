@@ -22,6 +22,7 @@ export class ResultsComponent
     private appsPerPage:number = 10;
     private currentPage:number = 1;
     private totalPages:number = 0;
+    private activeOnly: boolean = true;
 
     public resultsCount:number = 0;
 
@@ -39,7 +40,7 @@ export class ResultsComponent
     getResultsApps()
     {
         this.searching = true;
-        this._appsService.getBySearchPaged(this.searchTerm, false, this.appsPerPage, this.currentPage)
+        this._appsService.getBySearchPaged(this.searchTerm, false, this.appsPerPage, this.currentPage, this.activeOnly)
                 .subscribe(
                     results => {
                         this.resultsApps = results.data;

@@ -18,6 +18,10 @@ export class DownloadComponent
     public app:StoreApp;
     public instructions:String;
     public resourceId:number;
+    private resUrl : String = null;
+    private getting :boolean = false;
+    private urlError :boolean = false;
+
     protected resourceInstructions = ResourceInstructions;
 
     constructor( public authenticationService:AuthenticationService,
@@ -68,9 +72,19 @@ export class DownloadComponent
         if( !this.authenticationService.userSignedIn() ) {
             this.openSignIn();
         } else {
+            this.getting = true;
             this.appsService.getApp( this.resourceId )
                 .subscribe(
-                    url => window.open( url ),
+                    url => {
+                        this.getting = false;
+                        if (url == null){
+                            this.urlError = true;
+                        }
+                        else{
+                            this.resUrl = url;
+                        }
+
+                    },
                     ( error:any ) => AppComponent.generalError( error.status )
                 );
         }

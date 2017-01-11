@@ -1,21 +1,31 @@
-
 <div class="app-details-container">
-	<div class="app-details">
-    	<div class="col span-2">
+    <div class="app-details">
+        <div class="col span-2">
             <div *ngIf="app?.image" class="download-resource-image">
                 <img src="{{ app?.image }}">
             </div>
-            <div class="back-link"><button class="btn back" role="button" (click)="goBack()">Back</button>
+            <div class="back-link">
+                <button class="btn back" role="button" (click)="goBack()">Back</button>
             </div>
         </div>
         <div class="col span-6">
             <h2>{{ app?.title }}</h2>
             <h4>Instructions</h4>
-            <p *ngIf="!authenticationService.userSignedIn()">You must be logged in before you can download a resource. Click the sign-in button and register for a free account.</p>
+            <p *ngIf="!authenticationService.userSignedIn()">You must be logged in before you can download a resource.
+                Click the sign-in button and register for a free account.</p>
             <p>{{ instructions }}</p>
 
-            <div class="button-container"><button class="btn download" role="button" (click)="getApp()">Continue</button>
-            <p class="remindrating teaser">Remember, you can share your experiences using this resource and help the community out by returning to the previous page and adding a review and rating!</p>
+            <div class="button-container">
+                <button  *ngIf="resUrl == null && urlError == false" class="btn download" role="button" (click)="getApp()">Continue</button>
+                <a *ngIf="resUrl != null" href="{{resUrl}}" download class="download-resource"><i class="fa fa-cloud-download"></i> Download Now</a>
+                <p *ngIf="getting" class="getting">Accessing Resource Details</p>
+                <div *ngIf="urlError" class="alert alert-danger">
+                    <strong>Error!</strong> Could not access resource details.
+                </div>
+
+                <p class="remindrating teaser">Remember, you can share your experiences using this resource and help the
+                    community out by returning to the previous page and adding a review and rating!</p>
+            </div>
         </div>
     </div>
 </div>
