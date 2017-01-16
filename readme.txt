@@ -12,3 +12,4 @@ test:
 
 tree:
 	cd .. && tree -I node_modules -A -F angular2-rxjs-chat
+ 
