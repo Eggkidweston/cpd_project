@@ -19,7 +19,7 @@ export class AppsService
 
     public getResources(appsPerPage: number, pageNumber: number, filterText :string)
     {
-        return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
+        return this.http.get( `${appSettings.apiRoot}resources/explore?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
             .map( res => <GetResourceResults>res.json() )
             .catch( this.handleError );
     }
