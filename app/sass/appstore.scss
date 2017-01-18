@@ -201,3 +201,16 @@ main, app-store {
 .masthead__nav .submenu {
     width:193px !important;
 }
+
+.masthead__main {
+    background-image: url('../images/store-masthead-image.png');
+    background-color: #791c6f;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+   
+}
+
+.nav__item>a {
+    background-color: #6d0061;
+}

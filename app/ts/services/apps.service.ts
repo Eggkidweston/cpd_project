@@ -26,7 +26,6 @@ export class AppsService
 
     public getResourceCount(activeOnly: boolean)
     {
-
         let searchQuery = `${appSettings.apiRoot}resources/count?`;
         if(activeOnly) searchQuery += "$filter=(active eq true)";
 
