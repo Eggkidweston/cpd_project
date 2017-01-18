@@ -24,6 +24,16 @@ export class AppsService
             .catch( this.handleError );
     }
 
+    public getResourceCount(activeOnly: boolean)
+    {
+        let searchQuery = `${appSettings.apiRoot}resources/count?`;
+        if(activeOnly) searchQuery += "$filter=(active eq true)";
+
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
+            .catch( this.handleError );
+    }
+
     public getMostDownloadedApps(appsPerPage: number, pageNumber: number)
     {
         return this.http.get( `${appSettings.apiRoot}resources?$orderby=downloadcount%20desc&$top=10` )
