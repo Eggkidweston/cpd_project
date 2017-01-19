@@ -33,6 +33,7 @@ import { ResourceMetricsComponent } from './components/store-front/resource-metr
 import { AuthenticationService, appInfo } from './services/services';
 import { SigninRegisterService } from "./services/services";
 import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
+import { CurationTokenMigrationComponent } from './components/ctm/ctm.component';
 import myGlobals = require('./globals'); 
 
 declare let ga:Function; //google analytics object
@@ -65,7 +66,8 @@ declare let ga:Function; //google analytics object
     { path: '/comingsoon', name: 'ComingSoon', component: ComingSoonComponent },
     { path: '/support', name: 'Support', component: SupportComponent },
     { path: '/results/:searchterm', name: 'Results', component: ResultsComponent },
-    { path: '/feedback', name: 'Feedback', component: FeedbackComponent }
+    { path: '/feedback', name: 'Feedback', component: FeedbackComponent },
+    { path: '/ctm', name: 'Ctm', component: CurationTokenMigrationComponent }
     //{ path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
 ] )
 

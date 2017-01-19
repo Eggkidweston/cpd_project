@@ -109,7 +109,7 @@ export class ExploreComponent implements AfterViewInit {
     }
 
     loadApps() {
-        console.log('loading apps');
+       
         this.gettingResources = true;
         this.appsService.getResources(this.appsPerPage, this.currentPage, this.selectedTags.GetFilterSyntax())
             .subscribe(
@@ -161,6 +161,7 @@ export class ExploreComponent implements AfterViewInit {
                 //console.log('use initialSelectedId');
                 this.selectTagFromDB(initialSelectedId);
             } else {
+                this.totalPages = 0;
             this.appsService.getTagCloud(true, 50, this.chosenOrder)
                 .subscribe(
                     tags => {

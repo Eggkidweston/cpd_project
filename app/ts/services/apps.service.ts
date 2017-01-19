@@ -5,7 +5,7 @@ import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchR
 import { appInfo } from './services';
 import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
-import { Review, ResourceMetrics, ResourceMetric, DownloadInstructions } from 'models';
+import { Review, ResourceMetrics, ResourceMetric, DownloadInstructions } from '../models';
 
 let _ = require( 'underscore' );
 
@@ -19,9 +19,18 @@ export class AppsService
 
     public getResources(appsPerPage: number, pageNumber: number, filterText :string)
     {
-        //console.log(`${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` );
-        return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
+        return this.http.get( `${appSettings.apiRoot}resources/explore?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
             .map( res => <GetResourceResults>res.json() )
+            .catch( this.handleError );
+    }
+
+    public getResourceCount(activeOnly: boolean)
+    {
+        let searchQuery = `${appSettings.apiRoot}resources/count?`;
+        if(activeOnly) searchQuery += "$filter=(active eq true)";
+
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }
 
@@ -88,24 +97,25 @@ export class AppsService
 
     }
 
-    public getBySearch( searchTerm, opened)
+    public getBySearch( searchTerm, opened, activeOnly: boolean)
     {
         
 
         let searchQuery = `${appSettings.apiRoot}resources?$top=100&$filter=title%20eq%20%27${ searchTerm }%27`;
         //if(opened) searchQuery += "%20and%20isfree%20eq%20true";
-        
+        if(activeOnly) searchQuery += "%20and%20active%20eq%20true";
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }
 
-    public getBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number)
+    public getBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number, activeOnly: boolean)
     {
         
         let searchQuery = `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=title%20eq%20%27${searchTerm}%27`;
         if(openEd) searchQuery += "%20and%20isfree%20eq%20true";
-        
+        if(activeOnly) searchQuery += "%20and%20active%20eq%20true";
+
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
