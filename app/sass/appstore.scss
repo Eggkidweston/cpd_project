@@ -204,13 +204,16 @@ main, app-store {
 
 .masthead__main {
     background-image: url('../images/store-masthead-image.png');
-    background-color: #791c6f;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-   
+    background-position:center;
 }
 
 .nav__item>a {
-    background-color: #6d0061;
+    background-color: #641144;
 }
+.nav__item.has-popup.menuhidden .submenu a {
+    display:none !important;
+}
+
