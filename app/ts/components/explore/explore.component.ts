@@ -109,7 +109,7 @@ export class ExploreComponent implements AfterViewInit {
     }
 
     loadApps() {
-        console.log('loading apps');
+       
         this.gettingResources = true;
         this.appsService.getResources(this.appsPerPage, this.currentPage, this.selectedTags.GetFilterSyntax())
             .subscribe(
