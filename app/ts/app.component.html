@@ -77,16 +77,14 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li [class.active]="isRouteActive(['About']) || isRouteActive(['Who']) || isRouteActive(['Feedback'])"
+                            <li 
                                 class="nav__item has-popup "
                                 data-dropdown-item>
                                 <a href="javascript:void(0);">Help</a>
-                                <div class="submenu submenu--right">
+                                <div class="submenu submenu--right" >
                                     <ul>
                                         <li><a [routerLink]="['About']">About this release</a></li>
                                         <li><a [routerLink]="['Support']">Support</a></li>
-                                        <!--<li><a [routerLink]="['Who']">Who can register?</a></li>-->
-                                        <!--<li><a [routerLink]="['Feedback']">Feedback</a></li>-->
                                         <li><a [routerLink]="['Terms']">Terms of use</a></li>
                                     </ul>
                                 </div>
