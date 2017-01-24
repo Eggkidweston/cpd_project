@@ -36,28 +36,28 @@ export class AppsService
 
     public getMostDownloadedApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources?$orderby=downloadcount%20desc&$top=10` )
+        return this.http.get( `${appSettings.apiRoot}resources?$orderby=downloadcount%20desc&$top=10&$filter=active%20eq%20true` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
 
     public getRecentApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources/recent?$top=10` )
+        return this.http.get( `${appSettings.apiRoot}resources/recent?$top=10&$filter=active%20eq%20true` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
     
     public getLastUpdatedApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources?$orderby=updatedat%20desc&$top=10` )
+        return this.http.get( `${appSettings.apiRoot}resources?$orderby=updatedat%20desc&$top=10&$filter=active%20eq%20true` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
 
     public getRecommendedApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources/recommended?$top=10` )
+        return this.http.get( `${appSettings.apiRoot}resources/recommended?$top=10&$filter=active%20eq%20true` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
