@@ -48,6 +48,7 @@ export class StoreAppMini {
     title:string;
     description:string;
     average_rating:number;
+    jorum_legacy_flag:boolean;
 }
 
 export interface GetResourceResults {
