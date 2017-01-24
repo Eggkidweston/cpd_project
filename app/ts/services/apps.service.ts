@@ -36,28 +36,28 @@ export class AppsService
 
     public getMostDownloadedApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources?$orderby=downloadcount%20desc&$top=10` )
+        return this.http.get( `${appSettings.apiRoot}resources?$orderby=downloadcount%20desc&$top=10&$filter=active%20eq%20true` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
 
     public getRecentApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources/recent?$top=10` )
+        return this.http.get( `${appSettings.apiRoot}resources/recent?$top=10&$filter=active%20eq%20true` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
     
     public getLastUpdatedApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources?$orderby=updatedat%20desc&$top=10` )
+        return this.http.get( `${appSettings.apiRoot}resources?$orderby=updatedat%20desc&$top=10&$filter=active%20eq%20true` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
 
     public getRecommendedApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources/recommended?$top=10` )
+        return this.http.get( `${appSettings.apiRoot}resources/recommended?$top=10&$filter=active%20eq%20true` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
@@ -99,10 +99,7 @@ export class AppsService
 
     public getBySearch( searchTerm, opened, activeOnly: boolean)
     {
-        
-
-        let searchQuery = `${appSettings.apiRoot}resources?$top=100&$filter=title%20eq%20%27${ searchTerm }%27`;
-        //if(opened) searchQuery += "%20and%20isfree%20eq%20true";
+        let searchQuery = `${appSettings.apiRoot}resources/search?$top=100&$filter=title%20eq%20%27${ searchTerm }%27`;
         if(activeOnly) searchQuery += "%20and%20active%20eq%20true";
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )

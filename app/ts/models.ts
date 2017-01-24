@@ -42,6 +42,16 @@ export class StoreApp
     image:string;
 }
 
+export class StoreAppMini {
+    id: string;
+    image:string;
+    type_id:number;
+    title:string;
+    description:string;
+    average_rating:number;
+    jorum_legacy_flag:boolean;
+}
+
 export interface GetResourceResults {
     data: Array<StoreApp>;
     availableRows: number;
@@ -60,7 +70,7 @@ export interface IdpMemberResults {
 }
 
 export interface GetSearchResults {
-    data: Array<StoreApp>;
+    data: Array<StoreAppMini>;
     availableRows: number;
 }
 
