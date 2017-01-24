@@ -45,6 +45,7 @@ export class StoreApp
 export class StoreAppMini {
     id: string;
     image:string;
+    type_id:number;
     title:string;
     description:string;
     average_rating:number;
