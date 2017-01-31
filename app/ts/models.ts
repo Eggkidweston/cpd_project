@@ -22,6 +22,7 @@ export class StoreApp
     isfree:boolean;
     lastUpdatedDate:string;
     licensetype_id:number;
+    licenceurl:string;
     likes:number;
     media:Array<Medium>;
     metrics:CollatedMetrics;
