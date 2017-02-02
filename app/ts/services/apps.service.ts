@@ -99,8 +99,8 @@ export class AppsService
 
     public getBySearch( searchTerm, opened, activeOnly: boolean)
     {
-        let searchQuery = `${appSettings.apiRoot}resources/search?$top=100&$filter=title%20eq%20%27${ searchTerm }%27`;
-        if(activeOnly) searchQuery += "%20and%20active%20eq%20true";
+        let searchQuery = `${appSettings.apiRoot}resources/search?$top=100&term=${ searchTerm }`;
+        if(activeOnly) searchQuery += "&active=true";
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
@@ -132,8 +132,7 @@ export class AppsService
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
 
-        //  return this.http.get(`${appSettings.apiRoot}resources?$top=3`)
-        return this.http.get( `${appSettings.apiRoot}resources?$filter=createdby%20eq%20'${ createdBy }'`, { headers } )
+        return this.http.get( `${appSettings.apiRoot}resources?$filter=createdby%20eq%20'${ createdBy }'%20and%20active%20eq%20true`, { headers } )
             .map( res => <StoreApp[]>res.json().data )
             .catch( this.handleError );
     }
