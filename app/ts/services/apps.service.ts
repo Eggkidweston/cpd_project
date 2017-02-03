@@ -99,7 +99,7 @@ export class AppsService
 
     public getBySearch( searchTerm, opened, activeOnly: boolean)
     {
-        let searchQuery = `${appSettings.apiRoot}resources/search?$top=100&term=${ searchTerm }`;
+        let searchQuery = `${appSettings.apiRoot}resources/search?$top=100&$skip=0&term=${ searchTerm }`;
         if(activeOnly) searchQuery += "&active=true";
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
@@ -108,10 +108,8 @@ export class AppsService
 
     public getBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number, activeOnly: boolean)
     {
-        
-        let searchQuery = `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=title%20eq%20%27${searchTerm}%27`;
-        if(openEd) searchQuery += "%20and%20isfree%20eq%20true";
-        if(activeOnly) searchQuery += "%20and%20active%20eq%20true";
+        let searchQuery = `${appSettings.apiRoot}resources/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }`;
+        if(activeOnly) searchQuery += "&active=true";
 
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
