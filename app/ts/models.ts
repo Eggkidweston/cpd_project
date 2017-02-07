@@ -41,6 +41,7 @@ export class StoreApp
     jorum_legacy_flag:boolean;
     jorum_legacy_metadata:Array<string>;
     image:string;
+    active:boolean;
 }
 
 export class StoreAppMini {
