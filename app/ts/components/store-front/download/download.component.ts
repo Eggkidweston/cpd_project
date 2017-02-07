@@ -21,6 +21,7 @@ export class DownloadComponent
     private resUrl : String = null;
     private getting :boolean = false;
     private urlError :boolean = false;
+    private isUploadedResource: boolean = false;
 
     protected resourceInstructions = ResourceInstructions;
 
@@ -87,8 +88,16 @@ export class DownloadComponent
                             this.resUrl = url;
 
                             this.filedownloadButton.nativeElement.setAttribute("href", url);
-                            this.filedownloadButton.nativeElement.setAttribute("download", url);
-
+                            
+                            
+                            let resourceURL:string = url;
+                            if(resourceURL.indexOf('jisc-store-resources')==-1&&resourceURL.indexOf('jisc-store-content')==-1) {
+                                //not hosted on our s3 bucket
+                            }else {
+                                this.isUploadedResource = true;
+                                this.filedownloadButton.nativeElement.setAttribute("download", url);
+                            }
+                            
                             this.filedownloadButton.nativeElement.click();
                         }
 
