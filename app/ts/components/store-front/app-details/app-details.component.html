@@ -1,10 +1,10 @@
 
-<div class="app-details-container">
+<div class="app-details-container" [class.inactive]="!app?.active">
     <div class="app-details">
         <div class="col span-2">
             <div class="resource-image {{ widgetBackground }}">
                 <img class="img" src="{{ widgetIcon }}" *ngIf="widgetIcon" alt="">
-                <div class="button-container">
+                <div class="button-container" *ngIf="app?.active">
                     <button class="btn" role="button" (click)="goDownload()">Get it</button>
                     <button *ngIf="app?.trialurl" class="btn tryit" role="button" (click)="goTry()">Try It</button>
                 </div>
@@ -96,8 +96,8 @@
     </div>
 <div class="row"><div class="col span-11"><hr></div></div>
 
-    <div class="col span-11">
-        <div class="col span-7 reviews-list" style="">
+    <div class="col span-11" *ngIf="app?.active">
+        <div class="col span-7 reviews-list" style="" >
                 
             <h3>Reviews<span *ngIf="!authenticationService?.userSignedIn()"> - <a
                     [routerLink]="['SignIn']">Sign In</a> to submit a review</span></h3>
