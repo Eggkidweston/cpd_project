@@ -19,9 +19,17 @@
 
                 <button  class="btn download" role="button" (click)="getApp()">Continue</button>
                 <a target="_blank" #filedownloadButton></a>
-                <div *ngIf="resUrl!=null"><h4>Downloading file</h4>
-                <p>Your file should start to download. If it doesn't, <a href="{{resUrl}}" target="_blank">click here</a></p></div>
-                <p *ngIf="getting" class="getting">Accessing Resource Details</p>
+                <div *ngIf="resUrl!=null">
+                    <div *ngIf="isUploadedResource">
+                        <h4>Downloading file</h4>
+                        <p>Your file should start to download. If it doesn't, <a href="{{resUrl}}" target="_blank">click here</a></p>
+                    </div>
+                    <div *ngIf="!isUploadedResource">
+                        <h4>Accessing resource</h4>
+                        <p>Your resource should open in a new window. If it doesn't, <a href="{{resUrl}}" target="_blank">click here</a></p>
+                    </div>
+                </div>
+                <p *ngIf="getting" class="getting">Loading..</p>
                 <div *ngIf="urlError" class="alert alert-danger">
                     <strong>Error!</strong> Could not access resource details.
                 </div>
