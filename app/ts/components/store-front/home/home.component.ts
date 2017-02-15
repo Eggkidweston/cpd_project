@@ -5,13 +5,12 @@ import { RecommendedRecentComponent } from '../../recommended-recent/recommended
 import { AppsService } from '../../../services/services';
 import { StoreApp } from '../../../models';
 import { AppComponent } from '../../../app.component';
-import { PaginationComponent } from './pagination/pagination.component';
 
 @Component( {
     selector: 'home',
     template: require( './home.component.html' ),
     styles: [require('./home.scss').toString()],
-    directives: [AppWidgetsComponent, SearchComponent, RecommendedRecentComponent, PaginationComponent]
+    directives: [AppWidgetsComponent, SearchComponent, RecommendedRecentComponent]
 } )
 export class HomeComponent
 {
@@ -20,7 +19,7 @@ export class HomeComponent
     private lastUpdatedApps:Array<StoreApp>;
     private recommendedApps:Array<StoreApp>;
     private activeOnly: boolean = true;
-    private appsPerPage:number = 20;
+    private appsPerPage:number = 10;
     private currentPage:number = 1;
     private totalPages:number = 0;
 
@@ -33,7 +32,6 @@ export class HomeComponent
         this.getResourceCount();
         this.getMostDownloadedApps();
         this.getRecentApps();
-        this.getLastUpdatedApps();
         this.getRecommendedApps();
     }
 
@@ -72,18 +70,6 @@ export class HomeComponent
             );
     }
 
-    getLastUpdatedApps()
-    {
-        this._appsService.getLastUpdatedApps( this.appsPerPage, this.currentPage )
-            .subscribe(
-                lastUpdatedApps => {
-                    this.lastUpdatedApps = lastUpdatedApps.data;
-                    this.totalPages = Math.ceil(lastUpdatedApps.availableRows/this.appsPerPage);
-                },
-                ( error:any ) => AppComponent.generalError( error.status )
-            );
-    }
-
     getRecommendedApps()
     {
         this._appsService.getRecommendedApps( this.appsPerPage, this.currentPage )
@@ -94,13 +80,6 @@ export class HomeComponent
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
-    }
-
-
-
-    onPageClicked(page) {
-        this.currentPage = page;
-        this.getRecentApps();
     }
 
 }   
