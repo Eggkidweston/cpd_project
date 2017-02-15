@@ -36,7 +36,7 @@ export class AppsService
 
     public getMostDownloadedApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources?$orderby=downloadcount%20desc&$top=`+appsPerPage+`&$filter=active%20eq%20true` )
+        return this.http.get( `${appSettings.apiRoot}resources/mostdownloaded?$top=10` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
@@ -48,12 +48,12 @@ export class AppsService
             .catch( this.handleError );
     }
     
-    public getLastUpdatedApps(appsPerPage: number, pageNumber: number)
+    /*public getLastUpdatedApps(appsPerPage: number, pageNumber: number)
     {
         return this.http.get( `${appSettings.apiRoot}resources?$orderby=updatedat%20desc&$top=`+appsPerPage+`&$filter=active%20eq%20true` )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
-    }
+    }*/
 
     public getRecommendedApps(appsPerPage: number, pageNumber: number)
     {
