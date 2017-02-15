@@ -8,32 +8,21 @@
     <div class="row span-12"></div>
 
     <div class="col span-12">
-        <h3>Most downloaded resources</h3>
+        <h3>Jisc Picks</h3>
+        <app-widgets [apps]="recommendedApps"></app-widgets>
+    </div>
+
+    <div class="row span-11"><hr /></div>
+
+    <div class="col span-12">
+        <h3>Most downloaded</h3>
         <app-widgets [apps]="mostDownloadedApps"></app-widgets>
     </div>
 
     <div class="row span-11"><hr /></div>
 
     <div class="col span-12">
-    	<h3>Recently added resources</h3>
+    	<h3>Recently added</h3>
         <app-widgets [apps]="recentApps"></app-widgets>
     </div>
-
-    <div class="row span-11"><hr /></div>
-
-    <div class="col span-12">
-        <h3>Latest updates</h3>
-        <app-widgets [apps]="lastUpdatedApps"></app-widgets>
-    </div>
-    
-    <div class="row span-11"><hr /></div>
-
-    <div class="col span-12">
-   		<h3>Jisc Picks</h3>
-        <app-widgets [apps]="recommendedApps"></app-widgets>
-    </div>
-
-    <!--<div class="col span-12" *ngIf="totalPages>0">
-    	<pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageClicked)="onPageClicked($event)"></pagination>
-    </div>-->
 </div>
