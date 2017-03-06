@@ -5,6 +5,7 @@ import { RecommendedRecentComponent } from '../../recommended-recent/recommended
 import { AppsService } from '../../../services/services';
 import { StoreApp } from '../../../models';
 import { AppComponent } from '../../../app.component';
+import { appSettings } from '../../../../../settings';
 
 @Component( {
     selector: 'home',
@@ -80,6 +81,13 @@ export class HomeComponent
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
+    }
+
+    goCuration()
+    {
+        var url = `${appSettings.curationRoot}`;
+        //window.location.href = url;
+        window.open(url,'_blank');
     }
 
 }   
