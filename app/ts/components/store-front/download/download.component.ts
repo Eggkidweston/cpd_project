@@ -22,6 +22,7 @@ export class DownloadComponent
     private getting :boolean = false;
     private urlError :boolean = false;
     private isUploadedResource: boolean = false;
+    private isCCLicence: boolean = false;
 
     protected resourceInstructions = ResourceInstructions;
 
@@ -49,6 +50,7 @@ export class DownloadComponent
                 {
                     this.app = storeApp;
                     this.loadInstructions();
+                    this.displayDownloadLinkForCC();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -65,6 +67,13 @@ export class DownloadComponent
         
     }
 
+    displayDownloadLinkForCC() 
+    {
+        if(this.app.licensetype_id>=4&&this.app.licensetype_id<=10) {
+            this.isCCLicence = true;
+        }
+    }
+
     goBack()
     {
         this.router.navigate( ['AppDetails', { id: this.app.id }] );
@@ -75,36 +84,46 @@ export class DownloadComponent
         if( !this.authenticationService.userSignedIn() ) {
             this.openSignIn();
         } else {
-            
-            this.getting = true;
-            this.appsService.getApp( this.resourceId )
-                .subscribe(
-                    url => {
-                        this.getting = false;
-                        if (url == null){
-                            this.urlError = true;
-                        }
-                        else{
-                            this.resUrl = url;
-
-                            this.filedownloadButton.nativeElement.setAttribute("href", url);
-                            
-                            
-                            let resourceURL:string = url;
-                            if(resourceURL.indexOf('jisc-store-resources')==-1&&resourceURL.indexOf('jisc-store-content')==-1) {
-                                //not hosted on our s3 bucket
-                            }else {
-                                this.isUploadedResource = true;
-                                this.filedownloadButton.nativeElement.setAttribute("download", url);
-                            }
-                            
-                            this.filedownloadButton.nativeElement.click();
-                        }
-
-                    },
-                    ( error:any ) => AppComponent.generalError( error.status )
-                );
+            this.retrieveAppAndDownload();
         }
+    }
+
+    getAppWithoutLogin()
+    {
+        this.retrieveAppAndDownload();
+    }
+
+    retrieveAppAndDownload()
+    {       
+        this.getting = true;
+        this.appsService.getApp( this.resourceId )
+            .subscribe(
+                url => {
+                    this.getting = false;
+                    if (url == null){
+                        this.urlError = true;
+                    }
+                    else{
+                        this.resUrl = url;
+
+                        this.filedownloadButton.nativeElement.setAttribute("href", url);
+                        
+                        
+                        let resourceURL:string = url;
+                        if(resourceURL.indexOf('jisc-store-resources')==-1&&resourceURL.indexOf('jisc-store-content')==-1) {
+                            //not hosted on our s3 bucket
+                        }else {
+                            this.isUploadedResource = true;
+                            this.filedownloadButton.nativeElement.setAttribute("download", url);
+                        }
+                        
+                        this.filedownloadButton.nativeElement.click();
+                    }
+
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
+        
     }
 
 

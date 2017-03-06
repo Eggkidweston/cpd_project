@@ -11,8 +11,8 @@
         <div class="col span-6">
             <h2>{{ app?.title }}</h2>
             <h4>Instructions</h4>
-            <p *ngIf="!authenticationService.userSignedIn()">You must be logged in before you can download a resource.
-                Click the sign-in button and register for a free account.</p>
+            <p *ngIf="!authenticationService.userSignedIn()">Please log in to download this resource so we can understand how popular it is.
+                Registration is free and you can log in using your institutional credentials.</p>
             <p>{{ instructions }}</p>
 
             <div class="button-container">
@@ -36,6 +36,7 @@
 
                 <p class="remindrating teaser">Remember, you can share your experiences using this resource and help the
                     community out by returning to the previous page and adding a review and rating!</p>
+                <p *ngIf="isCCLicence">no thanks, just <a (click)="getAppWithoutLogin()">download</a></p>
             </div>
         </div>
     </div>
