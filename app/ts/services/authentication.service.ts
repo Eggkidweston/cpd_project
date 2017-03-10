@@ -15,7 +15,7 @@ export class AuthenticationService {
 
     static get user(): User {
         if (typeof(Storage) !== "undefined") {
-            return <User>(JSON.parse(sessionStorage.getItem("_user")));
+            return <User>(JSON.parse(localStorage.getItem("_user")));
         } else {
             return AuthenticationService._user;
         }
@@ -23,7 +23,7 @@ export class AuthenticationService {
 
     static set user(user:User) {
         if (typeof(Storage) !== "undefined") {
-            sessionStorage.setItem("_user", JSON.stringify(user));
+            localStorage.setItem("_user", JSON.stringify(user));
         }
 
         AuthenticationService._user = user;
@@ -36,7 +36,7 @@ export class AuthenticationService {
 
     static get apiKey(): string {
         if (typeof(Storage) !== "undefined") {
-            return sessionStorage.getItem("_apiKey");
+            return localStorage.getItem("_apiKey");
         } else {
             return AuthenticationService._apiKey;
         }
@@ -44,7 +44,7 @@ export class AuthenticationService {
 
     static set apiKey(apiKey:string) {
         if (typeof(Storage) !== "undefined") {
-            sessionStorage.setItem("_apiKey", apiKey);
+            localStorage.setItem("_apiKey", apiKey);
         }
 
         AuthenticationService._apiKey = apiKey;
