@@ -216,6 +216,10 @@ main, app-store {
 
 .nav__item>a {
     background-color: #641144;
+
+}
+.mobile-menu a {
+    background-color: #fff;
 }
 .nav__item.has-popup.menuhidden .submenu a {
     display:none !important;
