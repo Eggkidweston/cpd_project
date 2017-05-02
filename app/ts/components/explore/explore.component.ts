@@ -75,7 +75,8 @@ export class ExploreComponent implements AfterViewInit {
             );
     }
 
-    selectTag(tagId) {
+    selectTag(event, tagId) {
+        event.preventDefault();
         var selectedTag = this.tagcloud.GetTag(tagId);
         this.selectedTags = this.selectedTags || new TagCloud([]);
         this.selectedTags.AddTag(selectedTag);

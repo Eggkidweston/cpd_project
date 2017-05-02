@@ -81,7 +81,7 @@ html {
 	line-height: 1.5;
 }
 
-body,button,h1,h2,h3,h4,h5,h6,input,textarea, a {
+body,button,h1,h2,h3,h4,h5,h6,input,textarea {
     font-family: "Stag Sans Web Book",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,sans-serif;
 }
 
@@ -216,6 +216,10 @@ main, app-store {
 
 .nav__item>a {
     background-color: #641144;
+
+}
+.mobile-menu a {
+    background-color: #fff;
 }
 .nav__item.has-popup.menuhidden .submenu a {
     display:none !important;

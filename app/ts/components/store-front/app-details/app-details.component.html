@@ -43,7 +43,11 @@
 
             <div class="tagcloud condensed" *ngIf="app?.tags?.length > 0">
                 <h4>Tags</h4>
-                <button class="btn " *ngFor="let tag of app.tags" >{{tag.name}}</button>
+                <ul class="tags tags--white">
+                  <li class="tags__item" *ngFor="let tag of app.tags">
+                    <span href="#" class="tags__link">{{tag.name}}</span>
+                  </li>
+                </ul>
             </div>
         </div>
         <div class="col span-3 push-1 rating-group">
