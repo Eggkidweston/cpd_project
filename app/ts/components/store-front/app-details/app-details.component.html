@@ -55,7 +55,7 @@
                 <span class="rating-text">{{ averageRating }}</span>
             </div>
             <div>
-                <rating class="rating" [rating]="app?.average_rating"></rating>
+                <rating class="rating" modifierClass="detail" [rating]="app?.average_rating"></rating>
             </div>
             <div *ngIf="reviews.length>0">
                 {{ reviews.length }} rating<span *ngIf="reviews.length!=1">s</span>
