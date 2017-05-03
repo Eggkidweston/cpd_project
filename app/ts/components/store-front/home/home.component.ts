@@ -83,11 +83,4 @@ export class HomeComponent
             );
     }
 
-    goCuration()
-    {
-        var url = `${appSettings.curationRoot}`;
-        //window.location.href = url;
-        window.open(url,'_blank');
-    }
-
-}   
+}
