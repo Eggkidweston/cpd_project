@@ -72,30 +72,20 @@
     color:#737373;
 }
 
-.small {
-    .app-widget__container {
-        width:98px;
-        min-height:117px;
-    }
-    .widget-image-logo {
-        img {
-            height:80px;
-        }
-    }
-    .rating {
-        display:none;
-    }
-    .title-text {
-        padding-bottom:5px;
+.app-widget--small {
+  min-height: 160px;
 
-    }
-    .app-widget {
-        margin-right:14px;
-        margin-bottom:14px;
-    }
-    padding-bottom: 0px;
-    font-size:100% !important;
+  .app-widget__container {
+    min-height:117px;
+  }
+  .rating {
+    display: none;
+  }
+  .title-text {
+    padding-bottom:5px;
+  }
 }
+
 .glyphicon {
     position:inherit !important;
 }
