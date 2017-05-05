@@ -1,13 +1,12 @@
 <a [routerLink]="['AppDetails', { id: app?.id }]" class="app-widget__link">
-    <div class="app-widget__container">
-      <div class="app-widget__icon app-widget__icon--filetype {{ widgetBackground }}" *ngIf="!app?.image"></div>
-      <img src="{{ app?.image }}" width="128" height="128" alt="" class="app-widget__icon" *ngIf="app?.image">
-
-        <div class="app-widget__info">
-          <div class="title-text">{{ app?.title}}</div>
-          <div class="rating">
-              <rating [rating]="app?.average_rating"></rating>
-          </div>
-        </div>
+  <div class="app-widget__container" [ngStyle]="hasMedia && {'background-image': 'url(' + app?.media[0].url + ')'}">
+    <div class="app-widget__icon app-widget__icon--filetype {{ widgetTypeIcon }}" *ngIf="!app?.image"></div>
+    <img src="{{ app?.image }}" width="128" height="128" alt="" class="app-widget__icon" *ngIf="app?.image">
+    <div class="app-widget__info">
+      <div class="title-text">{{ app?.title}}</div>
+      <div class="rating">
+        <rating [rating]="app?.average_rating"></rating>
+      </div>
     </div>
+  </div>
 </a>
