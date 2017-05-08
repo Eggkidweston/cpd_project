@@ -1,6 +1,6 @@
 <div class="search-box col-11">
 	<form [ngFormModel]="searchForm" (submit)="onSubmitSearch(searchForm.value)">
-		<input id="searchterm" name="searchterm" [ngFormControl]="searchterm" #input (blur)="hideOptions()" [(ngModel)]="query" class="input--search" placeholder="Start typing to search" type="text">
+		<input id="searchterm" autocomplete="off" name="searchterm" [ngFormControl]="searchterm" #input (blur)="hideOptions()" [(ngModel)]="query" class="input--search" placeholder="Start typing to search" type="text">
 	</form>
 	<div class="suggestions" *ngIf="filteredList.length > 0">
 		<ul>
