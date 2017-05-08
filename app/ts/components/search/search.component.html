@@ -5,17 +5,20 @@
 	<div class="suggestions" *ngIf="filteredList.length > 0">
 		<ul>
 			<li *ngFor="let item of filteredList">
-				<img class="suggestions__image" src="{{item.image}}" *ngIf="item.image">
-				<div *ngIf="!item.image"  class="suggestions__type-icon {{itemTypeClass(item)}}"></div>
-				<div class="suggestions-text">
-					<span class="suggestions-text__title">{{shortTitle(item.title)}}</span>
-					<span class="suggestions-text__desc">{{shortDescription(item.description)}}</span>
-					<span *ngIf="item.overview"> - {{item.overview}}</span>
-				</div>
+				<a (click)="select(item)">
+					<img class="suggestions__image" src="{{item.image}}" *ngIf="item.image">
+					<div *ngIf="!item.image"  class="suggestions__type-icon {{itemTypeClass(item)}}"></div>
+					<div class="suggestions-text">
+						<span class="suggestions-text__title">{{shortTitle(item.title)}}</span>
+						<span class="suggestions-text__desc">{{shortDescription(item.description)}}</span>
+						<span *ngIf="item.overview"> - {{item.overview}}</span>
+					</div>
+				</a>
 			</li>
 		</ul>
 	</div>
 </div>
+
     <!--<div class="advanced-search-link" [hidden] = "advancedSearchActive">
     	<a href="javascript:void(0);" (click)="toggleAdvancedSearch()">Refined search</a>
     </div>
