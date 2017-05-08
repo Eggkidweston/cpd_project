@@ -1,16 +1,21 @@
-<div>
-	<div class="search-box col-11">
-		<form [ngFormModel]="searchForm" (submit)="onSubmitSearch(searchForm.value)">
-			<input id="searchterm" name="searchterm" [ngFormControl]="searchterm" #input (blur)="hideOptions()" [(ngModel)]="query" class="input--search" placeholder="Start typing to search" type="text">
-	 	</form>
-	 	<div class="suggestions" *ngIf="filteredList.length > 0">
-	        <ul *ngFor="let item of filteredList" >
-	            <span *ngIf="item"><a (click)="select(item)"><li>
-	                <img src="{{itemimage(item)}}"><div class="suggestions-text">{{item.title}} <span *ngIf="item.overview"> - {{item.overview}}</span></div>
-	            </li></a></span>
-	        </ul>
-	    </div>
-    </div>
+<div class="search-box col-11">
+	<form [ngFormModel]="searchForm" (submit)="onSubmitSearch(searchForm.value)">
+		<input id="searchterm" name="searchterm" [ngFormControl]="searchterm" #input (blur)="hideOptions()" [(ngModel)]="query" class="input--search" placeholder="Start typing to search" type="text">
+	</form>
+	<div class="suggestions" *ngIf="filteredList.length > 0">
+		<ul>
+			<li *ngFor="let item of filteredList">
+				<img class="suggestions__image" src="{{item.image}}" *ngIf="item.image">
+				<div *ngIf="!item.image"  class="suggestions__type-icon {{itemTypeClass(item)}}"></div>
+				<div class="suggestions-text">
+					<span class="suggestions-text__title">{{shortTitle(item.title)}}</span>
+					<span class="suggestions-text__desc">{{shortDescription(item.description)}}</span>
+					<span *ngIf="item.overview"> - {{item.overview}}</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
     <!--<div class="advanced-search-link" [hidden] = "advancedSearchActive">
     	<a href="javascript:void(0);" (click)="toggleAdvancedSearch()">Refined search</a>
     </div>
@@ -26,5 +31,3 @@
 			<li><input id="licencetype" name="licencetype" type="checkbox"><label for="licencetype">Specific license</label></li>
 		</div>
 	</div>-->
-
-</div>
