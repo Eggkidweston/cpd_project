@@ -12,17 +12,20 @@ import { StoreApp } from '../../models';
 export class AppWidgetComponent {
     @Input() app: StoreApp;
     public noimagestyle:string;
-
     public hasMedia: boolean;
+    
     //appTitleToFit(appTitle: String) {
     //	return (appTitle.length>18) ? (appTitle.substr(0, 16)+'...') : appTitle;
     //}
 
-    get widgetTypeIcon():string
-    {
+    ngOnInit(){
       if(this.app.media && this.app.media.length > 0) {
         this.hasMedia = true;
       }
+    }
+
+    get widgetTypeIcon():string
+    {
     	if(!this.app.image) {
     		return "backgroundimage" + this.app.type_id;
     	}
