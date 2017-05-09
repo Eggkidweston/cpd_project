@@ -36,7 +36,7 @@ export class AppsService
 
     public getMostDownloadedApps(appsPerPage: number, pageNumber: number)
     {
-        return this.http.get( `${appSettings.apiRoot}resources/mostdownloaded?$top`+appsPerPage )
+        return this.http.get( `${appSettings.apiRoot}resources/mostdownloaded?$top=`+appsPerPage )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
