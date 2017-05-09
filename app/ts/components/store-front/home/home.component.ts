@@ -21,7 +21,7 @@ export class HomeComponent
     private lastUpdatedApps:Array<StoreApp>;
     private recommendedApps:Array<StoreApp>;
     private activeOnly: boolean = true;
-    private appsPerPage:number = 10;
+    private appsPerPage:number = 9;
     private currentPage:number = 1;
     private totalPages:number = 0;
 
