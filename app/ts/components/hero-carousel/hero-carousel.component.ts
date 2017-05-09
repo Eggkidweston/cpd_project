@@ -14,7 +14,6 @@ declare var $: any
 export class HeroCarouselComponent {
     @Input() apps: Array<StoreApp>;
     public noimagestyle:string;
-    public hasMedia: boolean;
 
     ngAfterViewInit() {
       $('.hero-carousel').slick({
@@ -35,9 +34,6 @@ export class HeroCarouselComponent {
 
    widgetTypeIcon(app:StoreApp):string
    {
-     if(app.media && app.media.length > 0) {
-       this.hasMedia = true;
-     }
     if(!app.image) {
       return "backgroundimage" + app.type_id;
     }
