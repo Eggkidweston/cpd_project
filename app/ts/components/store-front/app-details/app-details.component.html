@@ -43,7 +43,11 @@
 
             <div class="tagcloud condensed" *ngIf="app?.tags?.length > 0">
                 <h4>Tags</h4>
-                <button class="btn " *ngFor="let tag of app.tags" >{{tag.name}}</button>
+                <ul class="tags tags--white">
+                  <li class="tags__item" *ngFor="let tag of app.tags">
+                    <span href="#" class="tags__link">{{tag.name}}</span>
+                  </li>
+                </ul>
             </div>
         </div>
         <div class="col span-3 push-1 rating-group">
@@ -51,7 +55,7 @@
                 <span class="rating-text">{{ averageRating }}</span>
             </div>
             <div>
-                <rating class="rating" [rating]="app?.average_rating"></rating>
+                <rating class="rating" modifierClass="detail" [rating]="app?.average_rating"></rating>
             </div>
             <div *ngIf="reviews.length>0">
                 {{ reviews.length }} rating<span *ngIf="reviews.length!=1">s</span>
