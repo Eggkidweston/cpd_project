@@ -66,9 +66,6 @@
 .rating {
     padding: 0.5em 0 0 0;
     font-size: 0.8em;
-    float: left;
-    width: 100%;
-    min-height: 75px;
 }
 .no-ratings{
     font-size:0.8em;
@@ -79,7 +76,7 @@
   min-height: 160px;
 
   .app-widget__container {
-    min-height:117px;
+    min-height: 210px;
   }
   .rating {
     display: none;
