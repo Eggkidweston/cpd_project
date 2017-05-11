@@ -8,6 +8,7 @@ export class User
     updatedat:string;
     createdat:string;
     active:any;
+    isadmin: boolean;
 }
 
 // TODO Refactor: this is synonymous with Resource

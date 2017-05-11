@@ -59,7 +59,11 @@
                             <li [class.active]="isRouteActive(['Explore'])" class="nav__item">
                                 <a [routerLink]="['Explore']">Explore</a>
                             </li>
-                            
+                            <li [class.active]="isRouteActive(['Collections'])" class="nav__item"
+                                *ngIf="authenticationService?.userIsAdmin()">
+                                <a [routerLink]="['Collections']">Collections</a>
+                            </li>
+
                         </ul>
                     </nav>
                     <nav class="masthead__nav masthead__nav--secondary" role="navigation" data-dropdown>
