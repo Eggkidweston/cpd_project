@@ -248,6 +248,15 @@ export interface DownloadInstructions
     notlocal:string;
 }
 
+export class Collection
+{
+
+   constructor( public title:string,
+                public description:string
+              )
+   {
+   };
+}
 
 export var ResourceTypes = ["APPLEAPP", "ANDROIDAPP", "IMAGE", "VIDEO", "AUDIO", "ARCHIVE_WEB", "ARCHIVE_OTHER", "WORD", "PDF", "POWERPOINT", "EXCEL", "WEB PAGE", "FLASH"];
 

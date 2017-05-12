@@ -1,7 +1,7 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions } from '../models';
+import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions, Collection } from '../models';
 import { appInfo } from './services';
 import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
@@ -167,6 +167,27 @@ export class AppsService
                 review => done( review ),
                 err => error( err )
             );
+    }
+
+    public submitCollection( collection:Collection,
+                             done:(  collection ) => void,
+                             error:( err ) => void )
+    {
+      let headers = new Headers();
+      headers.append( 'Content-Type', 'application/json' );
+      headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+      this.http.post( `${appSettings.apiRoot}collections/create`,
+          JSON.stringify( {
+              title: collection.title,
+              description: collection.description
+          } ),
+          { headers } )
+          .map( res => <Collection>res.json() )
+          .subscribe(
+              collection => done( collection ),
+              err => error( err )
+          );
     }
 
     public getApp( appId:number )
