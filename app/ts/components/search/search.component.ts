@@ -14,7 +14,7 @@ import 'rxjs/add/operator/do';
 @Component({
     selector: 'search',
     directives: [RouterOutlet, RouterLink],
-    styles: [require('./search.scss').toString()],
+    styles: [require('./search.scss').toString(), require('../../../sass/typeimage.scss').toString()],
     template: require('./search.component.html')
 })
 export class SearchComponent {
@@ -97,15 +97,12 @@ export class SearchComponent {
         //}, 300);
     }
 
-    itemimage(item):string {
-        if(!item.image) {
-            var type = item.type_id;
-            if(type==99){
-                type = 'other';
-            }
-            return 'https://s3-eu-west-1.amazonaws.com/jisc-store-assets/icontype' + type + '.png';
-        } 
-        return item.image;
+    itemTypeClass(item):string {
+      var type = item.type_id;
+      if(type==99){
+          type = 'other';
+      }
+      return 'backgroundimage' + type;
     }
 
     toggleAdvancedSearch() {
@@ -118,7 +115,15 @@ export class SearchComponent {
     clearAdvancedOptions() {
 
         (<Control>this.freestuff).updateValue(false);
-    
 
+
+    }
+
+    shortTitle(appTitle: String) {
+       return (appTitle.length>80) ? (appTitle.substr(0, 80)+'...') : appTitle;
+    }
+
+    shortDescription(appDescription: String) {
+  	   return (appDescription.length>110) ? (appDescription.substr(0, 110)+'...') : appDescription;
     }
 }

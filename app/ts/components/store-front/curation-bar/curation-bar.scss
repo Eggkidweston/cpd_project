@@ -1,0 +1,35 @@
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
+
+.curation{
+	border-bottom: 5px solid #a92173;
+}
+.curation__container.curation__container{
+	background-color: inherit;
+	background-image: none;
+}
+.curation__header{
+	margin-bottom: 0;
+}
+.curation__cta{
+	text-align: center;
+	margin-top: 2em;
+
+	@media (min-width: $screen-sm-min) {
+		text-align: right;
+		margin-top: 0.5em;
+	}
+}
+
+.curation__cta__btn{
+	line-height: 1.75em;
+	padding: 10px 20px;
+	background-color: #0c2931;
+	border: none;
+}
+.curation__cta__text{
+	display: block;
+	font-weight: 700;
+}
+.curation__cta__text--small{
+	font-size: 0.85em;
+}

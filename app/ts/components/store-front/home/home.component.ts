@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AppWidgetsComponent } from '../../appwidgets/appwidgets.component';
+import { HeroCarouselComponent } from '../../hero-carousel/hero-carousel.component';
 import { SearchComponent } from '../../search/search.component';
 import { RecommendedRecentComponent } from '../../recommended-recent/recommended-recent.component';
 import { AppsService } from '../../../services/services';
@@ -11,7 +12,7 @@ import { appSettings } from '../../../../../settings';
     selector: 'home',
     template: require( './home.component.html' ),
     styles: [require('./home.scss').toString()],
-    directives: [AppWidgetsComponent, SearchComponent, RecommendedRecentComponent]
+    directives: [AppWidgetsComponent, HeroCarouselComponent, SearchComponent, RecommendedRecentComponent]
 } )
 export class HomeComponent
 {
@@ -20,7 +21,7 @@ export class HomeComponent
     private lastUpdatedApps:Array<StoreApp>;
     private recommendedApps:Array<StoreApp>;
     private activeOnly: boolean = true;
-    private appsPerPage:number = 10;
+    private appsPerPage:number = 9;
     private currentPage:number = 1;
     private totalPages:number = 0;
 
@@ -83,11 +84,4 @@ export class HomeComponent
             );
     }
 
-    goCuration()
-    {
-        var url = `${appSettings.curationRoot}`;
-        //window.location.href = url;
-        window.open(url,'_blank');
-    }
-
-}   
+}

@@ -19,6 +19,7 @@ import { TermsComponent } from './components/store-front/terms/terms.component';
 import { ComingSoonComponent } from './components/store-front/comingsoon/comingsoon.component';
 import { SupportComponent } from './components/store-front/support/support.component';
 import { TryComponent } from './components/store-front/try/try.component';
+import { CurationBarComponent } from './components/store-front/curation-bar/curation-bar.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
 import { ResultsComponent } from './components/store-front/results/results.component';
@@ -41,7 +42,7 @@ declare let ga:Function; //google analytics object
 
 @Component( {
     selector: 'appstore-app',
-    directives: [...ROUTER_DIRECTIVES],
+    directives: [...ROUTER_DIRECTIVES, CurationBarComponent],
     styles: [require( '../sass/appstore.scss' ).toString()],
     template: require( './app.component.html' )
 } )

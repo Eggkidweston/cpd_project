@@ -1,39 +1,29 @@
 
 <div class="home-container">
 
-    
-
     <div class="col span-11">
         <search></search>
         <div class="resource-counter">searching {{totalResourceCount}} resources<br /><br /></div>
     </div>
-<div class="col span-11 notice-box">
-       
-        <div class="col span-8">
-        <h3>Add your resources to the Store</h3>
-        <p>Do you have free educational resources you want to share?</p></div>
-         <div class="col span-4 curation-div"><button class="curation-button" (click)="goCuration()"><div class="curation-button-text">Visit Curation</div><div class="small-print">(opens in a new window)</div></button>
-        </div>
-    </div>
 
+    <div class="row span-11"></div>
 
-    <div class="row span-12"></div>
-
-    <div class="col span-12">
+    <div class="col span-11">
         <h3>Jisc Picks</h3>
-        <app-widgets [apps]="recommendedApps"></app-widgets>
+        <hero-carousel [apps]="recommendedApps" *ngIf="recommendedApps && recommendedApps.length > 3"></hero-carousel>
+        <app-widgets [apps]="recommendedApps" *ngIf="recommendedApps && recommendedApps.length < 3"></app-widgets>
     </div>
 
     <div class="row span-11"><hr /></div>
 
-    <div class="col span-12">
+    <div class="col span-11">
         <h3>Most downloaded</h3>
         <app-widgets [apps]="mostDownloadedApps"></app-widgets>
     </div>
 
     <div class="row span-11"><hr /></div>
 
-    <div class="col span-12">
+    <div class="col span-11">
     	<h3>Recently added</h3>
         <app-widgets [apps]="recentApps"></app-widgets>
     </div>
