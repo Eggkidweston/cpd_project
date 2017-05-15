@@ -180,7 +180,8 @@ export class AppsService
       this.http.post( `${appSettings.apiRoot}collections/create`,
           JSON.stringify( {
               title: collection.title,
-              description: collection.description
+              description: collection.description,
+              resourceIds: collection.resourceIds,
           } ),
           { headers } )
           .map( res => <Collection>res.json() )

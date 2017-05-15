@@ -252,7 +252,8 @@ export class Collection
 {
 
    constructor( public title:string,
-                public description:string
+                public description:string,
+                public resourceIds:Array<number>,
               )
    {
    };

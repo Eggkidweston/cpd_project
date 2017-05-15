@@ -19,6 +19,9 @@ export class CollectionsComponent {
     private searchingForResources: boolean = false;
     private activeOnly: boolean = true;
 
+    public resourceIds = [];
+    public resources:Array<StoreApp>;
+
     newCollectionForm: ControlGroup;
 
     collectionTitle: AbstractControl;
@@ -56,7 +59,7 @@ export class CollectionsComponent {
         if( this.newCollectionForm.valid ) {
             this.busy = true;
 
-            let collection = new Collection(this.collectionTitle.value, this.collectionDescription.value);
+            let collection = new Collection(this.collectionTitle.value, this.collectionDescription.value, this.resourceIds);
 
             this.appsService.submitCollection(collection,
                 (collection) => {
@@ -92,7 +95,12 @@ export class CollectionsComponent {
     }
 
     select(item){
-        console.log('add this resource to collection', item.id);
+        if (this.resourceIds.indexOf(item.id) === -1){
+            this.resourceIds.push(item.id);
+        } else {
+            let index = this.resourceIds.indexOf(item.id);
+            this.resourceIds.splice(index, 1);
+        }
     }
 
     itemimage(item):string {
@@ -120,6 +128,10 @@ export class CollectionsComponent {
 
     shortDescription(appDescription: String) {
        return (appDescription.length>110) ? (appDescription.substr(0, 110)+'...') : appDescription;
+    }
+
+    resourceInCollection(resourceId: number){
+        return this.resourceIds.indexOf(resourceId) !== -1;
     }
 
 }
