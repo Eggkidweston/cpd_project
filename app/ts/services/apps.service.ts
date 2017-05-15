@@ -135,6 +135,18 @@ export class AppsService
             .catch( this.handleError );
     }
 
+    public getCollectionsByCreator( createdBy:number )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+        return this.http.get( `${appSettings.apiRoot}collections?$filter=createdby%20eq%20'${ createdBy }`, { headers } )
+            .map( res => <Collection[]>res.json().data )
+            .catch( this.handleError );
+    }
+
+
     public getReviews( resourceId:number )
     {
         let headers = new Headers();
@@ -189,6 +201,24 @@ export class AppsService
               collection => done( collection ),
               err => error( err )
           );
+    }
+
+    public deleteCollection( collectionID:Number,
+                        done:( status ) => void,
+                        error:( err ) => void )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+        this.http.delete( `${appSettings.apiRoot}collections/${collectionID}`,
+            { headers } )
+            .subscribe(
+                status => {
+                    done( status )
+                },
+                err => error( err )
+            );
     }
 
     public getApp( appId:number )

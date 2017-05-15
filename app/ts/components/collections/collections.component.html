@@ -29,6 +29,11 @@
                     </ul>
                 </div>
 
+                <h4>Resources in collection:</h4>
+                <ul *ngIf="resourceIds.length > 0">
+                    <li *ngFor="let resource of resourceIds">{{resource}}</li>
+                </ul>
+
                 <br><br>
 
                 <div class="submitbut">
@@ -39,7 +44,19 @@
 
         <br>
 
-        <h3>Collections</h3>
-        <p>No existing collections</p>
+        <div>
+            <h3>Collections</h3>
+            <p *ngIf="usersCollections.length == 0">No existing collections</p>
+
+            <ul *ngIf="usersCollections.length > 0">
+                <li *ngFor="let collection of usersCollections">
+
+                    <p>{{ collection.title }}</p>
+
+                    <button>Edit</button>
+                    <button (click)="deleteCollection(collection)">Delete</button>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

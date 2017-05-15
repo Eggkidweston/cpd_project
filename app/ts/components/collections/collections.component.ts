@@ -21,9 +21,9 @@ export class CollectionsComponent {
 
     public resourceIds = [];
     public resources:Array<StoreApp>;
+    public usersCollections:Array<Collection> = [];
 
     newCollectionForm: ControlGroup;
-
     collectionTitle: AbstractControl;
     collectionDescription: AbstractControl;
     searchterm: AbstractControl;
@@ -31,46 +31,76 @@ export class CollectionsComponent {
     busy: boolean = false;
     collectionId: number = 1;
 
-    constructor(private appsService: AppsService, fb: FormBuilder) {
-        this.newCollectionForm = fb.group({
-            "collectionTitle": ["", Validators.required],
-            "collectionDescription": ["", Validators.required],
-            "searchterm": [""],
-        });
+    constructor(private appsService: AppsService, private fb: FormBuilder) {
+        this.createForm();
+    }
 
-        this.collectionTitle = this.newCollectionForm.controls['collectionTitle'];
-        this.collectionDescription = this.newCollectionForm.controls['collectionDescription'];
-        this.searchterm = this.newCollectionForm.controls['searchterm'];
+    createForm() {
+      this.newCollectionForm = this.fb.group({
+          "collectionTitle": ["", Validators.required],
+          "collectionDescription": ["", Validators.required],
+          "searchterm": [""],
+      });
 
-        this.searchterm.valueChanges
-            .do((_) => {
-              this.searchingForResources = true;
-            })
-            .debounceTime(500)
-            .distinctUntilChanged()
+      this.collectionTitle = this.newCollectionForm.controls['collectionTitle'];
+      this.collectionDescription = this.newCollectionForm.controls['collectionDescription'];
+      this.searchterm = this.newCollectionForm.controls['searchterm'];
+
+      this.searchterm.valueChanges
+          .do((_) => {
+            this.searchingForResources = true;
+          })
+          .debounceTime(500)
+          .distinctUntilChanged()
+          .subscribe(
+              (res: any) => {
+                  this.searchTermChanged(this.searchterm.value, this.activeOnly);
+              }
+          );
+    }
+
+    ngAfterViewInit() {
+        this.loadExistingCollections();
+    }
+
+    loadExistingCollections()
+    {
+        this.appsService.getCollectionsByCreator( AuthenticationService.user.id )
             .subscribe(
-                (res: any) => {
-                    this.searchTermChanged(this.searchterm.value, this.activeOnly);
-                }
+                usersCollections => {
+                    this.usersCollections = usersCollections;
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
             );
     }
 
     onSubmit(formVaules: any) {
         if( this.newCollectionForm.valid ) {
             this.busy = true;
-
-            let collection = new Collection(this.collectionTitle.value, this.collectionDescription.value, this.resourceIds);
+            let collection = new Collection(this.collectionTitle.value, this.collectionDescription.value, this.resourceIds, null);
 
             this.appsService.submitCollection(collection,
-                (collection) => {
+                (result) => {
                     this.busy = false;
-                    this.collectionAdded.emit(collection);
+                    this.collectionAdded.emit(result.collection);
+                    this.usersCollections.push(result.collection);
+                    this.resetForm();
                 },
                 (err) => {
                     this.busy = false;
                 }
             );
         }
+    }
+
+    deleteCollection(collection: Collection){
+        this.appsService.deleteCollection( collection.id,
+            (status) => {
+                let index = this.usersCollections.indexOf(collection);
+                this.usersCollections.splice(index, 1);
+            },
+            (error:any) => AppComponent.generalError( error.status )
+            );
     }
 
     onSubmitSearch(formValues: any) {
@@ -132,6 +162,12 @@ export class CollectionsComponent {
 
     resourceInCollection(resourceId: number){
         return this.resourceIds.indexOf(resourceId) !== -1;
+    }
+
+    resetForm(){
+      this.searchResults = [];
+      this.resourceIds = [];
+      this.createForm();
     }
 
 }
