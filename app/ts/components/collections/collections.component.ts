@@ -106,6 +106,14 @@ export class CollectionsComponent {
         return item.image;
     }
 
+    itemTypeClass(item):string {
+      var type = item.type_id;
+      if(type==99){
+          type = 'other';
+      }
+      return 'backgroundimage' + type;
+    }
+
     shortTitle(appTitle: String) {
        return (appTitle.length>80) ? (appTitle.substr(0, 80)+'...') : appTitle;
     }
