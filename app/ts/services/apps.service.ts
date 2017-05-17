@@ -203,6 +203,30 @@ export class AppsService
           );
     }
 
+    public updateCollection( collectionID:Number, updatedCollection:Collection,
+                     done:( resource ) => void,
+                     error:( err ) => void )
+    {
+      let headers = new Headers();
+      headers.append( 'Content-Type', 'application/json' );
+      headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+      this.http.post( `${appSettings.apiRoot}collections/${collectionID}/edit`,
+        JSON.stringify( {
+            title: updatedCollection.title,
+            description: updatedCollection.description,
+            resourceIds: updatedCollection.resourceIds,
+        } ),
+          { headers } )
+          .map( res => <Collection>res.json() )
+          .subscribe(
+              collection => {
+                  done( collection )
+              },
+              err => error( err )
+          );
+    }
+
     public deleteCollection( collectionID:Number,
                         done:( status ) => void,
                         error:( err ) => void )

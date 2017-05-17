@@ -16,12 +16,14 @@ import { AppWidgetsComponent } from '../appwidgets/appwidgets.component';
 export class CollectionsComponent {
     @Output() collectionAdded: EventEmitter<Collection> = new EventEmitter<Collection>();
     public searchResults = [];
-    private searchingForResources: boolean = false;
-    private activeOnly: boolean = true;
-
-    public resourceIds = [];
     public resources:Array<StoreApp>;
     public usersCollections:Array<Collection> = [];
+
+    private resourceIds = [];
+    private searchingForResources: boolean = false;
+    private activeOnly: boolean = true;
+    private editingCollection: boolean = false;
+    private editingCollectionID: number;
 
     newCollectionForm: ControlGroup;
     collectionTitle: AbstractControl;
@@ -35,10 +37,10 @@ export class CollectionsComponent {
         this.createForm();
     }
 
-    createForm() {
+    createForm(title?, description?) {
       this.newCollectionForm = this.fb.group({
-          "collectionTitle": ["", Validators.required],
-          "collectionDescription": ["", Validators.required],
+          "collectionTitle": [title, Validators.required],
+          "collectionDescription": [description, Validators.required],
           "searchterm": [""],
       });
 
@@ -93,6 +95,34 @@ export class CollectionsComponent {
         }
     }
 
+    updateCollection(e){
+        e.preventDefault()
+
+        if( this.newCollectionForm.valid ) {
+            this.busy = true;
+            let collection = new Collection(this.collectionTitle.value, this.collectionDescription.value, this.resourceIds, null);
+            this.appsService.updateCollection(this.editingCollectionID, collection,
+                (result) => {
+                    this.busy = false;
+                    this.editingCollection = false;
+                    this.collectionAdded.emit(result.collection);
+                    this.loadExistingCollections();
+                    this.resetForm();
+                },
+                (err) => {
+                    this.busy = false;
+                }
+            );
+        }
+    }
+
+    cancelUpdate(e){
+        e.preventDefault();
+        this.editingCollection = false;
+        this.editingCollectionID = null;
+        this.resetForm();
+    }
+
     deleteCollection(collection: Collection){
         this.appsService.deleteCollection( collection.id,
             (status) => {
@@ -101,6 +131,14 @@ export class CollectionsComponent {
             },
             (error:any) => AppComponent.generalError( error.status )
             );
+    }
+
+    editCollection(collection: Collection){
+        this.searchResults = [];
+        this.editingCollection = true;
+        this.editingCollectionID = collection.id;
+        this.createForm(collection.title, collection.description);
+        this.resourceIds = collection.resourceIds;
     }
 
     onSubmitSearch(formValues: any) {

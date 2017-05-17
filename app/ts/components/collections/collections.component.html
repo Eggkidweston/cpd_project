@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col span-11">
-        <h3>New Collection</h3>
-        <p>Add new collection</p>
+        <h3 *ngIf="!editingCollection">New Collection</h3>
+        <h3 *ngIf="editingCollection">Edit Collection</h3>
 
         <div class="new-collection">
-            <form [ngFormModel]="newCollectionForm" (submit)="onSubmit(newCollectionForm.value)" novalidate>
+            <form [ngFormModel]="newCollectionForm" (submit)="onSubmit(newCollectionForm.value)" id="newCollectionForm">
                 <label for="collectionTitle">Collection name</label>
                 <input [ngFormControl]="collectionTitle" id="collectionTitle" class="form-control" type="text">
 
@@ -37,7 +37,9 @@
                 <br><br>
 
                 <div class="submitbut">
-                    <button [disabled]="busy" class="btn btn--3d btn--primary btn--large" type="submit">Create collection</button>
+                    <button [disabled]="busy" class="btn btn--3d btn--primary btn--large" type="submit" *ngIf="!editingCollection">Create collection</button>
+                    <button [disabled]="busy" class="btn btn--3d btn--primary btn--large" (click)="updateCollection($event)" *ngIf="editingCollection">Update collection</button>
+                    <button [disabled]="busy" class="btn btn--3d btn--primary btn--large" (click)="cancelUpdate($event)" *ngIf="editingCollection">Cancel</button>
                 </div>
             </form>
         </div>
@@ -45,15 +47,13 @@
         <br>
 
         <div>
-            <h3>Collections</h3>
+            <h3>Existing Collections</h3>
             <p *ngIf="usersCollections.length == 0">No existing collections</p>
-
             <ul *ngIf="usersCollections.length > 0">
                 <li *ngFor="let collection of usersCollections">
 
                     <p>{{ collection.title }}</p>
-
-                    <button>Edit</button>
+                    <button (click)="editCollection(collection)">Edit</button>
                     <button (click)="deleteCollection(collection)">Delete</button>
                 </li>
             </ul>
