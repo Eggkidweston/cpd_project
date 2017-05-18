@@ -1,19 +1,19 @@
 import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular/common';
 import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-import { AuthenticationService } from '../../services/services';
-import { AppsService } from '../../services/services';
-import { StoreApp, TagCloud, Tag, Collection } from '../../models';
-import { AppComponent } from '../../app.component';
-import { AppWidgetsComponent } from '../appwidgets/appwidgets.component';
+import { AuthenticationService } from '../../../services/services';
+import { AppsService } from '../../../services/services';
+import { StoreApp, TagCloud, Tag, Collection } from '../../../models';
+import { AppComponent } from '../../../app.component';
+import { AppWidgetsComponent } from '../../appwidgets/appwidgets.component';
 
 @Component({
-    selector: 'collections',
-    template: require('collections.component.html'),
-    styles: [require('../../../sass/explore.scss').toString(), require('../search/search.scss').toString()],
+    selector: 'submit-collection',
+    template: require('submit-collection.component.html'),
+    styles: [require('../../../../sass/explore.scss').toString(), require('../../search/search.scss').toString()],
     directives: [AppWidgetsComponent]
 })
-export class CollectionsComponent {
+export class SubmitCollectionComponent {
     @Output() collectionAdded: EventEmitter<Collection> = new EventEmitter<Collection>();
     public searchResults = [];
     public resources:Array<StoreApp>;
