@@ -24,6 +24,13 @@ export class AppsService
             .catch( this.handleError );
     }
 
+    public getResourcesWithMedia(appsPerPage: number, pageNumber: number, filterText :string)
+    {
+        return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
+            .map( res => <GetResourceResults>res.json() )
+            .catch( this.handleError );
+    }
+
     public getResourceCount(activeOnly: boolean)
     {
         let searchQuery = `${appSettings.apiRoot}resources/count?`;
@@ -132,6 +139,28 @@ export class AppsService
 
         return this.http.get( `${appSettings.apiRoot}resources?$filter=createdby%20eq%20'${ createdBy }'%20and%20active%20eq%20true`, { headers } )
             .map( res => <StoreApp[]>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getCollections( collectionsPerPage: number )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+        return this.http.get( `${appSettings.apiRoot}collections/?$top=`+collectionsPerPage, { headers } )
+            .map( res => <Collection[]>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getCollectionById( id:number )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+        return this.http.get( `${appSettings.apiRoot}collections/${ id }`, { headers } )
+            .map( res => <Collection>res.json().collection )
             .catch( this.handleError );
     }
 

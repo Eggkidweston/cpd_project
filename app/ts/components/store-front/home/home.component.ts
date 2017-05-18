@@ -4,7 +4,7 @@ import { HeroCarouselComponent } from '../../hero-carousel/hero-carousel.compone
 import { SearchComponent } from '../../search/search.component';
 import { RecommendedRecentComponent } from '../../recommended-recent/recommended-recent.component';
 import { AppsService } from '../../../services/services';
-import { StoreApp } from '../../../models';
+import { StoreApp, Collection } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { appSettings } from '../../../../../settings';
 
@@ -29,12 +29,12 @@ export class HomeComponent
 
     idpToken:string;
 
-    constructor( private _appsService:AppsService) 
+    constructor( private _appsService:AppsService)
     {
         this.getResourceCount();
         this.getMostDownloadedApps();
         this.getRecentApps();
-        this.getRecommendedApps();
+        this.getJiscPicks();
     }
 
     getResourceCount()
@@ -72,16 +72,38 @@ export class HomeComponent
             );
     }
 
-    getRecommendedApps()
-    {
-        this._appsService.getRecommendedApps( this.appsPerPage, this.currentPage )
-            .subscribe(
-                recommendedApps => {
-                    this.recommendedApps = recommendedApps.data;
-                    this.totalPages = Math.ceil(recommendedApps.availableRows/this.appsPerPage);
-                },
-                ( error:any ) => AppComponent.generalError( error.status )
-            );
+    getCollectionAppResources(homeCollection: Collection){
+        if(homeCollection.resourceids.length > 0) {
+            let filter = "";
+            for(let i = 0; i < homeCollection.resourceids.length; i++){
+                filter += "(id eq '" + homeCollection.resourceids[i] +"')";
+                if (i != homeCollection.resourceids.length - 1){
+                    filter += " or ";
+                }
+            }
+
+            this._appsService.getResourcesWithMedia( this.appsPerPage, this.currentPage, filter )
+                .subscribe(
+                    recommendedApps => {
+                        this.recommendedApps = recommendedApps.data;
+                        this.totalPages = Math.ceil(recommendedApps.availableRows/this.appsPerPage);
+                    },
+                    ( error:any ) => AppComponent.generalError( error.status )
+                );
+        }
+
     }
 
+    getJiscPicks()
+    {
+      this._appsService.getCollections( 1 )
+        .subscribe(
+            collection => {
+                if(collection) {
+                    this.getCollectionAppResources(collection[0]);
+                }
+              },
+              ( error:any ) => AppComponent.generalError( error.status )
+        );
+    }
 }

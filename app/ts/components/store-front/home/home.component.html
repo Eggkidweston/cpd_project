@@ -11,7 +11,7 @@
     <div class="col span-11">
         <h3>Jisc Picks</h3>
         <hero-carousel [apps]="recommendedApps" *ngIf="recommendedApps && recommendedApps.length > 3"></hero-carousel>
-        <app-widgets [apps]="recommendedApps" *ngIf="recommendedApps && recommendedApps.length < 3"></app-widgets>
+        <app-widgets [apps]="recommendedApps" *ngIf="recommendedApps && recommendedApps.length <= 3"></app-widgets>
     </div>
 
     <div class="row span-11"><hr /></div>
