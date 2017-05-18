@@ -138,7 +138,7 @@ export class SubmitCollectionComponent {
         this.editingCollection = true;
         this.editingCollectionID = collection.id;
         this.createForm(collection.title, collection.description);
-        this.resourceIds = collection.resourceIds;
+        this.resourceIds = collection.resourceids;
     }
 
     onSubmitSearch(formValues: any) {

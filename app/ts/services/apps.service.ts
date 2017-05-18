@@ -193,7 +193,7 @@ export class AppsService
           JSON.stringify( {
               title: collection.title,
               description: collection.description,
-              resourceIds: collection.resourceIds,
+              resourceids: collection.resourceids,
           } ),
           { headers } )
           .map( res => <Collection>res.json() )
@@ -215,7 +215,7 @@ export class AppsService
         JSON.stringify( {
             title: updatedCollection.title,
             description: updatedCollection.description,
-            resourceIds: updatedCollection.resourceIds,
+            resourceids: updatedCollection.resourceids,
         } ),
           { headers } )
           .map( res => <Collection>res.json() )

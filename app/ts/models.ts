@@ -253,7 +253,7 @@ export class Collection
 
    constructor( public title:string,
                 public description:string,
-                public resourceIds:Array<number>,
+                public resourceids:Array<number>,
                 public id: number,
               )
    {
