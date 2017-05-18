@@ -16,7 +16,7 @@ import { AppWidgetsComponent } from '../../appwidgets/appwidgets.component';
 export class SubmitCollectionComponent {
     @Output() collectionAdded: EventEmitter<Collection> = new EventEmitter<Collection>();
     public searchResults = [];
-    public resources:Array<StoreApp>;
+    public collectionApps:Array<StoreApp> = [];
     public usersCollections:Array<Collection> = [];
 
     private resourceIds = [];
@@ -139,6 +139,28 @@ export class SubmitCollectionComponent {
         this.editingCollectionID = collection.id;
         this.createForm(collection.title, collection.description);
         this.resourceIds = collection.resourceids;
+        this.getCollectionAppResources(collection);
+    }
+
+    getCollectionAppResources(collection: Collection){
+        if(collection.resourceids.length > 0) {
+            let filter = "";
+            for(let i = 0; i < collection.resourceids.length; i++){
+                filter += "(id eq '" + collection.resourceids[i] +"')";
+                if (i != collection.resourceids.length - 1){
+                    filter += " or ";
+                }
+            }
+
+            this.appsService.getResourcesWithMedia( 99, 1, filter )
+                .subscribe(
+                    collectionApps => {
+                        this.collectionApps = collectionApps.data;
+                    },
+                    ( error:any ) => AppComponent.generalError( error.status )
+                );
+        }
+
     }
 
     onSubmitSearch(formValues: any) {
@@ -165,9 +187,20 @@ export class SubmitCollectionComponent {
     select(item){
         if (this.resourceIds.indexOf(item.id) === -1){
             this.resourceIds.push(item.id);
+
+            this.appsService.getAppDetails( item.id )
+              .subscribe(
+                  app => {
+                    this.collectionApps.push(app);
+                  },
+                  (error:any) => AppComponent.generalError( error.status )
+              );
         } else {
             let index = this.resourceIds.indexOf(item.id);
             this.resourceIds.splice(index, 1);
+
+            let collectionIndex = this.collectionApps.indexOf(this.collectionApps.find(x => x.id === item.id));
+            this.collectionApps.splice(collectionIndex, 1);
         }
     }
 
@@ -205,6 +238,7 @@ export class SubmitCollectionComponent {
     resetForm(){
       this.searchResults = [];
       this.resourceIds = [];
+      this.collectionApps = [];
       this.createForm();
     }
 

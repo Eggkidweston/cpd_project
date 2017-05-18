@@ -82,7 +82,7 @@ export class HomeComponent
                 }
             }
 
-            this._appsService.getResourcesWithMedia( this.appsPerPage, this.currentPage, filter )
+            this._appsService.getResourcesWithMedia( 99, 1, filter )
                 .subscribe(
                     recommendedApps => {
                         this.recommendedApps = recommendedApps.data;
