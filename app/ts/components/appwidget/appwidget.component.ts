@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { RatingComponent } from '../shared/rating/rating.component';
 import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-import { Resource } from '../../models';
+import { StoreApp } from '../../models';
 
 @Component({
   selector: 'app-widget',
@@ -10,14 +10,21 @@ import { Resource } from '../../models';
   directives: [RouterOutlet, RouterLink, RatingComponent]
 })
 export class AppWidgetComponent {
-    @Input() app: Resource;
+    @Input() app: StoreApp;
     public noimagestyle:string;
-
+    public hasMedia: boolean;
+    
     //appTitleToFit(appTitle: String) {
     //	return (appTitle.length>18) ? (appTitle.substr(0, 16)+'...') : appTitle;
     //}
 
-    get widgetBackground():string 
+    ngOnInit(){
+      if(this.app.media && this.app.media.length > 0) {
+        this.hasMedia = true;
+      }
+    }
+
+    get widgetTypeIcon():string
     {
     	if(!this.app.image) {
     		return "backgroundimage" + this.app.type_id;

@@ -11,6 +11,7 @@ import { NgClass } from '@angular/common';
 export class RatingComponent {
     @Input() rating: number;
     @Input() editable: boolean;
+    @Input() modifierClass: string;
     @Output() ratingChanged = new EventEmitter();
     
     ratingClicked(rating: number) {
