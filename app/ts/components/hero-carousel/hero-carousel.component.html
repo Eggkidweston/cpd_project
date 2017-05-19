@@ -1,0 +1,16 @@
+<div class="hero-carousel">
+  <div class="hero__item hero-carousel__item" *ngFor="let app of apps">
+    <a [routerLink]="['AppDetails', { id: app?.id }]" class="app-widget__link">
+      <div class="app-widget__container hero-carousel__app" [ngStyle]="app?.media[0] && {'background-image': 'url(' + app?.media[0].url + ')'}">
+        <div class="app-widget__icon app-widget__icon--filetype {{ widgetTypeIcon(app) }} hero-carousel__hide-inactive" *ngIf="!app?.image"></div>
+        <img src="{{ app?.image }}" width="128" height="128" alt="" class="app-widget__icon hero-carousel__hide-inactive" *ngIf="app?.image">
+        <div class="app-widget__info hero-carousel__hide-inactive">
+          <div class="title-text">{{ app?.title}}</div>
+          <div class="rating">
+            <rating [rating]="app?.average_rating"></rating>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
