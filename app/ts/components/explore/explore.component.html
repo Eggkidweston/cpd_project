@@ -5,9 +5,11 @@
                     [class.selected]="chosenOrder==='updated'" (click)="order('updated')">Latest</span></div>
 
         <div *ngIf="tagcloud" class="tagcloud condensed" [hidden]="gettingTags===true">
-            <button class="btn" *ngFor="let tag of tagcloud.Tags"
-                    (click)="selectTag(tag.id)"> {{tag.name}}
-            </button>
+            <ul class="tags tags--white">
+              <li class="tags__item" *ngFor="let tag of tagcloud.Tags">
+                <a href="#" class="tags__link" (click)="selectTag($event, tag.id)">{{tag.name}}</a>
+              </li>
+            </ul>
         </div>
 
 
