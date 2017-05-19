@@ -13,6 +13,7 @@ import { WhoComponent } from './components/whocanregister/who.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { RegisterIDPComponent } from './components/registeridp/registeridp.component';
 import { AppDetailsComponent } from './components/store-front/app-details/app-details.component';
+import { CollectionDetailsComponent } from './components/store-front/collection-details/collection-details.component';
 import { DownloadComponent } from './components/store-front/download/download.component';
 import { AboutJorumComponent } from './components/store-front/jorum/aboutjorum.component';
 import { TermsComponent } from './components/store-front/terms/terms.component';
@@ -70,7 +71,8 @@ declare let ga:Function; //google analytics object
     { path: '/results/:searchterm', name: 'Results', component: ResultsComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent },
     { path: '/ctm', name: 'Ctm', component: CurationTokenMigrationComponent },
-    { path: '/collections', name:'Collections', component: SubmitCollectionComponent }
+    { path: '/collections', name:'Collections', component: SubmitCollectionComponent },
+    { path: '/collection/:id', name: 'CollectionDetails', component: CollectionDetailsComponent },
     //{ path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
 ] )
 
