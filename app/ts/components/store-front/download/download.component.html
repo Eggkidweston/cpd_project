@@ -1,42 +1,49 @@
 <div class="app-details-container">
     <div class="app-details">
-        <div class="col span-2">
-            <div *ngIf="app?.image" class="download-resource-image">
-                <img src="{{ app?.image }}">
-            </div>
+
+        <div>
             <div class="back-link">
                 <button class="btn back" role="button" (click)="goBack()">Back</button>
             </div>
         </div>
-        <div class="col span-6">
-            <h2>{{ app?.title }}</h2>
-            <h4>Instructions</h4>
-            <p *ngIf="!authenticationService.userSignedIn()">Please log in to download this resource so we can understand how popular it is.
-                Registration is free and you can log in using your institutional credentials.</p>
-            <p>{{ instructions }}</p>
 
-            <div class="button-container">
-
-                <button  class="btn download" role="button" (click)="getApp()">Continue</button>
-                <a target="_blank" #filedownloadButton></a>
-                <div *ngIf="resUrl!=null">
-                    <div *ngIf="isUploadedResource">
-                        <h4>Downloading file</h4>
-                        <p>Your file should start to download. If it doesn't, <a href="{{resUrl}}" target="_blank">click here</a></p>
-                    </div>
-                    <div *ngIf="!isUploadedResource">
-                        <h4>Accessing resource</h4>
-                        <p>Your resource should open in a new window. If it doesn't, <a href="{{resUrl}}" target="_blank">click here</a></p>
-                    </div>
+        <div class="col span-8">
+            <div *ngIf="app?.image">
+                <div *ngIf="app?.image" class="resource-image download-resource-image">
+                    <img src="{{ app?.image }}" class="img">
                 </div>
-                <p *ngIf="getting" class="getting">Loading..</p>
-                <div *ngIf="urlError" class="alert alert-danger">
-                    <strong>Error!</strong> Could not access resource details.
-                </div>
+                <h2 class="app-details__title">{{ app?.title }}</h2>
+            </div>
+            <h2 *ngIf="!app?.image">{{ app?.title }}</h2>
 
-                <p class="remindrating teaser">Remember, you can share your experiences using this resource and help the
-                    community out by returning to the previous page and adding a review and rating!</p>
-                <p *ngIf="isCCLicence">no thanks, just <a (click)="getAppWithoutLogin()">download</a></p>
+            <div class="download-instructions">
+                <h4>Instructions</h4>
+                <p *ngIf="!authenticationService.userSignedIn()">Please log in to download this resource so we can understand how popular it is.
+                    Registration is free and you can log in using your institutional credentials.</p>
+                <p>{{ instructions }}</p>
+
+                <div class="button-container">
+                    <button  class="btn btn--3d btn--primary btn--large download" role="button" (click)="getApp()">Continue</button>
+                    <a target="_blank" #filedownloadButton></a>
+                    <div *ngIf="resUrl!=null">
+                        <div *ngIf="isUploadedResource">
+                            <h4>Downloading file</h4>
+                            <p>Your file should start to download. If it doesn't, <a href="{{resUrl}}" target="_blank">click here</a></p>
+                        </div>
+                        <div *ngIf="!isUploadedResource">
+                            <h4>Accessing resource</h4>
+                            <p>Your resource should open in a new window. If it doesn't, <a href="{{resUrl}}" target="_blank">click here</a></p>
+                        </div>
+                    </div>
+                    <p *ngIf="getting" class="getting">Loading..</p>
+                    <div *ngIf="urlError" class="alert alert-danger">
+                        <strong>Error!</strong> Could not access resource details.
+                    </div>
+
+                    <p class="remindrating teaser">Remember, you can share your experiences using this resource and help the
+                        community out by returning to the previous page and adding a review and rating!</p>
+                    <p *ngIf="isCCLicence">No thanks, just <a (click)="getAppWithoutLogin()">download</a></p>
+                </div>
             </div>
         </div>
     </div>

@@ -1,10 +1,10 @@
 <div class="carousel-container">
     <div class="media-container">
-        <div>
+        <div class="media-container__thumbnails">
             <template ngFor let-medium [ngForOf]="resource?.media" let-i="index">
                 <img src="{{medium.url}}"
                      [ngClass]="{'medium-selected': i===selectedMedium&&!youtubeSeleceted, 'medium-unselected': i!==selectedMedium||youtubeSelected}"
-                     (click)="onMediumClicked(i)" 
+                     (click)="onMediumClicked(i)"
                      class="img-responsive medium-thumbnail"/>
             </template>
             <img *ngIf="resource?.youtubeurl" src="http://img.youtube.com/vi/{{extractYoutubeId(resource?.youtubeurl)}}/0.jpg" (click)="onYoutubeClicked(i)"

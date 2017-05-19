@@ -6,10 +6,15 @@
   h4 {
     font-size: 16px;
     font-weight: bold;
+    line-height: 1.5em;
   }
   .app-details {
     h2 {
       margin-top: 0px;
+    }
+
+    .app-details__title{
+      margin-left: 80px;
     }
 
     h3 {
@@ -28,38 +33,37 @@
       margin-top: 18px;
     }
 
-    //TODO: move to appwidget
     .resource-image {
-      border: 9px solid #fff;
-      border-radius: 15px;
-      box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.19);
-      width: 128px;
+      width: 64px;
+      float: left;
+      margin-right: 15px;
+      margin-bottom: 25px;
+
       .img {
-        border-radius: 10px;
-        height: 100%;
-        width: 128px;
+        width: 64px;
         height: auto;
-        margin-bottom: 10px;
       }
     }
 
     .nowidgetborder {
+      margin-bottom: 45px;
+      background-size: cover;
+
       .img {
-        margin-top: 33px;
-        margin-bottom: 0px;
+        position: relative;
+        bottom: -40px;
+        left: 0;
       }
     }
     .button-container {
+      clear: both;
+      margin-bottom: 25px;
 
-      button {
+      button:not(.btn--3d) {
         width: 100%;
         border-radius: 10px;
         background: #A1D490;
         font-weight: 700;
-      }
-
-      .tryit {
-        margin-top: 5px;
       }
     }
     .cost-licence-container {
@@ -68,6 +72,12 @@
 
     .creator-name {
       font-weight: 700;
+    }
+
+    .rating {
+        float: left;
+        width: 100%;
+        min-height: 75px;
     }
 
     .rating-group {
@@ -114,14 +124,16 @@
     }
 
     .curation-remix {
-      margin: 17px 25px 0px 25px;
+      margin-top: 25px;
+      margin-bottom: 25px;
       border: 1px solid #d8d8d8;
-      border-radius: 15px;
       padding: 10px;
-      padding-top: 0px;
-
     }
 
+    .tagcloud{
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
   }
 
   .meta-section {
@@ -132,13 +144,34 @@
 
   .reviews-list {
     margin-right: 57px;
-    padding-bottom: 36px;
   }
+
+  .reviews-list__item{
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+    padding-top: 20px;
+
+    &:first-of-type{
+      border-top: 0;
+      margin-top: 0;
+    }
+  }
+
+  .detail-review{
+    margin-bottom: 15px;
+  }
+
   .jorum-note {
     background-color: #efefef;
-    padding: 6px;
-    margin-bottom: 10px;
+    clear: both;
+    padding: 10px;
+    margin-bottom: 15px;
   }
 
 }
 
+.app-details-row{
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}

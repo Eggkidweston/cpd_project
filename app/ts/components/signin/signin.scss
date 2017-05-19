@@ -38,7 +38,7 @@
 	a:hover {
 		text-decoration: none;
 	}
-	.btn {
+	.btn:not(.btn--3d) {
 		border-radius: 0;
 		&:active {
 			box-shadow: none;

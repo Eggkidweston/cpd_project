@@ -63,7 +63,7 @@ bottom:auto !important;
     }
 }
 
-.btn {
+.btn:not(.btn--3d) {
     text-transform: uppercase;
 }
 
@@ -225,3 +225,21 @@ main, app-store {
     display:none !important;
 }
 
+.btn--3d{
+  border: inherit;
+  border-radius: 0;
+
+  &:hover{
+    color: #fff;
+  }
+}
+
+.table--unstyled.table--unstyled{
+    background: none;
+    border: 0;
+
+    td, tr {
+      border: 0;
+      background: none;
+    }
+}
