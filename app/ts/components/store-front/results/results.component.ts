@@ -19,7 +19,7 @@ export class ResultsComponent
     private resultsApps:Array<StoreApp>;
     public searchTerm:string;
     
-    private appsPerPage:number = 10;
+    private appsPerPage:number = 9;
     private currentPage:number = 1;
     private totalPages:number = 0;
     private activeOnly: boolean = true;
