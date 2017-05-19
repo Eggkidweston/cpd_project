@@ -64,8 +64,11 @@
 }
 
 .rating {
-    padding: 1em 0 0em 0;
-    font-size: 0.5em;
+    padding: 0.5em 0 0 0;
+    font-size: 0.8em;
+    float: left;
+    width: 100%;
+    min-height: 75px;
 }
 .no-ratings{
     font-size:0.8em;
