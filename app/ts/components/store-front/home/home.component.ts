@@ -26,12 +26,14 @@ export class HomeComponent
     private totalPages:number = 0;
 
     private totalResourceCount:number = 0;
+    private totalCollectionCount:number = 0;
 
     idpToken:string;
 
     constructor( private _appsService:AppsService)
     {
         this.getResourceCount();
+        this.getCollectionCount();
         this.getMostDownloadedApps();
         this.getRecentApps();
         this.getJiscPicks();
@@ -43,6 +45,17 @@ export class HomeComponent
             .subscribe(
                 resources => {
                     this.totalResourceCount = resources.availableRows;
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
+    }
+
+    getCollectionCount()
+    {
+        this._appsService.getCollectionCount(this.activeOnly)
+            .subscribe(
+                collections => {
+                    this.totalCollectionCount = collections.availableRows;
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );

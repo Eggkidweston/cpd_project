@@ -124,6 +124,14 @@ export class AppsService
     }
 
     
+    public getCollectionCount(activeOnly: boolean)
+    {
+        let searchQuery = `${appSettings.apiRoot}collections/count`;
+
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
+            .catch( this.handleError );
+    }
 
     public getAppDetails( appId:number )
     {
