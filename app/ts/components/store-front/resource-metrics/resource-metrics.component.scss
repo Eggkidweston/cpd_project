@@ -53,8 +53,8 @@
   }
 
   .button-container {
-      
-      button {
+
+      button:not(.btn--3d) {
         width: 100%;
         border-radius: 10px;
         background: #cfcfcf;
