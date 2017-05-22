@@ -10,7 +10,9 @@ import { AppWidgetsComponent } from '../../appwidgets/appwidgets.component';
 @Component({
     selector: 'submit-collection',
     template: require('submit-collection.component.html'),
-    styles: [require('../../../../sass/explore.scss').toString(), require('../../search/search.scss').toString()],
+    styles: [require('../../../../sass/explore.scss').toString(),
+      require('../../search/search.scss').toString(),
+      require('./submit-collection.component.scss').toString()],
     directives: [AppWidgetsComponent]
 })
 export class SubmitCollectionComponent {

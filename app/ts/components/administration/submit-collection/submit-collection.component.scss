@@ -1,0 +1,36 @@
+.user-collections__title{
+  float: left;
+  margin-bottom: 0;
+}
+
+.user-collections__list{
+  li {
+    overflow: hidden;
+    padding: 15px;
+
+    &:first-of-type{
+      margin-top: 20px;
+    }
+
+    &:nth-child(2n){
+      background-color: #f7f7f7;
+    }
+  }
+}
+
+.user-collections__buttons{
+  float: right;
+}
+
+.new-collection label {
+  margin-top: 15px;
+}
+
+.new-collection__resource-title{
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.new-collection__search.new-collection__search{
+  font-size: 1em;
+}

@@ -12,7 +12,7 @@
                 <textarea [ngFormControl]="collectionDescription" id="collectionDescription" class="form-control" type="text"></textarea>
 
                 <label for="searchterm">Add Resources to collection</label>
-                <input name="searchterm" autocomplete="off" [ngFormControl]="searchterm" id="searchterm" #input [(ngModel)]="query" class="input--search" placeholder="Start typing to search" type="text">
+                <input name="searchterm" autocomplete="off" [ngFormControl]="searchterm" id="searchterm" #input [(ngModel)]="query" class="input--search new-collection__search" placeholder="Start typing to search" type="text">
                 <div class="suggestions" *ngIf="searchResults.length > 0">
                     <ul>
                         <li *ngFor="let item of searchResults">
@@ -29,8 +29,10 @@
                     </ul>
                 </div>
 
-                <h4>Resources in collection:</h4>
-                <app-widgets [apps]="collectionApps" *ngIf="collectionApps.length > 0"></app-widgets>
+                <div *ngIf="collectionApps.length > 0">
+                  <p class="new-collection__resource-title">Resources in collection</p>
+                  <app-widgets [apps]="collectionApps"></app-widgets>
+                </div>
 
                 <br><br>
 
@@ -44,15 +46,17 @@
 
         <br>
 
-        <div>
+        <div class="user-collections">
             <h3>Existing Collections</h3>
             <p *ngIf="usersCollections.length == 0">No existing collections</p>
-            <ul *ngIf="usersCollections.length > 0">
+            <ul *ngIf="usersCollections.length > 0" class="user-collections__list">
                 <li *ngFor="let collection of usersCollections">
 
-                    <p>{{ collection.title }}</p>
-                    <button (click)="editCollection(collection)">Edit</button>
-                    <button (click)="deleteCollection(collection)">Delete</button>
+                    <p class="user-collections__title">{{ collection.title }}</p>
+                    <div class="user-collections__buttons">
+                      <button (click)="editCollection(collection)">Edit</button>
+                      <button (click)="deleteCollection(collection)">Delete</button>
+                    </div>
                 </li>
             </ul>
         </div>
