@@ -5,7 +5,7 @@ import { SubmitReviewComponent } from './submit-review/submit-review.component';
 import { AuthenticationService } from '../../../services/services';
 import { appSettings } from '../../../../../settings';
 import { AppsService } from '../../../services/services';
-import { StoreApp, Review } from '../../../models';
+import { StoreApp, Review, Collection } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
@@ -27,6 +27,7 @@ export class AppDetailsComponent implements AfterViewInit
     public app:StoreApp;
     public resourceId:number;
     public alsoBy:Array<StoreApp>;
+    public relatedCollections:Array<Collection>;
     public reviews:Array<Review> = new Array<Review>();
     public widgetBackground:string;
     public widgetIcon:string;
@@ -67,6 +68,8 @@ export class AppDetailsComponent implements AfterViewInit
 
                     this.loadAlsoBy();
 
+                    this.loadRelatedCollections();
+
                     //console.log(this.app);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
@@ -97,6 +100,17 @@ export class AppDetailsComponent implements AfterViewInit
                 alsoBy => this.alsoBy = alsoBy.filter( app => this.app.id != app.id ),
                 ( error:any ) => AppComponent.generalError( error.status )
             );
+    }
+
+    loadRelatedCollections()
+    {
+      this.appsService.getCollectionsByResourceId(this.app.id)
+          .subscribe(
+              filteredList => {
+                  this.relatedCollections = filteredList;
+              },
+              (error:any) => AppComponent.generalError( error.status )
+          );
     }
 
     reviewAdded( review:Review )

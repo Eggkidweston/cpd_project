@@ -206,6 +206,15 @@ export class AppsService
             .catch( this.handleError );
     }
 
+    public getCollectionsByResourceId( resourceId )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        return this.http.get(`${appSettings.apiRoot}collections/relations/`+resourceId)
+            .map( res => <Collection[]>res.json().data )
+            .catch( this.handleError );
+    }
 
     public getReviews( resourceId:number )
     {
