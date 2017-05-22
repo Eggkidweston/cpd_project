@@ -21,7 +21,7 @@ export class SearchComponent {
     @Output() updateSearch = new EventEmitter();
     static router:Router;
     public filteredList = [];
-	public query = '';
+    public query = '';
     public advancedSearchActive: boolean = false;
     private searchingForSuggestions: boolean = false;
     private activeOnly: boolean = true;
@@ -32,7 +32,7 @@ export class SearchComponent {
     freestuff: AbstractControl;
     searchterm: AbstractControl;
 
- 
+
     constructor( private _appsService:AppsService,
                  fb: FormBuilder,
                  router:Router ) {
@@ -64,10 +64,15 @@ export class SearchComponent {
     }
 
 	select(item){
-    	this.query = item.title;
-    	this.filteredList = [];
-    	var url = `/#/resource/${item.id}/`;
-        window.location.href = url;
+      let isCollection = item.resourceids ? true : false;
+
+      let url;
+      if(isCollection){
+        url = `/#/collection/${item.id}/`;
+      } else {
+        url = `/#/resource/${item.id}/`;
+      }
+      window.location.href = url;
 	}
 
 	searchTermChanged(searchTerm, activeOnly) {
@@ -76,8 +81,7 @@ export class SearchComponent {
                 .subscribe(
                     filteredList => {
                         if(this.searchingForSuggestions) { // don't allow slow responses to overwrite
-                            this.filteredList = filteredList.data;
-                            this.searchingForSuggestions = false;
+                            this.searchForCollections(searchTerm, filteredList.data);
                         }
                     },
                     (error:any) => AppComponent.generalError( error.status )
@@ -86,6 +90,20 @@ export class SearchComponent {
         	this.filteredList = [];
         }
     }
+
+    searchForCollections(searchTerm, resourcesList) {
+      this._appsService.getCollectionsBySearch(searchTerm)
+          .subscribe(
+              filteredList => {
+                  if(this.searchingForSuggestions) {
+                      this.filteredList = filteredList.data.concat(resourcesList);
+                      this.searchingForSuggestions = false;
+                  }
+              },
+              (error:any) => AppComponent.generalError( error.status )
+          );
+    }
+
 
     onSubmitSearch(formValues: any) {
         SearchComponent.router.navigate( ['Results', { searchterm: encodeURIComponent(this.searchterm._value) }] );
@@ -101,6 +119,9 @@ export class SearchComponent {
       var type = item.type_id;
       if(type==99){
           type = 'other';
+      }
+      if(type === undefined){
+        type = '-collection';
       }
       return 'backgroundimage' + type;
     }

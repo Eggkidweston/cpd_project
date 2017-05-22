@@ -1,22 +1,55 @@
 
 <div class="results-container">
-    
+
     <div class="col span-12">
-    <div class="back-link"><button class="btn back" role="button" (click)="goBack()">Back</button>
-            </div>
-        <h3 *ngIf="resultsCount==1">{{resultsCount}} result found for: {{searchTerm}}</h3>
-        <h3 *ngIf="resultsCount!=1">{{resultsCount}} results found for: {{searchTerm}}</h3>
-        <p >Showing page {{currentPage}} of {{totalPages}}</p>
-        <div *ngIf="resultsApps&&resultsApps.length>0">
-        <app-widgets [apps]="resultsApps"></app-widgets>
-        </div>
-        <div *ngIf="!(resultsApps&&resultsApps.length>0)">
-            <span *ngIf="!searching">Sorry, no resources found.</span>
-            <span *ngIf="searching">Searching..</span>
+        <div class="back-link">
+            <button class="btn back" role="button" (click)="goBack()">Back</button>
         </div>
     </div>
 
-    <div class="col span-12" *ngIf="totalPages>1">
-    	<pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageClicked)="onPageClicked($event)"></pagination>
+    <div class="col span-12">
+        <div>
+            <h2>Collections</h2>
+            <div *ngIf="resultsCountCollections > 0">
+                <h3 *ngIf="resultsCountCollections==1">{{resultsCountCollections}} result found for: {{searchTerm}}</h3>
+                <h3 *ngIf="resultsCountCollections!=1">{{resultsCountCollections}} results found for: {{searchTerm}}</h3>
+                <p *ngIf="totalPagesCollections > 1">Showing page {{currentPageCollections}} of {{totalPagesCollections}}</p>
+            </div>
+            <div *ngIf="resultsCollections&&resultsCollections.length>0">
+                <app-widgets [apps]="resultsCollections"></app-widgets>
+            </div>
+            <div *ngIf="!(resultsCollections&&resultsCollections.length>0)">
+                <span *ngIf="!searching">Sorry, no collections found.</span>
+                <span *ngIf="searching">Searching..</span>
+            </div>
+        </div>
+
+        <div class="col span-12" *ngIf="totalPagesCollections>1">
+            <pagination [totalPages]="totalPagesCollections" [currentPage]="currentPageCollections" (pageClicked)="onPageClicked($event, true)"></pagination>
+        </div>
+    </div>
+
+    <div class="row"><div class="col span-12"><hr></div></div>
+
+    <div class="col span-12">
+        <div>
+            <h2>Resources</h2>
+            <div *ngIf="resultsCount > 0">
+                <h3 *ngIf="resultsCount==1">{{resultsCount}} result found for: {{searchTerm}}</h3>
+                <h3 *ngIf="resultsCount!=1">{{resultsCount}} results found for: {{searchTerm}}</h3>
+                <p *ngIf="totalPages > 1">Showing page {{currentPage}} of {{totalPages}}</p>
+            </div>
+            <div *ngIf="resultsApps&&resultsApps.length>0">
+                <app-widgets [apps]="resultsApps"></app-widgets>
+            </div>
+            <div *ngIf="!(resultsApps&&resultsApps.length>0)">
+                <span *ngIf="!searching">Sorry, no resources found.</span>
+                <span *ngIf="searching">Searching..</span>
+            </div>
+        </div>
+        
+        <div class="col span-12" *ngIf="totalPages>1">
+            <pagination [totalPages]="totalPages" [currentPage]="currentPage" (pageClicked)="onPageClicked($event, false)"></pagination>
+        </div>
     </div>
 </div>

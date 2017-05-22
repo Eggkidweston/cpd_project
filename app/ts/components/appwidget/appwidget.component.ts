@@ -13,23 +13,33 @@ export class AppWidgetComponent {
     @Input() app: StoreApp;
     public noimagestyle:string;
     public hasMedia: boolean;
-    
-    //appTitleToFit(appTitle: String) {
-    //	return (appTitle.length>18) ? (appTitle.substr(0, 16)+'...') : appTitle;
-    //}
+    public isCollection: boolean;
+    public resourceLink: string;
+
+    constructor(public router:Router){}
 
     ngOnInit(){
       if(this.app.media && this.app.media.length > 0) {
         this.hasMedia = true;
+      }
+
+      this.isCollection = this.app.type_id == null;
+
+      if(this.isCollection){
+        this.resourceLink = "CollectionDetails"
+      } else {
+        this.resourceLink = "AppDetails"
       }
     }
 
     get widgetTypeIcon():string
     {
     	if(!this.app.image) {
+        if(!this.app.type_id){
+          return "backgroundimage-collection";
+        }
     		return "backgroundimage" + this.app.type_id;
     	}
     	return "";
     }
-
 }

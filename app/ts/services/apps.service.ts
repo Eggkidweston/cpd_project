@@ -54,7 +54,7 @@ export class AppsService
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
-    
+
     /*public getLastUpdatedApps(appsPerPage: number, pageNumber: number)
     {
         return this.http.get( `${appSettings.apiRoot}resources?$orderby=updatedat%20desc&$top=`+appsPerPage+`&$filter=active%20eq%20true` )
@@ -64,10 +64,14 @@ export class AppsService
 
     public getRecommendedApps(appsPerPage: number, pageNumber: number)
     {
+
+
         return this.http.get( `${appSettings.apiRoot}resources/recommended?$top=`+appsPerPage )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
+
+
 
     public getTagCloud(resourcedOnly, limit, order)
     {
@@ -123,7 +127,23 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    
+    public getCollectionsBySearch( searchTerm )
+    {
+        let searchQuery = `${appSettings.apiRoot}collections/search?$top=100&$skip=0&term=${ searchTerm }`;
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
+            .catch( this.handleError );
+    }
+
+    public getCollectionsBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number)
+    {
+        let searchQuery = `${appSettings.apiRoot}collections/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }`;
+
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
+            .catch( this.handleError );
+    }
+
     public getCollectionCount(activeOnly: boolean)
     {
         let searchQuery = `${appSettings.apiRoot}collections/count`;
@@ -338,7 +358,7 @@ export class AppsService
             "date": "2016-01-10T07:24:31.613Z"
         }
     ]
-}                
+}
         ` );
 
         return Observable.of( c )
