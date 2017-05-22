@@ -109,7 +109,7 @@ export class HomeComponent
 
     getJiscPicks()
     {
-      this._appsService.getCollections( 1 )
+      this._appsService.getRecentCollections( 1 )
         .subscribe(
             collection => {
                 if(collection) {

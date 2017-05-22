@@ -172,11 +172,14 @@ export class AppsService
 
     public getCollections( collectionsPerPage: number )
     {
-        let headers = new Headers();
-        headers.append( 'Content-Type', 'application/json' );
-        headers.append( 'x-access-token', AuthenticationService.apiKey );
+        return this.http.get( `${appSettings.apiRoot}collections?$top=`+collectionsPerPage )
+            .map( res => <Collection[]>res.json().data )
+            .catch( this.handleError );
+    }
 
-        return this.http.get( `${appSettings.apiRoot}collections/?$top=`+collectionsPerPage, { headers } )
+    public getRecentCollections( collectionsPerPage: number )
+    {
+        return this.http.get( `${appSettings.apiRoot}collections/recent?$top=`+collectionsPerPage )
             .map( res => <Collection[]>res.json().data )
             .catch( this.handleError );
     }
