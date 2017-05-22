@@ -21,7 +21,7 @@ export class ResultsComponent
 
     public searchTerm:string;
 
-    private appsPerPage:number = 10;
+    private appsPerPage:number = 9;
     private collectionsPerPage:number = 3;
     private currentPage:number = 1;
     private currentPageCollections:number = 1;
