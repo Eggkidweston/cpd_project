@@ -13,25 +13,35 @@ import { AppComponent } from '../../app.component';
 export class SignInComponent {
     busy: boolean = false;
     shaking: boolean = false;
+    forgotPassword: boolean = false;
+    forgotPasswordEmailSent: boolean = false;
 
     signInForm: ControlGroup;
     emailOrUsername: AbstractControl;
     password: AbstractControl;
-    
+
+    resetPasswordForm: ControlGroup;
+    resetEmail: AbstractControl;
+
     constructor(
-        public authenticationService: AuthenticationService, 
+        public authenticationService: AuthenticationService,
         public signinRegisterService: SigninRegisterService,
-        private router: Router, 
-        fb: FormBuilder ) 
+        private router: Router,
+        fb: FormBuilder )
     {
         this.signInForm = fb.group({
             "emailOrUsername": ["", Validators.required],
             "password": ["", Validators.required]
-        }
-        );
+        });
 
         this.emailOrUsername = this.signInForm.controls['emailOrUsername'];
         this.password = this.signInForm.controls['password'];
+
+        this.resetPasswordForm = fb.group({
+            "resetEmail": ["", Validators.required]
+        });
+
+        this.resetEmail = this.resetPasswordForm.controls['resetEmail'];
     }
 
     onSubmit(formValues: any) {
@@ -53,6 +63,15 @@ export class SignInComponent {
                     }
                 }
                 );
+        } else {
+            this.shakeForm();
+        }
+    }
+
+    onSubmitPasswordReset(formValues: any) {
+        if (this.resetPasswordForm.valid) {
+            console.log('send password reset email');
+            this.forgotPasswordEmailSent = true;
         } else {
             this.shakeForm();
         }

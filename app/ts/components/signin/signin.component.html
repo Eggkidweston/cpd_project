@@ -1,5 +1,9 @@
+<div class="col span-11" *ngIf="forgotPasswordEmailSent">
+    <p class="alert alert-success">You have been sent a password reset email.</p>
+</div>
+
 <div class="col span-4 sign-in-container">
-    <form class="form" [ngFormModel]="signInForm" (submit)="onSubmit(signInForm.value)" novalidate>
+    <form class="form" [ngFormModel]="signInForm" (submit)="onSubmit(signInForm.value)" novalidate *ngIf="!forgotPassword">
         <fieldset class="form__fieldset">
             <legend>
                 <span class="legend-text"><h3>Sign in</h3></span>
@@ -12,26 +16,50 @@
                     <input [disabled]="busy" type="password" placeholder="Password" required="required" [ngFormControl]="password">
                 </div>
             </div>
-            
-            <div class="pull-right">
-                <button [disabled]="busy" class="btn--3d btn--primary btn--large" type="submit">Sign In</button>
+
+            <div>
+                <a (click)="forgotPassword = !forgotPassword" class="sign-in-container__form-toggle">Forgot password</a>
+                <div class="pull-right">
+                    <button [disabled]="busy" class="btn--3d btn--primary btn--large" type="submit">Sign In</button>
+                </div>
             </div>
-            
+
         </fieldset>
     </form>
-    <div>
+    <div *ngIf="!forgotPassword">
         <a [routerLink]="['RegisterIDP']" id="signup_from_2"><button class="btn--3d btn--primary">Sign In through your institution</button></a>
     </div>
+
+    <form class="form" [ngFormModel]="resetPasswordForm" (submit)="onSubmitPasswordReset(resetPasswordForm.value)" novalidate *ngIf="forgotPassword">
+        <fieldset class="form__fieldset">
+            <legend>
+                <span class="legend-text"><h3>Forgot password</h3></span>
+            </legend>
+            <p>Please enter the email address associated to your account.</p>
+            <div [class.shake]="shaking" [class.animated]="shaking" class="signin-form">
+                <div>
+                    <input [disabled]="busy" type="text" placeholder="Email address" [ngFormControl]="resetEmail" required="required">
+                </div>
+            </div>
+
+            <div>
+                <a (click)="forgotPassword = !forgotPassword" class="sign-in-container__form-toggle">Back to Sign in</a>
+                <div class="pull-right">
+                    <button [disabled]="busy" class="btn--3d btn--primary btn--large" type="submit">Confirm</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
 </div>
 <div class="col span-6 push-1">
     <h1>First time here?</h1>
     <p>You can use this website to find great resources but to start downloading, rating and reviewing resources and to become part of this community, you can either...</p>
-   
+
     <p><a [routerLink]="['Register']" id="signup_from_2">
         <button class="btn--3d btn--primary ">Create a new account</button>
     </a></p>
     <p>or..
-    
+
     <p><a [routerLink]="['RegisterIDP']" id="signup_from_2"><button class="btn--3d btn--primary ">Register through your institution</button></a></p>
 
 </div>
