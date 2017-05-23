@@ -63,7 +63,7 @@ bottom:auto !important;
     }
 }
 
-.btn {
+.btn:not(.btn--3d) {
     text-transform: uppercase;
 }
 
@@ -81,7 +81,7 @@ html {
 	line-height: 1.5;
 }
 
-body,button,h1,h2,h3,h4,h5,h6,input,textarea, a {
+body,button,h1,h2,h3,h4,h5,h6,input,textarea {
     font-family: "Stag Sans Web Book",HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,sans-serif;
 }
 
@@ -225,3 +225,21 @@ main, app-store {
     display:none !important;
 }
 
+.btn--3d{
+  border: inherit;
+  border-radius: 0;
+
+  &:hover{
+    color: #fff;
+  }
+}
+
+.table--unstyled.table--unstyled{
+    background: none;
+    border: 0;
+
+    td, tr {
+      border: 0;
+      background: none;
+    }
+}
