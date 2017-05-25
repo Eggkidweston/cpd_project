@@ -190,6 +190,25 @@ export class AuthenticationService {
             );
     }
 
+    forgotPassword(email: string,
+        next: () => void,
+        error: (res: Response) => void)
+    {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        this.http.post(`${appSettings.apiRoot}users/forgot`,
+            JSON.stringify({
+                email: email,
+            }), { headers })
+            .map(res => res.json())
+            .subscribe(
+              (res) => next(),
+              err => error(err),
+            )
+    }
+
     private handleError(error: Response) {
         return Observable.throw(error);
     }
@@ -197,4 +216,4 @@ export class AuthenticationService {
 
 export var authenticationServiceInjectables: Array<any> = [
     bind(AuthenticationService).toClass(AuthenticationService)
-];
+];

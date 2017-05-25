@@ -15,6 +15,7 @@ export class SignInComponent {
     shaking: boolean = false;
     forgotPassword: boolean = false;
     forgotPasswordEmailSent: boolean = false;
+    forgotErrorDisplayed: boolean = false;
 
     signInForm: ControlGroup;
     emailOrUsername: AbstractControl;
@@ -69,9 +70,25 @@ export class SignInComponent {
     }
 
     onSubmitPasswordReset(formValues: any) {
+        this.forgotErrorDisplayed = false;
+        this.forgotPasswordEmailSent = false;
+
         if (this.resetPasswordForm.valid) {
-            console.log('send password reset email');
-            this.forgotPasswordEmailSent = true;
+            this.busy = true;
+            this.forgotErrorDisplayed = false;
+            this.forgotPasswordEmailSent = false;
+
+            this.authenticationService.forgotPassword(formValues.resetEmail,
+                () => {
+                    this.forgotPasswordEmailSent = true;
+                    this.busy = false;
+                },
+                (res: any) => {
+                    this.shakeForm();
+                    this.forgotErrorDisplayed = true;
+                    this.busy = false;
+                }
+            );
         } else {
             this.shakeForm();
         }

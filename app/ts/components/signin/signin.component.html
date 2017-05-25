@@ -1,6 +1,9 @@
 <div class="col span-11" *ngIf="forgotPasswordEmailSent">
     <p class="alert alert-success">You have been sent a password reset email.</p>
 </div>
+<div class="col span-11" *ngIf="forgotErrorDisplayed">
+    <p class="alert alert-danger">That email address doesn't exist.</p>
+</div>
 
 <div class="col span-4 sign-in-container">
     <form class="form" [ngFormModel]="signInForm" (submit)="onSubmit(signInForm.value)" novalidate *ngIf="!forgotPassword">
