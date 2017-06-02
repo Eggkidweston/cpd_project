@@ -13,7 +13,7 @@ export class AppWidgetComponent {
     @Input() app: StoreApp;
     public noimagestyle:string;
     public hasMedia: boolean;
-    public isCollection: boolean;
+    public isChannel: boolean;
     public resourceLink: string;
 
     constructor(public router:Router){}
@@ -23,10 +23,10 @@ export class AppWidgetComponent {
         this.hasMedia = true;
       }
 
-      this.isCollection = this.app.type_id == null;
+      this.isChannel = this.app.type_id == null;
 
-      if(this.isCollection){
-        this.resourceLink = "CollectionDetails"
+      if(this.isChannel){
+        this.resourceLink = "ChannelDetails"
       } else {
         this.resourceLink = "AppDetails"
       }
@@ -36,7 +36,7 @@ export class AppWidgetComponent {
     {
     	if(!this.app.image) {
         if(!this.app.type_id){
-          return "backgroundimage-collection";
+          return "backgroundimage-channel";
         }
     		return "backgroundimage" + this.app.type_id;
     	}

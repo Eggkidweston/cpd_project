@@ -248,7 +248,7 @@ export interface DownloadInstructions
     notlocal:string;
 }
 
-export class Collection
+export class Channel
 {
 
    constructor( public title:string,

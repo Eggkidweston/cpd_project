@@ -1,9 +1,9 @@
-.user-collections__title{
+.user-channels__title{
   float: left;
   margin-bottom: 0;
 }
 
-.user-collections__list{
+.user-channels__list{
   li {
     overflow: hidden;
     padding: 15px;
@@ -18,19 +18,19 @@
   }
 }
 
-.user-collections__buttons{
+.user-channels__buttons{
   float: right;
 }
 
-.new-collection label {
+.new-channel label {
   margin-top: 15px;
 }
 
-.new-collection__resource-title{
+.new-channel__resource-title{
   margin-top: 15px;
   font-weight: bold;
 }
 
-.new-collection__search.new-collection__search{
+.new-channel__search.new-channel__search{
   font-size: 1em;
 }

@@ -4,7 +4,7 @@ import { HeroCarouselComponent } from '../../hero-carousel/hero-carousel.compone
 import { SearchComponent } from '../../search/search.component';
 import { RecommendedRecentComponent } from '../../recommended-recent/recommended-recent.component';
 import { AppsService } from '../../../services/services';
-import { StoreApp, Collection } from '../../../models';
+import { StoreApp, Channel } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { appSettings } from '../../../../../settings';
 
@@ -26,14 +26,14 @@ export class HomeComponent
     private totalPages:number = 0;
 
     private totalResourceCount:number = 0;
-    private totalCollectionCount:number = 0;
+    private totalChannelCount:number = 0;
 
     idpToken:string;
 
     constructor( private _appsService:AppsService)
     {
         this.getResourceCount();
-        this.getCollectionCount();
+        this.getChannelCount();
         this.getMostDownloadedApps();
         this.getRecentApps();
         this.getJiscPicks();
@@ -50,12 +50,12 @@ export class HomeComponent
             );
     }
 
-    getCollectionCount()
+    getChannelCount()
     {
-        this._appsService.getCollectionCount(this.activeOnly)
+        this._appsService.getChannelCount(this.activeOnly)
             .subscribe(
-                collections => {
-                    this.totalCollectionCount = collections.availableRows;
+                channels => {
+                    this.totalChannelCount = channels.availableRows;
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -85,12 +85,12 @@ export class HomeComponent
             );
     }
 
-    getCollectionAppResources(homeCollection: Collection){
-        if(homeCollection.resourceids.length > 0) {
+    getChannelAppResources(homeChannel: Channel){
+        if(homeChannel.resourceids.length > 0) {
             let filter = "";
-            for(let i = 0; i < homeCollection.resourceids.length; i++){
-                filter += "(id eq '" + homeCollection.resourceids[i] +"')";
-                if (i != homeCollection.resourceids.length - 1){
+            for(let i = 0; i < homeChannel.resourceids.length; i++){
+                filter += "(id eq '" + homeChannel.resourceids[i] +"')";
+                if (i != homeChannel.resourceids.length - 1){
                     filter += " or ";
                 }
             }
@@ -109,11 +109,11 @@ export class HomeComponent
 
     getJiscPicks()
     {
-      this._appsService.getRecentCollections( 1 )
+      this._appsService.getRecentChannels( 1 )
         .subscribe(
-            collection => {
-                if(collection) {
-                    this.getCollectionAppResources(collection[0]);
+            channel => {
+                if(channel) {
+                    this.getChannelAppResources(channel[0]);
                 }
               },
               ( error:any ) => AppComponent.generalError( error.status )

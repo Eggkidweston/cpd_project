@@ -64,11 +64,11 @@ export class SearchComponent {
     }
 
 	select(item){
-      let isCollection = item.resourceids ? true : false;
+      let isChannel = item.resourceids ? true : false;
 
       let url;
-      if(isCollection){
-        url = `/#/collection/${item.id}/`;
+      if(isChannel){
+        url = `/#/channel/${item.id}/`;
       } else {
         url = `/#/resource/${item.id}/`;
       }
@@ -81,7 +81,7 @@ export class SearchComponent {
                 .subscribe(
                     filteredList => {
                         if(this.searchingForSuggestions) { // don't allow slow responses to overwrite
-                            this.searchForCollections(searchTerm, filteredList.data);
+                            this.searchForChannels(searchTerm, filteredList.data);
                         }
                     },
                     (error:any) => AppComponent.generalError( error.status )
@@ -91,8 +91,8 @@ export class SearchComponent {
         }
     }
 
-    searchForCollections(searchTerm, resourcesList) {
-      this._appsService.getCollectionsBySearch(searchTerm)
+    searchForChannels(searchTerm, resourcesList) {
+      this._appsService.getChannelsBySearch(searchTerm)
           .subscribe(
               filteredList => {
                   if(this.searchingForSuggestions) {
@@ -121,7 +121,7 @@ export class SearchComponent {
           type = 'other';
       }
       if(type === undefined){
-        type = '-collection';
+        type = '-channel';
       }
       return 'backgroundimage' + type;
     }

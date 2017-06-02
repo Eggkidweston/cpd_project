@@ -9,23 +9,23 @@
 
     <div class="col span-12">
         <div>
-            <h2>Collections</h2>
-            <div *ngIf="resultsCountCollections > 0">
-                <h3 *ngIf="resultsCountCollections==1">{{resultsCountCollections}} result found for: {{searchTerm}}</h3>
-                <h3 *ngIf="resultsCountCollections!=1">{{resultsCountCollections}} results found for: {{searchTerm}}</h3>
-                <p *ngIf="totalPagesCollections > 1">Showing page {{currentPageCollections}} of {{totalPagesCollections}}</p>
+            <h2>Channels</h2>
+            <div *ngIf="resultsCountChannels > 0">
+                <h3 *ngIf="resultsCountChannels==1">{{resultsCountChannels}} result found for: {{searchTerm}}</h3>
+                <h3 *ngIf="resultsCountChannels!=1">{{resultsCountChannels}} results found for: {{searchTerm}}</h3>
+                <p *ngIf="totalPagesChannels > 1">Showing page {{currentPageChannels}} of {{totalPagesChannels}}</p>
             </div>
-            <div *ngIf="resultsCollections&&resultsCollections.length>0">
-                <app-widgets [apps]="resultsCollections"></app-widgets>
+            <div *ngIf="resultsChannels&&resultsChannels.length>0">
+                <app-widgets [apps]="resultsChannels"></app-widgets>
             </div>
-            <div *ngIf="!(resultsCollections&&resultsCollections.length>0)">
-                <span *ngIf="!searching">Sorry, no collections found.</span>
+            <div *ngIf="!(resultsChannels&&resultsChannels.length>0)">
+                <span *ngIf="!searching">Sorry, no channels found.</span>
                 <span *ngIf="searching">Searching..</span>
             </div>
         </div>
 
-        <div class="col span-12" *ngIf="totalPagesCollections>1">
-            <pagination [totalPages]="totalPagesCollections" [currentPage]="currentPageCollections" (pageClicked)="onPageClicked($event, true)"></pagination>
+        <div class="col span-12" *ngIf="totalPagesChannels>1">
+            <pagination [totalPages]="totalPagesChannels" [currentPage]="currentPageChannels" (pageClicked)="onPageClicked($event, true)"></pagination>
         </div>
     </div>
 

@@ -21,7 +21,7 @@
         <img alt="Jisc logo" src="//ux.jisc.ac.uk/2.0.0/ui/img/logo.png">
       </a>
       <div id="nav" class="title-nav">
-        
+
       <span class="menu-button" [class.is-open]="showMobileMenu" tabindex="0" (click)="clickMenu()">Menu <span class="icon icon-arrow-down"></span></span><div [class.showing]="showMobileMenu" class="mobile-menu mobile-tablet-only" ><ul>
           <li class="nav__item"><a [routerLink]="['Home']">Search</a>
           <li class="nav__item"><a [routerLink]="['Explore']">Explore</a></li>
@@ -31,7 +31,7 @@
           <li class="nav__item"><a [routerLink]="['SignIn']">Sign in</a></li>
           <li class="nav__item"><a [routerLink]="['Profile']">My profile</a></li>
         </ul></div></div>
-      
+
       <nav class="masthead__nav masthead__nav--primary masthead__nav--secondary" role="banner" data-dropdown="">
         {{ appVersion }}
       </nav>
@@ -45,9 +45,9 @@
 
 <header class="masthead" role="banner" data-mobilemenu *ngIf="!narrowHeader">
     <div class="masthead__top">
-        
-    
-        
+
+
+
         <div class="masthead__main masthead__main--with-content">
             <div class="inner">
                 <div class="appstoretitle">
@@ -63,9 +63,9 @@
                             <li [class.active]="isRouteActive(['Explore'])" class="nav__item">
                                 <a [routerLink]="['Explore']">Explore</a>
                             </li>
-                            <li [class.active]="isRouteActive(['Collections'])" class="nav__item"
+                            <li [class.active]="isRouteActive(['Channels'])" class="nav__item"
                                 *ngIf="authenticationService?.userIsAdmin()">
-                                <a [routerLink]="['Collections']">Collections</a>
+                                <a [routerLink]="['Channels']">Channels</a>
                             </li>
 
                         </ul>
@@ -85,7 +85,7 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li 
+                            <li
                                 class="nav__item has-popup "
                                 data-dropdown-item>
                                 <a href="javascript:void(0);">Help</a>

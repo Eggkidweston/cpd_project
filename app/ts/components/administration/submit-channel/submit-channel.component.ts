@@ -3,52 +3,52 @@ import { ControlGroup, FormBuilder, AbstractControl, Validators } from '@angular
 import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AuthenticationService } from '../../../services/services';
 import { AppsService } from '../../../services/services';
-import { StoreApp, TagCloud, Tag, Collection } from '../../../models';
+import { StoreApp, TagCloud, Tag, Channel } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { AppWidgetsComponent } from '../../appwidgets/appwidgets.component';
 
 @Component({
-    selector: 'submit-collection',
-    template: require('submit-collection.component.html'),
+    selector: 'submit-channel',
+    template: require('submit-channel.component.html'),
     styles: [require('../../../../sass/explore.scss').toString(),
       require('../../search/search.scss').toString(),
-      require('./submit-collection.component.scss').toString()],
+      require('./submit-channel.component.scss').toString()],
     directives: [AppWidgetsComponent]
 })
-export class SubmitCollectionComponent {
-    @Output() collectionAdded: EventEmitter<Collection> = new EventEmitter<Collection>();
+export class SubmitChannelComponent {
+    @Output() channelAdded: EventEmitter<Channel> = new EventEmitter<Channel>();
     public searchResults = [];
-    public collectionApps:Array<StoreApp> = [];
-    public usersCollections:Array<Collection> = [];
+    public channelApps:Array<StoreApp> = [];
+    public usersChannels:Array<Channel> = [];
 
     private resourceIds = [];
     private searchingForResources: boolean = false;
     private activeOnly: boolean = true;
-    private editingCollection: boolean = false;
-    private editingCollectionID: number;
+    private editingChannel: boolean = false;
+    private editingChannelID: number;
 
-    newCollectionForm: ControlGroup;
-    collectionTitle: AbstractControl;
-    collectionDescription: AbstractControl;
+    newChannelForm: ControlGroup;
+    channelTitle: AbstractControl;
+    channelDescription: AbstractControl;
     searchterm: AbstractControl;
 
     busy: boolean = false;
-    collectionId: number = 1;
+    channelId: number = 1;
 
     constructor(private appsService: AppsService, private fb: FormBuilder) {
         this.createForm();
     }
 
     createForm(title?, description?) {
-      this.newCollectionForm = this.fb.group({
-          "collectionTitle": [title, Validators.required],
-          "collectionDescription": [description, Validators.required],
+      this.newChannelForm = this.fb.group({
+          "channelTitle": [title, Validators.required],
+          "channelDescription": [description, Validators.required],
           "searchterm": [""],
       });
 
-      this.collectionTitle = this.newCollectionForm.controls['collectionTitle'];
-      this.collectionDescription = this.newCollectionForm.controls['collectionDescription'];
-      this.searchterm = this.newCollectionForm.controls['searchterm'];
+      this.channelTitle = this.newChannelForm.controls['channelTitle'];
+      this.channelDescription = this.newChannelForm.controls['channelDescription'];
+      this.searchterm = this.newChannelForm.controls['searchterm'];
 
       this.searchterm.valueChanges
           .do((_) => {
@@ -64,30 +64,30 @@ export class SubmitCollectionComponent {
     }
 
     ngAfterViewInit() {
-        this.loadExistingCollections();
+        this.loadExistingChannels();
     }
 
-    loadExistingCollections()
+    loadExistingChannels()
     {
-        this.appsService.getCollectionsByCreator( AuthenticationService.user.id )
+        this.appsService.getChannelsByCreator( AuthenticationService.user.id )
             .subscribe(
-                usersCollections => {
-                    this.usersCollections = usersCollections;
+                usersChannels => {
+                    this.usersChannels = usersChannels;
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
     }
 
     onSubmit(formVaules: any) {
-        if( this.newCollectionForm.valid ) {
+        if( this.newChannelForm.valid ) {
             this.busy = true;
-            let collection = new Collection(this.collectionTitle.value, this.collectionDescription.value, this.resourceIds, null);
+            let channel = new Channel(this.channelTitle.value, this.channelDescription.value, this.resourceIds, null);
 
-            this.appsService.submitCollection(collection,
+            this.appsService.submitChannel(channel,
                 (result) => {
                     this.busy = false;
-                    this.collectionAdded.emit(result.collection);
-                    this.usersCollections.push(result.collection);
+                    this.channelAdded.emit(result.channel);
+                    this.usersChannels.push(result.channel);
                     this.resetForm();
                 },
                 (err) => {
@@ -97,18 +97,18 @@ export class SubmitCollectionComponent {
         }
     }
 
-    updateCollection(e){
+    updateChannel(e){
         e.preventDefault()
 
-        if( this.newCollectionForm.valid ) {
+        if( this.newChannelForm.valid ) {
             this.busy = true;
-            let collection = new Collection(this.collectionTitle.value, this.collectionDescription.value, this.resourceIds, null);
-            this.appsService.updateCollection(this.editingCollectionID, collection,
+            let channel = new Channel(this.channelTitle.value, this.channelDescription.value, this.resourceIds, null);
+            this.appsService.updateChannel(this.editingChannelID, channel,
                 (result) => {
                     this.busy = false;
-                    this.editingCollection = false;
-                    this.collectionAdded.emit(result.collection);
-                    this.loadExistingCollections();
+                    this.editingChannel = false;
+                    this.channelAdded.emit(result.channel);
+                    this.loadExistingChannels();
                     this.resetForm();
                 },
                 (err) => {
@@ -120,44 +120,44 @@ export class SubmitCollectionComponent {
 
     cancelUpdate(e){
         e.preventDefault();
-        this.editingCollection = false;
-        this.editingCollectionID = null;
+        this.editingChannel = false;
+        this.editingChannelID = null;
         this.resetForm();
     }
 
-    deleteCollection(collection: Collection){
-        this.appsService.deleteCollection( collection.id,
+    deleteChannel(channel: Channel){
+        this.appsService.deleteChannel( channel.id,
             (status) => {
-                let index = this.usersCollections.indexOf(collection);
-                this.usersCollections.splice(index, 1);
+                let index = this.usersChannels.indexOf(channel);
+                this.usersChannels.splice(index, 1);
             },
             (error:any) => AppComponent.generalError( error.status )
             );
     }
 
-    editCollection(collection: Collection){
+    editChannel(channel: Channel){
         this.searchResults = [];
-        this.editingCollection = true;
-        this.editingCollectionID = collection.id;
-        this.createForm(collection.title, collection.description);
-        this.resourceIds = collection.resourceids;
-        this.getCollectionAppResources(collection);
+        this.editingChannel = true;
+        this.editingChannelID = channel.id;
+        this.createForm(channel.title, channel.description);
+        this.resourceIds = channel.resourceids;
+        this.getChannelAppResources(channel);
     }
 
-    getCollectionAppResources(collection: Collection){
-        if(collection.resourceids.length > 0) {
+    getChannelAppResources(channel: Channel){
+        if(channel.resourceids.length > 0) {
             let filter = "";
-            for(let i = 0; i < collection.resourceids.length; i++){
-                filter += "(id eq '" + collection.resourceids[i] +"')";
-                if (i != collection.resourceids.length - 1){
+            for(let i = 0; i < channel.resourceids.length; i++){
+                filter += "(id eq '" + channel.resourceids[i] +"')";
+                if (i != channel.resourceids.length - 1){
                     filter += " or ";
                 }
             }
 
             this.appsService.getResourcesWithMedia( 99, 1, filter )
                 .subscribe(
-                    collectionApps => {
-                        this.collectionApps = collectionApps.data;
+                    channelApps => {
+                        this.channelApps = channelApps.data;
                     },
                     ( error:any ) => AppComponent.generalError( error.status )
                 );
@@ -193,7 +193,7 @@ export class SubmitCollectionComponent {
             this.appsService.getAppDetails( item.id )
               .subscribe(
                   app => {
-                    this.collectionApps.push(app);
+                    this.channelApps.push(app);
                   },
                   (error:any) => AppComponent.generalError( error.status )
               );
@@ -201,8 +201,8 @@ export class SubmitCollectionComponent {
             let index = this.resourceIds.indexOf(item.id);
             this.resourceIds.splice(index, 1);
 
-            let collectionIndex = this.collectionApps.indexOf(this.collectionApps.find(x => x.id === item.id));
-            this.collectionApps.splice(collectionIndex, 1);
+            let channelIndex = this.channelApps.indexOf(this.channelApps.find(x => x.id === item.id));
+            this.channelApps.splice(channelIndex, 1);
         }
     }
 
@@ -233,14 +233,14 @@ export class SubmitCollectionComponent {
        return (appDescription.length>110) ? (appDescription.substr(0, 110)+'...') : appDescription;
     }
 
-    resourceInCollection(resourceId: number){
+    resourceInChannel(resourceId: number){
         return this.resourceIds.indexOf(resourceId) !== -1;
     }
 
     resetForm(){
       this.searchResults = [];
       this.resourceIds = [];
-      this.collectionApps = [];
+      this.channelApps = [];
       this.createForm();
     }
 

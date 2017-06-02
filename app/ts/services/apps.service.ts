@@ -1,7 +1,7 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions, Collection } from '../models';
+import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions, Channel } from '../models';
 import { appInfo } from './services';
 import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
@@ -127,26 +127,26 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    public getCollectionsBySearch( searchTerm )
+    public getChannelsBySearch( searchTerm )
     {
-        let searchQuery = `${appSettings.apiRoot}collections/search?$top=100&$skip=0&term=${ searchTerm }`;
+        let searchQuery = `${appSettings.apiRoot}channels/search?$top=100&$skip=0&term=${ searchTerm }`;
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }
 
-    public getCollectionsBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number)
+    public getChannelsBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number)
     {
-        let searchQuery = `${appSettings.apiRoot}collections/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }`;
+        let searchQuery = `${appSettings.apiRoot}channels/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }`;
 
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }
 
-    public getCollectionCount(activeOnly: boolean)
+    public getChannelCount(activeOnly: boolean)
     {
-        let searchQuery = `${appSettings.apiRoot}collections/count`;
+        let searchQuery = `${appSettings.apiRoot}channels/count`;
 
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
@@ -170,49 +170,49 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    public getCollections( collectionsPerPage: number )
+    public getChannels( channelsPerPage: number )
     {
-        return this.http.get( `${appSettings.apiRoot}collections?$top=`+collectionsPerPage )
-            .map( res => <Collection[]>res.json().data )
+        return this.http.get( `${appSettings.apiRoot}channels?$top=`+channelsPerPage )
+            .map( res => <Channel[]>res.json().data )
             .catch( this.handleError );
     }
 
-    public getRecentCollections( collectionsPerPage: number )
+    public getRecentChannels( channelsPerPage: number )
     {
-        return this.http.get( `${appSettings.apiRoot}collections/recent?$top=`+collectionsPerPage )
-            .map( res => <Collection[]>res.json().data )
+        return this.http.get( `${appSettings.apiRoot}channels/recent?$top=`+channelsPerPage )
+            .map( res => <Channel[]>res.json().data )
             .catch( this.handleError );
     }
 
-    public getCollectionById( id:number )
+    public getChannelById( id:number )
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
         headers.append( 'x-access-token', AuthenticationService.apiKey );
 
-        return this.http.get( `${appSettings.apiRoot}collections/${ id }`, { headers } )
-            .map( res => <Collection>res.json().collection )
+        return this.http.get( `${appSettings.apiRoot}channels/${ id }`, { headers } )
+            .map( res => <Channel>res.json().channel )
             .catch( this.handleError );
     }
 
-    public getCollectionsByCreator( createdBy:number )
+    public getChannelsByCreator( createdBy:number )
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
         headers.append( 'x-access-token', AuthenticationService.apiKey );
 
-        return this.http.get( `${appSettings.apiRoot}collections?$filter=createdby%20eq%20'${ createdBy }`, { headers } )
-            .map( res => <Collection[]>res.json().data )
+        return this.http.get( `${appSettings.apiRoot}channels?$filter=createdby%20eq%20'${ createdBy }`, { headers } )
+            .map( res => <Channel[]>res.json().data )
             .catch( this.handleError );
     }
 
-    public getCollectionsByResourceId( resourceId )
+    public getChannelsByResourceId( resourceId )
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
 
-        return this.http.get(`${appSettings.apiRoot}collections/relations/`+resourceId)
-            .map( res => <Collection[]>res.json().data )
+        return this.http.get(`${appSettings.apiRoot}channels/relations/`+resourceId)
+            .map( res => <Channel[]>res.json().data )
             .catch( this.handleError );
     }
 
@@ -250,29 +250,29 @@ export class AppsService
             );
     }
 
-    public submitCollection( collection:Collection,
-                             done:(  collection ) => void,
+    public submitChannel( channel:Channel,
+                             done:(  channel ) => void,
                              error:( err ) => void )
     {
       let headers = new Headers();
       headers.append( 'Content-Type', 'application/json' );
       headers.append( 'x-access-token', AuthenticationService.apiKey );
 
-      this.http.post( `${appSettings.apiRoot}collections/create`,
+      this.http.post( `${appSettings.apiRoot}channels/create`,
           JSON.stringify( {
-              title: collection.title,
-              description: collection.description,
-              resourceids: collection.resourceids,
+              title: channel.title,
+              description: channel.description,
+              resourceids: channel.resourceids,
           } ),
           { headers } )
-          .map( res => <Collection>res.json() )
+          .map( res => <Channel>res.json() )
           .subscribe(
-              collection => done( collection ),
+              channel => done( channel ),
               err => error( err )
           );
     }
 
-    public updateCollection( collectionID:Number, updatedCollection:Collection,
+    public updateChannel( channelID:Number, updatedChannel:Channel,
                      done:( resource ) => void,
                      error:( err ) => void )
     {
@@ -280,23 +280,23 @@ export class AppsService
       headers.append( 'Content-Type', 'application/json' );
       headers.append( 'x-access-token', AuthenticationService.apiKey );
 
-      this.http.post( `${appSettings.apiRoot}collections/${collectionID}/edit`,
+      this.http.post( `${appSettings.apiRoot}channels/${channelID}/edit`,
         JSON.stringify( {
-            title: updatedCollection.title,
-            description: updatedCollection.description,
-            resourceids: updatedCollection.resourceids,
+            title: updatedChannel.title,
+            description: updatedChannel.description,
+            resourceids: updatedChannel.resourceids,
         } ),
           { headers } )
-          .map( res => <Collection>res.json() )
+          .map( res => <Channel>res.json() )
           .subscribe(
-              collection => {
-                  done( collection )
+              channel => {
+                  done( channel )
               },
               err => error( err )
           );
     }
 
-    public deleteCollection( collectionID:Number,
+    public deleteChannel( channelID:Number,
                         done:( status ) => void,
                         error:( err ) => void )
     {
@@ -304,7 +304,7 @@ export class AppsService
         headers.append( 'Content-Type', 'application/json' );
         headers.append( 'x-access-token', AuthenticationService.apiKey );
 
-        this.http.delete( `${appSettings.apiRoot}collections/${collectionID}`,
+        this.http.delete( `${appSettings.apiRoot}channels/${channelID}`,
             { headers } )
             .subscribe(
                 status => {

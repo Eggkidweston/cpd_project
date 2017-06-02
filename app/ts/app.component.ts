@@ -13,7 +13,7 @@ import { WhoComponent } from './components/whocanregister/who.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { RegisterIDPComponent } from './components/registeridp/registeridp.component';
 import { AppDetailsComponent } from './components/store-front/app-details/app-details.component';
-import { CollectionDetailsComponent } from './components/store-front/collection-details/collection-details.component';
+import { ChannelDetailsComponent } from './components/store-front/channel-details/channel-details.component';
 import { DownloadComponent } from './components/store-front/download/download.component';
 import { AboutJorumComponent } from './components/store-front/jorum/aboutjorum.component';
 import { TermsComponent } from './components/store-front/terms/terms.component';
@@ -36,7 +36,7 @@ import { AuthenticationService, appInfo } from './services/services';
 import { SigninRegisterService } from "./services/services";
 import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
 import { CurationTokenMigrationComponent } from './components/ctm/ctm.component';
-import { SubmitCollectionComponent } from './components/administration/submit-collection/submit-collection.component';
+import { SubmitChannelComponent } from './components/administration/submit-channel/submit-channel.component';
 import myGlobals = require('./globals');
 
 declare let ga:Function; //google analytics object
@@ -71,8 +71,8 @@ declare let ga:Function; //google analytics object
     { path: '/results/:searchterm', name: 'Results', component: ResultsComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent },
     { path: '/ctm', name: 'Ctm', component: CurationTokenMigrationComponent },
-    { path: '/collections', name:'Collections', component: SubmitCollectionComponent },
-    { path: '/collection/:id', name: 'CollectionDetails', component: CollectionDetailsComponent },
+    { path: '/channels', name:'Channels', component: SubmitChannelComponent },
+    { path: '/channel/:id', name: 'ChannelDetails', component: ChannelDetailsComponent },
     //{ path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
 ] )
 
@@ -93,15 +93,15 @@ export class AppComponent
                  public router:Router )
     {
         this.checkCookieBar();
-        
-        
+
+
         this.appInfoname = appInfo.name;
         this.appInfoStrap = appInfo.strap;
         this.appVersion = appInfo.version;
         AppComponent.router = router;
-        
+
         this.narrowHeader = myGlobals.narrowHeader;
-        
+
         router.subscribe((value: any) => {
             if( value.indexOf('try/')==0 ) {
                 this.narrowHeader = true;
@@ -178,7 +178,7 @@ export class AppComponent
     }
 
 
-    
+
     // ok, I confess, this needs refactoring. This is not a good
     // approach to intercomponent communication. And it creates
     // a necessity for a static router, which is smelly

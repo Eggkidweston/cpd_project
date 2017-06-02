@@ -5,7 +5,7 @@ import { SubmitReviewComponent } from './submit-review/submit-review.component';
 import { AuthenticationService } from '../../../services/services';
 import { appSettings } from '../../../../../settings';
 import { AppsService } from '../../../services/services';
-import { StoreApp, Review, Collection } from '../../../models';
+import { StoreApp, Review, Channel } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
@@ -27,7 +27,7 @@ export class AppDetailsComponent implements AfterViewInit
     public app:StoreApp;
     public resourceId:number;
     public alsoBy:Array<StoreApp>;
-    public relatedCollections:Array<Collection>;
+    public relatedChannels:Array<Channel>;
     public reviews:Array<Review> = new Array<Review>();
     public widgetBackground:string;
     public widgetIcon:string;
@@ -68,7 +68,7 @@ export class AppDetailsComponent implements AfterViewInit
 
                     this.loadAlsoBy();
 
-                    this.loadRelatedCollections();
+                    this.loadRelatedChannels();
 
                     //console.log(this.app);
                 },
@@ -102,12 +102,12 @@ export class AppDetailsComponent implements AfterViewInit
             );
     }
 
-    loadRelatedCollections()
+    loadRelatedChannels()
     {
-      this.appsService.getCollectionsByResourceId(this.app.id)
+      this.appsService.getChannelsByResourceId(this.app.id)
           .subscribe(
               filteredList => {
-                  this.relatedCollections = filteredList;
+                  this.relatedChannels = filteredList;
               },
               (error:any) => AppComponent.generalError( error.status )
           );
