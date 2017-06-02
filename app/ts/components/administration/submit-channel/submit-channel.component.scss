@@ -1,0 +1,36 @@
+.user-channels__title{
+  float: left;
+  margin-bottom: 0;
+}
+
+.user-channels__list{
+  li {
+    overflow: hidden;
+    padding: 15px;
+
+    &:first-of-type{
+      margin-top: 20px;
+    }
+
+    &:nth-child(2n){
+      background-color: #f7f7f7;
+    }
+  }
+}
+
+.user-channels__buttons{
+  float: right;
+}
+
+.new-channel label {
+  margin-top: 15px;
+}
+
+.new-channel__resource-title{
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.new-channel__search.new-channel__search{
+  font-size: 1em;
+}

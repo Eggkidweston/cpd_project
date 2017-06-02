@@ -168,4 +168,14 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf="relatedChannels?.length > 0">
+        <div class="row"><div class="col span-12"><hr></div></div>
+        <div class="col span-11 meta-section">
+            <h3>Channels containing this resource</h3>
+            <div class="app-widgets">
+                <app-widget class="app-widget app-widget--small" *ngFor="let channel of relatedChannels" [app]="channel"></app-widget>
+            </div>
+        </div>
+    </div>
 </div>
