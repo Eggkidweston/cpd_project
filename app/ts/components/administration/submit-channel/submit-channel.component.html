@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col span-11">
+        <h3 *ngIf="!editingChannel">New Channel</h3>
+        <h3 *ngIf="editingChannel">Edit Channel</h3>
+
+        <div class="new-channel">
+            <form [ngFormModel]="newChannelForm" (submit)="onSubmit(newChannelForm.value)" id="newChannelForm">
+                <label for="channelTitle">Channel name</label>
+                <input [ngFormControl]="channelTitle" id="channelTitle" class="form-control" type="text">
+
+                <label for="channelDescription">Channel description</label>
+                <textarea [ngFormControl]="channelDescription" id="channelDescription" class="form-control" type="text"></textarea>
+
+                <label for="searchterm">Add Resources to channel</label>
+                <input name="searchterm" autocomplete="off" [ngFormControl]="searchterm" id="searchterm" #input [(ngModel)]="query" class="input--search new-channel__search" placeholder="Start typing to search" type="text">
+                <div class="suggestions" *ngIf="searchResults.length > 0">
+                    <ul>
+                        <li *ngFor="let item of searchResults">
+                            <a (click)="select(item)" [ngClass]="{'selected' : resourceInChannel(item.id)}">
+                                <img class="suggestions__image" src="{{item.image}}" *ngIf="item.image">
+                                <div *ngIf="!item.image"  class="suggestions__type-icon {{itemTypeClass(item)}}"></div>
+                                <div class="suggestions-text">
+                                    <span class="suggestions-text__title">{{shortTitle(item.title)}}</span>
+                                    <span class="suggestions-text__desc">{{shortDescription(item.description)}}</span>
+                                    <span *ngIf="item.overview"> - {{item.overview}}</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div *ngIf="channelApps.length > 0">
+                  <p class="new-channel__resource-title">Resources in channel</p>
+                  <app-widgets [apps]="channelApps"></app-widgets>
+                </div>
+
+                <br><br>
+
+                <div class="submitbut">
+                    <button [disabled]="busy" class="btn btn--3d btn--primary btn--large" type="submit" *ngIf="!editingChannel">Create channel</button>
+                    <button [disabled]="busy" class="btn btn--3d btn--primary btn--large" (click)="updateChannel($event)" *ngIf="editingChannel">Update channel</button>
+                    <button [disabled]="busy" class="btn btn--3d btn--primary btn--large" (click)="cancelUpdate($event)" *ngIf="editingChannel">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <br>
+
+        <div class="user-channels">
+            <h3>Existing Channels</h3>
+            <p *ngIf="usersChannels.length == 0">No existing channels</p>
+            <ul *ngIf="usersChannels.length > 0" class="user-channels__list">
+                <li *ngFor="let channel of usersChannels">
+
+                    <p class="user-channels__title">{{ channel.title }}</p>
+                    <div class="user-channels__buttons">
+                      <button (click)="editChannel(channel)">Edit</button>
+                      <button (click)="deleteChannel(channel)">Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -8,7 +8,7 @@
         <span title="1" class="rating-inner__star" (click)="ratingClicked(1)" [class.rating-editable]="editable" [ngClass]="{'rating-selected': rating>=1, 'rating-deselected': rating<1}"><i class="glyphicon glyphicon-star"></i></span>
         </div>
         <div class="no-ratings" *ngIf="rating<1">
-          <h4 title="0">No ratings yet</h4>
+          <h4 title="0" class="no-ratings__title">No ratings yet</h4>
         </div>
     </div>
 </div>

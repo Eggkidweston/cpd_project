@@ -8,6 +8,7 @@ export class User
     updatedat:string;
     createdat:string;
     active:any;
+    isadmin: boolean;
 }
 
 // TODO Refactor: this is synonymous with Resource
@@ -247,6 +248,17 @@ export interface DownloadInstructions
     notlocal:string;
 }
 
+export class Channel
+{
+
+   constructor( public title:string,
+                public description:string,
+                public resourceids:Array<number>,
+                public id: number,
+              )
+   {
+   };
+}
 
 export var ResourceTypes = ["APPLEAPP", "ANDROIDAPP", "IMAGE", "VIDEO", "AUDIO", "ARCHIVE_WEB", "ARCHIVE_OTHER", "WORD", "PDF", "POWERPOINT", "EXCEL", "WEB PAGE", "FLASH"];
 
