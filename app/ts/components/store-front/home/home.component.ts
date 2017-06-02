@@ -86,7 +86,7 @@ export class HomeComponent
     }
 
     getChannelAppResources(homeChannel: Channel){
-        if(homeChannel.resourceids.length > 0) {
+        if(homeChannel && homeChannel.resourceids.length > 0) {
             let filter = "";
             for(let i = 0; i < homeChannel.resourceids.length; i++){
                 filter += "(id eq '" + homeChannel.resourceids[i] +"')";
