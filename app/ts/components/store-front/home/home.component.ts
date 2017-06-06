@@ -4,7 +4,7 @@ import { HeroCarouselComponent } from '../../hero-carousel/hero-carousel.compone
 import { SearchComponent } from '../../search/search.component';
 import { RecommendedRecentComponent } from '../../recommended-recent/recommended-recent.component';
 import { AppsService } from '../../../services/services';
-import { StoreApp } from '../../../models';
+import { StoreApp, Channel } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { appSettings } from '../../../../../settings';
 
@@ -26,15 +26,17 @@ export class HomeComponent
     private totalPages:number = 0;
 
     private totalResourceCount:number = 0;
+    private totalChannelCount:number = 0;
 
     idpToken:string;
 
-    constructor( private _appsService:AppsService) 
+    constructor( private _appsService:AppsService)
     {
         this.getResourceCount();
+        this.getChannelCount();
         this.getMostDownloadedApps();
         this.getRecentApps();
-        this.getRecommendedApps();
+        this.getJiscPicks();
     }
 
     getResourceCount()
@@ -43,6 +45,17 @@ export class HomeComponent
             .subscribe(
                 resources => {
                     this.totalResourceCount = resources.availableRows;
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
+    }
+
+    getChannelCount()
+    {
+        this._appsService.getChannelCount(this.activeOnly)
+            .subscribe(
+                channels => {
+                    this.totalChannelCount = channels.availableRows;
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -72,16 +85,38 @@ export class HomeComponent
             );
     }
 
-    getRecommendedApps()
-    {
-        this._appsService.getRecommendedApps( this.appsPerPage, this.currentPage )
-            .subscribe(
-                recommendedApps => {
-                    this.recommendedApps = recommendedApps.data;
-                    this.totalPages = Math.ceil(recommendedApps.availableRows/this.appsPerPage);
-                },
-                ( error:any ) => AppComponent.generalError( error.status )
-            );
+    getChannelAppResources(homeChannel: Channel){
+        if(homeChannel.resourceids.length > 0) {
+            let filter = "";
+            for(let i = 0; i < homeChannel.resourceids.length; i++){
+                filter += "(id eq '" + homeChannel.resourceids[i] +"')";
+                if (i != homeChannel.resourceids.length - 1){
+                    filter += " or ";
+                }
+            }
+
+            this._appsService.getResourcesWithMedia( 99, 1, filter )
+                .subscribe(
+                    recommendedApps => {
+                        this.recommendedApps = recommendedApps.data;
+                        this.totalPages = Math.ceil(recommendedApps.availableRows/this.appsPerPage);
+                    },
+                    ( error:any ) => AppComponent.generalError( error.status )
+                );
+        }
+
     }
 
+    getJiscPicks()
+    {
+      this._appsService.getRecentChannels( 1 )
+        .subscribe(
+            channel => {
+                if(channel) {
+                    this.getChannelAppResources(channel[0]);
+                }
+              },
+              ( error:any ) => AppComponent.generalError( error.status )
+        );
+    }
 }

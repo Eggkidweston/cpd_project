@@ -1,7 +1,7 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions } from '../models';
+import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions, Channel } from '../models';
 import { appInfo } from './services';
 import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
@@ -20,6 +20,13 @@ export class AppsService
     public getResources(appsPerPage: number, pageNumber: number, filterText :string)
     {
         return this.http.get( `${appSettings.apiRoot}resources/explore?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
+            .map( res => <GetResourceResults>res.json() )
+            .catch( this.handleError );
+    }
+
+    public getResourcesWithMedia(appsPerPage: number, pageNumber: number, filterText :string)
+    {
+        return this.http.get( `${appSettings.apiRoot}resources?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
             .map( res => <GetResourceResults>res.json() )
             .catch( this.handleError );
     }
@@ -47,7 +54,7 @@ export class AppsService
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
-    
+
     /*public getLastUpdatedApps(appsPerPage: number, pageNumber: number)
     {
         return this.http.get( `${appSettings.apiRoot}resources?$orderby=updatedat%20desc&$top=`+appsPerPage+`&$filter=active%20eq%20true` )
@@ -57,10 +64,14 @@ export class AppsService
 
     public getRecommendedApps(appsPerPage: number, pageNumber: number)
     {
+
+
         return this.http.get( `${appSettings.apiRoot}resources/recommended?$top=`+appsPerPage )
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
+
+
 
     public getTagCloud(resourcedOnly, limit, order)
     {
@@ -116,7 +127,31 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    
+    public getChannelsBySearch( searchTerm )
+    {
+        let searchQuery = `${appSettings.apiRoot}channels/search?$top=100&$skip=0&term=${ searchTerm }`;
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
+            .catch( this.handleError );
+    }
+
+    public getChannelsBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number)
+    {
+        let searchQuery = `${appSettings.apiRoot}channels/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }`;
+
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
+            .catch( this.handleError );
+    }
+
+    public getChannelCount(activeOnly: boolean)
+    {
+        let searchQuery = `${appSettings.apiRoot}channels/count`;
+
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
+            .catch( this.handleError );
+    }
 
     public getAppDetails( appId:number )
     {
@@ -132,6 +167,52 @@ export class AppsService
 
         return this.http.get( `${appSettings.apiRoot}resources?$filter=createdby%20eq%20'${ createdBy }'%20and%20active%20eq%20true`, { headers } )
             .map( res => <StoreApp[]>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getChannels( channelsPerPage: number )
+    {
+        return this.http.get( `${appSettings.apiRoot}channels?$top=`+channelsPerPage )
+            .map( res => <Channel[]>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getRecentChannels( channelsPerPage: number )
+    {
+        return this.http.get( `${appSettings.apiRoot}channels/recent?$top=`+channelsPerPage )
+            .map( res => <Channel[]>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getChannelById( id:number )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+        return this.http.get( `${appSettings.apiRoot}channels/${ id }`, { headers } )
+            .map( res => <Channel>res.json().channel )
+            .catch( this.handleError );
+    }
+
+    public getChannelsByCreator( createdBy:number )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+        return this.http.get( `${appSettings.apiRoot}channels?$filter=createdby%20eq%20'${ createdBy }`, { headers } )
+            .map( res => <Channel[]>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getChannelsByResourceId( resourceId )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        return this.http.get(`${appSettings.apiRoot}channels/relations/`+resourceId)
+            .map( res => <Channel[]>res.json().data )
             .catch( this.handleError );
     }
 
@@ -165,6 +246,70 @@ export class AppsService
             .map( res => <Review>res.json() )
             .subscribe(
                 review => done( review ),
+                err => error( err )
+            );
+    }
+
+    public submitChannel( channel:Channel,
+                             done:(  channel ) => void,
+                             error:( err ) => void )
+    {
+      let headers = new Headers();
+      headers.append( 'Content-Type', 'application/json' );
+      headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+      this.http.post( `${appSettings.apiRoot}channels/create`,
+          JSON.stringify( {
+              title: channel.title,
+              description: channel.description,
+              resourceids: channel.resourceids,
+          } ),
+          { headers } )
+          .map( res => <Channel>res.json() )
+          .subscribe(
+              channel => done( channel ),
+              err => error( err )
+          );
+    }
+
+    public updateChannel( channelID:Number, updatedChannel:Channel,
+                     done:( resource ) => void,
+                     error:( err ) => void )
+    {
+      let headers = new Headers();
+      headers.append( 'Content-Type', 'application/json' );
+      headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+      this.http.post( `${appSettings.apiRoot}channels/${channelID}/edit`,
+        JSON.stringify( {
+            title: updatedChannel.title,
+            description: updatedChannel.description,
+            resourceids: updatedChannel.resourceids,
+        } ),
+          { headers } )
+          .map( res => <Channel>res.json() )
+          .subscribe(
+              channel => {
+                  done( channel )
+              },
+              err => error( err )
+          );
+    }
+
+    public deleteChannel( channelID:Number,
+                        done:( status ) => void,
+                        error:( err ) => void )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+        this.http.delete( `${appSettings.apiRoot}channels/${channelID}`,
+            { headers } )
+            .subscribe(
+                status => {
+                    done( status )
+                },
                 err => error( err )
             );
     }
@@ -225,7 +370,7 @@ export class AppsService
             "date": "2016-01-10T07:24:31.613Z"
         }
     ]
-}                
+}
         ` );
 
         return Observable.of( c )

@@ -18,6 +18,10 @@ export class AppWidgetComponent {
     //appTitleToFit(appTitle: String) {
     //	return (appTitle.length>18) ? (appTitle.substr(0, 16)+'...') : appTitle;
     //}
+    public isChannel: boolean;
+    public resourceLink: string;
+
+    constructor(public router:Router){}
 
     ngOnInit(){
       if(this.app.media && this.app.media.length > 0){
@@ -25,14 +29,24 @@ export class AppWidgetComponent {
       } else if(this.app.type_id === 3){
         this.typeImage = true;
       }
+
+      this.isChannel = this.app.type_id == null;
+
+      if(this.isChannel){
+        this.resourceLink = "ChannelDetails"
+      } else {
+        this.resourceLink = "AppDetails"
+      }
     }
 
     get widgetTypeIcon():string
     {
     	if(!this.app.image) {
+        if(!this.app.type_id){
+          return "backgroundimage-channel";
+        }
     		return "backgroundimage" + this.app.type_id;
     	}
     	return "";
     }
-
 }
