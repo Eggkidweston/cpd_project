@@ -1,5 +1,6 @@
 <a [routerLink]="['AppDetails', { id: app?.id }]" class="app-widget__link">
-  <div class="app-widget__container" [ngStyle]="hasMedia && {'background-image': 'url(' + app?.media[0].url + ')'}">
+  <div class="app-widget__container" [ngStyle]="hasMedia && {'background-image': 'url(' + app?.media[0].url + ')'}
+    || typeImage && {'background-image': 'url(' + app?.url + ')'}">
     <div class="app-widget__icon app-widget__icon--filetype {{ widgetTypeIcon }}" *ngIf="!app?.image"></div>
     <img src="{{ app?.image }}" width="128" height="128" alt="" class="app-widget__icon" *ngIf="app?.image">
     <div class="app-widget__info">

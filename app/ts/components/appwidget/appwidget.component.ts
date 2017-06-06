@@ -13,14 +13,17 @@ export class AppWidgetComponent {
     @Input() app: StoreApp;
     public noimagestyle:string;
     public hasMedia: boolean;
-    
+    public typeImage: boolean;
+
     //appTitleToFit(appTitle: String) {
     //	return (appTitle.length>18) ? (appTitle.substr(0, 16)+'...') : appTitle;
     //}
 
     ngOnInit(){
-      if(this.app.media && this.app.media.length > 0) {
+      if(this.app.media && this.app.media.length > 0){
         this.hasMedia = true;
+      } else if(this.app.type_id === 3){
+        this.typeImage = true;
       }
     }
 
