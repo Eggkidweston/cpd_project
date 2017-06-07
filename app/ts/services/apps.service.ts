@@ -169,9 +169,18 @@ export class AppsService
             );
     }
 
-    public getApp( appId:number )
+    public getApp( resourceId:number )
     {
-        return this.http.get( `${appSettings.apiRoot}resources/${appId}/download` )
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        //Pass the api key if someone is logged in
+         if (AuthenticationService.user) {
+             headers.append( 'x-access-token', AuthenticationService.apiKey );
+         }
+
+        return this.http.get( `${appSettings.apiRoot}resources/${resourceId}/download`,
+            { headers })
             .map( res => res.json().url )
             .catch( this.handleError );
     }
