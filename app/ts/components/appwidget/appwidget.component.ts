@@ -14,10 +14,6 @@ export class AppWidgetComponent {
     public noimagestyle:string;
     public hasMedia: boolean;
     public typeImage: boolean;
-
-    //appTitleToFit(appTitle: String) {
-    //	return (appTitle.length>18) ? (appTitle.substr(0, 16)+'...') : appTitle;
-    //}
     public isChannel: boolean;
     public resourceLink: string;
 
