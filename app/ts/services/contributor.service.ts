@@ -23,7 +23,7 @@ export class ContributorService
             .catch( this.handleError );
     }
 
-    public getResourceDownloadsByContributorId ( contributorId: number):Observable<any>
+    public getResourceDownloads():Observable<any>
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
