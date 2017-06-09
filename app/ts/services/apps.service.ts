@@ -328,7 +328,7 @@ export class AppsService
         headers.append( 'Content-Type', 'application/json' );
         headers.append( 'x-access-token', AuthenticationService.apiKey );
 
-        return this.http.get( `${appSettings.apiRoot}users/me/downloads`, { headers } )
+        return this.http.get( `${appSettings.apiRoot}resources/downloaded`, { headers } )
             .map( res => res.json().resources )
             .catch( this.handleError );
     }
