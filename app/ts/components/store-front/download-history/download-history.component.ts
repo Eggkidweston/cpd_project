@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ContributorService } from '../../../services/services';
+import { AppsService } from '../../../services/apps.service';
 import { Resource } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
@@ -14,7 +14,7 @@ export class DownloadHistoryComponent {
 
     private _resourceDownloads:Array<Resource>;
 
-    constructor(protected contributorService:ContributorService) {
+    constructor(protected appsService:AppsService) {
         this.loadResourceDownloads();
     }
 
@@ -25,9 +25,7 @@ export class DownloadHistoryComponent {
 
     protected loadResourceDownloads():void {
 
-        //TODO: shouldn't be contributor service...
-
-        this.contributorService.getResourceDownloads()
+        this.appsService.getUserResourceDownloads()
             .subscribe(
                 resourceDownloads =>
                 {
