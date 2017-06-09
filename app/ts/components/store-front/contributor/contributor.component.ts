@@ -4,6 +4,7 @@ import { ContributorService } from 'services/services';
 import { AppComponent } from 'app.component';
 import { AppWidgetComponent } from 'appwidget/appwidget.component';
 import { Contributor } from 'models';
+import { Resource } from 'models';
 import { AgoPipe } from '../../shared/ago.pipe.ts';
 import { Router } from '@angular/router-deprecated';
 import { AuthenticationService, SigninRegisterService } from "../../../services/services";
@@ -27,6 +28,7 @@ export class ContributorComponent
     private _contributor:Contributor;
     private isEditingUsername: boolean = false;
     private test: string;
+    private _resourceDownloads:Array<Resource>;
 
     constructor( protected authenticationService:AuthenticationService,
                  protected router:Router,
@@ -43,6 +45,7 @@ export class ContributorComponent
             else {
                 this._contributorId = AuthenticationService.user.id;
                 this.loadContributor();
+                this.loadContributorResourceDownloads();
             }
         }
         else {
@@ -60,6 +63,11 @@ export class ContributorComponent
     get contributor():Contributor
     {
         return this._contributor;
+    }
+
+    get contributorResourceDownloads():Array<Resource>
+    {
+        return this._resourceDownloads;
     }
 
     isProfile():boolean
@@ -83,6 +91,17 @@ export class ContributorComponent
                     this._contributor = contributor;
                     var createdAt = moment(this._contributor.createdat);
                     this.contributor.createdat = createdAt.format("D MMM YYYY");
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
+    }
+
+    protected loadContributorResourceDownloads():void {
+        this.contributorService.getResourceDownloadsByContributorId( this._contributorId )
+            .subscribe(
+                resourceDownloads =>
+                {
+                    this._resourceDownloads = resourceDownloads;
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );

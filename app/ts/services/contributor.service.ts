@@ -23,6 +23,17 @@ export class ContributorService
             .catch( this.handleError );
     }
 
+    public getResourceDownloadsByContributorId ( contributorId: number):Observable<any>
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+        return this.http.get( `${appSettings.apiRoot}users/me/downloads`, { headers } )
+            .map( res => res.json().resources )
+            .catch( this.handleError );
+    }
+
     private handleError( error:Response )
     {
         return Observable.throw( error );

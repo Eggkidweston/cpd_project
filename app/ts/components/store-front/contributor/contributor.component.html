@@ -35,4 +35,11 @@
             <app-widget class="app-widget app-widget--small" *ngFor="let alsoBy of contributor?.resources" [app]="alsoBy"></app-widget>
         </div>
     </div>
+    <div *ngIf="contributorResourceDownloads?.length > 0" class="row col span-11">
+        <hr/>
+        <h2>Recent downloads</h2>
+        <div class="app-widgets">
+            <app-widget class="app-widget app-widget--small" *ngFor="let alsoBy of contributorResourceDownloads" [app]="alsoBy"></app-widget>
+        </div>
+    </div>
 </div>
