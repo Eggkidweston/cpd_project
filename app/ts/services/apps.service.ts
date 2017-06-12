@@ -47,7 +47,7 @@ export class AppsService
             .map( res => <GetResourceResults[]>res.json() )
             .catch( this.handleError );
     }
-    
+
     /*public getLastUpdatedApps(appsPerPage: number, pageNumber: number)
     {
         return this.http.get( `${appSettings.apiRoot}resources?$orderby=updatedat%20desc&$top=`+appsPerPage+`&$filter=active%20eq%20true` )
@@ -116,7 +116,7 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    
+
 
     public getAppDetails( appId:number )
     {
@@ -169,7 +169,7 @@ export class AppsService
             );
     }
 
-    public getApp( resourceId:number )
+    public getApp( appId:number )
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
@@ -234,7 +234,7 @@ export class AppsService
             "date": "2016-01-10T07:24:31.613Z"
         }
     ]
-}                
+}
         ` );
 
         return Observable.of( c )
