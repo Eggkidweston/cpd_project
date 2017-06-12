@@ -117,7 +117,6 @@ export class AppsService
     }
 
 
-
     public getAppDetails( appId:number )
     {
         return this.http.get( `${appSettings.apiRoot}resources/${appId}` )
@@ -179,7 +178,7 @@ export class AppsService
              headers.append( 'x-access-token', AuthenticationService.apiKey );
          }
 
-        return this.http.get( `${appSettings.apiRoot}resources/${resourceId}/download`,
+        return this.http.get( `${appSettings.apiRoot}resources/${appId}/download`,
             { headers })
             .map( res => res.json().url )
             .catch( this.handleError );
