@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { WindowRef } from '../../../services/window.service';
 
 @Component({
@@ -9,6 +9,9 @@ import { WindowRef } from '../../../services/window.service';
 })
 
 export class SocialShareComponent {
+    @Input() title: string;
+    @Input() description: string;
+
     constructor(private winRef: WindowRef) {
 
         let addthis = winRef.nativeWindow.addthis;
