@@ -115,6 +115,31 @@ export class AppsService
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }
+
+    public getChannelsBySearch( searchTerm )
+    {
+        let searchQuery = `${appSettings.apiRoot}channels/search?$top=100&$skip=0&term=${ searchTerm }`;
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
+            .catch( this.handleError );
+    }
+
+    public getChannelsBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number)
+    {
+        let searchQuery = `${appSettings.apiRoot}channels/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }`;
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
+            .catch( this.handleError );
+    }
+
+    public getChannelCount(activeOnly: boolean)
+    {
+        let searchQuery = `${appSettings.apiRoot}channels/count`;
+        return this.http.get(searchQuery)
+            .map( res => <GetSearchResults>res.json() )
+            .catch( this.handleError );
+    }
+
     public getAppDetails( appId:number )
     {
         return this.http.get( `${appSettings.apiRoot}resources/${appId}` )
