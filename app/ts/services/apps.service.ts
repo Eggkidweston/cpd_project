@@ -115,7 +115,6 @@ export class AppsService
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }
-
     public getAppDetails( appId:number )
     {
         return this.http.get( `${appSettings.apiRoot}resources/${appId}` )
