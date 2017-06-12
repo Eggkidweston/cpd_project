@@ -127,6 +127,7 @@ export class AppsService
     public getChannelsBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number)
     {
         let searchQuery = `${appSettings.apiRoot}channels/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }`;
+
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
@@ -135,6 +136,7 @@ export class AppsService
     public getChannelCount(activeOnly: boolean)
     {
         let searchQuery = `${appSettings.apiRoot}channels/count`;
+
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
