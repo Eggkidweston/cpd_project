@@ -313,6 +313,13 @@ export class AppsService
         } );
     }
 
+    public getTrialUrl(trialUrl: string)
+    {
+        return this.http.get( trialUrl )
+            .map( res => res.status )
+            .catch( this.handleError );
+    }
+
     private handleError( error:Response )
     {
         return Observable.throw( error );
