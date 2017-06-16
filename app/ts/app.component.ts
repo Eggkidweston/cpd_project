@@ -21,12 +21,9 @@ import { SupportComponent } from './components/store-front/support/support.compo
 import { TryComponent } from './components/store-front/try/try.component';
 import { CurationBarComponent } from './components/store-front/curation-bar/curation-bar.component';
 import { ErrorComponent } from './components/error/error.component';
-import { SignInComponent } from './components/signin/signin.component';
 import { ResultsComponent } from './components/store-front/results/results.component';
 //import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
 import { ExploreComponent } from './components/explore/explore.component';
-import { RegisterComponent } from './components/register/register.component';
-//import { AppEditComponent } from './components/appedit/appedit.component';
 import { AppInfoComponent } from './components/app-info/app-info.component';
 import { ContributorComponent } from './components/store-front/contributor/contributor.component';
 import { SubmitResourceComponent } from './components/administration/submit-resource/submit-resource.component';
@@ -57,8 +54,7 @@ declare let ga:Function; //google analytics object
     { path: '/contributor/:id', name: 'Contributor', component: ContributorComponent },
     { path: '/aboutjorum', name: 'AboutJorum', component: AboutJorumComponent },
     { path: '/error', name: 'Error', component: ErrorComponent },
-    { path: '/signin', name: 'SignIn', component: SignInComponent },
-    { path: '/register', name: 'Register', component: RegisterComponent },
+    { path: '/signin', name: 'SignIn', component: RegisterIDPComponent },
     { path: '/registeridp', name: 'RegisterIDP', component: RegisterIDPComponent },
     { path: '/about', name: 'About', component: AboutComponent },
     { path: '/whocanregister', name: 'Who', component: WhoComponent },

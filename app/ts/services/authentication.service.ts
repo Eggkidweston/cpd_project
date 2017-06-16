@@ -8,7 +8,6 @@ import { User } from '../models';
 export class AuthenticationService {
     private static _user: User = null;
     private static _apiKey: string;
-    private static _pidpass: string = 'idp628345093456';
 
     constructor(private http: Http) {
     }
@@ -50,32 +49,6 @@ export class AuthenticationService {
         AuthenticationService._apiKey = apiKey;
     }
 
-    register(email: string, username:string, password: string,
-        next: () => void,
-        error: (res: Response) => void,
-        complete: () => void)
-    {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-
-        this.http.post(`${appSettings.apiRoot}users/register`,
-            JSON.stringify({
-                name: username,
-                username: username,
-                email: email,
-                password: password
-            }), { headers })
-            .map(res => res.json())
-            .subscribe(
-                data => {
-                    AuthenticationService.user = data.user;
-                    next();
-                },
-                err => error(err),
-                () => complete()
-            );
-    }
-
     registerWithLocalPid( username:string,
         next: () => void,
         error: (res: Response) => void,
@@ -85,15 +58,14 @@ export class AuthenticationService {
         headers.append('Content-Type', 'application/json');
 
         let localpid:string = localStorage.getItem("pid");
-      
+
         var json = JSON.stringify({
                 name: username,
                 username: username,
-                email: localpid ,
-                password: AuthenticationService._pidpass
-            })
-           
-        this.http.post(`${appSettings.apiRoot}users/register`,
+                email: localpid
+            });
+
+        this.http.post(`${appSettings.apiRoot}users/registeridp`,
             json, { headers })
             .map(res => res.json())
             .subscribe(
@@ -112,12 +84,12 @@ export class AuthenticationService {
         complete: () => void)
     {
         let localpid:string = localStorage.getItem("pid");
-        this.signIn(localpid, AuthenticationService._pidpass, next, error);
+        this.signIn(localpid, next, error);
     }
 
     signInWithToken(token:string, next: () => void, error: (res: Response) => void)
     {
-        
+
         AuthenticationService.apiKey = <any>token;
 
         let headers = new Headers();
@@ -133,18 +105,17 @@ export class AuthenticationService {
         );
     }
 
-    signIn(emailOrUsername: string, password: string,
+    signIn(email: string,
         next: () => void,
         error: (res: Response) => void)
     {
-        
+
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        this.http.post(`${appSettings.apiRoot}authenticate`,
+        this.http.post(`${appSettings.apiRoot}authenticate/idp`,
             JSON.stringify({
-                emailOrUsername: emailOrUsername,
-                password: password
+                email: email
             }), { headers })
             .map(res => <any>res.json())
             .subscribe(

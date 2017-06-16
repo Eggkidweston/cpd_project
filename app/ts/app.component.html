@@ -68,7 +68,7 @@
                     </nav>
                     <nav class="masthead__nav masthead__nav--secondary" role="navigation" data-dropdown>
                         <ul>
-                            <li [class.active]="isRouteActive(['SignIn']) || isRouteActive(['Register']) || isRouteActive(['RegisterIDP'])"
+                            <li [class.active]="isRouteActive(['SignIn']) || isRouteActive(['RegisterIDP'])"
                                 class="nav__item" *ngIf="!authenticationService?.userSignedIn()">
                                 <a [routerLink]="['Profile']">Sign in</a>
                             </li>

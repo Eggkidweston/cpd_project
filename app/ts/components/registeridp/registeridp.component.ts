@@ -93,14 +93,12 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
                         this.signIn();
                     }
                 );
-	        } else {
-	            //this.shakeForm();
 	        }
-	    } 
-	    
-        
+	    }
+
+
 	    signIn() {
-	    	
+
 	    	this.authenticationService
                 .signInWithPid(
                     () => {
