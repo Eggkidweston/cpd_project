@@ -13,14 +13,17 @@ export class AppWidgetComponent {
     @Input() app: StoreApp;
     public noimagestyle:string;
     public hasMedia: boolean;
+    public typeImage: boolean;
     public isChannel: boolean;
     public resourceLink: string;
 
     constructor(public router:Router){}
 
     ngOnInit(){
-      if(this.app.media && this.app.media.length > 0) {
+      if(this.app.media && this.app.media.length > 0){
         this.hasMedia = true;
+      } else if(this.app.type_id === 3){
+        this.typeImage = true;
       }
 
       this.isChannel = this.app.type_id == null;

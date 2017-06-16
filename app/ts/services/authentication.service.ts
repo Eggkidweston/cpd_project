@@ -94,14 +94,14 @@ export class AuthenticationService {
         headers.append('Content-Type', 'application/json');
 
         let localpid:string = localStorage.getItem("pid");
-      
+
         var json = JSON.stringify({
                 name: username,
                 username: username,
                 email: localpid ,
                 password: AuthenticationService._pidpass
             })
-           
+
         this.http.post(`${appSettings.apiRoot}users/register`,
             json, { headers })
             .map(res => res.json())
@@ -126,7 +126,7 @@ export class AuthenticationService {
 
     signInWithToken(token:string, next: () => void, error: (res: Response) => void)
     {
-        
+
         AuthenticationService.apiKey = <any>token;
 
         let headers = new Headers();
@@ -146,7 +146,7 @@ export class AuthenticationService {
         next: () => void,
         error: (res: Response) => void)
     {
-        
+
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -199,6 +199,46 @@ export class AuthenticationService {
             );
     }
 
+    forgotPassword(email: string,
+        next: () => void,
+        error: (res: Response) => void)
+    {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        this.http.post(`${appSettings.apiRoot}users/forgot`,
+            JSON.stringify({
+                email: email,
+            }), { headers })
+            .map(res => res.json())
+            .subscribe(
+              (res) => next(),
+              err => error(err),
+            )
+    }
+
+    resetPassword(resetPasswordToken: string, password: string,
+      next: () => void,
+      error: (res: Response) => void)
+    {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
+      this.http.post(`${appSettings.apiRoot}users/reset`,
+          JSON.stringify({
+              resetPasswordToken: resetPasswordToken,
+              password: password,
+          }), { headers })
+          .map(res => res.json())
+          .subscribe(
+            data => {
+              this.signIn(data.user.username, password, next, error);
+            },
+            err => error(err),
+          )
+    }
+
     private handleError(error: Response) {
         return Observable.throw(error);
     }
@@ -206,4 +246,4 @@ export class AuthenticationService {
 
 export var authenticationServiceInjectables: Array<any> = [
     bind(AuthenticationService).toClass(AuthenticationService)
-];
+];
