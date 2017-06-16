@@ -29,10 +29,14 @@
 			display: block;
 			overflow: hidden;
 			color: #515151;
-			
+
 			&:hover{
 				background-color: #f3f3f3;
 				color: inherit;
+			}
+
+			&.selected{
+				background-color: #deefde;
 			}
 		}
 	}
