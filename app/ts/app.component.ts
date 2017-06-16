@@ -24,6 +24,7 @@ import { CurationBarComponent } from './components/store-front/curation-bar/cura
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
 import { ResultsComponent } from './components/store-front/results/results.component';
+import { ProfileComponent } from './components/profile/profile.component';
 //import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -51,7 +52,7 @@ declare let ga:Function; //google analytics object
 @RouteConfig( [
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault:true },
     { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
-    { path: '/profile', name: 'Profile', component: ContributorComponent },
+    { path: '/profile', name: 'Profile', component: ProfileComponent },
     { path: '/download/:id', name: 'Download', component: DownloadComponent },
     { path: '/try/:id', name: 'Try', component: TryComponent },
     { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
