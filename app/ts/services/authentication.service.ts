@@ -80,8 +80,7 @@ export class AuthenticationService {
 
     signInWithPid(
         next: ()=> void,
-        error: (res: Response) => void,
-        complete: () => void)
+        error: (res: Response) => void)
     {
         let localpid:string = localStorage.getItem("pid");
         this.signIn(localpid, next, error);
@@ -89,19 +88,18 @@ export class AuthenticationService {
 
     signInWithToken(token:string, next: () => void, error: (res: Response) => void)
     {
-
         AuthenticationService.apiKey = <any>token;
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', token);
         this.http.get(`${appSettings.apiRoot}users/me`, { headers })
-                 .map(res => res.json())
-                 .subscribe(data => {
-                     AuthenticationService.user = data.user;
-                     next();
-        },
-                err => error(err)
+            .map(res => res.json())
+            .subscribe(data => {
+                AuthenticationService.user = data.user;
+                next();
+            },
+            err => error(err)
         );
     }
 
@@ -116,6 +114,37 @@ export class AuthenticationService {
         this.http.post(`${appSettings.apiRoot}authenticate/idp`,
             JSON.stringify({
                 email: email
+            }), { headers })
+            .map(res => <any>res.json())
+            .subscribe(
+                data => {
+                    AuthenticationService.apiKey = <any>data.token;
+                    headers.append('x-access-token', AuthenticationService.apiKey);
+                    this.http.get(`${appSettings.apiRoot}users/me`, { headers })
+                        .map(res => res.json())
+                        .subscribe(data => {
+                            AuthenticationService.user = data.user;
+                            next();
+                        });
+                },
+                err => error(err)
+            );
+    }
+
+    signInAdmin(password: string,
+        next: () => void,
+        error: (res: Response) => void)
+    {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        let localpid:string = localStorage.getItem("pid");
+
+        this.http.post(`${appSettings.apiRoot}authenticate/idpadmin`,
+            JSON.stringify({
+                email: localpid,
+                password: password,
             }), { headers })
             .map(res => <any>res.json())
             .subscribe(
