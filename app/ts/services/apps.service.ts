@@ -182,7 +182,6 @@ export class AppsService
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
-        headers.append( 'x-access-token', AuthenticationService.apiKey );
 
         this.http.post( `${appSettings.apiRoot}resources/metrics`,
             JSON.stringify( {
