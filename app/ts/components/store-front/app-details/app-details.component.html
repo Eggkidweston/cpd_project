@@ -72,8 +72,7 @@
             </tr>
             <tr>
               <td>
-                <span *ngIf="authenticationService?.userSignedIn()"><a [routerLink]="['AppInfo', { id: app?.id }]">Resource metrics</a></span>
-                <span *ngIf="!authenticationService?.userSignedIn()"><a [routerLink]="['SignIn']">Resource metrics</a></span>
+                <a [routerLink]="['AppInfo', { id: app?.id }]">Resource metrics</a>
               </td>
             </tr>
           </table>
