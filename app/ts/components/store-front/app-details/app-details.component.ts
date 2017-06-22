@@ -32,7 +32,6 @@ export class AppDetailsComponent implements AfterViewInit
     public widgetIcon:string;
     public errorMessage:string;
     public fileList:Array<string>;
-    public trialUrl:string;
     addingReview:boolean = false;
 
     constructor( public authenticationService:AuthenticationService,
@@ -67,26 +66,8 @@ export class AppDetailsComponent implements AfterViewInit
                     this.setWidgetIcon();
 
                     this.loadAlsoBy();
-
-                    if(this.app.trialurl) {
-                        this.checkTrialUrl( this.app.trialurl );
-                    }
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
-            );
-    }
-
-    checkTrialUrl( trialUrl )
-    {
-        this.appsService.getTrialUrl( trialUrl )
-            .subscribe(
-                status =>
-                {
-                    if(status == 200) {
-                        this.trialUrl = trialUrl;
-                    }
-                },
-                ( error:any ) => this.trialUrl = null
             );
     }
 
