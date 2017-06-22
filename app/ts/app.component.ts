@@ -13,6 +13,7 @@ import { WhoComponent } from './components/whocanregister/who.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { RegisterIDPComponent } from './components/registeridp/registeridp.component';
 import { AppDetailsComponent } from './components/store-front/app-details/app-details.component';
+import { ChannelDetailsComponent } from './components/store-front/channel-details/channel-details.component';
 import { DownloadComponent } from './components/store-front/download/download.component';
 import { AboutJorumComponent } from './components/store-front/jorum/aboutjorum.component';
 import { TermsComponent } from './components/store-front/terms/terms.component';
@@ -23,6 +24,7 @@ import { CurationBarComponent } from './components/store-front/curation-bar/cura
 import { ErrorComponent } from './components/error/error.component';
 import { SignInComponent } from './components/signin/signin.component';
 import { ResultsComponent } from './components/store-front/results/results.component';
+import { ProfileComponent } from './components/profile/profile.component';
 //import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -35,7 +37,9 @@ import { AuthenticationService, appInfo } from './services/services';
 import { SigninRegisterService } from "./services/services";
 import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
 import { CurationTokenMigrationComponent } from './components/ctm/ctm.component';
-import myGlobals = require('./globals'); 
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { SubmitChannelComponent } from './components/administration/submit-channel/submit-channel.component';
+import myGlobals = require('./globals');
 
 declare let ga:Function; //google analytics object
 
@@ -48,7 +52,7 @@ declare let ga:Function; //google analytics object
 @RouteConfig( [
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault:true },
     { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
-    { path: '/profile', name: 'Profile', component: ContributorComponent },
+    { path: '/profile', name: 'Profile', component: ProfileComponent },
     { path: '/download/:id', name: 'Download', component: DownloadComponent },
     { path: '/try/:id', name: 'Try', component: TryComponent },
     { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
@@ -68,7 +72,10 @@ declare let ga:Function; //google analytics object
     { path: '/support', name: 'Support', component: SupportComponent },
     { path: '/results/:searchterm', name: 'Results', component: ResultsComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent },
-    { path: '/ctm', name: 'Ctm', component: CurationTokenMigrationComponent }
+    { path: '/ctm', name: 'Ctm', component: CurationTokenMigrationComponent },
+    { path: '/reset-password/:token', name: 'ResetPassword', component: ResetPasswordComponent },
+    { path: '/channels', name:'Channels', component: SubmitChannelComponent },
+    { path: '/channel/:id', name: 'ChannelDetails', component: ChannelDetailsComponent },
     //{ path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },
 ] )
 
@@ -89,15 +96,15 @@ export class AppComponent
                  public router:Router )
     {
         this.checkCookieBar();
-        
-        
+
+
         this.appInfoname = appInfo.name;
         this.appInfoStrap = appInfo.strap;
         this.appVersion = appInfo.version;
         AppComponent.router = router;
-        
+
         this.narrowHeader = myGlobals.narrowHeader;
-        
+
         router.subscribe((value: any) => {
             if( value.indexOf('try/')==0 ) {
                 this.narrowHeader = true;
@@ -174,7 +181,7 @@ export class AppComponent
     }
 
 
-    
+
     // ok, I confess, this needs refactoring. This is not a good
     // approach to intercomponent communication. And it creates
     // a necessity for a static router, which is smelly

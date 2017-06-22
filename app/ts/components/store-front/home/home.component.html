@@ -3,15 +3,15 @@
 
     <div class="col span-11">
         <search></search>
-        <div class="resource-counter">searching {{totalResourceCount}} resources<br /><br /></div>
+        <div class="resource-counter">searching {{totalResourceCount}} resources<span *ngIf="totalChannelCount > 0"> and {{totalChannelCount}} channels</span><br /><br /></div>
     </div>
 
     <div class="row span-11"></div>
 
-    <div class="col span-11">
+    <div class="col span-11" *ngIf="recommendedApps">
         <h3>Jisc Picks</h3>
-        <hero-carousel [apps]="recommendedApps" *ngIf="recommendedApps && recommendedApps.length > 3"></hero-carousel>
-        <app-widgets [apps]="recommendedApps" *ngIf="recommendedApps && recommendedApps.length < 3"></app-widgets>
+        <hero-carousel [apps]="recommendedApps" *ngIf="recommendedApps.length > 3"></hero-carousel>
+        <app-widgets [apps]="recommendedApps" *ngIf="recommendedApps.length <= 3"></app-widgets>
     </div>
 
     <div class="row span-11"><hr /></div>
