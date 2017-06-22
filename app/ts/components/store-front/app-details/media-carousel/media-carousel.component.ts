@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { StoreApp } from '../../../../models';
+import { AppsService } from '../../../../services/services';
 
 require("../../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js");
 
@@ -17,6 +18,7 @@ export class MediaCarouselComponent {
     private livePreviewSelected: boolean;
     private livePreviewUrl: string;
 
+    constructor(public appsService:AppsService) {}
 
     ngOnInit() {
         if(this.resource.trialurl) {
@@ -66,8 +68,19 @@ export class MediaCarouselComponent {
 
     checkLivePreviewUrl( livePreviewUrl )
     {
+        this.appsService.getTrialUrl( livePreviewUrl )
+            .subscribe(
+                status =>
+                {
+                    console.log(status);
+                    //if(status == 200) {
+                    //    this.livePreviewUrl = livePreviewUrl;
+                    // }
+                },
+                ( error:any ) => console.log("ERROR", error)
+            );
 
-        this.livePreviewUrl = livePreviewUrl;
-
+        //this.livePreviewUrl = livePreviewUrl;
+        //this.livePreviewUrl = 'https://sketchfab.com/models/79ce458a2a074a64b0808f1f90d2a468/embed';
     }
 }

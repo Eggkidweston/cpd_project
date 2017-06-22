@@ -315,8 +315,8 @@ export class AppsService
 
     public getTrialUrl(trialUrl: string)
     {
-        return this.http.get( trialUrl )
-            .map( res => res.status )
+        return this.http.head( trialUrl )
+            .map( res => res )
             .catch( this.handleError );
     }
 
