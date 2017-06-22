@@ -9,7 +9,7 @@ import { StoreApp, Review } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
-import { MediaCarouselComponent } from './media-carousel/media-carousel.component';
+import { PreviewComponent } from './preview/preview.component';
 
 let moment = require( "moment" );
 
@@ -19,7 +19,7 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
     selector: 'app-details',
     template: require( './app-details.component.html' ),
     styles: [require( './app-details.scss' ).toString(), require('../../../../sass/typeimage.scss').toString()],
-    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
+    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, PreviewComponent, AppWidgetComponent]
 } )
 
 export class AppDetailsComponent implements AfterViewInit

@@ -5,12 +5,12 @@ import { AppsService } from '../../../../services/services';
 require("../../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js");
 
 @Component({
-    selector: 'media-carousel',
-    template: require('./media-carousel.component.html'),
-    styles: [require('./media-carousel.scss').toString()]
+    selector: 'preview',
+    template: require('./preview.component.html'),
+    styles: [require('./preview.scss').toString()]
 })
 
-export class MediaCarouselComponent {
+export class PreviewComponent {
     @Input() resource: StoreApp;
     private selectedImage: number = 0;
     private imageSelected: boolean;
@@ -38,25 +38,25 @@ export class MediaCarouselComponent {
     switchCurrentPreview(previewType: string, clickedImageIndex: number = null) {
         switch(previewType) {
             case "Image":
-                this.disableAllPreviews();
+                this.disableAllPreviews(clickedImageIndex);
                 this.imageSelected = true;
-                this.selectedImage = clickedImageIndex;
                 break;
             case "Youtube":
-                this.disableAllPreviews();
+                this.disableAllPreviews(clickedImageIndex);
                 this.youtubeSelected = true;
                 break;
             case "LivePreview":
-                this.disableAllPreviews();
+                this.disableAllPreviews(clickedImageIndex);
                 this.livePreviewSelected = true;
                 break;
         }
     }
 
-    disableAllPreviews(){
+    disableAllPreviews(clickedImageIndex: number){
         this.youtubeSelected = false;
         this.livePreviewSelected = false;
         this.imageSelected = false;
+        this.selectedImage = clickedImageIndex;
     }
 
     extractYoutubeId(fullUrl) {
@@ -68,19 +68,18 @@ export class MediaCarouselComponent {
 
     checkLivePreviewUrl( livePreviewUrl )
     {
-        this.appsService.getTrialUrl( livePreviewUrl )
-            .subscribe(
-                status =>
-                {
-                    console.log(status);
-                    //if(status == 200) {
-                    //    this.livePreviewUrl = livePreviewUrl;
-                    // }
-                },
-                ( error:any ) => console.log("ERROR", error)
-            );
+        // this.appsService.getTrialUrl( livePreviewUrl )
+        //     .subscribe(
+        //         status =>
+        //         {
+        //             console.log(status);
+        //             //if(status == 200) {
+        //             //    this.livePreviewUrl = livePreviewUrl;
+        //             // }
+        //         },
+        //         ( error:any ) => console.log("ERROR", error)
+        //     );
 
-        //this.livePreviewUrl = livePreviewUrl;
-        //this.livePreviewUrl = 'https://sketchfab.com/models/79ce458a2a074a64b0808f1f90d2a468/embed';
+        this.livePreviewUrl = livePreviewUrl;
     }
 }
