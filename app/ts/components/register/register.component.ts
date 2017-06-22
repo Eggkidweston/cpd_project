@@ -84,7 +84,6 @@ export class RegisterComponent {
                 this.checkingForDuplicateEmail = true;
             })
             .debounceTime(500)
-            .distinctUntilChanged()
             .subscribe(
                 (res: any) => {
                     if( res.indexOf('@') >= 0 )
@@ -102,7 +101,6 @@ export class RegisterComponent {
                 this.checkingForDuplicateUsername = true;
             })
             .debounceTime(500)
-            .distinctUntilChanged()
             .subscribe(
                 (res: any) => {
                     authenticationService.isEmailOrUsernameInUse(res,

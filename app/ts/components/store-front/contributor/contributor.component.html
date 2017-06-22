@@ -5,10 +5,7 @@
         </div>
     </div>
     <div class="col span-6">
-        <h2 *ngIf="!isEditingUsername" (click)="onUsernameClicked()">{{ contributor?.username }}</h2>
-        <form *ngIf="isEditingUsername" [ngFormModel]="usernameForm" (submit)="onSubmit(usernameForm.value)" novalidate>
-            <input [ngFormControl]="username" (blur)="usernameChanged(username.value)" class="form-control edit-username">
-        </form>
+        <h2>{{ contributor?.username }}</h2>
         <p><strong>Registered</strong> {{ contributor?.createdat }}</p>
         <p *ngIf="contributor?.reputation"><strong>Reputation</strong> {{ contributor?.reputation }}</p>
     </div>
