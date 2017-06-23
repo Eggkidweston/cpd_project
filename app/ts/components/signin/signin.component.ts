@@ -16,6 +16,7 @@ export class SignInComponent {
     forgotPassword: boolean = false;
     forgotPasswordEmailSent: boolean = false;
     forgotErrorDisplayed: boolean = false;
+    emailErrorDisplayed: boolean = false;
 
     signInForm: ControlGroup;
     emailOrUsername: AbstractControl;
@@ -71,6 +72,7 @@ export class SignInComponent {
 
     onSubmitPasswordReset(formValues: any) {
         this.forgotErrorDisplayed = false;
+        this.emailErrorDisplayed = false;
         this.forgotPasswordEmailSent = false;
 
         if (this.resetPasswordForm.valid) {
@@ -84,9 +86,15 @@ export class SignInComponent {
                     this.busy = false;
                 },
                 (res: any) => {
-                    this.shakeForm();
-                    this.forgotErrorDisplayed = true;
                     this.busy = false;
+
+                    let message = res.json().message;
+                    if (message === "user_not_found") {
+                        this.shakeForm();
+                        this.forgotErrorDisplayed = true;
+                    } else {
+                        this.emailErrorDisplayed = true;
+                    }
                 }
             );
         } else {
