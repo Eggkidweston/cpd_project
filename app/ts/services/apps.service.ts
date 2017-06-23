@@ -198,6 +198,17 @@ export class AppsService
             )
     }
 
+    public verifyTrialUrl(trialUrl: string)
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        return this.http.get( `${appSettings.apiRoot}resources/verifyurl?url=${ trialUrl }`,
+            { headers })
+            .map( res => res.json() )
+            .catch( this.handleError );
+    }
+
     public getResourceCuration( resourceId:number )
     {
         let c = JSON.parse( `
@@ -311,13 +322,6 @@ export class AppsService
             );
             xhr.send( formData );
         } );
-    }
-
-    public getTrialUrl(trialUrl: string)
-    {
-        return this.http.head( trialUrl )
-            .map( res => res )
-            .catch( this.handleError );
     }
 
     private handleError( error:Response )

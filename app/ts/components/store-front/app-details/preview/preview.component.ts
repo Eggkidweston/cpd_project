@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StoreApp } from '../../../../models';
 import { AppsService } from '../../../../services/services';
+import {AppComponent} from '../../../../app.component';
 
 require("../../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js");
 
@@ -21,10 +22,6 @@ export class PreviewComponent {
     constructor(public appsService:AppsService) {}
 
     ngOnInit() {
-        if(this.resource.trialurl) {
-            this.checkLivePreviewUrl( this.resource.trialurl );
-        }
-
         if(this.resource.media.length > 0) {
             this.imageSelected = true;
             return;
@@ -32,6 +29,12 @@ export class PreviewComponent {
             this.livePreviewSelected = true;
         } else {
             this.youtubeSelected = true;
+        }
+    }
+
+    ngAfterViewInit() {
+        if(this.resource.trialurl) {
+            this.checkLivePreviewUrl( this.resource.trialurl );
         }
     }
 
@@ -68,18 +71,15 @@ export class PreviewComponent {
 
     checkLivePreviewUrl( livePreviewUrl )
     {
-        // this.appsService.getTrialUrl( livePreviewUrl )
-        //     .subscribe(
-        //         status =>
-        //         {
-        //             console.log(status);
-        //             //if(status == 200) {
-        //             //    this.livePreviewUrl = livePreviewUrl;
-        //             // }
-        //         },
-        //         ( error:any ) => console.log("ERROR", error)
-        //     );
-
-        this.livePreviewUrl = livePreviewUrl;
+        this.appsService.verifyTrialUrl( livePreviewUrl )
+            .subscribe(
+                response =>
+                {
+                    if(response.status === 200) {
+                       this.livePreviewUrl = livePreviewUrl;
+                    }
+                },
+                ( error:any ) => this.livePreviewUrl = null
+            );
     }
 }
