@@ -316,7 +316,16 @@ export class AppsService
 
     public getApp( appId:number )
     {
-        return this.http.get( `${appSettings.apiRoot}resources/${appId}/download` )
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        //Pass the api key if someone is logged in
+         if (AuthenticationService.user) {
+             headers.append( 'x-access-token', AuthenticationService.apiKey );
+         }
+
+        return this.http.get( `${appSettings.apiRoot}resources/${appId}/download`,
+            { headers })
             .map( res => res.json().url )
             .catch( this.handleError );
     }
@@ -327,7 +336,6 @@ export class AppsService
     {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
-        headers.append( 'x-access-token', AuthenticationService.apiKey );
 
         this.http.post( `${appSettings.apiRoot}resources/metrics`,
             JSON.stringify( {
@@ -456,6 +464,17 @@ export class AppsService
             );
             xhr.send( formData );
         } );
+    }
+
+    public getUserResourceDownloads()
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+        headers.append( 'x-access-token', AuthenticationService.apiKey );
+
+        return this.http.get( `${appSettings.apiRoot}resources/downloaded`, { headers } )
+            .map( res => res.json().resources )
+            .catch( this.handleError );
     }
 
     private handleError( error:Response )

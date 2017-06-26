@@ -11,13 +11,12 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
         styles: [require('./registeridp.scss').toString()]
     })
 
-
     export class RegisterIDPComponent {
 
     	@Output() updateSearch = new EventEmitter();
 
 	    public filteredList = [];
-		public query = '';
+        public query = '';
 	    public advancedSearchActive: boolean = false;
 	    public idpLoaded:boolean = false;
 	    public idpSelected:boolean = false;
@@ -26,49 +25,56 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	    private selectedIdp:IdpMembers;
 
 	    public showPage:boolean = false;
-
 	    public authenticated:boolean = false;
+        public requireAdminPassword:boolean = false;
+        public shaking: boolean = false;
+        public busy: boolean = false;
 
 	    searchForm: ControlGroup;
 	    searchterm: AbstractControl;
 	    idpUserForm: ControlGroup;
 	    username: AbstractControl;
 
+        idpPasswordForm: ControlGroup;
+        password: AbstractControl;
+
 	    checkingForDuplicateUsername: boolean = false;
 	    usernameInUse: boolean = false;
 
 	    constructor( private _idpRegisterService:IDPRegisterService,
                  fb: FormBuilder,
-                 public authenticationService: AuthenticationService, 
-        		public signinRegisterService: SigninRegisterService,
-                  ) {
+                 public authenticationService: AuthenticationService,
+                 public signinRegisterService: SigninRegisterService)
+        {
 
-	  
-	    	this.searchForm = fb.group({
-	                "searchterm": [""]
-	            });
+            this.searchForm = fb.group({
+                "searchterm": [""]
+            });
+    	    this.searchterm = this.searchForm.controls['searchterm'];
 
-		    this.searchterm = this.searchForm.controls['searchterm'];
+    	    this.idpUserForm = fb.group({
+                "username": [""]
+            });
+    	    this.username = this.idpUserForm.controls['username'];
 
-		    this.idpUserForm = fb.group({
-	                "username": [""]
-	            });
-
-		    this.username = this.idpUserForm.controls['username'];
+            this.idpPasswordForm = fb.group({
+                "password": [""]
+            });
+            this.password = this.idpPasswordForm.controls['password'];
 
 	    	if(localStorage.getItem("pid")!='undefined'&&localStorage.getItem("pid")!=''&&localStorage.getItem("pid")!=null){
 
 	    		//attempt to log in with the pidmail and password
 	    		this.signIn()
 
-	    	}else{
+	    	} else {
 	    		this.showPage = true;
 		        this.getIdpMembers();
 	    	}
 	    }
-        
+
 	    private getIdpMembers() {
-        
+
             this._idpRegisterService.getIdpMembers()
                 .subscribe(
                     results => {
@@ -79,12 +85,12 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
                 );
 	    }
 
-	    onSubmitIDP(formValues: any) {
-	        if (this.idpUserForm.valid) {
+        onSubmitIDP(formValues: any) {
+            if (this.idpUserForm.valid) {
 	            this.authenticationService
-                .registerWithLocalPid( formValues.username, 
+                .registerWithLocalPid( formValues.username,
                     () => {
-						this.signinRegisterService.redirectToProfileAfterSignin();
+                      this.signinRegisterService.redirectToProfileAfterSignin();
                     },
                     (res: any) => {
                         AppComponent.generalError(res.status);
@@ -93,33 +99,54 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
                         this.signIn();
                     }
                 );
-	        } else {
-	            //this.shakeForm();
 	        }
-	    } 
-	    
-        
-	    signIn() {
-	    	
-	    	this.authenticationService
-                .signInWithPid(
+	    }
+
+        onSubmitIDPAdmin(formValues: any) {
+            if (this.idpPasswordForm.valid && !this.busy) {
+                this.busy = true;
+
+                this.authenticationService
+                .signInAdmin( formValues.password,
                     () => {
-                    	this.signinRegisterService.redirectToProfileAfterSignin();
-						this.signinRegisterService.resumeAfterSigninOrRegister();
+                        this.signinRegisterService.redirectToProfileAfterSignin();
+                        this.signinRegisterService.resumeAfterSigninOrRegister();
                     },
                     (res: any) => {
-                    	this.showPage = true;
-                        this.requireUsername();
-                    },
-                    () => {
-                    	
-                        
+                        this.busy = false;
+                        this.shakeForm();
                     }
                 );
+            }
+        }
+
+	    signIn() {
+	    	this.authenticationService
+            .signInWithPid(
+                () => {
+                    this.signinRegisterService.redirectToProfileAfterSignin();
+                    this.signinRegisterService.resumeAfterSigninOrRegister();
+                },
+                (res: any) => {
+
+                  if (res.json().message) {
+                    let message = res.json().message;
+
+                    if (message === "admin_requires_password") {
+                      this.requireAdminPassword = true;
+                      this.showPage = true;
+                      return;
+                    }
+                  }
+
+                  this.showPage = true;
+                  this.requireUsername();
+                }
+            );
 	    }
 
 	    requireUsername() {
-	    	this.authenticated = true; 
+	    	this.authenticated = true;
 
 			this.username.valueChanges
             .do((_) => {
@@ -127,7 +154,6 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
                 this.checkingForDuplicateUsername = true;
             })
             .debounceTime(500)
-            .distinctUntilChanged()
             .subscribe(
                 (res: any) => {
                     this.authenticationService.isEmailOrUsernameInUse(res,
@@ -136,7 +162,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
                         () => this.checkingForDuplicateUsername = false
                     )
                 }
-            );  
+            );
 	    }
 
 	    public searchTermChanged(searchTerm:string) {
@@ -169,7 +195,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 
 		public launchIDP() {
 			var url = `https://sp.data.alpha.jisc.ac.uk/Shibboleth.sso/Login?entityID=${this.selectedIdp.entityID}&target=https://sp.data.alpha.jisc.ac.uk/secure/auth-web.php?returl=` + encodeURIComponent(window.location.href);
-			
+
         	window.location.href = url;
 		}
 
@@ -179,4 +205,10 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	        }, 300);
 	    }
 
-    }   
+        shakeForm() {
+            this.shaking = true;
+            setTimeout(() => {
+                this.shaking = false;
+            }, 1000);
+        }
+    }

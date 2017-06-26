@@ -22,12 +22,10 @@ import { SupportComponent } from './components/store-front/support/support.compo
 import { TryComponent } from './components/store-front/try/try.component';
 import { CurationBarComponent } from './components/store-front/curation-bar/curation-bar.component';
 import { ErrorComponent } from './components/error/error.component';
-import { SignInComponent } from './components/signin/signin.component';
 import { ResultsComponent } from './components/store-front/results/results.component';
+import { ProfileComponent } from './components/profile/profile.component';
 //import { TagCloudComponent } from './components/tagcloud/tagcloud.component';
 import { ExploreComponent } from './components/explore/explore.component';
-import { RegisterComponent } from './components/register/register.component';
-//import { AppEditComponent } from './components/appedit/appedit.component';
 import { AppInfoComponent } from './components/app-info/app-info.component';
 import { ContributorComponent } from './components/store-front/contributor/contributor.component';
 import { SubmitResourceComponent } from './components/administration/submit-resource/submit-resource.component';
@@ -35,8 +33,6 @@ import { ResourceMetricsComponent } from './components/store-front/resource-metr
 import { AuthenticationService, appInfo } from './services/services';
 import { SigninRegisterService } from "./services/services";
 import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
-import { CurationTokenMigrationComponent } from './components/ctm/ctm.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { SubmitChannelComponent } from './components/administration/submit-channel/submit-channel.component';
 import myGlobals = require('./globals');
 
@@ -51,7 +47,7 @@ declare let ga:Function; //google analytics object
 @RouteConfig( [
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault:true },
     { path: '/resource/:id', name: 'AppDetails', component: AppDetailsComponent },
-    { path: '/profile', name: 'Profile', component: ContributorComponent },
+    { path: '/profile', name: 'Profile', component: ProfileComponent },
     { path: '/download/:id', name: 'Download', component: DownloadComponent },
     { path: '/try/:id', name: 'Try', component: TryComponent },
     { path: '/resource/info/:id', name: 'AppInfo', component: AppInfoComponent },
@@ -60,8 +56,7 @@ declare let ga:Function; //google analytics object
     { path: '/contributor/:id', name: 'Contributor', component: ContributorComponent },
     { path: '/aboutjorum', name: 'AboutJorum', component: AboutJorumComponent },
     { path: '/error', name: 'Error', component: ErrorComponent },
-    { path: '/signin', name: 'SignIn', component: SignInComponent },
-    { path: '/register', name: 'Register', component: RegisterComponent },
+    { path: '/signin', name: 'SignIn', component: RegisterIDPComponent },
     { path: '/registeridp', name: 'RegisterIDP', component: RegisterIDPComponent },
     { path: '/about', name: 'About', component: AboutComponent },
     { path: '/whocanregister', name: 'Who', component: WhoComponent },
@@ -71,8 +66,6 @@ declare let ga:Function; //google analytics object
     { path: '/support', name: 'Support', component: SupportComponent },
     { path: '/results/:searchterm', name: 'Results', component: ResultsComponent },
     { path: '/feedback', name: 'Feedback', component: FeedbackComponent },
-    { path: '/ctm', name: 'Ctm', component: CurationTokenMigrationComponent },
-    { path: '/reset-password/:token', name: 'ResetPassword', component: ResetPasswordComponent },
     { path: '/channels', name:'Channels', component: SubmitChannelComponent },
     { path: '/channel/:id', name: 'ChannelDetails', component: ChannelDetailsComponent },
     //{ path: '/submissions', name: 'Submissions', component: SubmitResourceComponent },

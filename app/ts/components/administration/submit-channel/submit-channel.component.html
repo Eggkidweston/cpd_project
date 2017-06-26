@@ -52,7 +52,12 @@
             <ul *ngIf="usersChannels.length > 0" class="user-channels__list">
                 <li *ngFor="let channel of usersChannels">
 
-                    <p class="user-channels__title">{{ channel.title }}</p>
+                    <article *ngIf="!editingChannel&&editingChannelID==channel.id" class="box box--padding-tiny box--success">
+                    <div class="box__inner">
+                      <p>Channel updated.</p>
+                    </div>
+                    <!--/ box__inner -->
+                  </article><p class="user-channels__title">{{ channel.title }}</p>
                     <div class="user-channels__buttons">
                       <button (click)="editChannel(channel)">Edit</button>
                       <button (click)="deleteChannel(channel)">Delete</button>
