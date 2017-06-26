@@ -154,7 +154,6 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
                 this.checkingForDuplicateUsername = true;
             })
             .debounceTime(500)
-            .distinctUntilChanged()
             .subscribe(
                 (res: any) => {
                     this.authenticationService.isEmailOrUsernameInUse(res,

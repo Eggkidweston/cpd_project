@@ -33,6 +33,15 @@ export class AuthenticationService {
         return result;
     }
 
+    userIsAdmin(): boolean {
+        var result = false;
+        if(this.userSignedIn()){
+          result = AuthenticationService.user.isadmin;
+        }
+
+        return result;
+    }
+
     static get apiKey(): string {
         if (typeof(Storage) !== "undefined") {
             return localStorage.getItem("_apiKey");

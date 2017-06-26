@@ -5,11 +5,12 @@ import { SubmitReviewComponent } from './submit-review/submit-review.component';
 import { AuthenticationService } from '../../../services/services';
 import { appSettings } from '../../../../../settings';
 import { AppsService } from '../../../services/services';
-import { StoreApp, Review } from '../../../models';
+import { StoreApp, Review, Channel } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
 import { MediaCarouselComponent } from './media-carousel/media-carousel.component';
+import { SocialShareComponent } from '../../shared/social-share/social-share.component';
 
 let moment = require( "moment" );
 
@@ -19,7 +20,7 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
     selector: 'app-details',
     template: require( './app-details.component.html' ),
     styles: [require( './app-details.scss' ).toString(), require('../../../../sass/typeimage.scss').toString()],
-    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
+    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent, SocialShareComponent]
 } )
 
 export class AppDetailsComponent implements AfterViewInit
@@ -27,6 +28,7 @@ export class AppDetailsComponent implements AfterViewInit
     public app:StoreApp;
     public resourceId:number;
     public alsoBy:Array<StoreApp>;
+    public relatedChannels:Array<Channel>;
     public reviews:Array<Review> = new Array<Review>();
     public widgetBackground:string;
     public widgetIcon:string;
@@ -67,6 +69,8 @@ export class AppDetailsComponent implements AfterViewInit
 
                     this.loadAlsoBy();
 
+                    this.loadRelatedChannels();
+
                     //console.log(this.app);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
@@ -97,6 +101,17 @@ export class AppDetailsComponent implements AfterViewInit
                 alsoBy => this.alsoBy = alsoBy.filter( app => this.app.id != app.id ),
                 ( error:any ) => AppComponent.generalError( error.status )
             );
+    }
+
+    loadRelatedChannels()
+    {
+      this.appsService.getChannelsByResourceId(this.app.id)
+          .subscribe(
+              filteredList => {
+                  this.relatedChannels = filteredList;
+              },
+              (error:any) => AppComponent.generalError( error.status )
+          );
     }
 
     reviewAdded( review:Review )
