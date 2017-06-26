@@ -28,7 +28,7 @@
             <div *ngIf="app?.active" class="button-container">
                 <button class="btn btn--3d btn--primary btn--large" role="button" (click)="goDownload()">Get it</button>
                 <button *ngIf="app?.trialurl" class="btn btn--3d btn--primary btn--large tryit" role="button" (click)="goTry()">Try It</button>
-                <social-share [title]="app.title" [description]=app.description></social-share>
+                <social-share [title]="app.title" [description]=app.description [media]=app.media[0]?.url></social-share>
             </div>
 
             <h4 *ngIf="app?.overview">{{ app?.overview }}</h4>
