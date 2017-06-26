@@ -5,11 +5,12 @@ import { SubmitReviewComponent } from './submit-review/submit-review.component';
 import { AuthenticationService } from '../../../services/services';
 import { appSettings } from '../../../../../settings';
 import { AppsService } from '../../../services/services';
-import { StoreApp, Review } from '../../../models';
+import { StoreApp, Review, Channel } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
 import { PreviewComponent } from './preview/preview.component';
+import { SocialShareComponent } from '../../shared/social-share/social-share.component';
 
 let moment = require( "moment" );
 
@@ -19,7 +20,7 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
     selector: 'app-details',
     template: require( './app-details.component.html' ),
     styles: [require( './app-details.scss' ).toString(), require('../../../../sass/typeimage.scss').toString()],
-    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, PreviewComponent, AppWidgetComponent]
+    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, PreviewComponent, AppWidgetComponent, SocialShareComponent]
 } )
 
 export class AppDetailsComponent implements AfterViewInit
@@ -27,6 +28,7 @@ export class AppDetailsComponent implements AfterViewInit
     public app:StoreApp;
     public resourceId:number;
     public alsoBy:Array<StoreApp>;
+    public relatedChannels:Array<Channel>;
     public reviews:Array<Review> = new Array<Review>();
     public widgetBackground:string;
     public widgetIcon:string;
@@ -61,11 +63,13 @@ export class AppDetailsComponent implements AfterViewInit
                     this.app.jorum_legacy_lastmodified = jorum_legacy_lastmodified.format("D MMM YYYY");
 
                     this.fileList = this.getFileListFromMetadata(this.app.jorum_legacy_metadata);
-                    
+
                     this.setWidgetBackground();
                     this.setWidgetIcon();
 
                     this.loadAlsoBy();
+
+                    this.loadRelatedChannels();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -77,7 +81,7 @@ export class AppDetailsComponent implements AfterViewInit
         window.location.href = url;
     }
 
-    
+
 
     loadReviews()
     {
@@ -97,6 +101,17 @@ export class AppDetailsComponent implements AfterViewInit
             );
     }
 
+    loadRelatedChannels()
+    {
+      this.appsService.getChannelsByResourceId(this.app.id)
+          .subscribe(
+              filteredList => {
+                  this.relatedChannels = filteredList;
+              },
+              (error:any) => AppComponent.generalError( error.status )
+          );
+    }
+
     reviewAdded( review:Review )
     {
         // TODO We really ought to be able to just
@@ -112,7 +127,7 @@ export class AppDetailsComponent implements AfterViewInit
         this.router.navigate( ['Try', { id: this.resourceId }] );
     }
 
-    goDownload() 
+    goDownload()
     {
         this.router.navigate( ['Download', { id: this.resourceId }] );
     }
@@ -139,14 +154,14 @@ export class AppDetailsComponent implements AfterViewInit
         else return "";
     }
 
-    setWidgetBackground() 
+    setWidgetBackground()
     {
         if(!this.app.image) {
             this.widgetBackground = "backgroundimage" + this.app.type_id + " nowidgetborder";
         }
     }
 
-    setWidgetIcon() 
+    setWidgetIcon()
     {
         if(!this.app.image&&this.app.jorum_legacy_flag) {
             this.widgetIcon = "https://s3-eu-west-1.amazonaws.com/jisc-store-assets/jorumicon.png";

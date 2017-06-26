@@ -1,0 +1,38 @@
+<div class="app-details-container">
+    <div class="app-details row">
+        <div class="col span-11">
+            <div>
+                <div class="resource-image backgroundimage-channel nowidgetborder app-widget__icon--filetype"></div>
+                <h2 class="app-details__title">{{ channel?.title }}</h2>
+                <p>
+                    <span class="created-by">Created by</span>
+                    <span class="creator-name">{{ channel?.creator?.username }}</span>
+                    <span class="about-this-contributor"><a [routerLink]="['Contributor', { id: channel?.creator?.id }]">about this contributor</a></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col span-11">
+            <p *ngIf="channel?.description">{{ channel?.description }}</p>
+        </div>
+    </div>
+
+    <div class="row"><div class="col span-11"><hr></div></div>
+
+    <div class="row">
+        <div class="col span-11">
+            <h3>Resources in this channel</h3>
+            <app-widgets [apps]="channelApps"></app-widgets>
+        </div>
+    </div>
+
+    <div class="row"><div class="col span-11"><hr></div></div>
+
+    <div class="resource-problem">
+        <h3>Problems with this channel?</h3>
+        <p>Email <a href="mailto:support@jiscstore.freshdesk.com">support@jiscstore.freshdesk.com</a></p>
+    </div>
+
+    <div class="row"><div class="col span-11"><hr></div></div>
+</div>

@@ -14,17 +14,20 @@
                         class="creator-name">Jorum</span>
                     <span class="about-this-contributor"><a [routerLink]="['AboutJorum', { id: app?.id }]">about Jorum</a></span>
                 </p>
-                <p *ngIf="!app?.jorum_legacy_flag"><span class="created-by">Created by</span> <span
+                <p *ngIf="!app?.jorum_legacy_flag"><span class="created-by">Contributed by</span> <span
                         class="creator-name">{{ app?.creator?.username }}</span>
                     <span class="about-this-contributor"><a [routerLink]="['Contributor', { id: app?.creator?.id }]">about this contributor</a></span>
                 </p>
+
               </div>
 
               <div class="jorum-note" *ngIf="app?.jorum_legacy_flag"><strong>Jorum</strong> - Created on {{app?.jorum_legacy_lastmodified}} by <strong>{{app?.jorum_legacy_name}}</strong> of <strong>{{app?.jorum_legacy_type}}</strong></div>
+              <div class="jorum-note" *ngIf="!app?.jorum_legacy_flag&&(app?.author||app?.attribution)"><span *ngIf="app?.author"><strong>Author</strong> - {{app?.author}} </span><span *ngIf="app?.attribution"><strong>Attribution</strong> - {{app?.attribution}} </span></div>
 
 
             <div *ngIf="app?.active" class="button-container">
                 <button class="btn btn--3d btn--primary btn--large" role="button" (click)="goDownload()">Get it</button>
+                <social-share [title]="app.title" [description]=app.description></social-share>
             </div>
 
             <h4 *ngIf="app?.overview">{{ app?.overview }}</h4>
@@ -71,8 +74,7 @@
             </tr>
             <tr>
               <td>
-                <span *ngIf="authenticationService?.userSignedIn()"><a [routerLink]="['AppInfo', { id: app?.id }]">Resource metrics</a></span>
-                <span *ngIf="!authenticationService?.userSignedIn()"><a [routerLink]="['SignIn']">Resource metrics</a></span>
+                <a [routerLink]="['AppInfo', { id: app?.id }]">Resource metrics</a>
               </td>
             </tr>
           </table>
@@ -164,6 +166,16 @@
             <h3>Also by {{ app?.creator?.username }}</h3>
             <div class="app-widgets">
                 <app-widget class="app-widget app-widget--small" *ngFor="let alsoBy of alsoBy" [app]="alsoBy"></app-widget>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="relatedChannels?.length > 0">
+        <div class="row"><div class="col span-12"><hr></div></div>
+        <div class="col span-11 meta-section">
+            <h3>Channels containing this resource</h3>
+            <div class="app-widgets">
+                <app-widget class="app-widget app-widget--small" *ngFor="let channel of relatedChannels" [app]="channel"></app-widget>
             </div>
         </div>
     </div>
