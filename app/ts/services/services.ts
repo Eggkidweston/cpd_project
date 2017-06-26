@@ -15,12 +15,12 @@ export * from './version-control.service';
 export * from './idpregister.service';
 export var servicesInjectables: Array<any> = [
     appsServiceInjectables,
-    authenticationServiceInjectables, 
-    tagsServiceInjectables, 
+    authenticationServiceInjectables,
+    tagsServiceInjectables,
     signinRegisterServiceInjectables,
     contributorServiceInjectables,
     versionControlServiceInjectables,
     idpRegisterServiceInjectables
 ];
 
-export var appInfo = { name: 'Store', strap: 'Open and commercial educational apps and resources', version: 'version 1.1'}
+export var appInfo = { name: 'Store', strap: 'Open and commercial educational apps and resources', version: 'version 1.3.2'}
