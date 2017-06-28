@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AppWidgetsComponent } from '../../appwidgets/appwidgets.component';
 import { HeroCarouselComponent } from '../../hero-carousel/hero-carousel.component';
 import { SearchComponent } from '../../search/search.component';
+import { RefinedSearchComponent } from '../../refined-search/refined-search.component';
 import { RecommendedRecentComponent } from '../../recommended-recent/recommended-recent.component';
 import { AppsService } from '../../../services/services';
 import { StoreApp, Channel } from '../../../models';
@@ -12,10 +13,11 @@ import { appSettings } from '../../../../../settings';
     selector: 'home',
     template: require( './home.component.html' ),
     styles: [require('./home.scss').toString()],
-    directives: [AppWidgetsComponent, HeroCarouselComponent, SearchComponent, RecommendedRecentComponent]
+    directives: [AppWidgetsComponent, HeroCarouselComponent, SearchComponent, RefinedSearchComponent, RecommendedRecentComponent]
 } )
 export class HomeComponent
 {
+    @ViewChild(SearchComponent) searchChild;
     private mostDownloadedApps:Array<StoreApp>;
     private recentApps:Array<StoreApp>;
     private lastUpdatedApps:Array<StoreApp>;
@@ -118,5 +120,9 @@ export class HomeComponent
               },
               ( error:any ) => AppComponent.generalError( error.status )
         );
+    }
+
+    refinedSearchUpdated(event){
+        this.searchChild.refreshSearchResults();
     }
 }

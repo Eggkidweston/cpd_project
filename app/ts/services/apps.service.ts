@@ -108,9 +108,9 @@ export class AppsService
 
     }
 
-    public getBySearch( searchTerm, opened, activeOnly: boolean)
+    public getBySearch( searchTerm, opened, level, subject, useType, activeOnly: boolean)
     {
-        let searchQuery = `${appSettings.apiRoot}resources/search?$top=100&$skip=0&term=${ searchTerm }`;
+        let searchQuery = `${appSettings.apiRoot}resources/search?$top=100&$skip=0&term=${ searchTerm }&level=${ level }&subject=${ subject }&usetype=${ useType }`;
         if(activeOnly) searchQuery += "&active=true";
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
