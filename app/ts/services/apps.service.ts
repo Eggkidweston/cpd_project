@@ -1,7 +1,10 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions, Channel } from '../models';
+import {
+    StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions, Channel,
+    ReleaseNoteResults
+} from '../models';
 import { appInfo } from './services';
 import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
@@ -474,6 +477,12 @@ export class AppsService
 
         return this.http.get( `${appSettings.apiRoot}resources/downloaded`, { headers } )
             .map( res => res.json().resources )
+            .catch( this.handleError );
+    }
+
+    public getReleaseNotes() {
+        return this.http.get( `${appSettings.apiRoot}releases` )
+            .map( res => <ReleaseNoteResults>res.json() )
             .catch( this.handleError );
     }
 
