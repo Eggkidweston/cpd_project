@@ -12,6 +12,10 @@
 	color: #333;
 	background: #eeeeee;
 	font-weight: 600;
+
+	&:last-of-type{
+		width: 14.5em;
+	}
 }
 
 .refine-search__option:disabled{
