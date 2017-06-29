@@ -27,7 +27,6 @@ export class RefinedSearchComponent {
         this.resourceUseType = this.getStoredValue('resource-usetype');
         this.resourceSubject = this.getStoredValue('resource-subject');
         this.resourceLevel = this.getStoredValue('resource-level');
-        this.setSubjectFilter(this.resourceLevel);
     }
 
     getStoredValue(category){
@@ -58,7 +57,7 @@ export class RefinedSearchComponent {
     }
 
     setSubjectFilter(value){
-        if(this._resourceLevels && this.resourceLevel != "all"){
+        if(this.resourceLevel !== "all"){
             let index = this._resourceLevels.map((o) => o.id).indexOf(parseInt(value));
             if (index == -1) {
                 this.subjectFilter = null;
@@ -85,6 +84,7 @@ export class RefinedSearchComponent {
                 resourceLevels =>
                 {
                     this._resourceLevels = resourceLevels;
+                    this.setSubjectFilter(this.resourceLevel);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
