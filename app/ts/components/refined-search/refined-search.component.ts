@@ -15,9 +15,9 @@ export class RefinedSearchComponent {
     private resourceLevel: string;
     private subjectFilter: string;
 
-    private _resourceUseTypes:Array<ResourceProperty>;
-    private _resourceLevels:Array<ResourceProperty>;
-    private _resourceSubjects:Array<ResourceProperty>;
+    private resourceUseTypes:Array<ResourceProperty>;
+    private resourceLevels:Array<ResourceProperty>;
+    private resourceSubjects:Array<ResourceProperty>;
 
     constructor(protected appsService:AppsService) {
         this.loadResourceUseTypes();
@@ -58,12 +58,12 @@ export class RefinedSearchComponent {
 
     setSubjectFilter(value){
         if(this.resourceLevel !== "all"){
-            let index = this._resourceLevels.map((o) => o.id).indexOf(parseInt(value));
+            let index = this.resourceLevels.map((o) => o.id).indexOf(parseInt(value));
             if (index == -1) {
                 this.subjectFilter = null;
                 return;
             }
-            this.subjectFilter = this._resourceLevels[index].filter;
+            this.subjectFilter = this.resourceLevels[index].filter;
         }
     }
 
@@ -72,7 +72,7 @@ export class RefinedSearchComponent {
             .subscribe(
                 resourceUseTypes =>
                 {
-                    this._resourceUseTypes = resourceUseTypes;
+                    this.resourceUseTypes = resourceUseTypes;
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -83,7 +83,7 @@ export class RefinedSearchComponent {
             .subscribe(
                 resourceLevels =>
                 {
-                    this._resourceLevels = resourceLevels;
+                    this.resourceLevels = resourceLevels;
                     this.setSubjectFilter(this.resourceLevel);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
@@ -95,7 +95,7 @@ export class RefinedSearchComponent {
             .subscribe(
                 resourceSubjects =>
                 {
-                    this._resourceSubjects = resourceSubjects;
+                    this.resourceSubjects = resourceSubjects;
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
