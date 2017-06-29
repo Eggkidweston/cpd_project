@@ -1,28 +1,23 @@
 <div class="refine-search">
 	<span>I am looking for</span>
 
-	<select name="resource-usetype" (change)="update($event.target.name, $event.target.value)" class="refine-search__select" [value]="resourceUseType ? resourceUseType : 'all'">
+	<select name="resource-usetype" (change)="update($event.target.name, $event.target.value)" class="refine-search__select" [ngModel]="resourceUseType">
 		<option value="all">all</option>
-		<option value="1000">teaching</option>
-		<option value="1001">research</option>
-		<option value="1002">admin</option>
-		<option value="1003">technical</option>
+		<option *ngFor="let useType of _resourceUseTypes" [value]="useType.id" class="refine-search__option">{{useType.name}}</option>
 	</select>
 
 	<span>resources for</span>
 
-	<select name="resource-level" (change)="update($event.target.name, $event.target.value)" class="refine-search__select" [value]="resourceLevel ? resourceLevel : 'all'">
-		<option value="all">any</option>
-		<option value="1000">Higher</option>
-		<option value="1001">Lower</option>
+	<select name="resource-level" (change)="update($event.target.name, $event.target.value)" class="refine-search__select" [ngModel]="resourceLevel">
+		<option value="all">all</option>
+		<option *ngFor="let level of _resourceLevels" [value]="level.id" class="refine-search__option">{{level.name}}</option>
 	</select>
 
 	<span>Education in</span>
 
-	<select name="resource-subject" (change)="update($event.target.name, $event.target.value)" class="refine-search__select" [value]="resourceSubject ? resourceSubject : 'all'">
-		<option value="all">everything</option>
-		<option value="1011">Law</option>
-		<option value="1010">Social Studies</option>
+	<select name="resource-subject" (change)="update($event.target.name, $event.target.value)" class="refine-search__select" [ngModel]="resourceSubject">
+		<option value="all" [selected]="resourceSubject == 'all'">all subjects</option>
+		<option *ngFor="let subject of _resourceSubjects" [value]="subject.id" [disabled]="subjectFilter != null && subjectFilter == subject.filter" class="refine-search__option">{{subject.name}}</option>
 	</select>
 
 </div>

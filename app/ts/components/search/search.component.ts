@@ -81,7 +81,7 @@ export class SearchComponent {
         let resourceUseType = this.getStoredValue('resource-usetype');
 
         if(searchTerm.length>1) {
-            this._appsService.getBySearch(searchTerm, this.freestuff._value, resourceLevel, resourceSubject, resourceUseType, activeOnly)
+            this._appsService.getBySearch(searchTerm, this.freestuff._value, activeOnly, resourceLevel, resourceSubject, resourceUseType)
                 .subscribe(
                     filteredList => {
                         if(this.searchingForSuggestions) { // don't allow slow responses to overwrite
