@@ -480,8 +480,8 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    public getReleaseNotes() {
-        return this.http.get( `${appSettings.apiRoot}releases` )
+    public getActiveReleaseNotes() {
+        return this.http.get( `${appSettings.apiRoot}release-notes` )
             .map( res => <ReleaseNoteResults>res.json() )
             .catch( this.handleError );
     }

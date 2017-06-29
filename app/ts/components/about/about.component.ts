@@ -15,11 +15,11 @@ import { AppComponent } from "../../app.component";
 
         constructor(private appService: AppsService) {
 
-            this.getReleaseNotes();
+            this.getActiveReleaseNotes();
         }
 
-        private getReleaseNotes() {
-            this.appService.getReleaseNotes()
+        private getActiveReleaseNotes() {
+            this.appService.getActiveReleaseNotes()
                 .subscribe(
                     releaseNotes => {
                         this.releaseNotes = releaseNotes;
