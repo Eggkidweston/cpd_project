@@ -14,7 +14,6 @@ export class RefinedSearchComponent {
     private resourceSubject: string;
     private resourceLevel: string;
     private subjectFilter: string;
-    private vocationalValue: number;
 
     private resourceUseTypes:Array<ResourceProperty>;
     private resourceLevels:Array<ResourceProperty>;
@@ -37,7 +36,7 @@ export class RefinedSearchComponent {
         return "all";
     }
 
-    update(category, value, filter?){
+    update(category, value){
         if (typeof(Storage) !== "undefined") {
             localStorage.setItem(category, value);
         }
@@ -68,11 +67,6 @@ export class RefinedSearchComponent {
         }
     }
 
-    setVocationalValue(){
-        let index = this.resourceLevels.map((o) => o.filter).indexOf("further");
-        this.vocationalValue = this.resourceLevels[index].id;
-    }
-
     loadResourceUseTypes() {
         this.appsService.getResourceUseTypes()
             .subscribe(
@@ -91,7 +85,6 @@ export class RefinedSearchComponent {
                 {
                     this.resourceLevels = resourceLevels;
                     this.setSubjectFilter(this.resourceLevel);
-                    this.setVocationalValue();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
