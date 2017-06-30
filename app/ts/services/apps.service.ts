@@ -117,9 +117,9 @@ export class AppsService
             .catch( this.handleError );
     }
 
-    public getBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number, activeOnly: boolean)
+    public getBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number, activeOnly: boolean, level?, subject?, useType?)
     {
-        let searchQuery = `${appSettings.apiRoot}resources/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }`;
+        let searchQuery = `${appSettings.apiRoot}resources/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }&level=${ level }&subject=${ subject }&usetype=${ useType }`;
         if(activeOnly) searchQuery += "&active=true";
 
         return this.http.get(searchQuery)
