@@ -2,7 +2,7 @@ import { Component, Input, AfterViewInit, ChangeDetectorRef } from '@angular/cor
 import { RatingComponent } from '../../shared/rating/rating.component';
 import { RouterOutlet, RouterLink, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { SubmitReviewComponent } from './submit-review/submit-review.component';
-import { AuthenticationService } from '../../../services/services';
+import { AuthenticationService, ContributorService } from '../../../services/services';
 import { appSettings } from '../../../../../settings';
 import { AppsService } from '../../../services/services';
 import { StoreApp, Review, Channel } from '../../../models';
@@ -10,6 +10,7 @@ import { AppComponent } from '../../../app.component';
 import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
 import { MediaCarouselComponent } from './media-carousel/media-carousel.component';
+import { SocialShareComponent } from '../../shared/social-share/social-share.component';
 
 let moment = require( "moment" );
 
@@ -19,7 +20,7 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
     selector: 'app-details',
     template: require( './app-details.component.html' ),
     styles: [require( './app-details.scss' ).toString(), require('../../../../sass/typeimage.scss').toString()],
-    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent]
+    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent, SocialShareComponent]
 } )
 
 export class AppDetailsComponent implements AfterViewInit
@@ -36,6 +37,7 @@ export class AppDetailsComponent implements AfterViewInit
     addingReview:boolean = false;
 
     constructor( public authenticationService:AuthenticationService,
+                 private contributorService:ContributorService,
                  public router:Router,
                  public appsService:AppsService,
                  params:RouteParams )
@@ -62,7 +64,7 @@ export class AppDetailsComponent implements AfterViewInit
                     this.app.jorum_legacy_lastmodified = jorum_legacy_lastmodified.format("D MMM YYYY");
 
                     this.fileList = this.getFileListFromMetadata(this.app.jorum_legacy_metadata);
-                    
+
                     this.setWidgetBackground();
                     this.setWidgetIcon();
 
@@ -78,11 +80,29 @@ export class AppDetailsComponent implements AfterViewInit
 
     goCuration()
     {
-        var url = `${appSettings.curationRoot}#/resource/${this.app.id}?token=${AuthenticationService.apiKey}`;
-        window.location.href = url;
+      //work around until we get a token checking endpoint
+      if(this.authenticationService.userSignedIn()) {
+        this.contributorService.getContributorById( AuthenticationService.user.id )
+            .subscribe(
+                contributor =>
+                {
+                  //console.log('logged in');
+                    //definitely logged in
+                    var url = `${appSettings.curationRoot}#/resource/${this.app.id}?token=${AuthenticationService.apiKey}`;
+                    window.location.href = url;
+                },
+                ( error:any ) => {
+                  //console.log('error getting contributor - sign in');
+                   this.router.navigate( ['SignIn'] );
+               }
+            );
+      }else{
+        //console.log('not signed in - sign in');
+          this.router.navigate( ['SignIn'] );
+      }
     }
 
-    
+
 
     loadReviews()
     {
@@ -128,7 +148,7 @@ export class AppDetailsComponent implements AfterViewInit
         this.router.navigate( ['Try', { id: this.resourceId }] );
     }
 
-    goDownload() 
+    goDownload()
     {
         this.router.navigate( ['Download', { id: this.resourceId }] );
     }
@@ -155,14 +175,14 @@ export class AppDetailsComponent implements AfterViewInit
         else return "";
     }
 
-    setWidgetBackground() 
+    setWidgetBackground()
     {
         if(!this.app.image) {
             this.widgetBackground = "backgroundimage" + this.app.type_id + " nowidgetborder";
         }
     }
 
-    setWidgetIcon() 
+    setWidgetIcon()
     {
         if(!this.app.image&&this.app.jorum_legacy_flag) {
             this.widgetIcon = "https://s3-eu-west-1.amazonaws.com/jisc-store-assets/jorumicon.png";
