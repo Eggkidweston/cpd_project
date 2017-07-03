@@ -23,4 +23,7 @@ export var servicesInjectables: Array<any> = [
     idpRegisterServiceInjectables
 ];
 
-export var appInfo = { name: 'Store', strap: 'Open and commercial educational apps and resources', version: 'version 1.4'}
+export var appInfo = {
+    name: 'Store',
+    strap: 'Open and commercial educational apps and resources'
+};

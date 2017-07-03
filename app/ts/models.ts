@@ -262,6 +262,14 @@ export class Channel
    };
 }
 
+export class Version {
+    id: number;
+    version_number: number;
+    active: boolean;
+    updatedat: string;
+    createdat: string;
+}
+
 export var ResourceTypes = ["APPLEAPP", "ANDROIDAPP", "IMAGE", "VIDEO", "AUDIO", "ARCHIVE_WEB", "ARCHIVE_OTHER", "WORD", "PDF", "POWERPOINT", "EXCEL", "WEB PAGE", "FLASH"];
 
 export var ResourceInstructions = [
