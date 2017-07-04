@@ -93,9 +93,9 @@
 
 .loader {
   position: relative;
-  margin-top: 100px;
+  margin-top: 50px;
   height: 58px;
-  left: 40%;
+  left: 50%;
   transform: translateX(-50%) translateY(-50%);
   -o-transform: translateX(-50%) translateY(-50%);
   -ms-transform: translateX(-50%) translateY(-50%);
@@ -413,6 +413,10 @@
   position: absolute;
   top: 2px;
   right: 0;
+}
+
+.explore-filter__property--usetype{
+  text-transform: capitalize;
 }
 
 .explore-filter__property--active{

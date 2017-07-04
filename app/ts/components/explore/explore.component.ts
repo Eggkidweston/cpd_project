@@ -10,7 +10,7 @@ import {
 } from '@angular/router-deprecated';
 import {AuthenticationService} from '../../services/services';
 import {AppsService} from '../../services/services';
-import {StoreApp, TagCloud, Tag, ResourceProperty} from '../../models';
+import {StoreApp, ResourceProperty} from '../../models';
 import {AppComponent} from '../../app.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import {AppWidgetsComponent} from '../appwidgets/appwidgets.component';
@@ -29,25 +29,19 @@ export class ExploreComponent implements AfterViewInit {
     private storeApps: Array<StoreApp>;
     public errorMessage: string;
 
-    public tagcloud: TagCloud;
-    public selectedTags: TagCloud;
-    public chosenOrder: string;
-    private queryTags: string;
-    private gettingTags: boolean;
     private gettingResources: boolean;
     private appsPerPage:number = 10;
     private currentPage:number = 1;
     private totalPages:number = 0;
     public resultsCount:number = 0;
 
-    private showFilterTag: boolean = false;
     private showFilterUseType: boolean = true;
     private showFilterLevel: boolean = true;
     private showFilterSubject: boolean = true;
 
     private resourceUseType: string;
     private resourceLevel: string;
-    private resourceSubject: string;
+    private resourceSubject: string[];
     private subjectFilter: string;
 
     private resourceUseTypes:Array<ResourceProperty>;
@@ -59,94 +53,26 @@ export class ExploreComponent implements AfterViewInit {
                 public appsService: AppsService,
                 public cdr: ChangeDetectorRef,
                 params: RouteParams) {
-        
-        this.queryTags = params.get('tags');
-        this.chosenOrder = "pop";
 
-        this.selectedTags = new TagCloud([]);
+        this.resourceSubject = [];
 
         this.loadResourceUseTypes();
         this.loadResourceLevels();
         this.loadResourceSubjects();
     }
 
-
     ngAfterViewInit() {
-        if (this.queryTags) {
-            this.loadCloud(this.queryTags);
-        }
-        else {
-            this.loadCloud();
-        }
-    }
-
-    getTaggedApps(tag) {
-        this.appsService.getByTag(tag)
-            .subscribe(
-                storeApps => {
-                    this.storeApps = storeApps;
-                },
-                (error: any) => AppComponent.generalError(error.status)
-            );
-    }
-
-    selectTag(event, tagId) {
-        event.preventDefault();
-        var selectedTag = this.tagcloud.GetTag(tagId);
-        this.selectedTags = this.selectedTags || new TagCloud([]);
-        this.selectedTags.AddTag(selectedTag);
-        this.loadCloud();
-    }
-
-    selectTagFromDB(tagId) {
-        this.appsService.getTags(tagId)
-            .subscribe(
-                tags => {
-                        this.gettingTags = false;
-                        this.selectedTags = new TagCloud([tags[0]]);
-                        this.loadCloud();
-                        this.loadApps();
-
-                    },
-                (error: any) => AppComponent.generalError(error.status)
-            );
-    }
-
-    removeTag(tagId) {
-        this.selectedTags.RemoveTag(tagId);
-        this.loadCloud();
-    }
-
-    order(order) {
-        this.chosenOrder = order;
-        this.selectedTags = new TagCloud([]);
-        
-        this.loadCloud();
-    }
-
-    loadApps() {
-       
-        this.gettingResources = true;
-        this.appsService.getResources(this.appsPerPage, this.currentPage, this.selectedTags.GetFilterSyntax())
-            .subscribe(
-                storeApps => {
-                    this.storeApps = storeApps.data;
-                    this.resultsCount = storeApps.availableRows;
-                    this.totalPages = Math.ceil(storeApps.availableRows/this.appsPerPage);
-                    this.gettingResources = false;
-                },
-                (error: any) => AppComponent.generalError(error.status)
-            );
+        this.loadRecommendedApps();
     }
 
     onPageClicked(page) {
         this.currentPage = page;
-        this.loadApps();
+        this.loadResources();
     }
 
-    loadRecomendedApps() {
+    loadRecommendedApps() {
         this.gettingResources = true;
-        this.appsService.getRecommendedApps(100, 1)
+        this.appsService.getRecommendedApps(10, 1)
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
@@ -154,47 +80,6 @@ export class ExploreComponent implements AfterViewInit {
                 },
                 (error: any) => AppComponent.generalError(error.status)
             );
-    }
-
-    loadCloud(initialSelectedId = null) {
-        this.gettingTags = true;
-        this.gettingResources = true;
-        if (this.selectedTags.Tags.length > 0) {
-            var tagIds = this.selectedTags.GetIds();
-            this.appsService.getRelatedTags(tagIds)
-                .subscribe(
-                    tags => {
-                        this.gettingTags = false;
-                        this.tagcloud = new TagCloud(tags);
-
-                        this.loadApps();
-                    },
-                    (error: any) => AppComponent.generalError(error.status)
-                );
-        }
-        else {
-            if (initialSelectedId != null){
-                //console.log('use initialSelectedId');
-                this.selectTagFromDB(initialSelectedId);
-            } else {
-                this.totalPages = 0;
-            this.appsService.getTagCloud(true, 50, this.chosenOrder)
-                .subscribe(
-                    tags => {
-                        //console.log('getTagCloud');
-                        //console.log(tags);
-                        this.gettingTags = false;
-                        this.tagcloud = new TagCloud(tags);
-                        this.loadRecomendedApps();
-
-                    },
-                    (error: any) => AppComponent.generalError(error.status)
-                );
-
-            }
-        }
-        error => this.errorMessage = <any>error;
-
     }
 
     loadResourceUseTypes() {
@@ -248,20 +133,27 @@ export class ExploreComponent implements AfterViewInit {
                     break;
                 }
                 this.resourceLevel = property;
-                this.resourceSubject = null;
+                this.resourceSubject = [];
                 this.setSubjectFilter(property);
                 break;
             case 'subject':
-                if (this.resourceSubject === property) {
-                    this.resourceSubject = null;
+                let index = this.resourceSubject.indexOf(property);
+                if (index > -1){
+                    this.resourceSubject.splice(index);
                     break;
                 }
-                this.resourceSubject = property;
+
+                this.resourceSubject.push(property);
                 break;
         }
 
         this.currentPage = 1;
-        this.refreshApps();
+
+        if (this.resourceLevel || this.resourceUseType || this.resourceSubject.length > 0) {
+            this.loadResources();
+        } else {
+            this.loadRecommendedApps();
+        }
     }
 
     setSubjectFilter(value){
@@ -273,6 +165,14 @@ export class ExploreComponent implements AfterViewInit {
         this.subjectFilter = this.resourceLevels[index].filter;
     }
 
+    resourceSubjectSelected(subject){
+        let index = this.resourceSubject.indexOf(subject);
+        if (index === -1){
+            return false;
+        }
+        return true;
+    }
+
     getResourcePropertySyntax() {
         let resourcePropertyQuery: string = '';
 
@@ -282,16 +182,16 @@ export class ExploreComponent implements AfterViewInit {
         if(this.resourceLevel) {
             resourcePropertyQuery += `&$level=${this.resourceLevel}`;
         }
-        if(this.resourceSubject) {
+        if(this.resourceSubject.length > 0) {
             resourcePropertyQuery += `&$subject=${this.resourceSubject}`;
         }
 
         return resourcePropertyQuery;
     }
 
-    refreshApps(){
+    loadResources() {
         this.gettingResources = true;
-        this.appsService.getResources(this.appsPerPage, this.currentPage, this.selectedTags.GetFilterSyntax(), this.getResourcePropertySyntax())
+        this.appsService.getResources(this.appsPerPage, this.currentPage, '', this.getResourcePropertySyntax())
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
