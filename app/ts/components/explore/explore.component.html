@@ -2,7 +2,10 @@
     <div class="col span-3">
 
         <div class="explore-filter" *ngIf="resourceUseTypes">
-            <h3 class="explore-filter__title" [ngClass]="{'opened' : showFilterUseType}" (click)="showFilterUseType = !showFilterUseType">Use Type</h3>
+            <h3 class="explore-filter__title" (click)="showFilterUseType = !showFilterUseType">
+                Use Type
+                <span class="icon explore-filter__icon" [ngClass]="{'icon-chevron-up' : showFilterUseType, 'icon-chevron-down' : !showFilterUseType}"></span>
+            </h3>
 
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterUseType}">
                 <ul>
@@ -14,7 +17,10 @@
         </div>
 
         <div class="explore-filter" *ngIf="resourceLevels">
-            <h3 class="explore-filter__title" [ngClass]="{'opened' : showFilterLevel}" (click)="showFilterLevel = !showFilterLevel">Level</h3>
+            <h3 class="explore-filter__title" [ngClass]="{'opened' : showFilterLevel}" (click)="showFilterLevel = !showFilterLevel">
+                Level
+                <span class="icon explore-filter__icon" [ngClass]="{'icon-chevron-up' : showFilterLevel, 'icon-chevron-down' : !showFilterLevel}"></span>
+            </h3>
 
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterLevel}">
                 <ul>
@@ -26,7 +32,10 @@
         </div>
 
         <div class="explore-filter" *ngIf="resourceSubjects">
-            <h3 class="explore-filter__title" [ngClass]="{'opened' : showFilterSubject}" (click)="showFilterSubject = !showFilterSubject">Subject</h3>
+            <h3 class="explore-filter__title" [ngClass]="{'opened' : showFilterSubject}" (click)="showFilterSubject = !showFilterSubject">
+                Subject
+                <span class="icon explore-filter__icon" [ngClass]="{'icon-chevron-up' : showFilterSubject, 'icon-chevron-down' : !showFilterSubject}"></span>
+            </h3>
 
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterSubject}">
                 <ul>
@@ -38,7 +47,10 @@
         </div>
 
         <div class="explore-filter">
-            <h3 class="explore-filter__title" [ngClass]="{'opened' : showFilterTag}" (click)="showFilterTag = !showFilterTag">Tags</h3>
+            <h3 class="explore-filter__title" [ngClass]="{'opened' : showFilterTag}" (click)="showFilterTag = !showFilterTag">
+                Tags
+                <span class="icon explore-filter__icon" [ngClass]="{'icon-chevron-up' : showFilterTag, 'icon-chevron-down' : !showFilterTag}"></span>
+            </h3>
 
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterTag}">
                 <span>Order by</span>

@@ -23,7 +23,9 @@
 
   }
 
-
+  .btn:first-of-type{
+    padding-left: 0;
+  }
 
 }
 
@@ -404,10 +406,13 @@
 .explore-filter__title{
   cursor: pointer;
   user-select: none;
+  position: relative;
+}
 
-  &.opened{
-
-  }
+.explore-filter__icon{
+  position: absolute;
+  top: 2px;
+  right: 0;
 }
 
 .explore-filter__property--active{
