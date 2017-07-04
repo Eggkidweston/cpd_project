@@ -28,7 +28,7 @@
 }
 
 .ordertags{
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 
   span{
     color: #0092cb;
@@ -395,4 +395,18 @@
     opacity: 0;
     -moz-transform: translateY(97px);
   }
+}
+
+.explore-filter__title{
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 0;
+
+  &.opened{
+
+  }
+}
+
+.explore-filter__property--active{
+  font-weight: bold;
 }

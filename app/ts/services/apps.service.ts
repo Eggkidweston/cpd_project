@@ -17,9 +17,14 @@ export class AppsService
     {
     }
 
-    public getResources(appsPerPage: number, pageNumber: number, filterText :string)
+    public getResources(appsPerPage: number, pageNumber: number, filterText: string = '', resourcePropertyQuery: string = '')
     {
-        return this.http.get( `${appSettings.apiRoot}resources/explore?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
+        let filterQuery: string = '';
+        if (filterText !== '') {
+            filterQuery += `&$filter=${filterText}`;
+        }
+
+        return this.http.get( `${appSettings.apiRoot}resources/explore?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}` + filterQuery + resourcePropertyQuery )
             .map( res => <GetResourceResults>res.json() )
             .catch( this.handleError );
     }

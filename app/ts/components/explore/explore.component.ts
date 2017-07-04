@@ -10,11 +10,9 @@ import {
 } from '@angular/router-deprecated';
 import {AuthenticationService} from '../../services/services';
 import {AppsService} from '../../services/services';
-import {StoreApp, TagCloud, Tag} from '../../models';
+import {StoreApp, TagCloud, Tag, ResourceProperty} from '../../models';
 import {AppComponent} from '../../app.component';
 import { PaginationComponent } from './pagination/pagination.component';
-
-
 import {AppWidgetsComponent} from '../appwidgets/appwidgets.component';
 
 
@@ -23,9 +21,8 @@ require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
 @Component({
     selector: 'explore',
     template: require('explore.component.html'),
-    styles: [require('../../../sass/explore.scss').toString()],
-
-    directives: [AppWidgetsComponent, RouterOutlet, RouterLink, RatingComponent,PaginationComponent]
+    styles: [require('./explore.scss').toString()],
+    directives: [AppWidgetsComponent, RouterOutlet, RouterLink, RatingComponent,PaginationComponent],
 })
 export class ExploreComponent implements AfterViewInit {
 
@@ -38,10 +35,23 @@ export class ExploreComponent implements AfterViewInit {
     private queryTags: string;
     private gettingTags: boolean;
     private gettingResources: boolean;
-    private appsPerPage:number = 100;
+    private appsPerPage:number = 10;
     private currentPage:number = 1;
     private totalPages:number = 0;
     public resultsCount:number = 0;
+
+    private showFilterTag: boolean = true;
+    private showFilterUseType: boolean = true;
+    private showFilterLevel: boolean = true;
+    private showFilterSubject: boolean = true;
+
+    private resourceUseType: string;
+    private resourceLevel: string;
+    private resourceSubject: string;
+
+    private resourceUseTypes:Array<ResourceProperty>;
+    private resourceLevels:Array<ResourceProperty>;
+    private resourceSubjects:Array<ResourceProperty>;
 
     constructor(public authenticationService: AuthenticationService,
                 public router: Router,
@@ -53,6 +63,10 @@ export class ExploreComponent implements AfterViewInit {
         this.chosenOrder = "pop";
 
         this.selectedTags = new TagCloud([]);
+
+        this.loadResourceUseTypes();
+        this.loadResourceLevels();
+        this.loadResourceSubjects();
     }
 
 
@@ -171,7 +185,7 @@ export class ExploreComponent implements AfterViewInit {
                         this.gettingTags = false;
                         this.tagcloud = new TagCloud(tags);
                         this.loadRecomendedApps();
-                        
+
                     },
                     (error: any) => AppComponent.generalError(error.status)
                 );
@@ -182,5 +196,97 @@ export class ExploreComponent implements AfterViewInit {
 
     }
 
+    loadResourceUseTypes() {
+        this.appsService.getResourceUseTypes()
+            .subscribe(
+                resourceUseTypes =>
+                {
+                    this.resourceUseTypes = resourceUseTypes;
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
+    }
 
+    loadResourceLevels() {
+        this.appsService.getResourceLevels()
+            .subscribe(
+                resourceLevels =>
+                {
+                    this.resourceLevels = resourceLevels;
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
+    }
+
+    loadResourceSubjects() {
+        this.appsService.getResourceSubjects()
+            .subscribe(
+                resourceSubjects =>
+                {
+                    this.resourceSubjects = resourceSubjects;
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
+    }
+
+    selectResourceProperty(propertyType, property, event) {
+        event.preventDefault();
+
+        switch(propertyType) {
+            case 'useType':
+                if (this.resourceUseType === property) {
+                    this.resourceUseType = null;
+                    break;
+                }
+                this.resourceUseType = property;
+                break;
+            case 'level':
+                if (this.resourceLevel === property) {
+                    this.resourceLevel = null;
+                    break;
+                }
+                this.resourceLevel = property;
+                break;
+            case 'subject':
+                if (this.resourceSubject === property) {
+                    this.resourceSubject = null;
+                    break;
+                }
+                this.resourceSubject = property;
+                break;
+        }
+
+        this.currentPage = 1;
+        this.refreshApps();
+    }
+
+    getResourcePropertySyntax() {
+        let resourcePropertyQuery: string = '';
+
+        if(this.resourceUseType) {
+            resourcePropertyQuery += `&$usetype=${this.resourceUseType}`;
+        }
+        if(this.resourceLevel) {
+            resourcePropertyQuery += `&$level=${this.resourceLevel}`;
+        }
+        if(this.resourceSubject) {
+            resourcePropertyQuery += `&$subject=${this.resourceSubject}`;
+        }
+
+        return resourcePropertyQuery;
+    }
+
+    refreshApps(){
+        this.gettingResources = true;
+        this.appsService.getResources(this.appsPerPage, this.currentPage, this.selectedTags.GetFilterSyntax(), this.getResourcePropertySyntax())
+            .subscribe(
+                storeApps => {
+                    this.storeApps = storeApps.data;
+                    this.resultsCount = storeApps.availableRows;
+                    this.totalPages = Math.ceil(storeApps.availableRows/this.appsPerPage);
+                    this.gettingResources = false;
+                },
+                (error:any) => AppComponent.generalError( error.status )
+            );
+    }
 }
