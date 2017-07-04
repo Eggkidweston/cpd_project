@@ -1,49 +1,85 @@
 <div *ngIf="showPage" class="col span-8 search-box">
-
    	<h1>Register or sign in with your institution</h1>
-    <div *ngIf="!authenticated"><p>If this is your first time here, you can use your institutional login details to register by first logging in through your institution and then completing your registration by adding a username. We can securely and uniquely identify you through this process without saving any of your personal details.</p>
-    <p>If you've already registered, just find your institution and login.<br /><br /></p>
-     	<h4>Find your institution</h4>
-     	<form [ngFormModel]="searchForm" (submit)="onSubmitSearch(searchForm.value)">
-  		<input id="searchterm" name="searchterm" [ngFormControl]="searchterm" #input (input)="searchTermChanged(input.value)" (blur)="hideOptions()" [(ngModel)]="query" class="input--search" placeholder="Start typing to search" type="text" *ngIf="idpLoaded">
-    	</form>
-    	<span *ngIf="!idpLoaded">Loading institutions...</span>
-    	<div class="suggestions" *ngIf="filteredList.length > 0">
-          <ul *ngFor="let item of filteredList" >
-              <span *ngIf="item"><a (click)="select(item)"><li>
-                  <div class="suggestions-text">{{item.name}}</div>
-              </li></a></span>
-          </ul>
-      </div>
-      <div class="idpMessage" *ngIf="idpSelected">
-      	<p *ngIf="idpFound">Thank you! Click the login button below and use your institutional login details.</p>
-      	<p *ngIf="!idpFound">Sorry, that seems to be an invalid institution. Please let us know at <a href="mailto:store.support@jisc.ac.uk">store.support@jisc.ac.uk</a></p>
-        <div><button class="btn registerbutton" role="button" (click)="launchIDP()">Log in at {{query}}</button></div>
-      </div>
-    </div>
-    <div *ngIf="authenticated" class="authed">
-    <div><p>As this is your first time here, we just need you to set your username so we can complete your registration and log you in.</p></div>
-    <form [ngFormModel]="idpUserForm" (submit)="onSubmitIDP(idpUserForm.value)" novalidate>
-        <fieldset class="form__fieldset">
-            <legend>
-                <span class="legend-text"><h3>Choose a username</h3></span>
-            </legend>
-            <div [class.shake]="shaking" [class.animated]="shaking" class="register-form">
-                
-                <div [class.has-error]="(!username.valid && username.touched) || usernameInUse"> 
-                    <label class="control-label" for="username" *ngIf="!username.valid && username.touched">Please choose a username</label>
-                    <label class="control-label" for="username" *ngIf="usernameInUse">This username is already in use</label>
-                    <div><input [disabled]="busy" placeholder="Desired username" type="text" [ngFormControl]="username" id="username" required></div>
-                </div>
-                
-            </div>
-            
-            <div class="pull-right">
-                <button [disabled]="busy || emailInUse || usernameInUse" class="btn--3d btn--primary btn--large" type="submit">Sign Up</button>
-            </div>
-            
-        </fieldset>
-    </form></div>
-    <br /><br />
-</div>
 
+    <div *ngIf="!requireAdminPassword">
+        <div *ngIf="!authenticated">
+            <p>If this is your first time here, you can use your institutional login details to register by first logging in through your institution and then completing your registration by adding a username. We can securely and uniquely identify you through this process without saving any of your personal details.</p>
+            <p>If you've already registered, just find your institution and login.</p><br>
+         	<h4>Find your institution</h4>
+
+            <form [ngFormModel]="searchForm" (submit)="onSubmitSearch(searchForm.value)">
+                <label for="searchterm" class="sr-only">Search for your institution</label>
+                <input id="searchterm" name="searchterm" [ngFormControl]="searchterm" #input (input)="searchTermChanged(input.value)" (blur)="hideOptions()" [(ngModel)]="query" class="input--search" placeholder="Start typing to search" type="text" *ngIf="idpLoaded" autocomplete="off">
+            </form>
+
+            <span *ngIf="!idpLoaded">Loading institutions...</span>
+            <div class="suggestions" *ngIf="filteredList.length > 0">
+                <ul *ngFor="let item of filteredList">
+                    <span *ngIf="item">
+                        <a (click)="select(item)">
+                            <li>
+                                <div class="suggestions-text">{{item.name}}</div>
+                            </li>
+                        </a>
+                    </span>
+                </ul>
+            </div>
+            <div class="idpMessage" *ngIf="idpSelected">
+                <br><p *ngIf="idpFound">Thank you! Click the login button below and use your institutional login details.</p>
+                <p *ngIf="!idpFound">Sorry, that seems to be an invalid institution. Please let us know at <a href="mailto:store.support@jisc.ac.uk">store.support@jisc.ac.uk</a></p>
+                <button class="btn registerbutton" role="button" (click)="launchIDP()">Log in at {{query}}</button>
+          </div>
+        </div>
+
+        <div *ngIf="authenticated" class="authed">
+            <p>As this is your first time here, we just need you to set your username so we can complete your registration and log you in.</p>
+
+            <form [ngFormModel]="idpUserForm" (submit)="onSubmitIDP(idpUserForm.value)" novalidate>
+                <fieldset class="form__fieldset">
+                    <legend>
+                        <span class="legend-text">
+                            <h3>Choose a username</h3>
+                        </span>
+                    </legend>
+                    <div class="register-form">
+                        <div [class.has-error]="(!username.valid && username.touched) || usernameInUse">
+                            <span class="control-label" *ngIf="!username.valid && username.touched">Please choose a username</span>
+                            <span class="control-label" *ngIf="usernameInUse">This username is already in use</span>
+
+                            <label for="username" class="sr-only">Choose a username</label>
+                            <input [disabled]="busy" placeholder="Desired username" type="text" [ngFormControl]="username" id="username" required>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <button [disabled]="busy || emailInUse || usernameInUse" class="btn--3d btn--primary btn--large" type="submit">Sign Up</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div *ngIf="requireAdminPassword">
+        <p>As you have an admin account, please enter your admin password.</p><br>
+        <form [ngFormModel]="idpPasswordForm" (submit)="onSubmitIDPAdmin(idpPasswordForm.value)" novalidate>
+            <fieldset class="form__fieldset">
+                <legend>
+                    <span class="legend-text">
+                        <h3>Enter admin password</h3>
+                    </span>
+                </legend>
+                <div [class.has-error]="(!password.valid && password.touched)">
+                    <div [class.shake]="shaking" [class.animated]="shaking" class="register-form">
+                        <span class="control-label" *ngIf="!password.valid && password.touched"></span>
+                        <label class="sr-only" for="password" >Please enter your admin password</label>
+                        <input [disabled]="busy" placeholder="Password" type="password" [ngFormControl]="password" id="password" required>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <button [disabled]="busy" class="btn--3d btn--primary btn--large" type="submit">Sign In</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <br><br>
+</div>
