@@ -397,10 +397,13 @@
   }
 }
 
+.explore-filter{
+  margin-bottom: 25px;
+}
+
 .explore-filter__title{
   cursor: pointer;
   user-select: none;
-  padding: 10px 0;
 
   &.opened{
 

@@ -31,7 +31,7 @@
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterSubject}">
                 <ul>
                     <li *ngFor="let subject of resourceSubjects">
-                        <a (click)="selectResourceProperty('subject', subject.id, $event)" class="explore-filter__property" [class.explore-filter__property--active]="resourceSubject === subject.id" href="#">{{subject.name}}</a>
+                        <a (click)="selectResourceProperty('subject', subject.id, $event)" [ngClass]="{'hidden' : subjectFilter != null && subjectFilter == subject.filter}" class="explore-filter__property" [class.explore-filter__property--active]="resourceSubject === subject.id" href="#">{{subject.name}}</a>
                     </li>
                 </ul>
             </div>

@@ -40,7 +40,7 @@ export class ExploreComponent implements AfterViewInit {
     private totalPages:number = 0;
     public resultsCount:number = 0;
 
-    private showFilterTag: boolean = true;
+    private showFilterTag: boolean = false;
     private showFilterUseType: boolean = true;
     private showFilterLevel: boolean = true;
     private showFilterSubject: boolean = true;
@@ -48,6 +48,7 @@ export class ExploreComponent implements AfterViewInit {
     private resourceUseType: string;
     private resourceLevel: string;
     private resourceSubject: string;
+    private subjectFilter: string;
 
     private resourceUseTypes:Array<ResourceProperty>;
     private resourceLevels:Array<ResourceProperty>;
@@ -243,9 +244,12 @@ export class ExploreComponent implements AfterViewInit {
             case 'level':
                 if (this.resourceLevel === property) {
                     this.resourceLevel = null;
+                    this.subjectFilter = null;
                     break;
                 }
                 this.resourceLevel = property;
+                this.resourceSubject = null;
+                this.setSubjectFilter(property);
                 break;
             case 'subject':
                 if (this.resourceSubject === property) {
@@ -258,6 +262,15 @@ export class ExploreComponent implements AfterViewInit {
 
         this.currentPage = 1;
         this.refreshApps();
+    }
+
+    setSubjectFilter(value){
+        let index = this.resourceLevels.map((o) => o.id).indexOf(parseInt(value));
+        if (index == -1) {
+            this.subjectFilter = null;
+            return;
+        }
+        this.subjectFilter = this.resourceLevels[index].filter;
     }
 
     getResourcePropertySyntax() {
