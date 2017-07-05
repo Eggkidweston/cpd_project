@@ -152,13 +152,13 @@ export class ExploreComponent implements AfterViewInit {
         let resourcePropertyQuery: string = '';
 
         if (this.filteredUseTypes.length > 0) {
-            resourcePropertyQuery += `&usetype=${this.filteredUseTypes}`;
+            resourcePropertyQuery += `&usetypes=${this.filteredUseTypes}`;
         }
         if (this.filteredLevels.length > 0) {
-            resourcePropertyQuery += `&level=${this.filteredLevels}`;
+            resourcePropertyQuery += `&levels=${this.filteredLevels}`;
         }
         if (this.filteredSubjects.length > 0) {
-            resourcePropertyQuery += `&subject=${this.filteredSubjects}`;
+            resourcePropertyQuery += `&subjects=${this.filteredSubjects}`;
         }
 
         return resourcePropertyQuery;
