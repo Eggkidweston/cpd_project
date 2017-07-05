@@ -11,6 +11,7 @@ import { WindowRef } from '../../../services/window.service';
 export class SocialShareComponent {
     @Input() title: string;
     @Input() description: string;
+    @Input() media: string;
 
     constructor(private winRef: WindowRef) {
 

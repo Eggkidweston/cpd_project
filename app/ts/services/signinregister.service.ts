@@ -13,15 +13,15 @@ export class SigninRegisterService {
             }
         })
     };
-    
+
     resumeAfterSigninOrRegister() {
-        console.log('resumeAfterRegister');
+        //console.log('resumeAfterRegister');
         if( this.lastRoute ) {
             this.router.navigateByUrl('' + this.lastRoute);
-            console.log('navigate to ' + this.lastRoute);
+            //console.log('navigate to ' + this.lastRoute);
         } else {
             this.router.navigate(['Home']);
-            console.log('home');
+            //console.log('home');
         }
     }
 
@@ -30,7 +30,7 @@ export class SigninRegisterService {
     }
 
     redirectToProfileAfterSignin() {
-        this.lastRoute = 'profile'; 
+        this.lastRoute = 'profile';
     }
 
     redirectToProfile() {
