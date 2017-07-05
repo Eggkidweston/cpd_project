@@ -356,6 +356,17 @@ export class AppsService
             )
     }
 
+    public verifyTrialUrl(trialUrl: string)
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        return this.http.get( `${appSettings.apiRoot}resources/verifyurl?url=${ trialUrl }`,
+            { headers })
+            .map( res => res.json() )
+            .catch( this.handleError );
+    }
+
     public getResourceCuration( resourceId:number )
     {
         let c = JSON.parse( `
