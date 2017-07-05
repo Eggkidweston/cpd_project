@@ -15,14 +15,15 @@ import {AppComponent} from '../../app.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import {AppWidgetsComponent} from '../appwidgets/appwidgets.component';
 
-
-require("../../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js");
-
 @Component({
     selector: 'explore',
     template: require('explore.component.html'),
     styles: [require('./explore.scss').toString()],
-    directives: [AppWidgetsComponent, RouterOutlet, RouterLink, RatingComponent,PaginationComponent],
+    directives: [AppWidgetsComponent,
+                RouterOutlet,
+                RouterLink,
+                RatingComponent,
+                PaginationComponent]
 })
 export class ExploreComponent implements AfterViewInit {
 
@@ -30,23 +31,22 @@ export class ExploreComponent implements AfterViewInit {
     public errorMessage: string;
 
     private gettingResources: boolean;
-    private appsPerPage:number = 10;
-    private currentPage:number = 1;
-    private totalPages:number = 0;
-    public resultsCount:number = 0;
+    private appsPerPage: number = 10;
+    private currentPage: number = 1;
+    private totalPages: number = 0;
+    public resultsCount: number = 0;
 
     private showFilterUseType: boolean = true;
     private showFilterLevel: boolean = true;
     private showFilterSubject: boolean = true;
 
-    private resourceUseType: string;
-    private resourceLevel: string;
-    private resourceSubject: string[];
-    private subjectFilter: string;
+    private filteredUseTypes: string[];
+    private filteredLevels: string[];
+    private filteredSubjects: string[];
 
-    private resourceUseTypes:Array<ResourceProperty>;
-    private resourceLevels:Array<ResourceProperty>;
-    private resourceSubjects:Array<ResourceProperty>;
+    private resourceUseTypes: Array<ResourceProperty>;
+    private resourceLevels: Array<ResourceProperty>;
+    private resourceSubjects: Array<ResourceProperty>;
 
     constructor(public authenticationService: AuthenticationService,
                 public router: Router,
@@ -54,7 +54,9 @@ export class ExploreComponent implements AfterViewInit {
                 public cdr: ChangeDetectorRef,
                 params: RouteParams) {
 
-        this.resourceSubject = [];
+        this.filteredUseTypes = [];
+        this.filteredLevels = [];
+        this.filteredSubjects = [];
 
         this.loadResourceUseTypes();
         this.loadResourceLevels();
@@ -115,58 +117,28 @@ export class ExploreComponent implements AfterViewInit {
             );
     }
 
-    selectResourceProperty(propertyType, property, event) {
+    toggleProperty(property: string, array: string[], event: any) {
         event.preventDefault();
 
-        switch(propertyType) {
-            case 'useType':
-                if (this.resourceUseType === property) {
-                    this.resourceUseType = null;
-                    break;
-                }
-                this.resourceUseType = property;
-                break;
-            case 'level':
-                if (this.resourceLevel === property) {
-                    this.resourceLevel = null;
-                    this.subjectFilter = null;
-                    break;
-                }
-                this.resourceLevel = property;
-                this.resourceSubject = [];
-                this.setSubjectFilter(property);
-                break;
-            case 'subject':
-                let index = this.resourceSubject.indexOf(property);
-                if (index > -1){
-                    this.resourceSubject.splice(index);
-                    break;
-                }
-
-                this.resourceSubject.push(property);
-                break;
+        let index = array.indexOf(property);
+        if (index > -1) {
+            array.splice(index, 1);
+        } else {
+            array.push(property);
         }
 
         this.currentPage = 1;
-
-        if (this.resourceLevel || this.resourceUseType || this.resourceSubject.length > 0) {
+        if (this.filteredLevels.length > 0 ||
+            this.filteredUseTypes.length > 0 ||
+            this.filteredSubjects.length > 0) {
             this.loadResources();
         } else {
             this.loadRecommendedApps();
         }
     }
 
-    setSubjectFilter(value){
-        let index = this.resourceLevels.map((o) => o.id).indexOf(parseInt(value));
-        if (index == -1) {
-            this.subjectFilter = null;
-            return;
-        }
-        this.subjectFilter = this.resourceLevels[index].filter;
-    }
-
-    resourceSubjectSelected(subject){
-        let index = this.resourceSubject.indexOf(subject);
+    propertySelected(subject: string, array: string[]) {
+        let index: number = array.indexOf(subject);
         if (index === -1){
             return false;
         }
@@ -176,14 +148,14 @@ export class ExploreComponent implements AfterViewInit {
     getResourcePropertySyntax() {
         let resourcePropertyQuery: string = '';
 
-        if(this.resourceUseType) {
-            resourcePropertyQuery += `&$usetype=${this.resourceUseType}`;
+        if (this.filteredUseTypes.length > 0) {
+            resourcePropertyQuery += `&usetype=${this.filteredUseTypes}`;
         }
-        if(this.resourceLevel) {
-            resourcePropertyQuery += `&$level=${this.resourceLevel}`;
+        if (this.filteredLevels.length > 0) {
+            resourcePropertyQuery += `&level=${this.filteredLevels}`;
         }
-        if(this.resourceSubject.length > 0) {
-            resourcePropertyQuery += `&$subject=${this.resourceSubject}`;
+        if (this.filteredSubjects.length > 0) {
+            resourcePropertyQuery += `&subject=${this.filteredSubjects}`;
         }
 
         return resourcePropertyQuery;
@@ -191,12 +163,16 @@ export class ExploreComponent implements AfterViewInit {
 
     loadResources() {
         this.gettingResources = true;
-        this.appsService.getResources(this.appsPerPage, this.currentPage, '', this.getResourcePropertySyntax())
+        this.appsService.getResources(this.appsPerPage,
+                                      this.currentPage,
+                                      '',
+                                      this.getResourcePropertySyntax())
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
                     this.resultsCount = storeApps.availableRows;
-                    this.totalPages = Math.ceil(storeApps.availableRows/this.appsPerPage);
+                    this.totalPages =
+                        Math.ceil(storeApps.availableRows / this.appsPerPage);
                     this.gettingResources = false;
                 },
                 (error:any) => AppComponent.generalError( error.status )

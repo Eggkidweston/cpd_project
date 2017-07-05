@@ -10,7 +10,7 @@
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterUseType}">
                 <ul>
                     <li *ngFor="let useType of resourceUseTypes">
-                        <a (click)="selectResourceProperty('useType', useType.id, $event)" class="explore-filter__property explore-filter__property--usetype" [class.explore-filter__property--active]="resourceUseType === useType.id" href="#">{{useType.name}}</a>
+                        <a (click)="toggleProperty(useType.id, filteredUseTypes, $event)" class="explore-filter__property explore-filter__property--usetype" [class.explore-filter__property--active]="propertySelected(useType.id, filteredUseTypes)" href="#">{{useType.name}}</a>
                     </li>
                 </ul>
             </div>
@@ -25,7 +25,7 @@
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterLevel}">
                 <ul>
                     <li *ngFor="let level of resourceLevels">
-                        <a (click)="selectResourceProperty('level', level.id, $event)" class="explore-filter__property" [class.explore-filter__property--active]="resourceLevel === level.id" href="#">{{level.name}}</a>
+                        <a (click)="toggleProperty(level.id, filteredLevels, $event)" class="explore-filter__property" [class.explore-filter__property--active]="propertySelected(level.id, filteredLevels)" href="#">{{level.name}}</a>
                     </li>
                 </ul>
             </div>
@@ -40,7 +40,7 @@
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterSubject}">
                 <ul>
                     <li *ngFor="let subject of resourceSubjects">
-                        <a (click)="selectResourceProperty('subject', subject.id, $event)" [ngClass]="{'hidden' : subjectFilter != null && subjectFilter == subject.filter}" class="explore-filter__property" [class.explore-filter__property--active]="resourceSubjectSelected(subject.id)" href="#">{{subject.name}}</a>
+                        <a (click)="toggleProperty(subject.id, filteredSubjects, $event)" class="explore-filter__property" [class.explore-filter__property--active]="propertySelected(subject.id, filteredSubjects)" href="#">{{subject.name}}</a>
                     </li>
                 </ul>
             </div>
@@ -103,6 +103,3 @@
 
     </div>
 </div>
-
-
-
