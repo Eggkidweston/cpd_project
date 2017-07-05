@@ -27,7 +27,6 @@
 
             <div *ngIf="app?.active" class="button-container">
                 <button class="btn btn--3d btn--primary btn--large" role="button" (click)="goDownload()">Get it</button>
-                <button *ngIf="app?.trialurl" class="btn btn--3d btn--primary btn--large tryit" role="button" (click)="goTry()">Try It</button>
                 <social-share [title]="app.title" [description]=app.description [media]=app.media[0]?.url></social-share>
             </div>
 
@@ -86,9 +85,9 @@
             </div>
 
             <div class="app-details-row">
-              <h4>Licence:</h4>
-              <span *ngIf="app?.licensetype_id">{{ licenseType }}</span>
-              <a href='{{app?.licenceurl}}' target="_blank" *ngIf="app?.licenceurl!= null">VIEW LICENCE</a>
+              <h4>Licence</h4>
+              <span *ngIf="!app?.licenceurl">{{ app?.licensetype_id && licenseType ? licenseType : "No licence information found for this resource" }}</span>
+              <a href='{{app?.licenceurl}}' target="_blank" *ngIf="app?.licenceurl">{{ licenseType ? licenseType : "VIEW LICENCE" }}</a>
             </div>
 
             <div *ngIf="app?.jorum_legacy_curation_flag" class="curation-remix">
@@ -104,17 +103,17 @@
         </div>
     </div>
 
-    <div class="row" *ngIf="app?.media?.length > 0">
+    <div class="row">
         <h3>Preview</h3>
-        <div class="media-container">
-            <media-carousel [resource]="app"></media-carousel>
-        </div>
-    </div>
-    <div class="row" *ngIf="app?.media?.length == 0">
-        <h3>Preview</h3>
-        <div class="media-container">
+
+        <div class="media-container" *ngIf="app?.media?.length == 0 && !app?.youtubeurl && !app?.trialurl">
             Preview coming soon.
         </div>
+
+        <div class="media-container" *ngIf="app?.media?.length > 0">
+            <preview [resource]="app"></preview>
+        </div>
+
     </div>
 
     <div class="row"><div class="col span-12"><hr></div></div>
