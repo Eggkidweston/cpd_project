@@ -78,6 +78,9 @@ export class ExploreComponent implements AfterViewInit {
             .subscribe(
                 storeApps => {
                     this.storeApps = storeApps.data;
+                    this.resultsCount = storeApps.availableRows;
+                    this.totalPages =
+                        Math.ceil(storeApps.availableRows / this.appsPerPage);
                     this.gettingResources = false;
                 },
                 (error: any) => AppComponent.generalError(error.status)
