@@ -20,7 +20,7 @@
 	<label for="resource-subject" class="sr-only">Select resource use type</label>
 	<select name="resource-subject" (change)="update($event.target.name, $event.target.value)" class="refine-search__select" [ngModel]="resourceSubject">
 		<option value="all" [selected]="resourceSubject == 'all'">all subjects</option>
-		<option *ngFor="let subject of resourceSubjects" [value]="subject.id" [disabled]="subjectFilter != null && subjectFilter == subject.filter" class="refine-search__option">{{subject.name}}</option>
+		<option *ngFor="let subject of resourceSubjects" [value]="subject.id" [disabled]="subjectFilter != null && subjectFilter != subject.filter" class="refine-search__option">{{subject.name}}</option>
 	</select>
 
 </div>
