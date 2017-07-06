@@ -503,7 +503,7 @@ export class AppsService
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
 
-        return this.http.get( `${appSettings.apiRoot}resources/usetypes`, { headers } )
+        return this.http.get( `${appSettings.apiRoot}usetypes`, { headers } )
             .map( res => res.json().data )
             .catch( this.handleError );
     }
@@ -513,7 +513,7 @@ export class AppsService
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
 
-        return this.http.get( `${appSettings.apiRoot}resources/levels`, { headers } )
+        return this.http.get( `${appSettings.apiRoot}levels`, { headers } )
             .map( res => res.json().data )
             .catch( this.handleError );
     }
@@ -523,7 +523,7 @@ export class AppsService
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json' );
 
-        return this.http.get( `${appSettings.apiRoot}resources/subjects`, { headers } )
+        return this.http.get( `${appSettings.apiRoot}subjects`, { headers } )
             .map( res => res.json().data )
             .catch( this.handleError );
     }
