@@ -38,7 +38,7 @@ export class ExploreComponent implements AfterViewInit {
 
     private showFilterUseType: boolean = true;
     private showFilterLevel: boolean = true;
-    private showFilterSubject: boolean = true;
+    private showFilterSubject: boolean = false;
 
     private filteredUseTypes: string[];
     private filteredLevels: string[];
