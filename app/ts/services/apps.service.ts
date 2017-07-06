@@ -201,7 +201,7 @@ export class AppsService
         headers.append( 'Content-Type', 'application/json' );
         headers.append( 'x-access-token', AuthenticationService.apiKey );
 
-        return this.http.get( `${appSettings.apiRoot}channels?$filter=createdby%20eq%20'${ createdBy }`, { headers } )
+        return this.http.get( `${appSettings.apiRoot}channels?$filter=createdby%20eq%20'${ createdBy }'`, { headers } )
             .map( res => <Channel[]>res.json().data )
             .catch( this.handleError );
     }
