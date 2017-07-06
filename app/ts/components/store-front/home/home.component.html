@@ -2,6 +2,7 @@
 <div class="home-container">
 
     <div class="col span-11">
+        <refined-search (refinedSearchUpdated)="refinedSearchUpdated($event)"></refined-search>
         <search></search>
         <div class="resource-counter">searching {{totalResourceCount}} resources<span *ngIf="totalChannelCount > 0"> and {{totalChannelCount}} channels</span><br /><br /></div>
     </div>

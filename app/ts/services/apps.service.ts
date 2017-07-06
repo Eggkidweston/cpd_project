@@ -17,9 +17,14 @@ export class AppsService
     {
     }
 
-    public getResources(appsPerPage: number, pageNumber: number, filterText :string)
+    public getResources(appsPerPage: number, pageNumber: number, filterText: string = '', resourcePropertyQuery: string = '')
     {
-        return this.http.get( `${appSettings.apiRoot}resources/explore?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&$filter=${filterText}` ) // &$filter=contains('title', 'Introduction')
+        let filterQuery: string = '';
+        if (filterText !== '') {
+            filterQuery += `&$filter=${filterText}`;
+        }
+
+        return this.http.get( `${appSettings.apiRoot}resources/explore?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}` + filterQuery + resourcePropertyQuery )
             .map( res => <GetResourceResults>res.json() )
             .catch( this.handleError );
     }
@@ -108,18 +113,18 @@ export class AppsService
 
     }
 
-    public getBySearch( searchTerm, opened, activeOnly: boolean)
+    public getBySearch( searchTerm, opened, activeOnly: boolean, level?, subject?, useType?)
     {
-        let searchQuery = `${appSettings.apiRoot}resources/search?$top=100&$skip=0&term=${ searchTerm }`;
+        let searchQuery = `${appSettings.apiRoot}resources/search?$top=100&$skip=0&term=${ searchTerm }&level=${ level }&subject=${ subject }&usetype=${ useType }`;
         if(activeOnly) searchQuery += "&active=true";
         return this.http.get(searchQuery)
             .map( res => <GetSearchResults>res.json() )
             .catch( this.handleError );
     }
 
-    public getBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number, activeOnly: boolean)
+    public getBySearchPaged( searchTerm, openEd, appsPerPage: number, pageNumber: number, activeOnly: boolean, level?, subject?, useType?)
     {
-        let searchQuery = `${appSettings.apiRoot}resources/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }`;
+        let searchQuery = `${appSettings.apiRoot}resources/search?$skip=${appsPerPage*(pageNumber-1)}&$top=${appsPerPage}&term=${ searchTerm }&level=${ level }&subject=${ subject }&usetype=${ useType }`;
         if(activeOnly) searchQuery += "&active=true";
 
         return this.http.get(searchQuery)
@@ -491,6 +496,36 @@ export class AppsService
     private handleError( error:Response )
     {
         return Observable.throw( error );
+    }
+
+    public getResourceUseTypes()
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        return this.http.get( `${appSettings.apiRoot}usetypes`, { headers } )
+            .map( res => res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getResourceLevels()
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        return this.http.get( `${appSettings.apiRoot}levels`, { headers } )
+            .map( res => res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getResourceSubjects()
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        return this.http.get( `${appSettings.apiRoot}subjects`, { headers } )
+            .map( res => res.json().data )
+            .catch( this.handleError );
     }
 }
 

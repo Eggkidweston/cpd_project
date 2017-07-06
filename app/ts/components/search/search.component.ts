@@ -76,8 +76,12 @@ export class SearchComponent {
 	}
 
 	searchTermChanged(searchTerm, activeOnly) {
+        let resourceLevel = this.getStoredValue('resource-level');
+        let resourceSubject = this.getStoredValue('resource-subject');
+        let resourceUseType = this.getStoredValue('resource-usetype');
+
         if(searchTerm.length>1) {
-            this._appsService.getBySearch(searchTerm, this.freestuff._value, activeOnly)
+            this._appsService.getBySearch(searchTerm, this.freestuff._value, activeOnly, resourceLevel, resourceSubject, resourceUseType)
                 .subscribe(
                     filteredList => {
                         if(this.searchingForSuggestions) { // don't allow slow responses to overwrite
@@ -91,11 +95,17 @@ export class SearchComponent {
         }
     }
 
+    refreshSearchResults(){
+        this.searchingForSuggestions = true;
+        this.searchTermChanged(this.searchterm.value, this.activeOnly);
+    }
+
     searchForChannels(searchTerm, resourcesList) {
       this._appsService.getChannelsBySearch(searchTerm)
           .subscribe(
               filteredList => {
                   if(this.searchingForSuggestions) {
+                      this.filteredList = [];
                       this.filteredList = filteredList.data.concat(resourcesList);
                       this.searchingForSuggestions = false;
                   }
@@ -146,5 +156,11 @@ export class SearchComponent {
 
     shortDescription(appDescription: String) {
   	   return (appDescription.length>110) ? (appDescription.substr(0, 110)+'...') : appDescription;
+    }
+
+    getStoredValue(category){
+        if (typeof(Storage) !== "undefined") {
+            return localStorage.getItem(category);
+        }
     }
 }

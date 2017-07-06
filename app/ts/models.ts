@@ -262,6 +262,13 @@ export class Channel
    };
 }
 
+export class ResourceProperty
+{
+    id: number;
+    name: string;
+    filter: string;
+}
+
 export var ResourceTypes = ["APPLEAPP", "ANDROIDAPP", "IMAGE", "VIDEO", "AUDIO", "ARCHIVE_WEB", "ARCHIVE_OTHER", "WORD", "PDF", "POWERPOINT", "EXCEL", "WEB PAGE", "FLASH"];
 
 export var ResourceInstructions = [
