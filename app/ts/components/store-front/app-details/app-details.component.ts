@@ -5,7 +5,7 @@ import { SubmitReviewComponent } from './submit-review/submit-review.component';
 import { AuthenticationService, ContributorService } from '../../../services/services';
 import { appSettings } from '../../../../../settings';
 import { AppsService } from '../../../services/services';
-import { StoreApp, Review, Channel } from '../../../models';
+import { StoreApp, Review, Channel, ResourceProperty } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
@@ -34,6 +34,9 @@ export class AppDetailsComponent implements AfterViewInit
     public widgetIcon:string;
     public errorMessage:string;
     public fileList:Array<string>;
+    private resourceUseTypes:Array<ResourceProperty> = [];
+    private resourceLevels:Array<ResourceProperty> = [];
+    private resourceSubjects:Array<ResourceProperty> = [];
     addingReview:boolean = false;
 
     constructor( public authenticationService:AuthenticationService,
@@ -71,6 +74,9 @@ export class AppDetailsComponent implements AfterViewInit
                     this.loadAlsoBy();
 
                     this.loadRelatedChannels();
+                    this.loadResourceUseTypes();
+                    this.loadResourceLevels();
+                    this.loadResourceSubjects();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -129,6 +135,39 @@ export class AppDetailsComponent implements AfterViewInit
               },
               (error:any) => AppComponent.generalError( error.status )
           );
+    }
+
+    loadResourceUseTypes()
+    {
+        this.appsService.getUseTypesByResourceId(this.app.id)
+            .subscribe(
+                resourceUseTypes => {
+                    this.resourceUseTypes = resourceUseTypes;
+                },
+                (error:any) => AppComponent.generalError( error.status )
+            );
+    }
+
+    loadResourceLevels()
+    {
+        this.appsService.getLevelsByResourceId(this.app.id)
+            .subscribe(
+                resourceLevels => {
+                    this.resourceLevels = resourceLevels;
+                },
+                (error:any) => AppComponent.generalError( error.status )
+            );
+    }
+
+    loadResourceSubjects()
+    {
+        this.appsService.getSubjectsByResourceId(this.app.id)
+            .subscribe(
+                resourceSubjects => {
+                    this.resourceSubjects = resourceSubjects;
+                },
+                (error:any) => AppComponent.generalError( error.status )
+            );
     }
 
     reviewAdded( review:Review )

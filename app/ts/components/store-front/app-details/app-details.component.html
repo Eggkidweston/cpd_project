@@ -40,6 +40,21 @@
                 </ul>
             </div>
 
+            <div class="tagcloud condensed" *ngIf="resourceUseTypes.length > 0 || resourceLevels.length > 0 || resourceSubjects.length > 0">
+                <h4>Categories</h4>
+                <ul class="tags tags--white">
+                    <li class="tags__item" *ngFor="let useType of resourceUseTypes">
+                        <span class="tags__link">{{useType.name}}</span>
+                    </li>
+                    <li class="tags__item" *ngFor="let level of resourceLevels">
+                        <span class="tags__link">{{level.name}} Education</span>
+                    </li>
+                    <li class="tags__item" *ngFor="let subject of resourceSubjects">
+                        <span class="tags__link">{{subject.name}}</span>
+                    </li>
+                </ul>
+            </div>
+
             <div class="tagcloud condensed" *ngIf="app?.tags?.length > 0">
                 <h4>Tags</h4>
                 <ul class="tags tags--white">

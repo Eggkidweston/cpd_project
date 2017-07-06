@@ -1,7 +1,7 @@
 import { Injectable, bind } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions, Channel } from '../models';
+import { StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions, Channel, ResourceProperty } from '../models';
 import { appInfo } from './services';
 import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
@@ -218,6 +218,36 @@ export class AppsService
 
         return this.http.get(`${appSettings.apiRoot}channels/relations/`+resourceId)
             .map( res => <Channel[]>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getUseTypesByResourceId( resourceId )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        return this.http.get(`${appSettings.apiRoot}usetypes/relations/${resourceId}`)
+            .map( res => <ResourceProperty[]>res.json().data )
+            .catch( this.handleError );
+    }
+    
+    public getLevelsByResourceId( resourceId )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        return this.http.get(`${appSettings.apiRoot}levels/relations/${resourceId}`)
+            .map( res => <ResourceProperty[]>res.json().data )
+            .catch( this.handleError );
+    }
+
+    public getSubjectsByResourceId( resourceId )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        return this.http.get(`${appSettings.apiRoot}subjects/relations/${resourceId}`)
+            .map( res => <ResourceProperty[]>res.json().data )
             .catch( this.handleError );
     }
 
