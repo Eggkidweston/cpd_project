@@ -48,6 +48,9 @@ export class ExploreComponent implements AfterViewInit {
     private resourceLevels: Array<ResourceProperty>;
     private resourceSubjects: Array<ResourceProperty>;
 
+    private subjectFilters: string[];
+    private subjectDuplicateSelected: number = 0;
+
     constructor(public authenticationService: AuthenticationService,
                 public router: Router,
                 public appsService: AppsService,
@@ -61,6 +64,8 @@ export class ExploreComponent implements AfterViewInit {
         this.loadResourceUseTypes();
         this.loadResourceLevels();
         this.loadResourceSubjects();
+
+        this.subjectFilters = [];
     }
 
     ngAfterViewInit() {
@@ -120,14 +125,22 @@ export class ExploreComponent implements AfterViewInit {
             );
     }
 
-    toggleProperty(property: string, array: string[], event: any) {
+    toggleProperty(property: string, filter: string, array: string[], event: any) {
         event.preventDefault();
 
         let index = array.indexOf(property);
         if (index > -1) {
             array.splice(index, 1);
+
+            if (filter === 'further'){
+                this.subjectDuplicateSelected--;
+            }
         } else {
             array.push(property);
+
+            if (filter === 'further'){
+                this.subjectDuplicateSelected++;
+            }
         }
 
         this.currentPage = 1;
@@ -162,6 +175,31 @@ export class ExploreComponent implements AfterViewInit {
         }
 
         return resourcePropertyQuery;
+    }
+
+    setSubjectFilter(value){
+        let index: any = this.resourceLevels.map((o) => o.id).indexOf(parseInt(value));
+        if (index === -1) {
+            return;
+        }
+
+        let indexSubjectFilters: any = this.subjectFilters.indexOf(this.resourceLevels[index].filter);
+        if (indexSubjectFilters > -1) {
+            if (this.resourceLevels[index].filter === 'further' &&
+                this.subjectDuplicateSelected > 0) {
+                return;
+            }
+
+            this.subjectFilters.splice(indexSubjectFilters, 1);
+            this.filteredSubjects = [];
+        } else {
+            this.subjectFilters.push(this.resourceLevels[index].filter);
+        }
+    }
+
+    displaySubject(filter: string) {
+        return this.subjectFilters.length === 0 ||
+               this.subjectFilters.indexOf(filter) > -1;
     }
 
     loadResources() {

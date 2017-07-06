@@ -10,7 +10,7 @@
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterUseType}">
                 <ul>
                     <li *ngFor="let useType of resourceUseTypes">
-                        <a (click)="toggleProperty(useType.id, filteredUseTypes, $event)" class="explore-filter__property explore-filter__property--usetype" [class.explore-filter__property--active]="propertySelected(useType.id, filteredUseTypes)" href="#">
+                        <a (click)="toggleProperty(useType.id, null, filteredUseTypes, $event)" class="explore-filter__property explore-filter__property--usetype" [class.explore-filter__property--active]="propertySelected(useType.id, filteredUseTypes)" href="#">
                             {{useType.name}}
                             <span class="icon-close icon explore-filter__close" *ngIf="propertySelected(useType.id, filteredUseTypes)"></span>
                         </a>
@@ -28,7 +28,7 @@
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterLevel}">
                 <ul>
                     <li *ngFor="let level of resourceLevels">
-                        <a (click)="toggleProperty(level.id, filteredLevels, $event)" class="explore-filter__property" [class.explore-filter__property--active]="propertySelected(level.id, filteredLevels)" href="#">
+                        <a (click)="toggleProperty(level.id, level.filter, filteredLevels, $event); setSubjectFilter(level.id)" class="explore-filter__property" [class.explore-filter__property--active]="propertySelected(level.id, filteredLevels)" href="#">
                             {{level.name}}
                             <span class="icon-close icon explore-filter__close" *ngIf="propertySelected(level.id, filteredLevels)"></span>
                         </a>
@@ -46,7 +46,7 @@
             <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterSubject}">
                 <ul>
                     <li *ngFor="let subject of resourceSubjects">
-                        <a (click)="toggleProperty(subject.id, filteredSubjects, $event)" class="explore-filter__property" [class.explore-filter__property--active]="propertySelected(subject.id, filteredSubjects)" href="#">
+                        <a (click)="toggleProperty(subject.id, null, filteredSubjects, $event)" class="explore-filter__property" [class.explore-filter__property--active]="propertySelected(subject.id, filteredSubjects)" href="#" *ngIf="displaySubject(subject.filter)">
                             {{subject.name}}
                             <span class="icon-close icon explore-filter__close" *ngIf="propertySelected(subject.id, filteredSubjects)"></span>
                         </a>
