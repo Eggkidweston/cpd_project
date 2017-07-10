@@ -9,7 +9,7 @@ import { StoreApp, Review, Channel } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
-import { MediaCarouselComponent } from './media-carousel/media-carousel.component';
+import { PreviewComponent } from './preview/preview.component';
 import { SocialShareComponent } from '../../shared/social-share/social-share.component';
 
 let moment = require( "moment" );
@@ -20,7 +20,7 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
     selector: 'app-details',
     template: require( './app-details.component.html' ),
     styles: [require( './app-details.scss' ).toString(), require('../../../../sass/typeimage.scss').toString()],
-    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, MediaCarouselComponent, AppWidgetComponent, SocialShareComponent]
+    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, PreviewComponent, AppWidgetComponent, SocialShareComponent]
 } )
 
 export class AppDetailsComponent implements AfterViewInit
@@ -71,8 +71,6 @@ export class AppDetailsComponent implements AfterViewInit
                     this.loadAlsoBy();
 
                     this.loadRelatedChannels();
-
-                    //console.log(this.app);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );

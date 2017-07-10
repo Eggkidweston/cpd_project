@@ -1,0 +1,38 @@
+<div class="preview">
+    <div class="preview__thumbnails">
+        <template ngFor let-medium [ngForOf]="resource?.media" let-i="index">
+            <span (click)="switchCurrentPreview('Image', i)"
+                [ngClass]="{'preview__icon--active': i === selectedImage}"
+                class="preview__icon preview__icon--image">
+                <span class="preview__desc sr-only">Preview Image</span>
+            </span>
+        </template>
+
+        <span *ngIf="resource?.youtubeurl"
+            (click)="switchCurrentPreview('Youtube')"
+            [ngClass]="{'preview__icon--active': youtubeSelected}"
+            class="preview__icon preview__icon--video">
+            <span class="preview__desc sr-only">Preview {{resource?.youtubeurl}}</span>
+        </span>
+
+        <span *ngIf="livePreviewUrl"
+            (click)="switchCurrentPreview('LivePreview')"
+            [ngClass]="{'preview__icon--active': livePreviewSelected}"
+            class="preview__icon preview__icon--url">
+            <span class="preview__desc sr-only">Preview {{livePreviewUrl}}</span>
+        </span>
+    </div>
+
+    <div class="preview__container">
+        <iframe class="preview__iframe" *ngIf="livePreviewSelected && livePreviewUrl" [src]="livePreviewUrl"></iframe>
+
+        <iframe type="text/html" class="preview__iframe"
+                src="https://www.youtube.com/embed/{{extractYoutubeId(resource?.youtubeurl)}}?autoplay=1"
+                *ngIf="youtubeSelected && resource?.youtubeurl"
+                frameborder="0" allowfullscreen></iframe>
+
+        <img *ngIf="imageSelected && resource?.media"
+            src="{{ resource?.media[selectedImage]?.url }}"
+            class="img-responsive medium-full-size"/>
+    </div>
+</div>
