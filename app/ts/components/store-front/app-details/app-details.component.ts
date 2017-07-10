@@ -39,6 +39,8 @@ export class AppDetailsComponent implements AfterViewInit
     private resourceSubjects:Array<ResourceProperty> = [];
     addingReview:boolean = false;
 
+    resourceNoCategories: boolean = false;
+
     constructor( public authenticationService:AuthenticationService,
                  private contributorService:ContributorService,
                  public router:Router,
@@ -143,6 +145,7 @@ export class AppDetailsComponent implements AfterViewInit
             .subscribe(
                 resourceUseTypes => {
                     this.resourceUseTypes = resourceUseTypes;
+                    this.resourceNoCategories = this.checkResourceCategories();
                 },
                 (error:any) => AppComponent.generalError( error.status )
             );
@@ -154,6 +157,7 @@ export class AppDetailsComponent implements AfterViewInit
             .subscribe(
                 resourceLevels => {
                     this.resourceLevels = resourceLevels;
+                    this.resourceNoCategories = this.checkResourceCategories();
                 },
                 (error:any) => AppComponent.generalError( error.status )
             );
@@ -165,9 +169,16 @@ export class AppDetailsComponent implements AfterViewInit
             .subscribe(
                 resourceSubjects => {
                     this.resourceSubjects = resourceSubjects;
+                    this.resourceNoCategories = this.checkResourceCategories();
                 },
                 (error:any) => AppComponent.generalError( error.status )
             );
+    }
+
+    checkResourceCategories() {
+        return this.resourceUseTypes.length === 0 &&
+               this.resourceLevels.length === 0 &&
+               this.resourceSubjects.length === 0;
     }
 
     reviewAdded( review:Review )
