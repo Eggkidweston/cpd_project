@@ -11,6 +11,7 @@ import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
 import { PreviewComponent } from './preview/preview.component';
 import { SocialShareComponent } from '../../shared/social-share/social-share.component';
+import { CategorySelectComponent } from './category-select/category-select.component';
 
 let moment = require( "moment" );
 
@@ -20,7 +21,7 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
     selector: 'app-details',
     template: require( './app-details.component.html' ),
     styles: [require( './app-details.scss' ).toString(), require('../../../../sass/typeimage.scss').toString()],
-    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, PreviewComponent, AppWidgetComponent, SocialShareComponent]
+    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, PreviewComponent, AppWidgetComponent, SocialShareComponent, CategorySelectComponent]
 } )
 
 export class AppDetailsComponent implements AfterViewInit

@@ -557,6 +557,22 @@ export class AppsService
             .map( res => res.json().data )
             .catch( this.handleError );
     }
+
+    public editResourceAttributes( resourceID: number, updateJSON: string, done:( resource ) => void, error:( err ) => void )
+    {
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        this.http.post( `${appSettings.apiRoot}resources/${resourceID}/editattributes`,
+            updateJSON,
+            { headers } )
+            .map( res => <Resource>res.json() )
+            .subscribe(
+                resource => done( resource ),
+                err => error( err )
+            );
+
+    }
 }
 
 export var appsServiceInjectables:Array<any> = [
