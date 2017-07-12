@@ -101,9 +101,9 @@ export class CategorySelectComponent {
             'usetypes': []
         };
 
-        resourceAttributes.subjects.push(this.formUseType.value);
+        resourceAttributes.subjects.push(this.formSubject.value);
         resourceAttributes.levels.push(this.formLevel.value);
-        resourceAttributes.usetypes.push(this.formSubject.value);
+        resourceAttributes.usetypes.push(this.formUseType.value);
 
         this.appsService.editResourceAttributes(this.resourceId, JSON.stringify(resourceAttributes),
             (done: any) => {
