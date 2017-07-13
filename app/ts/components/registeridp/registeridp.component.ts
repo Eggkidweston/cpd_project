@@ -90,7 +90,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	            this.authenticationService
                 .registerWithLocalPid( formValues.username,
                     () => {
-                      this.signinRegisterService.redirectToProfileAfterSignin();
+                      this.signinRegisterService.resumeAfterSigninOrRegister();
                     },
                     (res: any) => {
                         AppComponent.generalError(res.status);
@@ -109,7 +109,6 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
                 this.authenticationService
                 .signInAdmin( formValues.password,
                     () => {
-                        this.signinRegisterService.redirectToProfileAfterSignin();
                         this.signinRegisterService.resumeAfterSigninOrRegister();
                     },
                     (res: any) => {
@@ -124,7 +123,6 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	    	this.authenticationService
             .signInWithPid(
                 () => {
-                    this.signinRegisterService.redirectToProfileAfterSignin();
                     this.signinRegisterService.resumeAfterSigninOrRegister();
                 },
                 (res: any) => {

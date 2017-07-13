@@ -105,6 +105,12 @@ export class AppComponent
             }
             this.showMobileMenu = false;
             ga('send', 'pageview', value);
+
+            if (typeof(Storage) !== 'undefined') {
+                if (value !== 'signin' && value !== 'registeridp') {
+                    localStorage.setItem('last-route', value);
+                }
+            }
         });
 
         if(window.location.href.indexOf('token')>-1&&window.location.href.indexOf('jwt')>-1){
