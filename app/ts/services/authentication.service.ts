@@ -3,6 +3,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { appSettings } from '../../../settings';
 import { User } from '../models';
+import * as moment from 'moment';
 
 @Injectable()
 export class AuthenticationService {
@@ -14,15 +15,31 @@ export class AuthenticationService {
 
     static get user(): User {
         if (typeof(Storage) !== "undefined") {
-            return <User>(JSON.parse(localStorage.getItem("_user")));
+            let tokenExpiryToken = localStorage.getItem('_tokenExpiry');
+            if (tokenExpiryToken) {
+                let tokenExpiryTime = moment(parseInt(tokenExpiryToken));
+                let currentTime = moment(new Date());
+                let duration = moment.duration(tokenExpiryTime.diff(currentTime)).asMinutes();
+
+                if (duration > 0) {
+                    return <User>(JSON.parse(localStorage.getItem("_user")));
+                } else {
+                    localStorage.removeItem('_tokenExpiry');
+                    localStorage.removeItem('_user');
+                }
+            }
         } else {
             return AuthenticationService._user;
         }
     }
 
     static set user(user:User) {
-        if (typeof(Storage) !== "undefined") {
+        if (typeof(Storage) !== "undefined" && user !== null) {
             localStorage.setItem("_user", JSON.stringify(user));
+
+            let timeNow = new Date();
+            timeNow.setHours(timeNow.getHours() + 1);
+            localStorage.setItem('_tokenExpiry', timeNow.getTime().toString());
         }
 
         AuthenticationService._user = user;
@@ -175,6 +192,7 @@ export class AuthenticationService {
         AuthenticationService.apiKey = null;
         AuthenticationService.user = null;
         localStorage.setItem("pid",'');
+        localStorage.removeItem('_tokenExpiry');
     }
 
     isEmailOrUsernameInUse(emailOrUsername: string,
