@@ -3,14 +3,17 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { appSettings } from '../../../settings';
 import { User } from '../models';
+import { Router } from '@angular/router-deprecated';
 import * as moment from 'moment';
 
 @Injectable()
 export class AuthenticationService {
     private static _user: User = null;
     private static _apiKey: string;
+    private static _router: Router;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, public router: Router) {
+        AuthenticationService._router = router;
     }
 
     static get user(): User {
@@ -24,8 +27,8 @@ export class AuthenticationService {
                 if (duration > 0) {
                     return <User>(JSON.parse(localStorage.getItem("_user")));
                 } else {
-                    localStorage.removeItem('_tokenExpiry');
-                    localStorage.removeItem('_user');
+                    this.signOut();
+                    AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
                 }
             }
         } else {
