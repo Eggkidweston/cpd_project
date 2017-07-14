@@ -11,6 +11,7 @@ export class AuthenticationService {
     private static _user: User = null;
     private static _apiKey: string;
     private static _router: Router;
+    private static _tokenExpiry: number;
 
     constructor(private http: Http, public router: Router) {
         AuthenticationService._router = router;
@@ -36,13 +37,10 @@ export class AuthenticationService {
         }
     }
 
-    static set user(user:User) {
+    static set user(user: User) {
         if (typeof(Storage) !== "undefined" && user !== null) {
-            localStorage.setItem("_user", JSON.stringify(user));
-
-            let timeNow = new Date();
-            timeNow.setHours(timeNow.getHours() + 1);
-            localStorage.setItem('_tokenExpiry', timeNow.getTime().toString());
+            localStorage.setItem('_user', JSON.stringify(user));
+            localStorage.setItem('_tokenExpiry', AuthenticationService._tokenExpiry.toString());
         }
 
         AuthenticationService._user = user;
@@ -148,6 +146,7 @@ export class AuthenticationService {
             .subscribe(
                 data => {
                     AuthenticationService.apiKey = <any>data.token;
+                    this.storeTokenExpiryTime(data.expiresIn);
                     headers.append('x-access-token', AuthenticationService.apiKey);
                     this.http.get(`${appSettings.apiRoot}users/me`, { headers })
                         .map(res => res.json())
@@ -179,6 +178,7 @@ export class AuthenticationService {
             .subscribe(
                 data => {
                     AuthenticationService.apiKey = <any>data.token;
+                    this.storeTokenExpiryTime(data.expiresIn);
                     headers.append('x-access-token', AuthenticationService.apiKey);
                     this.http.get(`${appSettings.apiRoot}users/me`, { headers })
                         .map(res => res.json())
@@ -218,6 +218,11 @@ export class AuthenticationService {
                     else err(res);
                 }
             );
+    }
+
+    storeTokenExpiryTime(expiryTime){
+        let timeNow = moment().add(expiryTime, 's');
+        AuthenticationService._tokenExpiry = timeNow.valueOf();
     }
 
     private handleError(error: Response) {
