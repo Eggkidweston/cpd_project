@@ -31,6 +31,7 @@ export class AuthenticationService {
                     // Refresh JWT
                     localStorage.removeItem('_tokenExpiry');
                     AuthenticationService.refreshToken();
+                    return AuthenticationService._user;
                 }
 
                 if (duration < 0) {
@@ -226,8 +227,8 @@ export class AuthenticationService {
     static signOut() {
         AuthenticationService.apiKey = null;
         AuthenticationService.user = null;
-        localStorage.removeItem("user");
-        localStorage.setItem("pid",'');
+        localStorage.removeItem("pid");
+        localStorage.removeItem("_user");
         localStorage.removeItem('_tokenExpiry');
     }
 
