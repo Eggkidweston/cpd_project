@@ -262,6 +262,16 @@ export class Channel
    };
 }
 
+export class ReleaseNote {
+    id: number;
+    version_number: string;
+    description: string;
+}
+
+export interface ReleaseNoteResults {
+    data: Array<ReleaseNote>;
+}
+
 export var ResourceTypes = ["APPLEAPP", "ANDROIDAPP", "IMAGE", "VIDEO", "AUDIO", "ARCHIVE_WEB", "ARCHIVE_OTHER", "WORD", "PDF", "POWERPOINT", "EXCEL", "WEB PAGE", "FLASH"];
 
 export var ResourceInstructions = [
