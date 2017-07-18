@@ -3,7 +3,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {
     StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions, Channel,
-    Version
+    Version, ReleaseNoteResults
 } from '../models';
 import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
@@ -493,6 +493,12 @@ export class AppsService
 
         return this.http.get( `${appSettings.apiRoot}resources/downloaded`, { headers } )
             .map( res => res.json().resources )
+            .catch( this.handleError );
+    }
+
+    public getActiveReleaseNotes() {
+        return this.http.get( `${appSettings.apiRoot}release-notes` )
+            .map( res => <ReleaseNoteResults>res.json() )
             .catch( this.handleError );
     }
 
