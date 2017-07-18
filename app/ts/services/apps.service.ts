@@ -3,9 +3,8 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {
     StoreApp, TagCloud, SignedUrl, Resource, GetResourceResults, GetSearchResults, ResourceInstructions, Channel,
-    ReleaseNoteResults
+    Version, ReleaseNoteResults
 } from '../models';
-import { appInfo } from './services';
 import { appSettings } from '../../../settings';
 import { AuthenticationService } from './authentication.service';
 import { Review, ResourceMetrics, ResourceMetric, DownloadInstructions } from '../models';
@@ -18,6 +17,12 @@ export class AppsService
     constructor( private http:Http,
                  private authenticationService:AuthenticationService )
     {
+    }
+
+    public getVersionNumber() {
+        return this.http.get( `${appSettings.apiRoot}versions/latest` )
+            .map(res => <Version>res.json() )
+            .catch( this.handleError );
     }
 
     public getResources(appsPerPage: number, pageNumber: number, filterText :string)

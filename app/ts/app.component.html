@@ -33,7 +33,9 @@
         </ul></div></div>
 
       <nav class="masthead__nav masthead__nav--primary masthead__nav--secondary" role="banner" data-dropdown="">
-        {{ appVersion }}
+        <div *ngIf="appVersion">
+            version {{ appVersion }}
+        </div>
       </nav>
     </div>
   </div>

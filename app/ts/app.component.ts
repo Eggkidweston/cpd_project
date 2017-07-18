@@ -34,6 +34,7 @@ import { AuthenticationService, appInfo } from './services/services';
 import { SigninRegisterService } from "./services/services";
 import { RevisionHistoryComponent } from './components/version-control/revision-history/revision-history.component';
 import { SubmitChannelComponent } from './components/administration/submit-channel/submit-channel.component';
+import { AppsService } from "./services/apps.service";
 import myGlobals = require('./globals');
 
 declare let ga:Function; //google analytics object
@@ -83,16 +84,18 @@ export class AppComponent
     private idpJWT;
 
 
-    constructor( public authenticationService:AuthenticationService,
-                 protected signinRegisterService:SigninRegisterService,
-                 public router:Router )
+    constructor( public authenticationService: AuthenticationService,
+                 protected signinRegisterService: SigninRegisterService,
+                 public appsService: AppsService,
+                 public router: Router )
     {
         this.checkCookieBar();
 
+        this.getVersionNumber();
 
         this.appInfoname = appInfo.name;
         this.appInfoStrap = appInfo.strap;
-        this.appVersion = appInfo.version;
+
         AppComponent.router = router;
 
         this.narrowHeader = myGlobals.narrowHeader;
@@ -172,6 +175,16 @@ export class AppComponent
         return AppComponent.router.isRouteActive( AppComponent.router.generate( instruction ) );
     }
 
+
+    private getVersionNumber() {
+        this.appsService.getVersionNumber()
+            .subscribe(
+                version => {
+                    this.appVersion = version.version_number;
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            );
+    }
 
 
     // ok, I confess, this needs refactoring. This is not a good

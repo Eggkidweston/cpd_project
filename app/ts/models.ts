@@ -262,6 +262,14 @@ export class Channel
    };
 }
 
+export class Version {
+    id: number;
+    version_number: string;
+    active: boolean;
+    updatedat: string;
+    createdat: string;
+}
+
 export class ReleaseNote {
     id: number;
     version_number: string;
