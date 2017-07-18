@@ -12,7 +12,6 @@ export class AuthenticationService {
     private static _apiKey: string;
     private static _router: Router;
     private static _http: Http;
-    private static _tokenExpiry: number;
 
     constructor(private http: Http, public router: Router) {
         AuthenticationService._router = router;
@@ -20,38 +19,16 @@ export class AuthenticationService {
     }
 
     static get user(): User {
-        if (typeof(Storage) !== 'undefined') {
-            let tokenExpiryToken = localStorage.getItem('_tokenExpiry');
-            if (tokenExpiryToken) {
-                let tokenExpiryTime = moment(parseInt(tokenExpiryToken));
-                let currentTime = moment(new Date());
-                let duration = moment.duration(tokenExpiryTime.diff(currentTime)).asMinutes();
-
-                if (duration < 15 && duration > 0) {
-                    // Refresh JWT
-                    localStorage.removeItem('_tokenExpiry');
-                    AuthenticationService.refreshToken();
-                    return AuthenticationService._user;
-                }
-
-                if (duration < 0) {
-                    // JWT Expired - sign out
-                    this.signOut();
-                    AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
-                    return AuthenticationService._user;
-                }
-
-                return <User>(JSON.parse(localStorage.getItem('_user')));
-            }
+        if (typeof(Storage) !== "undefined") {
+            return <User>(JSON.parse(localStorage.getItem("_user")));
+        } else {
+            return AuthenticationService._user;
         }
-
-        return AuthenticationService._user;
     }
 
     static set user(user: User) {
         if (typeof(Storage) !== "undefined" && user !== null) {
             localStorage.setItem('_user', JSON.stringify(user));
-            localStorage.setItem('_tokenExpiry', AuthenticationService._tokenExpiry.toString());
         }
 
         AuthenticationService._user = user;
@@ -71,31 +48,53 @@ export class AuthenticationService {
         return result;
     }
 
-    static refreshToken() {
+    static refreshToken(apiKey) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        AuthenticationService._http.post(`${appSettings.apiRoot}authenticate/refreshtoken`,
+        return AuthenticationService._http.post(`${appSettings.apiRoot}authenticate/refreshtoken`,
             JSON.stringify({
-                token: AuthenticationService.apiKey
+                token: apiKey
             }), { headers })
             .map(res => <any>res.json())
-            .subscribe(
-                data => {
-                    if (data.status === 500) {
-                        AuthenticationService.signOut();
-                        AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
-                    }
-                    AuthenticationService.apiKey = <any>data.token;
-                    AuthenticationService.storeTokenExpiryTime(data.expiresIn);
-                    localStorage.setItem('_tokenExpiry', AuthenticationService._tokenExpiry.toString());
-                }
-            );
+            .catch(AuthenticationService.handleError)
+    }
+
+    static handleError( error:Response )
+    {
+        return Observable.throw( error );
     }
 
     static get apiKey(): string {
-        if (typeof(Storage) !== "undefined") {
-            return localStorage.getItem("_apiKey");
+
+        if (typeof(Storage) !== 'undefined') {
+            let tokenExpiry = localStorage.getItem('_tokenExpiry');
+            let tokenExpiryTime = moment(parseInt(tokenExpiry));
+            let currentTime = moment(new Date());
+            let duration = moment.duration(tokenExpiryTime.diff(currentTime)).asMinutes();
+            let apiKey = localStorage.getItem('_apiKey');
+
+            if (duration > 0 && duration < 15) {
+                // Refresh JWT
+                AuthenticationService.refreshToken(apiKey).subscribe(
+                    data => {
+                        AuthenticationService.apiKey = <any>data.token;
+                        AuthenticationService.storeTokenExpiryTime(data.expiresIn);
+
+                        return AuthenticationService._apiKey;
+                    },
+                    (error: any) => {
+                        AuthenticationService.signOut();
+                        AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
+                    }
+                );
+            } else if (duration < 0) {
+                // JWT Expired - sign out
+                this.signOut();
+                AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
+            } else {
+                return AuthenticationService._apiKey;
+            }
         } else {
             return AuthenticationService._apiKey;
         }
@@ -256,7 +255,7 @@ export class AuthenticationService {
 
     static storeTokenExpiryTime(expiryTime){
         let timeNow = moment().add(expiryTime, 's');
-        AuthenticationService._tokenExpiry = timeNow.valueOf();
+        localStorage.setItem('_tokenExpiry', timeNow.valueOf().toString());
     }
 
     private handleError(error: Response) {
