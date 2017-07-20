@@ -86,7 +86,7 @@
 
             <div class="app-details-row">
               <h4>Licence</h4>
-              <span *ngIf="!app?.licenceurl">{{ app?.licensetype_id && licenseType ? licenseType : "No licence information found for this resource" }}</span>
+              <span *ngIf="!app?.licenceurl">{{ app?.licensetype_id > -1 && licenseType ? licenseType : "No licence information found for this resource" }}</span>
               <a href='{{app?.licenceurl}}' target="_blank" *ngIf="app?.licenceurl">{{ licenseType ? licenseType : "VIEW LICENCE" }}</a>
             </div>
 
