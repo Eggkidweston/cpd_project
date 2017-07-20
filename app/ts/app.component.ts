@@ -182,7 +182,9 @@ export class AppComponent
                 version => {
                     this.appVersion = version.version_number;
                 },
-                ( error:any ) => AppComponent.generalError( error.status )
+                ( error:any ) => {
+                    this.appVersion = null;
+                }
             );
     }
 
