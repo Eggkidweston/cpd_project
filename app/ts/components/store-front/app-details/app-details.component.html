@@ -5,7 +5,8 @@
         <div class="col span-8">
             <div>
                 <div class="resource-image {{ widgetBackground }}">
-                    <img class="img" src="{{ widgetIcon }}" *ngIf="widgetIcon" alt="">
+                    <img *ngIf="widgetIcon" class="img" src="{{ widgetIcon }}" alt="">
+                    <div *ngIf="!widgetIcon" class="img-placeholder"></div>
                 </div>
 
                 <h2 class="app-details__title">{{ app?.title }}</h2>
