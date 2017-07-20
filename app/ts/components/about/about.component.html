@@ -14,7 +14,7 @@
 			down to you!</p>
 	</div>
 
-	<div *ngIf="releaseNotes">
+	<div *ngIf="releaseNotes && releaseNotes.length > 0">
 		<h2>Release Notes</h2>
 		<div *ngFor="let release of releaseNotes" class="release-container">
 
