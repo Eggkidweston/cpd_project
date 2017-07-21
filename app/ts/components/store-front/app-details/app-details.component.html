@@ -1,6 +1,17 @@
 
 <div class="app-details-container" [class.inactive]="!app?.active">
     <div class="app-details">
+        <div class="col span-12" *ngIf="resourceNoCategories">
+            <article class="box box--padding-large box--brd-mgreyblue app-details__notice">
+                <header class="box--notice__header">
+                    This resource has no categories assigned to it
+                </header>
+                <div class="box__inner">
+                    <p>Please help us to improve the search results by selecting the categories you think this resource belongs within.</p>
+                </div>
+            </article>
+            <category-select></category-select>
+        </div>
 
         <div class="col span-8">
             <div>
@@ -48,6 +59,21 @@
                 <h4>Included in this resource:</h4>
                 <ul>
                 <li *ngFor="let file of fileList">{{file}}</li>
+                </ul>
+            </div>
+
+            <div class="tagcloud condensed"  *ngIf="!resourceNoCategories">
+                <h4>Categories</h4>
+                <ul class="tags tags--white">
+                    <li class="tags__item" *ngFor="let useType of resourceUseTypes">
+                        <span class="tags__link">{{useType.name}}</span>
+                    </li>
+                    <li class="tags__item" *ngFor="let level of resourceLevels">
+                        <span class="tags__link">{{level.name}} Education</span>
+                    </li>
+                    <li class="tags__item" *ngFor="let subject of resourceSubjects">
+                        <span class="tags__link">{{subject.name}}</span>
+                    </li>
                 </ul>
             </div>
 

@@ -1,19 +1,61 @@
 <div class="row">
     <div class="col span-3">
-        <div class="ordertags">Order By <span (click)="order('az')" [class.selected]="chosenOrder==='az'">A..Z</span>,
-            <span [class.selected]="chosenOrder==='pop'" (click)="order('pop')">Popularity</span>, <span
-                    [class.selected]="chosenOrder==='updated'" (click)="order('updated')">Latest</span></div>
 
-        <div *ngIf="tagcloud" class="tagcloud condensed" [hidden]="gettingTags===true">
-            <ul class="tags tags--white">
-              <li class="tags__item" *ngFor="let tag of tagcloud.Tags">
-                <a href="#" class="tags__link" (click)="selectTag($event, tag.id)">{{tag.name}}</a>
-              </li>
-            </ul>
+        <div class="explore-filter" *ngIf="resourceUseTypes">
+            <h3 class="explore-filter__title" (click)="showFilterUseType = !showFilterUseType">
+                Use Type
+                <span class="icon explore-filter__icon" [ngClass]="{'icon-chevron-up' : showFilterUseType, 'icon-chevron-down' : !showFilterUseType}"></span>
+            </h3>
+
+            <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterUseType}">
+                <ul>
+                    <li *ngFor="let useType of resourceUseTypes">
+                        <a (click)="toggleProperty(useType.id, null, filteredUseTypes, $event)" class="explore-filter__property explore-filter__property--usetype" [class.explore-filter__property--active]="propertySelected(useType.id, filteredUseTypes)" href="#">
+                            {{useType.name}}
+                            <span class="icon-close icon explore-filter__close" *ngIf="propertySelected(useType.id, filteredUseTypes)"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
+        <div class="explore-filter" *ngIf="resourceLevels">
+            <h3 class="explore-filter__title" [ngClass]="{'opened' : showFilterLevel}" (click)="showFilterLevel = !showFilterLevel">
+                Level
+                <span class="icon explore-filter__icon" [ngClass]="{'icon-chevron-up' : showFilterLevel, 'icon-chevron-down' : !showFilterLevel}"></span>
+            </h3>
 
-        <div class="loader" [hidden]="gettingTags===false">
+            <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterLevel}">
+                <ul>
+                    <li *ngFor="let level of resourceLevels">
+                        <a (click)="toggleProperty(level.id, level.filter, filteredLevels, $event); setSubjectFilter(level.id)" class="explore-filter__property" [class.explore-filter__property--active]="propertySelected(level.id, filteredLevels)" href="#">
+                            {{level.name}}
+                            <span class="icon-close icon explore-filter__close" *ngIf="propertySelected(level.id, filteredLevels)"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="explore-filter" *ngIf="resourceSubjects">
+            <h3 class="explore-filter__title" [ngClass]="{'opened' : showFilterSubject}" (click)="showFilterSubject = !showFilterSubject">
+                Subject
+                <span class="icon explore-filter__icon" [ngClass]="{'icon-chevron-up' : showFilterSubject, 'icon-chevron-down' : !showFilterSubject}"></span>
+            </h3>
+
+            <div class="explore-filter__inner" [ngClass]="{'hidden' : !showFilterSubject}">
+                <ul>
+                    <li *ngFor="let subject of resourceSubjects">
+                        <a (click)="toggleProperty(subject.id, null, filteredSubjects, $event)" class="explore-filter__property" [class.explore-filter__property--active]="propertySelected(subject.id, filteredSubjects)" href="#" *ngIf="displaySubject(subject.filter)">
+                            {{subject.name}}
+                            <span class="icon-close icon explore-filter__close" *ngIf="propertySelected(subject.id, filteredSubjects)"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="loader" [hidden]="gettingResources===false">
             <span class="block-1"></span>
             <span class="block-2"></span>
             <span class="block-3"></span>
@@ -35,24 +77,6 @@
     </div>
     <div class="col span-7 push-1">
         <div class="row">
-            <div class="col-md-12">
-                <div *ngIf="selectedTags.Tags.length > 0" class="tagexplore selected">
-                    <button class="btn" *ngFor="let tag of selectedTags.Tags">
-                        <span title="remove"
-                              (click)="removeTag(tag.id)"
-                              class="glyphicon glyphicon-remove-circle"></span>{{tag.name}}
-
-                    </button>
-                </div>
-                <div *ngIf="selectedTags.Tags.length == 0">
-                    <br/>
-                    <p>Select a tag opposite to start exploring.<br/>
-                        You can refine your search by adding or removing tags as you go.</p>
-                    <p>Tags are initally ordered by popularity.
-                </div>
-            </div>
-        </div>
-        <div class="row">
             <div class="loader" [hidden]="gettingResources===false">
                 <span class="block-1"></span>
                 <span class="block-2"></span>
@@ -73,7 +97,7 @@
             </div>
 
             <div class="col span-12" [hidden]="gettingResources!==false">
-                <div *ngIf="selectedTags.Tags.length > 0">
+                <div>
                     <h3 *ngIf="resultsCount==1">{{resultsCount}} result found</h3>
                     <h3 *ngIf="resultsCount!=1">{{resultsCount}} results found</h3>
                     <p *ngIf="totalPages>1">Showing page {{currentPage}} of {{totalPages}}</p>
@@ -88,6 +112,3 @@
 
     </div>
 </div>
-
-
-

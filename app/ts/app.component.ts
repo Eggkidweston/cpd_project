@@ -108,6 +108,10 @@ export class AppComponent
             }
             this.showMobileMenu = false;
             ga('send', 'pageview', value);
+
+            if (value.indexOf('resource/') > -1) {
+                window.scrollTo(0, 0);
+            }
         });
 
         if(window.location.href.indexOf('token')>-1&&window.location.href.indexOf('jwt')>-1){
