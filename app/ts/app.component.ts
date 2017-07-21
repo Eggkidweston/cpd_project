@@ -109,10 +109,15 @@ export class AppComponent
             this.showMobileMenu = false;
             ga('send', 'pageview', value);
 
+
             if (typeof(Storage) !== 'undefined') {
                 if (value !== 'signin' && value !== 'registeridp') {
                     localStorage.setItem('last-route', value);
                 }
+            }
+
+            if (value.indexOf('resource/') > -1) {
+              window.scrollTo(0, 0);
             }
         });
 

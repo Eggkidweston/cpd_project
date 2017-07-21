@@ -262,6 +262,13 @@ export class Channel
    };
 }
 
+export class ResourceProperty
+{
+    id: number;
+    name: string;
+    filter: string;
+}
+
 export class Version {
     id: number;
     version_number: string;
