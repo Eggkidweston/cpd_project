@@ -1,26 +1,27 @@
 <div class="col span-11">
-	<h4>Version 1.5</h4> <br />
+	<div class="static-container about-container">
+		<h1>About</h1>
+		<p>The store works just like any other digital store, with a mixture of free and paid-for resources, each with clear
+			licensing and cost. You can search and explore, and recognise good content through ratings and reviews.
+			We are now open for submissions for free resources! Thank-you to everyone in the community that got involved!</p>
 
-	<p>The store works just like any other digital store, with a mixture of free and paid-for resources, each with clear licensing and cost. You can search and explore, and recognise good content through ratings and reviews.
-		We are now open for submissions for free resources! Thank-you to everyone in the community that got involved!</p>
-	<p>If you have a resource you want to share with the rest of the community, you can upload it to the store platform, or simply provide a listing to it if it's an online service or resource, through the Curation app.</p>
-	<p>In this release we've improved the try-it and resource preview functionality:</p>
-	<ul class="li--releasenotes"><li><strong>Try It</strong> - You can now access try it from the preview section on a resource page and we check to make sure the URL works now, before sending you there. </li>
-		<li><strong>Previews</strong> - We've made it possible to embed external content in the preview section so we can expand on the type of previews you can use to describe your resource.</li>
-	</ul>
-	<h4>Version 1.4</h4>
-		<p>In version 1.4, we improved the usability around registration and login and added social sharing to the resource pages:</p>
-		<ul class="li--releasenotes"><li><strong>Institutional Login</strong> - Use your institutional account to log into the Store to download, rate and review resources.</li>
-			<li><strong>Contributor Login</strong> - Use a non-institutional account in the Curation app to submit new resources to the store. That way, you can share/manage that login within your organisation and not locking it down to a single organisational account.</li>
-			<li><strong>Social Sharing</strong> - Sharing resources has never been easier - just click the icon on a resource page to share the link on facebook, twitter and many more.
-		</ul>
-		<h4>Version 1.3.2</h4>
-		<p>We squashed more bugs in version 1.3.2 and included a number of useful features:</p>
-		<ul class="li--releasenotes"><li><strong>Classification of resources by usage, academic level and subject</strong> - you can now add these classifications to your resources. We're working on classifying the existing resources but soon, users will be able to search by these categories in the Store.</li>
-		<li><strong>Recent Downloads</strong> - Any resources you download/access from now on will conveniently appear on your profile page.</li>
-		<li><strong>Resource Adoption</strong> - We've made it possible for contributors to adopt resources that were migrated over from Jorum. If you had a resource in Jorum that you want to associate with your contributor account, so that you can continue to maintain it, contact us.</li>
-		</ul>
-		<p>The next release will include much improved 'explore' functionality and the power to search by usage, academic level and subject.</p>
-   	<p>We want you to feedback on the app and resource store so if you have an idea for the Store or are having problems accessing the resources let us know on <a href="mailto:support@jiscstore.freshdesk.com">support@jiscstore.freshdesk.com</a>.
-			We’ll collate these suggestions and feed them back into the development pipeline so what this becomes is really down to you!</p><br><br>
+		<p>If you have a resource you want to share with the rest of the community, you can upload it to the store platform,
+			or simply provide a listing to it if it's an online service or resource, through the Curation app.</p>
+
+		<p>We want you to feedback on the app and resource store so if you have an idea for the Store or are having problems
+			accessing the resources let us know on <a href="mailto:support@jiscstore.freshdesk.com">support@jiscstore.freshdesk.com</a>.
+			We'll collate these suggestions and feed them back into the development pipeline so what this becomes is really
+			down to you!</p>
+	</div>
+
+	<div *ngIf="releaseNotes && releaseNotes.length > 0">
+		<h2>Release Notes</h2>
+		<div *ngFor="let release of releaseNotes" class="release-container">
+
+			<h4 class="version-label">Version {{release.version_number}}</h4>
+
+			<div [innerHtml]="release.description"></div>
+
+		</div>
+	</div>
 </div>
