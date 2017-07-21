@@ -4,9 +4,19 @@
 
         <div class="col span-8">
             <div>
-                <div class="resource-image {{ widgetBackground }}">
-                    <img *ngIf="widgetIcon" class="img" src="{{ widgetIcon }}" alt="">
-                    <div *ngIf="!widgetIcon" class="img-placeholder"></div>
+                <!-- Jorum resource, show the resource type image with the jorum logo -->
+                <div *ngIf="widgetIcon && app?.jorum_legacy_flag" class="resource-image {{ widgetBackground }}">
+                    <img class="img" src="{{ widgetIcon }}" alt="">
+                </div>
+
+                <!-- Standard resource, show the resource's icon image -->
+                <div *ngIf="widgetIcon && !app?.jorum_legacy_flag" class="resource-image">
+                    <img class="img" src="{{ widgetIcon }}" alt="">
+                </div>
+
+                <!-- Standard resource, show the resource type image as the icon image is not available -->
+                <div *ngIf="!widgetIcon" class="resource-image {{ widgetBackground }}">
+                    <div class="img-placeholder"></div>
                 </div>
 
                 <h2 class="app-details__title">{{ app?.title }}</h2>
