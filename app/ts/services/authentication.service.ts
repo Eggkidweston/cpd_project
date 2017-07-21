@@ -3,13 +3,19 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { appSettings } from '../../../settings';
 import { User } from '../models';
+import { Router } from '@angular/router-deprecated';
+import * as moment from 'moment';
 
 @Injectable()
 export class AuthenticationService {
     private static _user: User = null;
     private static _apiKey: string;
+    private static _router: Router;
+    private static _http: Http;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, public router: Router) {
+        AuthenticationService._router = router;
+        AuthenticationService._http = http;
     }
 
     static get user(): User {
@@ -20,9 +26,9 @@ export class AuthenticationService {
         }
     }
 
-    static set user(user:User) {
-        if (typeof(Storage) !== "undefined") {
-            localStorage.setItem("_user", JSON.stringify(user));
+    static set user(user: User) {
+        if (typeof(Storage) !== "undefined" && user !== null) {
+            localStorage.setItem('_user', JSON.stringify(user));
         }
 
         AuthenticationService._user = user;
@@ -42,9 +48,53 @@ export class AuthenticationService {
         return result;
     }
 
+    static refreshToken(apiKey) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return AuthenticationService._http.post(`${appSettings.apiRoot}authenticate/refreshtoken`,
+            JSON.stringify({
+                token: apiKey
+            }), { headers })
+            .map(res => <any>res.json())
+            .catch(AuthenticationService.handleError)
+    }
+
+    static handleError( error:Response )
+    {
+        return Observable.throw( error );
+    }
+
     static get apiKey(): string {
-        if (typeof(Storage) !== "undefined") {
-            return localStorage.getItem("_apiKey");
+
+        if (typeof(Storage) !== 'undefined') {
+            let tokenExpiry = localStorage.getItem('_tokenExpiry');
+            let tokenExpiryTime = moment(parseInt(tokenExpiry));
+            let currentTime = moment(new Date());
+            let duration = moment.duration(tokenExpiryTime.diff(currentTime)).asMinutes();
+            let apiKey = localStorage.getItem('_apiKey');
+
+            if (duration > 0 && duration < 15) {
+                // Refresh JWT
+                AuthenticationService.refreshToken(apiKey).subscribe(
+                    data => {
+                        AuthenticationService.apiKey = <any>data.token;
+                        AuthenticationService.storeTokenExpiryTime(data.expiresIn);
+
+                        return AuthenticationService._apiKey;
+                    },
+                    (error: any) => {
+                        AuthenticationService.signOut();
+                        AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
+                    }
+                );
+            } else if (duration < 0) {
+                // JWT Expired - sign out
+                this.signOut();
+                AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
+            } else {
+                return AuthenticationService._apiKey;
+            }
         } else {
             return AuthenticationService._apiKey;
         }
@@ -128,6 +178,7 @@ export class AuthenticationService {
             .subscribe(
                 data => {
                     AuthenticationService.apiKey = <any>data.token;
+                    AuthenticationService.storeTokenExpiryTime(data.expiresIn);
                     headers.append('x-access-token', AuthenticationService.apiKey);
                     this.http.get(`${appSettings.apiRoot}users/me`, { headers })
                         .map(res => res.json())
@@ -159,6 +210,7 @@ export class AuthenticationService {
             .subscribe(
                 data => {
                     AuthenticationService.apiKey = <any>data.token;
+                    AuthenticationService.storeTokenExpiryTime(data.expiresIn);
                     headers.append('x-access-token', AuthenticationService.apiKey);
                     this.http.get(`${appSettings.apiRoot}users/me`, { headers })
                         .map(res => res.json())
@@ -174,7 +226,9 @@ export class AuthenticationService {
     static signOut() {
         AuthenticationService.apiKey = null;
         AuthenticationService.user = null;
-        localStorage.setItem("pid",'');
+        localStorage.removeItem("pid");
+        localStorage.removeItem("_user");
+        localStorage.removeItem('_tokenExpiry');
     }
 
     isEmailOrUsernameInUse(emailOrUsername: string,
@@ -197,6 +251,11 @@ export class AuthenticationService {
                     else err(res);
                 }
             );
+    }
+
+    static storeTokenExpiryTime(expiryTime){
+        let timeNow = moment().add(expiryTime, 's');
+        localStorage.setItem('_tokenExpiry', timeNow.valueOf().toString());
     }
 
     private handleError(error: Response) {

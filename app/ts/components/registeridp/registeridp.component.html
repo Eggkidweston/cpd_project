@@ -1,5 +1,10 @@
 <div *ngIf="showPage" class="col span-8 search-box">
-   	<h1>Register or sign in with your institution</h1>
+
+    <div *ngIf="showSignedOutMessage" class="box box--padding-large box--info">
+        <span>You have been signed out due to inactivity.</span>
+    </div>
+
+    <h1>Register or sign in with your institution</h1>
 
     <div *ngIf="!requireAdminPassword">
         <div *ngIf="!authenticated">
