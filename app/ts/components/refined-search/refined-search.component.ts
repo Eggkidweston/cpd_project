@@ -46,6 +46,7 @@ export class RefinedSearchComponent {
         }
 
         if (category == "resource-level"){
+            this.resourceLevel = value;
             this.setSubjectFilter(value);
             if (value !== "all") {
                 this.resourceSubject = "all";
