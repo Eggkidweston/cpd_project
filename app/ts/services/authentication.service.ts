@@ -81,7 +81,7 @@ export class AuthenticationService {
                         AuthenticationService.apiKey = <any>data.token;
                         AuthenticationService.storeTokenExpiryTime(data.expiresIn);
 
-                        return AuthenticationService._apiKey;
+                        return apiKey;
                     },
                     (error: any) => {
                         AuthenticationService.signOut();
@@ -93,7 +93,7 @@ export class AuthenticationService {
                 this.signOut();
                 AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
             } else {
-                return AuthenticationService._apiKey;
+                return apiKey;
             }
         } else {
             return AuthenticationService._apiKey;
