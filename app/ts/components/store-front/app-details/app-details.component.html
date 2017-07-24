@@ -2,14 +2,6 @@
 <div class="app-details-container" [class.inactive]="!app?.active">
     <div class="app-details">
         <div class="col span-12" *ngIf="resourceNoCategories">
-            <article class="box box--padding-large box--brd-mgreyblue app-details__notice">
-                <header class="box--notice__header">
-                    This resource has no categories assigned to it
-                </header>
-                <div class="box__inner">
-                    <p>Please help us to improve the search results by selecting the categories you think this resource belongs within.</p>
-                </div>
-            </article>
             <category-select></category-select>
         </div>
 
