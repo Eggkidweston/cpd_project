@@ -1,3 +1,11 @@
+<article class="box box--padding-large box--brd-mgreyblue app-details__notice" *ngIf="resourceUseTypes && resourceLevels && resourceSubjects && displayCategoryForm">
+	<header class="box--notice__header">
+		This resource has no categories assigned to it
+	</header>
+	<div class="box__inner">
+		<p>Please help us to improve the search results by selecting the categories you think this resource belongs within.</p>
+	</div>
+</article>
 <div class="category-select" *ngIf="resourceUseTypes && resourceLevels && resourceSubjects && displayCategoryForm">
 	<form [ngFormModel]="searchForm" (submit)="onSubmitAssignCategories(searchForm.value)">
 		<span>This is a</span>
