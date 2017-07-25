@@ -111,7 +111,7 @@ export class AppComponent
 
 
             if (typeof(Storage) !== 'undefined') {
-                if (value !== 'signin' && value !== 'registeridp') {
+                if (value !== 'signin' && value !== 'signin?signedout=true' && value !== 'registeridp') {
                     localStorage.setItem('last-route', value);
                 }
             }
