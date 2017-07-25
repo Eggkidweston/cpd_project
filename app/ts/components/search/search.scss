@@ -2,8 +2,8 @@
 
 .input--search.input--search {
 	font-size:1.4em;
-  width:100%;
-	padding: 8px;
+	width:100%;
+	padding: 15px 50px 15px 10px;
 }
 .searchbox-container{
 	display:inline-flex;
@@ -139,4 +139,23 @@
 		border:1px solid #cccccc;
 		color:#fff
 		}
+}
+
+.search__form{
+	position: relative;
+}
+
+.search__btn{
+	border: 0;
+	background: none;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	bottom: 2px;
+	margin: auto;
+	font-size: 1.8em;
+	color: #d5dee2;
+	height: auto;
+	width: 50px;
+	text-align: center;
 }

@@ -1,11 +1,25 @@
 
 <div class="app-details-container" [class.inactive]="!app?.active">
     <div class="app-details">
+        <div class="col span-12" *ngIf="resourceNoCategories">
+            <category-select></category-select>
+        </div>
 
         <div class="col span-8">
             <div>
-                <div class="resource-image {{ widgetBackground }}">
-                    <img class="img" src="{{ widgetIcon }}" *ngIf="widgetIcon" alt="">
+                <!-- Jorum resource, show the resource type image with the jorum logo -->
+                <div *ngIf="widgetIcon && app?.jorum_legacy_flag" class="resource-image {{ widgetBackground }}">
+                    <img class="img" src="{{ widgetIcon }}" alt="">
+                </div>
+
+                <!-- Standard resource, show the resource's icon image -->
+                <div *ngIf="widgetIcon && !app?.jorum_legacy_flag" class="resource-image">
+                    <img class="img" src="{{ widgetIcon }}" alt="">
+                </div>
+
+                <!-- Standard resource, show the resource type image as the icon image is not available -->
+                <div *ngIf="!widgetIcon" class="resource-image {{ widgetBackground }}">
+                    <div class="img-placeholder"></div>
                 </div>
 
                 <h2 class="app-details__title">{{ app?.title }}</h2>
@@ -37,6 +51,21 @@
                 <h4>Included in this resource:</h4>
                 <ul>
                 <li *ngFor="let file of fileList">{{file}}</li>
+                </ul>
+            </div>
+
+            <div class="tagcloud condensed"  *ngIf="!resourceNoCategories">
+                <h4>Categories</h4>
+                <ul class="tags tags--white">
+                    <li class="tags__item" *ngFor="let useType of resourceUseTypes">
+                        <span class="tags__link">{{useType.name}}</span>
+                    </li>
+                    <li class="tags__item" *ngFor="let level of resourceLevels">
+                        <span class="tags__link">{{level.name}} Education</span>
+                    </li>
+                    <li class="tags__item" *ngFor="let subject of resourceSubjects">
+                        <span class="tags__link">{{subject.name}}</span>
+                    </li>
                 </ul>
             </div>
 
@@ -86,7 +115,7 @@
 
             <div class="app-details-row">
               <h4>Licence</h4>
-              <span *ngIf="!app?.licenceurl">{{ app?.licensetype_id && licenseType ? licenseType : "No licence information found for this resource" }}</span>
+              <span *ngIf="!app?.licenceurl">{{ app?.licensetype_id > -1 && licenseType ? licenseType : "No licence information found for this resource" }}</span>
               <a href='{{app?.licenceurl}}' target="_blank" *ngIf="app?.licenceurl">{{ licenseType ? licenseType : "VIEW LICENCE" }}</a>
             </div>
 

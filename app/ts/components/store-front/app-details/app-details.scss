@@ -43,10 +43,14 @@
         width: 64px;
         height: auto;
       }
+
+      .img-placeholder {
+        width: 64px;
+        height: 64px;
+      }
     }
 
     .nowidgetborder {
-      margin-bottom: 45px;
       background-size: cover;
 
       .img {
@@ -165,6 +169,7 @@
     background-color: #efefef;
     clear: both;
     padding: 10px;
+    margin-top: 44px;
     margin-bottom: 15px;
     span {
       padding-right:10px;
@@ -180,5 +185,10 @@
 }
 
 .medium-full-size{
-    margin: 0 auto;
+  margin: 0 auto;
+}
+
+.app-details__notice{
+  margin-right: 15px;
+  margin-bottom: 0;
 }

@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { RouterOutlet, RouterLink, RouteConfig, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { ControlGroup, Control, FormBuilder, AbstractControl } from '@angular/common';
 import { IdpMembers } from '../../models';
 import { AppComponent } from '../../app.component';
@@ -30,6 +30,8 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
         public shaking: boolean = false;
         public busy: boolean = false;
 
+        private showSignedOutMessage: boolean = false;
+
 	    searchForm: ControlGroup;
 	    searchterm: AbstractControl;
 	    idpUserForm: ControlGroup;
@@ -43,9 +45,11 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 
 	    constructor( private _idpRegisterService:IDPRegisterService,
                  fb: FormBuilder,
+                 params:RouteParams,
                  public authenticationService: AuthenticationService,
                  public signinRegisterService: SigninRegisterService)
         {
+            this.showSignedOutMessage = params.get( 'signedout' ) ? true : false;
 
             this.searchForm = fb.group({
                 "searchterm": [""]
@@ -90,7 +94,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	            this.authenticationService
                 .registerWithLocalPid( formValues.username,
                     () => {
-                      this.signinRegisterService.redirectToProfileAfterSignin();
+                      this.signinRegisterService.resumeAfterSigninOrRegister();
                     },
                     (res: any) => {
                         AppComponent.generalError(res.status);
@@ -109,7 +113,6 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
                 this.authenticationService
                 .signInAdmin( formValues.password,
                     () => {
-                        this.signinRegisterService.redirectToProfileAfterSignin();
                         this.signinRegisterService.resumeAfterSigninOrRegister();
                     },
                     (res: any) => {
@@ -124,7 +127,6 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	    	this.authenticationService
             .signInWithPid(
                 () => {
-                    this.signinRegisterService.redirectToProfileAfterSignin();
                     this.signinRegisterService.resumeAfterSigninOrRegister();
                 },
                 (res: any) => {

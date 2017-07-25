@@ -7,21 +7,17 @@ export class SigninRegisterService {
     public lastRoute: string;
 
     constructor(public router: Router) {
-        router.subscribe((value: any) => {
-            if( value !== 'signin' && value !== 'register' && value !== 'registeridp' ) {
-                this.lastRoute = value;
-            }
-        })
+
+        if (typeof(Storage) !== 'undefined') {
+            this.lastRoute = localStorage.getItem('last-route');
+        }
     };
 
     resumeAfterSigninOrRegister() {
-        //console.log('resumeAfterRegister');
         if( this.lastRoute ) {
             this.router.navigateByUrl('' + this.lastRoute);
-            //console.log('navigate to ' + this.lastRoute);
         } else {
             this.router.navigate(['Home']);
-            //console.log('home');
         }
     }
 
@@ -31,10 +27,6 @@ export class SigninRegisterService {
 
     redirectToProfileAfterSignin() {
         this.lastRoute = 'profile';
-    }
-
-    redirectToProfile() {
-        this.router.navigate(['Profile']);
     }
 }
 
