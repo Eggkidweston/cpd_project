@@ -5,12 +5,13 @@ import { SubmitReviewComponent } from './submit-review/submit-review.component';
 import { AuthenticationService, ContributorService } from '../../../services/services';
 import { appSettings } from '../../../../../settings';
 import { AppsService } from '../../../services/services';
-import { StoreApp, Review, Channel } from '../../../models';
+import { StoreApp, Review, Channel, ResourceProperty } from '../../../models';
 import { AppComponent } from '../../../app.component';
 import { LicenseTypes } from '../../../models';
 import { AppWidgetComponent } from '../../appwidget/appwidget.component';
 import { PreviewComponent } from './preview/preview.component';
 import { SocialShareComponent } from '../../shared/social-share/social-share.component';
+import { CategorySelectComponent } from './category-select/category-select.component';
 
 let moment = require( "moment" );
 
@@ -20,7 +21,7 @@ require( "../../../../../node_modules/bootstrap-sass/assets/javascripts/bootstra
     selector: 'app-details',
     template: require( './app-details.component.html' ),
     styles: [require( './app-details.scss' ).toString(), require('../../../../sass/typeimage.scss').toString()],
-    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, PreviewComponent, AppWidgetComponent, SocialShareComponent]
+    directives: [SubmitReviewComponent, RouterOutlet, RouterLink, RatingComponent, PreviewComponent, AppWidgetComponent, SocialShareComponent, CategorySelectComponent]
 } )
 
 export class AppDetailsComponent implements AfterViewInit
@@ -34,7 +35,12 @@ export class AppDetailsComponent implements AfterViewInit
     public widgetIcon:string;
     public errorMessage:string;
     public fileList:Array<string>;
+    private resourceUseTypes:Array<ResourceProperty> = [];
+    private resourceLevels:Array<ResourceProperty> = [];
+    private resourceSubjects:Array<ResourceProperty> = [];
     addingReview:boolean = false;
+
+    resourceNoCategories: boolean = false;
 
     constructor( public authenticationService:AuthenticationService,
                  private contributorService:ContributorService,
@@ -71,6 +77,9 @@ export class AppDetailsComponent implements AfterViewInit
                     this.loadAlsoBy();
 
                     this.loadRelatedChannels();
+                    this.loadResourceUseTypes();
+                    this.loadResourceLevels();
+                    this.loadResourceSubjects();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -129,6 +138,48 @@ export class AppDetailsComponent implements AfterViewInit
               },
               (error:any) => AppComponent.generalError( error.status )
           );
+    }
+
+    loadResourceUseTypes()
+    {
+        this.appsService.getUseTypesByResourceId(this.app.id)
+            .subscribe(
+                resourceUseTypes => {
+                    this.resourceUseTypes = resourceUseTypes;
+                    this.resourceNoCategories = this.checkResourceCategories();
+                },
+                (error:any) => AppComponent.generalError( error.status )
+            );
+    }
+
+    loadResourceLevels()
+    {
+        this.appsService.getLevelsByResourceId(this.app.id)
+            .subscribe(
+                resourceLevels => {
+                    this.resourceLevels = resourceLevels;
+                    this.resourceNoCategories = this.checkResourceCategories();
+                },
+                (error:any) => AppComponent.generalError( error.status )
+            );
+    }
+
+    loadResourceSubjects()
+    {
+        this.appsService.getSubjectsByResourceId(this.app.id)
+            .subscribe(
+                resourceSubjects => {
+                    this.resourceSubjects = resourceSubjects;
+                    this.resourceNoCategories = this.checkResourceCategories();
+                },
+                (error:any) => AppComponent.generalError( error.status )
+            );
+    }
+
+    checkResourceCategories() {
+        return this.resourceUseTypes.length === 0 &&
+               this.resourceLevels.length === 0 &&
+               this.resourceSubjects.length === 0;
     }
 
     reviewAdded( review:Review )

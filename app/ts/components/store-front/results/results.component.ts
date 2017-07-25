@@ -49,7 +49,11 @@ export class ResultsComponent
     getResultsApps()
     {
         this.searching = true;
-        this._appsService.getBySearchPaged(this.searchTerm, false, this.appsPerPage, this.currentPage, this.activeOnly)
+        let resourceLevel = this.getStoredValue('resource-level');
+        let resourceSubject = this.getStoredValue('resource-subject');
+        let resourceUseType = this.getStoredValue('resource-usetype');
+
+        this._appsService.getBySearchPaged(this.searchTerm, false, this.appsPerPage, this.currentPage, this.activeOnly, resourceLevel, resourceSubject, resourceUseType)
                 .subscribe(
                     results => {
                         this.resultsApps = results.data;
@@ -100,4 +104,9 @@ export class ResultsComponent
         this.router.navigate( ['Home'] );
     }
 
+    getStoredValue(category){
+        if (typeof(Storage) !== "undefined") {
+            return localStorage.getItem(category);
+        }
+    }
 }

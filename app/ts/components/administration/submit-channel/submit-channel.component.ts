@@ -10,8 +10,7 @@ import { AppWidgetsComponent } from '../../appwidgets/appwidgets.component';
 @Component({
     selector: 'submit-channel',
     template: require('submit-channel.component.html'),
-    styles: [require('../../../../sass/explore.scss').toString(),
-      require('../../search/search.scss').toString(),
+    styles: [require('../../search/search.scss').toString(),
       require('./submit-channel.component.scss').toString()],
     directives: [AppWidgetsComponent]
 })
