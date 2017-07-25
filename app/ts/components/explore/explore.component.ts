@@ -51,6 +51,8 @@ export class ExploreComponent implements AfterViewInit {
     private subjectFilters: string[];
     private subjectDuplicateSelected: number = 0;
 
+    private showingRecommended: boolean;
+
     constructor(public authenticationService: AuthenticationService,
                 public router: Router,
                 public appsService: AppsService,
@@ -79,6 +81,7 @@ export class ExploreComponent implements AfterViewInit {
 
     loadRecommendedApps() {
         this.gettingResources = true;
+        this.showingRecommended = true;
         this.appsService.getRecommendedApps(10, 1)
             .subscribe(
                 storeApps => {
@@ -204,6 +207,7 @@ export class ExploreComponent implements AfterViewInit {
 
     loadResources() {
         this.gettingResources = true;
+        this.showingRecommended = false;
         this.appsService.getResources(this.appsPerPage,
                                       this.currentPage,
                                       '',
