@@ -226,16 +226,16 @@ export class AppDetailsComponent implements AfterViewInit
 
     setWidgetBackground()
     {
-        if(!this.app.image) {
+        if(!this.app.image || this.app.image === 'undefined') {
             this.widgetBackground = "backgroundimage" + this.app.type_id + " nowidgetborder";
         }
     }
 
     setWidgetIcon()
     {
-        if(!this.app.image&&this.app.jorum_legacy_flag) {
+        if(!this.app.image && this.app.jorum_legacy_flag) {
             this.widgetIcon = "https://s3-eu-west-1.amazonaws.com/jisc-store-assets/jorumicon.png";
-        } else {
+        } else if (this.app.image !== 'undefined') {
             this.widgetIcon = this.app.image;
         }
     }
