@@ -41,6 +41,7 @@ export class AppDetailsComponent implements AfterViewInit
     addingReview:boolean = false;
 
     resourceNoCategories: boolean = false;
+    forceDisplayCategories: boolean = false;
 
     constructor( public authenticationService:AuthenticationService,
                  private contributorService:ContributorService,
@@ -254,5 +255,12 @@ export class AppDetailsComponent implements AfterViewInit
             }
             return partialList;
         }
+    }
+
+    refreshCategories(event){
+        this.forceDisplayCategories = true;
+        this.resourceSubjects = event.resourceCategories.subjects;
+        this.resourceUseTypes = event.resourceCategories.usetypes;
+        this.resourceLevels = event.resourceCategories.levels;
     }
 }
