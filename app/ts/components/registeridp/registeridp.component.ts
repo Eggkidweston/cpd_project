@@ -23,6 +23,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	    public idpFound:boolean = false;
 	    private results:Array<IdpMembers>;
 	    private selectedIdp:IdpMembers;
+        private storedInstitution: IdpMembers;
 
 	    public showPage:boolean = false;
 	    public authenticated:boolean = false;
@@ -75,6 +76,16 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	    		this.showPage = true;
 		        this.getIdpMembers();
 	    	}
+
+            if (typeof(Storage) !== 'undefined') {
+                if(localStorage.getItem("institution") != 'undefined' && localStorage.getItem("institution") != null) {
+                    this.storedInstitution = <IdpMembers>(JSON.parse(localStorage.getItem("institution")));
+                    this.selectedIdp = this.storedInstitution;
+                    this.query = this.storedInstitution.name;
+                    this.idpSelected = true;
+                    this.idpFound = true;
+                }
+            }
 	    }
 
 	    private getIdpMembers() {
@@ -193,6 +204,11 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	    		this.idpFound = false;
 	    		this.selectedIdp = null;
 	    	}
+
+	    	//Store Institution in local storage
+            if (typeof(Storage) !== 'undefined') {
+                localStorage.setItem('institution', JSON.stringify(item));
+            }
 		}
 
 		public launchIDP() {
@@ -212,5 +228,15 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
             setTimeout(() => {
                 this.shaking = false;
             }, 1000);
+        }
+
+        resetStoredInstitution(e) {
+            e.preventDefault();
+            this.query = '';
+            this.idpFound = false;
+            this.idpSelected = false;
+            this.selectedIdp = null;
+            this.storedInstitution = null;
+            localStorage.removeItem('institution');
         }
     }
