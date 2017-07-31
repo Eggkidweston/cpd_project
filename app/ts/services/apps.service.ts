@@ -373,6 +373,22 @@ export class AppsService
             .catch( this.handleError );
     }
 
+    public getEmbeddedResourceDocument( resourceId:number, documentType: string) {
+
+        let headers = new Headers();
+        headers.append( 'Content-Type', 'application/json' );
+
+        //Pass the api key if someone is logged in
+        if (AuthenticationService.user) {
+            headers.append( 'x-access-token', AuthenticationService.apiKey );
+        }
+
+        return this.http.get( `${appSettings.apiRoot}resources/${resourceId}/download/${documentType}`,
+            { headers })
+            .map( res => res.json().url )
+            .catch( this.handleError );
+    }
+
     public getResourceMetrics( resourceId:number, date:string,
                                next:( metrics ) => void,
                                error:( err ) => void )

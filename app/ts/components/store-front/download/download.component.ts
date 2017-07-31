@@ -93,6 +93,48 @@ export class DownloadComponent
         this.retrieveAppAndDownload();
     }
 
+    downloadFileFromUrl(url: string) {
+        if (url == null){
+            this.urlError = true;
+            return;
+        }
+
+        this.resUrl = url;
+
+        this.filedownloadButton.nativeElement.setAttribute("href", url);
+
+        let resourceURL:string = url;
+        if(resourceURL.indexOf('jisc-store-resources')==-1&&resourceURL.indexOf('jisc-store-content')==-1) {
+            //not hosted on our s3 bucket
+        }else {
+            this.isUploadedResource = true;
+            this.filedownloadButton.nativeElement.setAttribute("download", url);
+        }
+
+        this.filedownloadButton.nativeElement.click();
+    }
+
+    downloadEmbeddedResourceDocument(documentType) {
+        if (documentType !== 'word' && documentType !== 'powerpoint') {
+            return;
+        }
+
+        if( !this.authenticationService.userSignedIn() ) {
+            this.openSignIn();
+            return;
+        }
+
+        this.getting = true;
+        this.appsService.getEmbeddedResourceDocument(this.resourceId, documentType)
+            .subscribe(
+                url => {
+                    this.getting = false;
+                    this.downloadFileFromUrl(url);
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            )
+    }
+
     retrieveAppAndDownload()
     {       
         this.getting = true;
@@ -100,26 +142,7 @@ export class DownloadComponent
             .subscribe(
                 url => {
                     this.getting = false;
-                    if (url == null){
-                        this.urlError = true;
-                    }
-                    else{
-                        this.resUrl = url;
-
-                        this.filedownloadButton.nativeElement.setAttribute("href", url);
-                        
-                        
-                        let resourceURL:string = url;
-                        if(resourceURL.indexOf('jisc-store-resources')==-1&&resourceURL.indexOf('jisc-store-content')==-1) {
-                            //not hosted on our s3 bucket
-                        }else {
-                            this.isUploadedResource = true;
-                            this.filedownloadButton.nativeElement.setAttribute("download", url);
-                        }
-                        
-                        this.filedownloadButton.nativeElement.click();
-                    }
-
+                    this.downloadFileFromUrl(url);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
