@@ -75,6 +75,13 @@ export class SearchComponent {
       window.location.href = url;
 	}
 
+	hasIcon(item) {
+	    if (item.image && item.image !== 'undefined'){
+	        return true;
+        }
+        return false;
+    }
+
 	searchTermChanged(searchTerm, activeOnly) {
         let resourceLevel = this.getStoredValue('resource-level');
         let resourceSubject = this.getStoredValue('resource-subject');
