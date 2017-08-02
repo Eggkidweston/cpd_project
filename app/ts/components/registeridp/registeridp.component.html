@@ -4,10 +4,9 @@
         <span>You have been signed out due to inactivity.</span>
     </div>
 
-    <div *ngIf="showSignInErrorMessage" class="box box--padding-large box--danger">
+    <div *ngIf="showIDPNotSupportedMessage" class="box box--padding-large box--danger">
         <span>
-            Failed to login using institution portal, please email us:
-            <a href="mailto:support@jiscstore.freshdesk.com">support@jiscstore.freshdesk.com</a>
+            Sorry, your IDP is not supported. Please visit <a target="_blank" href="https://www.jisc.ac.uk/liberate">https://www.jisc.ac.uk/liberate</a> to find out more about our managed service.
         </span>
     </div>
 

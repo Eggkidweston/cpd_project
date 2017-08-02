@@ -31,7 +31,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
         public busy: boolean = false;
 
         private showSignedOutMessage: boolean = false;
-        private showSignInErrorMessage: boolean = false;
+        private showIDPNotSupportedMessage: boolean = false;
 
 	    searchForm: ControlGroup;
 	    searchterm: AbstractControl;
@@ -51,7 +51,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
                  public signinRegisterService: SigninRegisterService)
         {
             this.showSignedOutMessage = params.get( 'signedout' ) ? true : false;
-            this.showSignInErrorMessage = params.get( 'signinerror' ) ? true : false;
+            this.showIDPNotSupportedMessage = params.get( 'idpnotsupported' ) ? true : false;
 
             this.searchForm = fb.group({
                 "searchterm": [""]

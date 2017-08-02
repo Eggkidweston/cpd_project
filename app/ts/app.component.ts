@@ -125,8 +125,8 @@ export class AppComponent
             this.idpJWT = JSON.parse(this.getParameterByName('token', window.location.href));
 
             // JWT has not been provided in the expected format
-            if (this.idpJWT.jwt == null) {
-                AppComponent.router.navigate( ['SignIn', { signinerror: true}] );
+            if (this.idpJWT.jwt === null) {
+                AppComponent.router.navigate( ['SignIn', { idpnotsupported: true}] );
                 return;
             }
 
@@ -135,7 +135,7 @@ export class AppComponent
 
             // JWT payload has not been provided in the expected format
             if (payload === null || payload.data === null || payload.data.pid === null) {
-                AppComponent.router.navigate( ['SignIn', { signinerror: true}] );
+                AppComponent.router.navigate( ['SignIn', { idpnotsupported: true}] );
                 return;
             }
 
