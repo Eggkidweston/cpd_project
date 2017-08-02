@@ -4,6 +4,13 @@
         <span>You have been signed out due to inactivity.</span>
     </div>
 
+    <div *ngIf="showSignInErrorMessage" class="box box--padding-large box--danger">
+        <span>
+            Failed to login using institution portal, please email us:
+            <a href="mailto:support@jiscstore.freshdesk.com">support@jiscstore.freshdesk.com</a>
+        </span>
+    </div>
+
     <h1>Register or sign in with your institution</h1>
 
     <div *ngIf="!requireAdminPassword">
