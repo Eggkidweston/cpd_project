@@ -45,7 +45,7 @@
             </div>
 
             <h4 *ngIf="app?.overview">{{ app?.overview }}</h4>
-            <p *ngIf="app?.description">{{ app?.description }}</p>
+            <div *ngIf="app?.description" [innerHtml]="app?.description"></div>
 
             <div class="filelist-container" *ngIf="app?.jorum_legacy_metadata">
                 <h4>Included in this resource:</h4>
