@@ -2,7 +2,7 @@
 <div class="app-details-container" [class.inactive]="!app?.active">
     <div class="app-details">
         <div class="col span-12" *ngIf="resourceNoCategories">
-            <category-select></category-select>
+            <category-select (categoriesUpdated)="refreshCategories($event)"></category-select>
         </div>
 
         <div class="col span-8">
@@ -54,7 +54,7 @@
                 </ul>
             </div>
 
-            <div class="tagcloud condensed"  *ngIf="!resourceNoCategories">
+            <div class="tagcloud condensed"  *ngIf="!resourceNoCategories || forceDisplayCategories">
                 <h4>Categories</h4>
                 <ul class="tags tags--white">
                     <li class="tags__item" *ngFor="let useType of resourceUseTypes">
