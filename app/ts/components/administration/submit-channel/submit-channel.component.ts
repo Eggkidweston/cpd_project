@@ -217,11 +217,21 @@ export class SubmitChannelComponent {
     }
 
     itemTypeClass(item):string {
-      var type = item.type_id;
-      if(type==99){
-          type = 'other';
-      }
-      return 'backgroundimage' + type;
+        var type = item.type_id;
+        if(type==99){
+            type = 'other';
+        }
+        if(type === undefined){
+            type = '-channel';
+        }
+        return 'backgroundimage' + type;
+    }
+
+    hasIcon(item) {
+        if (item.image && item.image !== 'undefined'){
+            return true;
+        }
+        return false;
     }
 
     shortTitle(appTitle: String) {

@@ -17,8 +17,8 @@
                     <ul>
                         <li *ngFor="let item of searchResults">
                             <a (click)="select(item)" [ngClass]="{'selected' : resourceInChannel(item.id)}">
-                                <img class="suggestions__image" src="{{item.image}}" *ngIf="item.image">
-                                <div *ngIf="!item.image"  class="suggestions__type-icon {{itemTypeClass(item)}}"></div>
+                                <img class="suggestions__image" src="{{item.image}}" *ngIf="hasIcon(item)">
+                                <div *ngIf="!hasIcon(item)"  class="suggestions__type-icon {{itemTypeClass(item)}}"></div>
                                 <div class="suggestions-text">
                                     <span class="suggestions-text__title">{{shortTitle(item.title)}}</span>
                                     <span class="suggestions-text__desc">{{shortDescription(item.description)}}</span>
