@@ -97,7 +97,9 @@ export class AuthenticationService {
                     },
                     (error: any) => {
                         AuthenticationService.signOut();
-                        AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
+                        AuthenticationService.setSignedOutInactivityFlag();
+
+                        AuthenticationService._router.navigate( ['SignIn'] );
 
                         localStorage.setItem('_refreshingToken', 'false');
 
@@ -110,8 +112,10 @@ export class AuthenticationService {
 
             } else if (duration < 0) {
                 // JWT Expired - sign out
-                this.signOut();
-                AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
+                AuthenticationService.signOut();
+                AuthenticationService.setSignedOutInactivityFlag();
+
+                AuthenticationService._router.navigate( ['SignIn'] );
             } else {
                 return apiKey;
             }
@@ -272,6 +276,12 @@ export class AuthenticationService {
                     else err(res);
                 }
             );
+    }
+
+    static setSignedOutInactivityFlag() {
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("_signedOutInactivity", "true");
+        }
     }
 
     static storeTokenExpiryTime(apiKey: string){
