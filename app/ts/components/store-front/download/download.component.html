@@ -8,13 +8,17 @@
         </div>
 
         <div class="col span-8">
-            <div *ngIf="app?.image">
-                <div *ngIf="app?.image" class="resource-image download-resource-image">
-                    <img src="{{ app?.image }}" class="img">
+            <div>
+                <div *ngIf="hasIcon" class="resource-image download-resource-image">
+                    <img src="{{app.image}}" class="img">
                 </div>
+
+                <div *ngIf="!hasIcon" class="resource-image download-resource-image nowidgetborder {{resourceTypeClass}}">
+                    <div class="img-placeholder"></div>
+                </div>
+
                 <h2 class="app-details__title">{{ app?.title }}</h2>
             </div>
-            <h2 *ngIf="!app?.image">{{ app?.title }}</h2>
 
             <div class="download-instructions">
                 <h4>Instructions</h4>
