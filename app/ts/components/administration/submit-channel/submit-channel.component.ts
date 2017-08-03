@@ -229,7 +229,8 @@ export class SubmitChannelComponent {
     }
 
     shortDescription(appDescription: String) {
-       return (appDescription.length>110) ? (appDescription.substr(0, 110)+'...') : appDescription;
+        let appDescriptionHTMLStripped = String(appDescription).replace(/<[^>]+>/gm, ' ');
+        return (appDescriptionHTMLStripped.length>110) ? (appDescriptionHTMLStripped.substr(0, 110)+'...') : appDescriptionHTMLStripped;
     }
 
     resourceInChannel(resourceId: number){
