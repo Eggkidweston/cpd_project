@@ -23,6 +23,8 @@ export class DownloadComponent
     private urlError :boolean = false;
     private isUploadedResource: boolean = false;
     private isCCLicence: boolean = false;
+    private hasIcon: boolean = false;
+    private resourceTypeClass: string;
 
     protected resourceInstructions = ResourceInstructions;
 
@@ -51,6 +53,7 @@ export class DownloadComponent
                     this.app = storeApp;
                     this.loadInstructions();
                     this.displayDownloadLinkForCC();
+                    this.setIcon();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -153,6 +156,22 @@ export class DownloadComponent
     openSignIn()
     {
         this.router.navigate( ['SignIn'] );
+    }
+
+    setIcon()
+    {
+        if (this.app.image && this.app.image !== 'undefined'){
+            this.hasIcon = true;
+        }
+
+        var type = this.app.type_id;
+        if(type == 99){
+            this.resourceTypeClass = 'backgroundimageother';
+        }
+        if(type === undefined){
+            this.resourceTypeClass = 'backgroundimage-channel';
+        }
+        this.resourceTypeClass = 'backgroundimage' + type;
     }
 
 //    onPageClicked(page) {
