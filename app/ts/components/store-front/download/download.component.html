@@ -28,7 +28,7 @@
 
                 <div class="button-container">
                     <button class="btn btn--3d btn--primary btn--large download" role="button" (click)="getApp()">Continue</button>
-                    <div *ngIf="authenticationService.userSignedIn()">
+                    <div *ngIf="authenticationService.userSignedIn() && app?.url && (app?.type_id === 3 || app?.type_id === 4 || app?.type_id === 5)">
                       <h4>Or..</h4>
                       <p>Download the resource embedded into</p>
                       <button *ngIf="app?.url && app?.type_id === 3" class="btn btn--3d btn--primary btn--large download" role="button" (click)="downloadEmbeddedResourceDocument('word')"><img src="../../../../images/word-button-icon.png"> Word</button>
