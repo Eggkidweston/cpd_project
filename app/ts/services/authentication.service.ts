@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { appSettings } from '../../../settings';
 import { User } from '../models';
 import { Router } from '@angular/router-deprecated';
+import { HelperService } from "./helper.service";
 import * as moment from 'moment';
 
 @Injectable()
@@ -69,7 +70,7 @@ export class AuthenticationService {
 
         if (typeof(Storage) !== 'undefined') {
             let tokenExpiry = localStorage.getItem('_tokenExpiry');
-            let tokenExpiryTime = moment(parseInt(tokenExpiry));
+            let tokenExpiryTime = moment.unix(parseInt(tokenExpiry));
             let currentTime = moment(new Date());
             let duration = moment.duration(tokenExpiryTime.diff(currentTime)).asMinutes();
             let apiKey = localStorage.getItem('_apiKey');
@@ -89,15 +90,16 @@ export class AuthenticationService {
                 AuthenticationService.refreshToken(apiKey).subscribe(
                     data => {
                         AuthenticationService.apiKey = <any>data.token;
-                        AuthenticationService.storeTokenExpiryTime(data.expiresIn);
-
+                        AuthenticationService.storeTokenExpiryTime(data.token);
                         localStorage.setItem('_refreshingToken', 'false');
 
                         return apiKey;
                     },
                     (error: any) => {
                         AuthenticationService.signOut();
-                        AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
+                        AuthenticationService.setSignedOutInactivityFlag();
+
+                        AuthenticationService._router.navigate( ['SignIn'] );
 
                         localStorage.setItem('_refreshingToken', 'false');
 
@@ -110,8 +112,10 @@ export class AuthenticationService {
 
             } else if (duration < 0) {
                 // JWT Expired - sign out
-                this.signOut();
-                AuthenticationService._router.navigate( ['SignIn', { signedout: true}] );
+                AuthenticationService.signOut();
+                AuthenticationService.setSignedOutInactivityFlag();
+
+                AuthenticationService._router.navigate( ['SignIn'] );
             } else {
                 return apiKey;
             }
@@ -198,7 +202,7 @@ export class AuthenticationService {
             .subscribe(
                 data => {
                     AuthenticationService.apiKey = <any>data.token;
-                    AuthenticationService.storeTokenExpiryTime(data.expiresIn);
+                    AuthenticationService.storeTokenExpiryTime(data.token);
                     headers.append('x-access-token', data.token);
                     this.http.get(`${appSettings.apiRoot}users/me`, { headers })
                         .map(res => res.json())
@@ -230,7 +234,7 @@ export class AuthenticationService {
             .subscribe(
                 data => {
                     AuthenticationService.apiKey = <any>data.token;
-                    AuthenticationService.storeTokenExpiryTime(data.expiresIn);
+                    AuthenticationService.storeTokenExpiryTime(data.token);
                     headers.append('x-access-token', data.token);
                     this.http.get(`${appSettings.apiRoot}users/me`, { headers })
                         .map(res => res.json())
@@ -274,9 +278,23 @@ export class AuthenticationService {
             );
     }
 
-    static storeTokenExpiryTime(expiryTime){
-        let timeNow = moment().add(expiryTime, 's');
-        localStorage.setItem('_tokenExpiry', timeNow.valueOf().toString());
+    static setSignedOutInactivityFlag() {
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("_signedOutInactivity", "true");
+        }
+    }
+
+    static storeTokenExpiryTime(apiKey: string){
+        let expiryDate = this.extractExpiryDateFromApiKey(apiKey);
+        localStorage.setItem('_tokenExpiry', expiryDate);
+    }
+
+    private static extractExpiryDateFromApiKey(apiKey: string) {
+        var jwtArray = apiKey.split('.');
+        var base64DecodedString = HelperService.base64DecodeString(jwtArray[1]);
+        var payload = JSON.parse(base64DecodedString);
+
+        return payload.exp;
     }
 
     private handleError(error: Response) {

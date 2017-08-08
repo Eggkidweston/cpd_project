@@ -11,10 +11,11 @@ import { StoreApp } from '../../models';
 })
 export class AppWidgetComponent {
     @Input() app: StoreApp;
-    public noimagestyle:string;
+    public noimagestyle: string;
     public hasMedia: boolean;
     public typeImage: boolean;
     public isChannel: boolean;
+    public hasAppIcon: boolean;
     public resourceLink: string;
 
     constructor(public router:Router){}
@@ -33,16 +34,16 @@ export class AppWidgetComponent {
       } else {
         this.resourceLink = "AppDetails"
       }
+
+      if (this.app.image && this.app.image !== 'undefined'){
+          this.hasAppIcon = true;
+      }
     }
 
-    get widgetTypeIcon():string
-    {
-    	if(!this.app.image) {
-        if(!this.app.type_id){
-          return "backgroundimage-channel";
+    get widgetTypeIcon():string {
+        if (!this.app.type_id) {
+            return "backgroundimage-channel";
         }
-    		return "backgroundimage" + this.app.type_id;
-    	}
-    	return "";
+        return "backgroundimage" + this.app.type_id;
     }
 }

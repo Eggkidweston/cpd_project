@@ -23,6 +23,8 @@ export class DownloadComponent
     private urlError :boolean = false;
     private isUploadedResource: boolean = false;
     private isCCLicence: boolean = false;
+    private hasIcon: boolean = false;
+    private resourceTypeClass: string;
 
     protected resourceInstructions = ResourceInstructions;
 
@@ -51,6 +53,7 @@ export class DownloadComponent
                     this.app = storeApp;
                     this.loadInstructions();
                     this.displayDownloadLinkForCC();
+                    this.setIcon();
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -93,6 +96,48 @@ export class DownloadComponent
         this.retrieveAppAndDownload();
     }
 
+    downloadFileFromUrl(url: string) {
+        if (url == null){
+            this.urlError = true;
+            return;
+        }
+
+        this.resUrl = url;
+
+        this.filedownloadButton.nativeElement.setAttribute("href", url);
+
+        let resourceURL:string = url;
+        if(resourceURL.indexOf('jisc-store-resources')==-1&&resourceURL.indexOf('jisc-store-content')==-1) {
+            //not hosted on our s3 bucket
+        }else {
+            this.isUploadedResource = true;
+            this.filedownloadButton.nativeElement.setAttribute("download", url);
+        }
+
+        this.filedownloadButton.nativeElement.click();
+    }
+
+    downloadEmbeddedResourceDocument(documentType) {
+        if (documentType !== 'word' && documentType !== 'powerpoint') {
+            return;
+        }
+
+        if( !this.authenticationService.userSignedIn() ) {
+            this.openSignIn();
+            return;
+        }
+
+        this.getting = true;
+        this.appsService.getEmbeddedResourceDocument(this.resourceId, documentType)
+            .subscribe(
+                url => {
+                    this.getting = false;
+                    this.downloadFileFromUrl(url);
+                },
+                ( error:any ) => AppComponent.generalError( error.status )
+            )
+    }
+
     retrieveAppAndDownload()
     {       
         this.getting = true;
@@ -100,26 +145,7 @@ export class DownloadComponent
             .subscribe(
                 url => {
                     this.getting = false;
-                    if (url == null){
-                        this.urlError = true;
-                    }
-                    else{
-                        this.resUrl = url;
-
-                        this.filedownloadButton.nativeElement.setAttribute("href", url);
-                        
-                        
-                        let resourceURL:string = url;
-                        if(resourceURL.indexOf('jisc-store-resources')==-1&&resourceURL.indexOf('jisc-store-content')==-1) {
-                            //not hosted on our s3 bucket
-                        }else {
-                            this.isUploadedResource = true;
-                            this.filedownloadButton.nativeElement.setAttribute("download", url);
-                        }
-                        
-                        this.filedownloadButton.nativeElement.click();
-                    }
-
+                    this.downloadFileFromUrl(url);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -130,6 +156,22 @@ export class DownloadComponent
     openSignIn()
     {
         this.router.navigate( ['SignIn'] );
+    }
+
+    setIcon()
+    {
+        if (this.app.image && this.app.image !== 'undefined'){
+            this.hasIcon = true;
+        }
+
+        var type = this.app.type_id;
+        if(type == 99){
+            this.resourceTypeClass = 'backgroundimageother';
+        }
+        if(type === undefined){
+            this.resourceTypeClass = 'backgroundimage-channel';
+        }
+        this.resourceTypeClass = 'backgroundimage' + type;
     }
 
 //    onPageClicked(page) {

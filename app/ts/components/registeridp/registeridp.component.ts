@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { RouterOutlet, RouterLink, RouteConfig, RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { ControlGroup, Control, FormBuilder, AbstractControl } from '@angular/common';
 import { IdpMembers } from '../../models';
@@ -11,7 +11,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
         styles: [require('./registeridp.scss').toString()]
     })
 
-    export class RegisterIDPComponent {
+    export class RegisterIDPComponent implements OnDestroy {
 
     	@Output() updateSearch = new EventEmitter();
 
@@ -23,6 +23,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	    public idpFound:boolean = false;
 	    private results:Array<IdpMembers>;
 	    private selectedIdp:IdpMembers;
+        private storedInstitution: IdpMembers;
 
 	    public showPage:boolean = false;
 	    public authenticated:boolean = false;
@@ -31,6 +32,7 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
         public busy: boolean = false;
 
         private showSignedOutMessage: boolean = false;
+        private showIDPNotSupportedMessage: boolean = false;
 
 	    searchForm: ControlGroup;
 	    searchterm: AbstractControl;
@@ -49,7 +51,10 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
                  public authenticationService: AuthenticationService,
                  public signinRegisterService: SigninRegisterService)
         {
-            this.showSignedOutMessage = params.get( 'signedout' ) ? true : false;
+            this.showIDPNotSupportedMessage = params.get( 'idpnotsupported' ) ? true : false;
+
+            //Check to see whether the signed out inactivty flag is present
+            this.showSignedOutMessage = this.isSignedOutInactivtyFlagPresent();
 
             this.searchForm = fb.group({
                 "searchterm": [""]
@@ -75,7 +80,21 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	    		this.showPage = true;
 		        this.getIdpMembers();
 	    	}
+
+            if (typeof(Storage) !== 'undefined') {
+                if(localStorage.getItem("institution") != 'undefined' && localStorage.getItem("institution") != null) {
+                    this.storedInstitution = <IdpMembers>(JSON.parse(localStorage.getItem("institution")));
+                    this.selectedIdp = this.storedInstitution;
+                    this.query = this.storedInstitution.name;
+                    this.idpSelected = true;
+                    this.idpFound = true;
+                }
+            }
 	    }
+
+        ngOnDestroy() {
+	        this.deleteSignedOutInactivityFlag();
+        }
 
 	    private getIdpMembers() {
 
@@ -193,9 +212,16 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
 	    		this.idpFound = false;
 	    		this.selectedIdp = null;
 	    	}
+
+	    	//Store Institution in local storage
+            if (typeof(Storage) !== 'undefined') {
+                localStorage.setItem('institution', JSON.stringify(item));
+            }
 		}
 
 		public launchIDP() {
+            this.deleteSignedOutInactivityFlag();
+
 			var url = `https://sp.data.alpha.jisc.ac.uk/Shibboleth.sso/Login?entityID=${this.selectedIdp.entityID}&target=https://sp.data.alpha.jisc.ac.uk/secure/auth-web.php?returl=` + encodeURIComponent(window.location.href);
 
         	window.location.href = url;
@@ -212,5 +238,29 @@ import { IDPRegisterService, AuthenticationService, SigninRegisterService } from
             setTimeout(() => {
                 this.shaking = false;
             }, 1000);
+        }
+
+        resetStoredInstitution(e) {
+            e.preventDefault();
+            this.query = '';
+            this.idpFound = false;
+            this.idpSelected = false;
+            this.selectedIdp = null;
+            this.storedInstitution = null;
+            localStorage.removeItem('institution');
+        }
+
+        isSignedOutInactivtyFlagPresent() {
+            if (typeof(Storage) !== "undefined") {
+                return localStorage.getItem('_signedOutInactivity') !== null;
+            }
+
+            return false;
+        }
+
+        deleteSignedOutInactivityFlag() {
+            if (typeof(Storage) !== "undefined") {
+                localStorage.removeItem('_signedOutInactivity');
+            }
         }
     }

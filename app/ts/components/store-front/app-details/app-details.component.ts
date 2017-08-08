@@ -41,6 +41,7 @@ export class AppDetailsComponent implements AfterViewInit
     addingReview:boolean = false;
 
     resourceNoCategories: boolean = false;
+    forceDisplayCategories: boolean = false;
 
     constructor( public authenticationService:AuthenticationService,
                  private contributorService:ContributorService,
@@ -226,16 +227,16 @@ export class AppDetailsComponent implements AfterViewInit
 
     setWidgetBackground()
     {
-        if(!this.app.image) {
+        if(!this.app.image || this.app.image === 'undefined') {
             this.widgetBackground = "backgroundimage" + this.app.type_id + " nowidgetborder";
         }
     }
 
     setWidgetIcon()
     {
-        if(!this.app.image&&this.app.jorum_legacy_flag) {
+        if(!this.app.image && this.app.jorum_legacy_flag) {
             this.widgetIcon = "https://s3-eu-west-1.amazonaws.com/jisc-store-assets/jorumicon.png";
-        } else {
+        } else if (this.app.image !== 'undefined') {
             this.widgetIcon = this.app.image;
         }
     }
@@ -254,5 +255,12 @@ export class AppDetailsComponent implements AfterViewInit
             }
             return partialList;
         }
+    }
+
+    refreshCategories(event){
+        this.forceDisplayCategories = true;
+        this.resourceSubjects = event.resourceCategories.subjects;
+        this.resourceUseTypes = event.resourceCategories.usetypes;
+        this.resourceLevels = event.resourceCategories.levels;
     }
 }
