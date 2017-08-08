@@ -1,11 +1,16 @@
-.registerbutton  {
-          border-radius: 10px!important;
-          background: #0092cb !important;
-          font-weight: 700 !important;
-          color:#ffffff !important;
-        }
-.register-form {
-	input{
-		width:100%;
-	}
+.registerbutton.registerbutton{
+  border-radius: 10px;
+  background: #0092cb;
+  font-weight: 700;
+  color: #fff;
+}
+
+.changeInstitutionBtn{
+  margin-left: 5px;
+}
+
+.register-form{
+  input{
+    width:100%;
+  }
 }

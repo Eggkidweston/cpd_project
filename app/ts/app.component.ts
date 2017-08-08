@@ -123,8 +123,22 @@ export class AppComponent
 
         if(window.location.href.indexOf('token')>-1&&window.location.href.indexOf('jwt')>-1){
             this.idpJWT = JSON.parse(this.getParameterByName('token', window.location.href));
+
+            // JWT has not been provided in the expected format
+            if (this.idpJWT.jwt === null) {
+                AppComponent.router.navigate( ['SignIn', { idpnotsupported: true}] );
+                return;
+            }
+
             var jwtArr = this.idpJWT.jwt.split('.');
             var payload = JSON.parse(this.base64Decode(jwtArr[1]));
+
+            // JWT payload has not been provided in the expected format
+            if (payload === null || payload.data === null || payload.data.pid === null) {
+                AppComponent.router.navigate( ['SignIn', { idpnotsupported: true}] );
+                return;
+            }
+
             if (typeof(Storage) !== "undefined") {
                 let pidarr = payload.data.pid.split('!');
                 var pidmail = pidarr[pidarr.length-1] + '@jiscpidmail.co.uk';

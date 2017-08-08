@@ -4,36 +4,59 @@
         <span>You have been signed out due to inactivity.</span>
     </div>
 
+    <div *ngIf="showIDPNotSupportedMessage" class="box box--padding-large box--danger">
+        <span>
+            Sorry, your IDP is not supported. Please visit <a target="_blank" href="https://www.jisc.ac.uk/liberate">https://www.jisc.ac.uk/liberate</a> to find out more about our managed service.
+        </span>
+    </div>
+
     <h1>Register or sign in with your institution</h1>
 
     <div *ngIf="!requireAdminPassword">
         <div *ngIf="!authenticated">
-            <p>If this is your first time here, you can use your institutional login details to register by first logging in through your institution and then completing your registration by adding a username. We can securely and uniquely identify you through this process without saving any of your personal details.</p>
-            <p>If you've already registered, just find your institution and login.</p><br>
-         	<h4>Find your institution</h4>
+            <div *ngIf="!storedInstitution">
+                <p>If this is your first time here, you can use your institutional login details to register by first logging in through your institution and then completing your registration by adding a username. We can securely and uniquely identify you through this process without saving any of your personal details.</p>
+                <p>If you've already registered, just find your institution and login.</p><br>
+                <h4>Find your institution</h4>
 
-            <form [ngFormModel]="searchForm" (submit)="onSubmitSearch(searchForm.value)">
-                <label for="searchterm" class="sr-only">Search for your institution</label>
-                <input id="searchterm" name="searchterm" [ngFormControl]="searchterm" #input (input)="searchTermChanged(input.value)" (blur)="hideOptions()" [(ngModel)]="query" class="input--search" placeholder="Start typing to search" type="text" *ngIf="idpLoaded" autocomplete="off">
-            </form>
+                <form [ngFormModel]="searchForm" (submit)="onSubmitSearch(searchForm.value)">
+                    <label for="searchterm" class="sr-only">Search for your institution</label>
+                    <input id="searchterm" name="searchterm" [ngFormControl]="searchterm" #input (input)="searchTermChanged(input.value)" (blur)="hideOptions()" [(ngModel)]="query" class="input--search" placeholder="Start typing to search" type="text" *ngIf="idpLoaded" autocomplete="off">
+                </form>
 
-            <span *ngIf="!idpLoaded">Loading institutions...</span>
-            <div class="suggestions" *ngIf="filteredList.length > 0">
-                <ul *ngFor="let item of filteredList">
-                    <span *ngIf="item">
-                        <a (click)="select(item)">
-                            <li>
-                                <div class="suggestions-text">{{item.name}}</div>
-                            </li>
-                        </a>
-                    </span>
-                </ul>
+                <span *ngIf="!idpLoaded">Loading institutions...</span>
+                <div class="suggestions" *ngIf="filteredList.length > 0">
+                    <ul *ngFor="let item of filteredList">
+                        <span *ngIf="item">
+                            <a (click)="select(item)">
+                                <li>
+                                    <div class="suggestions-text">{{item.name}}</div>
+                                </li>
+                            </a>
+                        </span>
+                    </ul>
+                </div>
             </div>
-            <div class="idpMessage" *ngIf="idpSelected">
-                <br><p *ngIf="idpFound">Thank you! Click the login button below and use your institutional login details.</p>
+
+            <div class="idpMessage" *ngIf="idpSelected && !storedInstitution">
+                <br>
+                <p *ngIf="idpFound">Thank you! Click the login button below and use your institutional login details.</p>
                 <p *ngIf="!idpFound">Sorry, that seems to be an invalid institution. Please let us know at <a href="mailto:store.support@jisc.ac.uk">store.support@jisc.ac.uk</a></p>
                 <button class="btn registerbutton" role="button" (click)="launchIDP()">Log in at {{query}}</button>
-          </div>
+            </div>
+
+            <div class="idpMessage" *ngIf="idpSelected && storedInstitution">
+                <p>You can use your institutional login details to register by first logging in through your institution and then completing your registration by adding a username. We can securely and uniquely identify you through this process without saving any of your personal details.</p>
+                <p>If you've already registered, just login with your institutional login details.</p>
+                <p>
+                    <strong>Your chosen institution is {{storedInstitution.name}}</strong> 
+                    <a class="changeInstitutionBtn" (click)="resetStoredInstitution($event)" href="#">Change institution</a>
+                </p>
+                <br>
+                <p *ngIf="idpFound">Click the login button below and use your institutional login details.</p>
+                <p *ngIf="!idpFound">Sorry, that seems to be an invalid institution. Please let us know at <a href="mailto:store.support@jisc.ac.uk">store.support@jisc.ac.uk</a></p>
+                <button class="btn registerbutton" role="button" (click)="launchIDP()">Log in at {{query}}</button>
+            </div>
         </div>
 
         <div *ngIf="authenticated" class="authed">

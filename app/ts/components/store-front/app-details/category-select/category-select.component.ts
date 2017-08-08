@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AppsService } from '../../../../services/apps.service';
 import { AppComponent } from '../../../../app.component';
 import { ResourceProperty } from '../../../../models';
@@ -12,6 +12,8 @@ import { RouteParams } from '@angular/router-deprecated';
     template: require('./category-select.component.html')
 })
 export class CategorySelectComponent {
+    @Output() categoriesUpdated: EventEmitter<any> = new EventEmitter();
+
     public resourceId: number;
 
     searchForm: ControlGroup;
@@ -27,6 +29,10 @@ export class CategorySelectComponent {
     private resourceUseTypes: Array<ResourceProperty>;
     private resourceLevels: Array<ResourceProperty>;
     private resourceSubjects: Array<ResourceProperty>;
+
+    private selectedUseType: ResourceProperty;
+    private selectedLevel: ResourceProperty;
+    private selectedSubject: ResourceProperty;
 
     private displayCategoryForm = true;
 
@@ -57,6 +63,11 @@ export class CategorySelectComponent {
         this.subjectFilter = this.resourceLevels[index].filter;
     }
 
+    getCategoryItem(value, categoryArray){
+        let index = categoryArray.map((o) => o.id).indexOf(parseInt(value));
+        return categoryArray[index];
+    }
+
     loadResourceUseTypes() {
         this.appsService.getResourceUseTypes()
             .subscribe(
@@ -64,6 +75,7 @@ export class CategorySelectComponent {
                 {
                     this.resourceUseTypes = resourceUseTypes;
                     this.resourceUseType = this.resourceUseTypes[0].id;
+                    this.selectedUseType = this.getCategoryItem(this.resourceUseTypes[0].id, this.resourceUseTypes);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -77,6 +89,7 @@ export class CategorySelectComponent {
                     this.resourceLevels = resourceLevels;
                     this.resourceLevel = this.resourceLevels[0].id;
                     this.setSubjectFilter(this.resourceLevel);
+                    this.selectedLevel = this.getCategoryItem(this.resourceLevels[0].id, this.resourceLevels);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -89,6 +102,7 @@ export class CategorySelectComponent {
                 {
                     this.resourceSubjects = resourceSubjects;
                     this.resourceSubject = this.resourceSubjects[0].id;
+                    this.selectedSubject = this.getCategoryItem(this.resourceSubjects[0].id, this.resourceSubjects);
                 },
                 ( error:any ) => AppComponent.generalError( error.status )
             );
@@ -105,9 +119,16 @@ export class CategorySelectComponent {
         resourceAttributes.levels.push(this.formLevel.value);
         resourceAttributes.usetypes.push(this.formUseType.value);
 
+        let resourceCategories = {
+            'subjects': [this.selectedSubject],
+            'levels': [this.selectedLevel],
+            'usetypes': [this.selectedUseType]
+        };
+
         this.appsService.editResourceAttributes(this.resourceId, JSON.stringify(resourceAttributes),
             (done: any) => {
                 this.displayCategoryForm = false;
+                this.categoriesUpdated.emit({ event:event, resourceCategories: resourceCategories });
             },
             (error: any) => AppComponent.generalError( error.status )
         );

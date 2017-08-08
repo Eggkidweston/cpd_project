@@ -75,6 +75,13 @@ export class SearchComponent {
       window.location.href = url;
 	}
 
+	hasIcon(item) {
+	    if (item.image && item.image !== 'undefined'){
+	        return true;
+        }
+        return false;
+    }
+
 	searchTermChanged(searchTerm, activeOnly) {
         let resourceLevel = this.getStoredValue('resource-level');
         let resourceSubject = this.getStoredValue('resource-subject');
@@ -155,7 +162,8 @@ export class SearchComponent {
     }
 
     shortDescription(appDescription: String) {
-  	   return (appDescription.length>110) ? (appDescription.substr(0, 110)+'...') : appDescription;
+        let appDescriptionHTMLStripped = String(appDescription).replace(/<[^>]+>/gm, ' ');
+        return (appDescriptionHTMLStripped.length>110) ? (appDescriptionHTMLStripped.substr(0, 110)+'...') : appDescriptionHTMLStripped;
     }
 
     getStoredValue(category){
