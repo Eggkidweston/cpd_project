@@ -1,0 +1,39 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "${CONTAINER_NAME}",
+      "image": "${ECR_IMAGE_URL}",
+      "volumesFrom": [],
+      "portMappings": [
+        {
+          "hostPort": 0,
+          "containerPort": 8080
+        }
+      ],
+      "essential": true,
+      "mountPoints": [],
+      "environment": [
+        {
+          "name": "API_ROOT",
+          "value": "${API_ROOT}"
+        },
+        {
+          "name": "CURATION_ROOT",
+          "value": "${CURATION_ROOT}"
+        },
+        {
+          "name": "IDP_MEMBERS",
+          "value": "${IDP_MEMBERS}"
+        },
+        {
+          "name": "S3_ROOT",
+          "value": "${S3_ROOT}"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "json-file"
+      },
+      "memoryReservation": 450
+    }
+  ]
+}
