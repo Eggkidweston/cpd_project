@@ -8,3 +8,4 @@ uploads/*
 .webpack.json
 .DS_Store
 npm-debug.log
+build/

@@ -1,0 +1,25 @@
+FROM node:8.4.0
+
+ARG API_ROOT
+ARG CURATION_ROOT
+ARG S3_ROOT
+ARG IDP_MEMBERS
+
+ENV API_ROOT       ${API_ROOT}
+ENV CURATION_ROOT  ${CURATION_ROOT}
+ENV S3_ROOT        ${S3_ROOT}
+ENV IDP_MEMBERS    ${IDP_MEMBERS}
+
+WORKDIR /app
+
+COPY . /app
+
+RUN npm install webpack -g
+
+RUN npm install
+
+RUN webpack
+
+CMD ["node", "./server.js" ]
+
+EXPOSE 8080
