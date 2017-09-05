@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 
 # REQUIRES ENV VARS:
-# BRANCH_NAME              e.g. live
-# ECR_REPOSITORY_NAME      e.g. store-front-production
-# ECS_CLUSTER_NAME         e.g. store-front-production-ecs
-# ECS_SERVICE_NAME         e.g. store-production-store-front-web-service
-# ECS_TASK_DEFINITION_NAME e.g. store-production-store-front-web-tas
+# BRANCH_NAME              e.g. staging
+# ECR_REPOSITORY_NAME      e.g. store-front-staging
+# ECS_CLUSTER_NAME         e.g. store-front-staging-ecs
+# ECS_SERVICE_NAME         e.g. store-staging-store-front-web-service
+# ECS_TASK_DEFINITION_NAME e.g. store-staging-store-front-web-tas
 # CONTAINER_NAME           e.g. store-front-web
-# API_ROOT                 e.g. http://production-store-api-web-elb-1237715542.eu-west-1.elb.amazonaws.com:80/
-# CURATION_ROOT            e.g. http://production-curation-web-elb-21072284.eu-west-1.elb.amazonaws.com:80
+# API_ROOT                 e.g. http://staging-store-api-web-elb-1675125256.eu-west-1.elb.amazonaws.com:80/
+# CURATION_ROOT            e.g. http://staging-curation-web-elb-1677030901.eu-west-1.elb.amazonaws.com:80
 # IDP_MEMBERS              e.g. https://microservice.data.alpha.jisc.ac.uk:1337/idps
-# S3_ROOT                  e.g. https://s3-eu-west-1.amazonaws.com/jisc-store-resources/
+# S3_ROOT                  e.g. https://s3-eu-west-1.amazonaws.com/jisc-store-content/
+# AWS_LOGS_GROUP
+# AWS_LOGS_REGION
 
 source $ENV_PATH/bin/activate
 
@@ -41,6 +43,8 @@ NEW_CONTAINER_DEFINITION=`sed \
 -e 's@${CURATION_ROOT}@'"${CURATION_ROOT}"'@' \
 -e 's@${IDP_MEMBERS}@'"${IDP_MEMBERS}"'@' \
 -e 's@${S3_ROOT}@'"${S3_ROOT}"'@' \
+-e 's@${AWS_LOGS_GROUP}@'"${AWS_LOGS_GROUP}"'@' \
+-e 's@${AWS_LOGS_REGION}@'"${AWS_LOGS_REGION}"'@' \
 ci-scripts/container-definitions-template.json`
 
 # Write container definition to file

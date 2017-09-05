@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # REQUIRES ENV VARS:
-# ENV_PATH             e.g. /tmp/store-front-production
+# ENV_PATH             e.g. /tmp/store-front-staging
 # AWS_ACCESS_KEY_ID
 # AWS_SECRET_ACCESS_KEY
 # AWS_DEFAULT_REGION    e.g. eu-west-1
-# ECR_BUILD_IMAGE_TAG   e.g. store-front-production
+# ECR_BUILD_IMAGE_TAG   e.g. store-front-staging
 # API_ROOT
 # CURATION_ROOT
 # S3_ROOT

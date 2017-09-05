@@ -31,7 +31,12 @@
         }
       ],
       "logConfiguration": {
-        "logDriver": "json-file"
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${AWS_LOGS_GROUP}",
+          "awslogs-region": "${AWS_LOGS_REGION}",
+          "awslogs-stream-prefix": "${CONTAINER_NAME}"
+        }
       },
       "memoryReservation": 450
     }
