@@ -14,28 +14,12 @@ WORKDIR /app
 
 COPY . /app
 
-RUN apt-get update
-
-RUN apt-get install -y  nginx
-
 RUN npm install webpack -g
 
 RUN npm install
 
 RUN webpack
 
-RUN cp /app/nginx/store-front.conf /etc/nginx/sites-available/store-front.conf
+CMD ["node", "./server.js" ]
 
-RUN ln -s /etc/nginx/sites-available/store-front.conf /etc/nginx/sites-enabled/store-front.conf
-
-RUN rm /etc/nginx/sites-enabled/default
-
-RUN rm /etc/nginx/sites-available/default
-
-RUN rm /var/www/html/index.nginx-debian.html
-
-RUN cp -r /app/build/* /var/www/html/
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 8080
