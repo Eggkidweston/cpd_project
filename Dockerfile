@@ -16,7 +16,7 @@ COPY . /app
 
 RUN apt-get update
 
-RUN apt-get install -y  nginx
+RUN apt-get install -y nginx
 
 RUN npm install webpack -g
 
@@ -37,5 +37,9 @@ RUN rm /var/www/html/index.nginx-debian.html
 RUN cp -r /app/build/* /var/www/html/
 
 EXPOSE 80
+
+# Forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 CMD ["nginx", "-g", "daemon off;"]
