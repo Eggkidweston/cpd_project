@@ -85,6 +85,14 @@ function makeConfig(options)    {
             new WebpackNotifierPlugin({
                 title: "Jisc AppStore App"
             }),
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'API_ROOT': JSON.stringify(process.env.API_ROOT || 'http://localhost:8888/'),
+                    'CURATION_ROOT': JSON.stringify(process.env.CURATION_ROOT || 'https://curation-staging.data.alpha.jisc.ac.uk/'),
+                    'S3_ROOT': JSON.stringify(process.env.S3_ROOT || 'https://s3-eu-west-1.amazonaws.com/jisc-store-resources/'),
+                    'IDP_MEMBERS': JSON.stringify(process.env.IDP_MEMBERS || 'https://microservice.data.alpha.jisc.ac.uk:1337/idps')
+                }
+            })
         ],
         resolveLoader: {
             root: path.join(__dirname, 'node_modules'),

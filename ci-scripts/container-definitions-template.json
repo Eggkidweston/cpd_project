@@ -1,0 +1,44 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "${CONTAINER_NAME}",
+      "image": "${ECR_IMAGE_URL}",
+      "volumesFrom": [],
+      "portMappings": [
+        {
+          "hostPort": 0,
+          "containerPort": 80
+        }
+      ],
+      "essential": true,
+      "mountPoints": [],
+      "environment": [
+        {
+          "name": "API_ROOT",
+          "value": "${API_ROOT}"
+        },
+        {
+          "name": "CURATION_ROOT",
+          "value": "${CURATION_ROOT}"
+        },
+        {
+          "name": "IDP_MEMBERS",
+          "value": "${IDP_MEMBERS}"
+        },
+        {
+          "name": "S3_ROOT",
+          "value": "${S3_ROOT}"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${AWS_LOGS_GROUP}",
+          "awslogs-region": "${AWS_LOGS_REGION}",
+          "awslogs-stream-prefix": "${CONTAINER_NAME}"
+        }
+      },
+      "memoryReservation": 450
+    }
+  ]
+}
